@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>C++结构体</title>
+      <link href="/2023/05/03/c-jie-gou-ti/"/>
+      <url>/2023/05/03/c-jie-gou-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><h2 id="1-结构体的定义和使用"><a href="#1-结构体的定义和使用" class="headerlink" title="1. 结构体的定义和使用"></a>1. 结构体的定义和使用</h2><p>语法：<code>struct 结构体名 { 结构体成员列表 };</code></p><p>创建结构体变量时，可以省略<code>struct</code>关键字</p><p>三种创建结构体变量的方式：</p><pre class="line-numbers language-c++"><code class="language-c++">struct Student{    string name;    int age;    float score;}s3; // s3在定义结构体时创建结构体变量// struct可省略struct Student s1; s1.name = "张三";s1.age = 20;s1.score = 89.5;struct Student s2 = {"李四", 19, 80.5};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="2-结构体数组"><a href="#2-结构体数组" class="headerlink" title="2. 结构体数组"></a>2. 结构体数组</h2><p>作用：将自定义结构体存入数组中</p><h2 id="3-结构体指针"><a href="#3-结构体指针" class="headerlink" title="3. 结构体指针"></a>3. 结构体指针</h2><p>作用：通过指针访问结构体中的成员</p><p>利用<code>-&gt;</code>可以通过结构体指针访问结构体属性</p><pre class="line-numbers language-c++"><code class="language-c++">struct Student{    string name;    int age;    float score;};Student s = {"李四", 19, 80.5};Student* p = &s;cout << p->name << p->age << p->score << endl;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="4-嵌套结构体"><a href="#4-嵌套结构体" class="headerlink" title="4. 嵌套结构体"></a>4. 嵌套结构体</h2><pre class="line-numbers language-c++"><code class="language-c++">struct Student{    string name;    int age;    float score;};struct Teacher{    int id;    string name;    int age;    Student stu;};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="5-结构体做函数参数"><a href="#5-结构体做函数参数" class="headerlink" title="5. 结构体做函数参数"></a>5. 结构体做函数参数</h2><p>函数参数有两种形式：1. 值传递。2. 地址传递</p><pre><code>struct Student{    string name;    int age;    float score;};// 值传递void myprint1(Student s){    cout &lt;&lt; s.name &lt;&lt; s.age &lt;&lt; s.score &lt;&lt; endl; }// 地指传递void myprint2(Student* s){    cout &lt;&lt; s-&gt;name &lt;&lt; s-&gt;age &lt;&lt; s-&gt;score &lt;&lt; endl;}struct Student s1; s1.name = &quot;张三&quot;;s1.age = 20;s1.score = 89.5;myprint1(s);</code></pre><ul><li><code>const</code>在结构体中使用，用<code>const</code>防止误操作</li></ul><pre><code>struct Student{    string name;    int age;    float score;};void myprint2(const Student* s){    // s-&gt;age = 150; 报错    cout &lt;&lt; s-&gt;name &lt;&lt; s-&gt;age &lt;&lt; s-&gt;score &lt;&lt; endl;}struct Student s1 = {&quot;李四&quot;, 19, 80.5}; myprint2(s);</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo项目部署|PUSH到Github有各种问题</title>
       <link href="/2022/12/05/ji-lu-yi-ci-hexo-xiang-mu-bu-shu-de-debug-guo-cheng/"/>
       <url>/2022/12/05/ji-lu-yi-ci-hexo-xiang-mu-bu-shu-de-debug-guo-cheng/</url>

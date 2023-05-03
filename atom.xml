@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2023-05-02T14:20:02.000Z</updated>
+  <updated>2023-05-03T07:19:56.613Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++结构体</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/05/03/c-jie-gou-ti/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/05/03/c-jie-gou-ti/</id>
+    <published>2023-05-03T11:30:31.000Z</published>
+    <updated>2023-05-03T07:19:56.613Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;结构体&quot;&gt;&lt;a href=&quot;#结构体&quot; class=&quot;headerlink&quot; title=&quot;结构体&quot;&gt;&lt;/a&gt;结构体&lt;/h1&gt;&lt;h2 id=&quot;1-结构体的定义和使用&quot;&gt;&lt;a href=&quot;#1-结构体的定义和使用&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="学习" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="C++" scheme="https://github.com/merryTong/merryTong.github.io/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo项目部署|PUSH到Github有各种问题</title>
