@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="深度学习的优化算法, JAVA AI DeepLearning ML  深度学习 算FA">
+    <meta name="keywords" content="深度学习的优化算法, AI, 算法, 深度学习, 机器学习，编程">
     <meta name="description" content="炼丹师的日常：拿来药材（数据），架起八卦炉（模型），点着六味真火（优化算法），就摇着蒲扇等着丹药出炉了。不过，同样的食材，同样的菜谱，但火候不一样了，这出来的口味可是千差万别。火小了夹生，火大了易糊，火不匀则半生半糊。
 回顾优化算法深度学习">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +18,8 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深度学习的优化算法 | 泮池5号</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>深度学习的优化算法 | Merry的博客</title>
+    <link rel="icon" type="image/png" href="/medias/logo.png">
     
     <style>
         body{
@@ -75,7 +75,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">泮池5号</span>
+                    <span class="logo-span">Merry的博客</span>
                 </a>
             </div>
             
@@ -179,10 +179,10 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">泮池5号</div>
+        <div class="logo-name">Merry的博客</div>
         <div class="logo-desc">
             
-            上海大学 | 机械电子工程 | 计算机视觉
+            算法工程师 | 人工智能 | 黑客精神
             
         </div>
     </div>
@@ -444,8 +444,9 @@
 <h1 id="Adam-SGD-组合策略"><a href="#Adam-SGD-组合策略" class="headerlink" title="Adam+SGD 组合策略"></a>Adam+SGD 组合策略</h1><p>不同优化算法的优劣依然是未有定论的争议话题。主流的观点认为：Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。<br>可不可以把这两者结合起来，<strong>先用Adam快速下降，再用SGD调优</strong>，一举两得？思路简单，但里面有两个技术问题：</p>
 <ol>
 <li><strong>什么时候切换优化算法？</strong>——如果切换太晚，Adam可能已经跑到自己的盆地里去了，SGD再怎么好也跑不出来了。</li>
-<li><strong>切换算法以后用什么样的学习率？</strong>——Adam用的是自适应学习率，依赖的是二阶动量的累积，SGD接着训练的话，用什么样的学习率？<h2 id="切换之后用什么样的学习率"><a href="#切换之后用什么样的学习率" class="headerlink" title="切换之后用什么样的学习率"></a><strong>切换之后用什么样的学习率</strong></h2>Adam的下降方向是$\eta_t^{Adam}=(\alpha / \sqrt{V_t}) \cdot m_t$，SGD的下降方向是$\eta_t^{SGD}=\alpha^{SGD} \cdot g_t$。<br>$\eta_t^{SGD}$必定可以分解为$\eta_t^{Adam}$所在方向及其正交方向上的两个方向之和，那么其在$\eta_t^{Adam}$方向上的投影就意味着SGD在Adam算法决定的下降方向上前进的距离，而在$\eta_t^{Adam}$的正交方向上的投影是 SGD 在自己选择的修正方向上前进的距离。这里p为Adam下降方向，g为梯度方向，γ为SGD的学习率。<br><img src="./imgs/yuque_mind.jpeg" alt><br>如果SGD要走完Adam未走完的路，那就首先要接过Adam的大旗——沿着$\eta_t^{Adam}$方向走一步，而后在沿着其正交方向走相应的一步。这样我们就知道该如何确定SGD的步长（学习率）了——<strong>SGD在Adam下降方向上的正交投影，应该正好等于Adam的下降方向（含步长）</strong>。也即：<br>$proj_{\eta_t^{SGD}}=\eta_t^{Adam}$<br>解这个方程，我们就可以得到接续进行SGD的学习率：<br>$\alpha_t^{SGD}=((\eta_t^{Adam})^T \eta_t^{Adam}) / ((\eta_t^{Adam})^T g_t)$<br>为了减少噪声影响，作者使用移动平均值来修正对学习率的估计：<br>$\lambda_t^{SGD}=\beta_2 \cdot \lambda_{t-1}^{SGD}+(1-\beta_2) \cdot \alpha_t^{SGD}$<br>$\widetilde{\lambda_t^{SGD}}=\lambda_t^{SGD}/(1-\beta_2^t)$<br>这里直接复用了Adam的$\beta_2$参数。</li>
+<li><strong>切换算法以后用什么样的学习率？</strong>——Adam用的是自适应学习率，依赖的是二阶动量的累积，SGD接着训练的话，用什么样的学习率？</li>
 </ol>
+<h2 id="切换之后用什么样的学习率"><a href="#切换之后用什么样的学习率" class="headerlink" title="切换之后用什么样的学习率"></a><strong>切换之后用什么样的学习率</strong></h2><p>Adam的下降方向是$\eta_t^{Adam}=(\alpha / \sqrt{V_t}) \cdot m_t$，SGD的下降方向是$\eta_t^{SGD}=\alpha^{SGD} \cdot g_t$。<br>$\eta_t^{SGD}$必定可以分解为$\eta_t^{Adam}$所在方向及其正交方向上的两个方向之和，那么其在$\eta_t^{Adam}$方向上的投影就意味着SGD在Adam算法决定的下降方向上前进的距离，而在$\eta_t^{Adam}$的正交方向上的投影是 SGD 在自己选择的修正方向上前进的距离。这里p为Adam下降方向，g为梯度方向，γ为SGD的学习率。<br><img src="./imgs/yuque_mind.jpeg" alt><br>如果SGD要走完Adam未走完的路，那就首先要接过Adam的大旗——沿着$\eta_t^{Adam}$方向走一步，而后在沿着其正交方向走相应的一步。这样我们就知道该如何确定SGD的步长（学习率）了——<strong>SGD在Adam下降方向上的正交投影，应该正好等于Adam的下降方向（含步长）</strong>。也即：<br>$proj_{\eta_t^{SGD}}=\eta_t^{Adam}$<br>解这个方程，我们就可以得到接续进行SGD的学习率：<br>$\alpha_t^{SGD}=((\eta_t^{Adam})^T \eta_t^{Adam}) / ((\eta_t^{Adam})^T g_t)$<br>为了减少噪声影响，作者使用移动平均值来修正对学习率的估计：<br>$\lambda_t^{SGD}=\beta_2 \cdot \lambda_{t-1}^{SGD}+(1-\beta_2) \cdot \alpha_t^{SGD}$<br>$\widetilde{\lambda_t^{SGD}}=\lambda_t^{SGD}/(1-\beta_2^t)$<br>这里直接复用了Adam的$\beta_2$参数。</p>
 <h2 id="何时进行算法的切换"><a href="#何时进行算法的切换" class="headerlink" title="何时进行算法的切换"></a><strong>何时进行算法的切换</strong></h2><p>当 SGD的相应学习率的移动平均值基本不变的时候，即：<br>$|\widetilde{\lambda_t^{SGD}}-\alpha_t^{SGD}|&lt; \epsilon$<br>每次迭代完都计算一下SGD接班人的相应学习率，如果发现基本稳定了，那就SGD以$\widetilde{\lambda_t^{SGD}}$为学习率接班前进。</p>
 <h1 id="优化算法的常用tricks"><a href="#优化算法的常用tricks" class="headerlink" title="优化算法的常用tricks"></a>优化算法的常用tricks</h1><ol>
 <li>首先，各大算法孰优孰劣并无定论。如果是刚入门，<strong>优先考虑 SGD+Nesterov Momentum或者Adam。</strong>（Standford 231n : _The two recommended updates to use are either SGD+Nesterov Momentum or Adam_）</li>
@@ -610,13 +611,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/17/python-zhuang-shi-qi/">
+                <a href="/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/architect/19.jpg" class="responsive-img" alt="Python的装饰器">
+                        <img src="/medias/featureimages/architect/14.jpg" class="responsive-img" alt="Python的@staticmethod和@classmethod">
                         
-                        <span class="card-title">Python的装饰器</span>
+                        <span class="card-title">Python的@staticmethod和@classmethod</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -823,6 +824,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
