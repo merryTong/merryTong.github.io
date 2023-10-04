@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2023-05-26T22:02:24.000Z</updated>
+  <updated>2023-10-04T02:58:22.234Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深度学习中的正则化</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/07/19/shen-du-xue-xi/shen-du-xue-xi-zheng-ze-hua/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/07/19/shen-du-xue-xi/shen-du-xue-xi-zheng-ze-hua/</id>
+    <published>2023-07-19T09:30:31.000Z</published>
+    <updated>2023-10-04T02:58:22.234Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;深度学习中的正则化&quot;&gt;&lt;a href=&quot;#深度学习中的正则化&quot; class=&quot;headerlink&quot; title=&quot;深度学习中的正则化&quot;&gt;&lt;/a&gt;深度学习中的正则化&lt;/h1&gt;&lt;p&gt;先来看一个python实现的最简单的单参数线性回归模型。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python的argparse模块</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/</id>
+    <published>2023-07-17T11:30:31.000Z</published>
+    <updated>2023-10-04T14:05:17.350Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Python中的argparse模块&quot;&gt;&lt;a href=&quot;#Python中的argparse模块&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/categories/Python/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深度学习中的损失函数</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/07/14/shen-du-xue-xi/shen-du-xue-xi-chang-yong-sun-shi-han-shu/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/07/14/shen-du-xue-xi/shen-du-xue-xi-chang-yong-sun-shi-han-shu/</id>
+    <published>2023-07-14T09:30:31.000Z</published>
+    <updated>2023-10-04T09:27:43.972Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;深度学习中常用的损失函数&quot;&gt;&lt;a href=&quot;#深度学习中常用的损失函数&quot; class=&quot;headerlink&quot; title=&quot;深度学习中常用的损失函数&quot;&gt;&lt;/a&gt;深度学习中常用的损失函数&lt;/h1&gt;&lt;p&gt;机器学习中的监督学习本质是给定一系列训练样本$(x_i,
+        
+      
+    
+    </summary>
+    
+      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="损失函数" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -67,6 +154,34 @@
   </entry>
   
   <entry>
+    <title>常见的最优化方法</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/05/13/shu-xue/chang-jian-de-zui-you-hua-fang-fa/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/05/13/shu-xue/chang-jian-de-zui-you-hua-fang-fa/</id>
+    <published>2023-05-13T11:30:31.000Z</published>
+    <updated>2023-10-04T13:41:59.204Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;常见的最优化方法&quot;&gt;&lt;a href=&quot;#常见的最优化方法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="数学基础" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="最优化" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++结构体</title>
     <link href="https://github.com/merryTong/merryTong.github.io/2023/05/03/c-jie-gou-ti/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/05/03/c-jie-gou-ti/</id>
@@ -97,7 +212,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/14/python-zhi-shi/python-da-bao-fen-fa-gong-ju/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/14/python-zhi-shi/python-da-bao-fen-fa-gong-ju/</id>
     <published>2023-04-14T11:30:31.000Z</published>
-    <updated>2023-07-31T14:44:04.574Z</updated>
+    <updated>2023-10-04T00:19:04.317Z</updated>
     
     <summary type="html">
     
@@ -105,9 +220,7 @@
       
         
         
-          &lt;p&gt;setuptools库的前身是distutils（一个python标准库），&lt;strong&gt;setuptools本身不是标准库，所以需要自行安装&lt;/strong&gt;。setuptools提供的主要的功能有：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;python库的打包分发&lt;
+          &lt;h1 id=&quot;Python打包工具setuptools介绍&quot;&gt;&lt;a href=&quot;#Python打包工具setuptools介绍&quot; class=&quot;headerlink&quot;
         
       
     
@@ -127,7 +240,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/</id>
     <published>2023-04-10T11:30:31.000Z</published>
-    <updated>2023-07-31T14:48:43.385Z</updated>
+    <updated>2023-10-04T00:25:21.243Z</updated>
     
     <summary type="html">
     
@@ -135,14 +248,7 @@
       
         
         
-          &lt;p&gt;本节我们将介绍 Pytorch的动态计算图。&lt;br&gt;包括： &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;动态计算图简介&lt;/li&gt;
-&lt;li&gt;计算图中的Function&lt;/li&gt;
-&lt;li&gt;计算图和反向传播&lt;/li&gt;
-&lt;li&gt;叶子节点和非叶子节点&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1
+          &lt;h1 id=&quot;Pytorch的动态图简介&quot;&gt;&lt;a href=&quot;#Pytorch的动态图简介&quot; class=&quot;headerlink&quot; title=&quot;Pytorch的动态图简介&quot;&gt;&lt;/a&gt;Pytorch的动态图简介&lt;/h1&gt;&lt;p&gt;本节我们将介绍
         
       
     
@@ -162,7 +268,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</id>
     <published>2023-04-08T11:30:31.000Z</published>
-    <updated>2023-07-31T15:00:31.451Z</updated>
+    <updated>2023-10-04T00:29:24.949Z</updated>
     
     <summary type="html">
     
@@ -170,7 +276,7 @@
       
         
         
-          &lt;p&gt;神经网络通常依赖反向传播求梯度来更新网络参数，求梯度过程通常是一件非常复杂而容易出错的事情。而深度学习框架可以帮助我们自动地完成这种求梯度运算。&lt;br&gt;Pytorch一般通过反向传播&lt;code&gt;backward()&lt;/code&gt;方法实现这种求梯度计算。该方法求得的梯度将存在
+          &lt;h1 id=&quot;Pytorch自动微分简介&quot;&gt;&lt;a href=&quot;#Pytorch自动微分简介&quot; class=&quot;headerlink&quot;
         
       
     
@@ -190,7 +296,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
     <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-07-31T15:04:04.794Z</updated>
+    <updated>2023-10-04T00:32:20.136Z</updated>
     
     <summary type="html">
     
@@ -198,7 +304,7 @@
       
         
         
-          &lt;h1 id=&quot;功能简介&quot;&gt;&lt;a href=&quot;#功能简介&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
         
       
     
@@ -218,7 +324,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</id>
     <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-06-03T14:26:39.794Z</updated>
+    <updated>2023-10-04T00:36:47.413Z</updated>
     
     <summary type="html">
     
@@ -226,7 +332,7 @@
       
         
         
-          &lt;p&gt;这里的function和Module是指&lt;code&gt;nn.functional&lt;/code&gt;和&lt;code&gt;nn.Module&lt;/code&gt;。&lt;br&gt;Pytorch和神经网络相关的功能组件大多都封装在&lt;code&gt;torch.nn&lt;/code&gt;模块下。这些功能组件的绝大部分既有
+          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
         
       
     
@@ -246,7 +352,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/</id>
     <published>2023-04-05T11:30:31.000Z</published>
-    <updated>2023-06-03T14:25:14.126Z</updated>
+    <updated>2023-10-04T00:41:37.094Z</updated>
     
     <summary type="html">
     
@@ -254,11 +360,7 @@
       
         
         
-          &lt;p&gt;可以使用以下3种方式构建模型：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;继承nn.Module基类构建自定义模型。&lt;/li&gt;
-&lt;li&gt;使用nn.Sequential按层顺序构建模型。&lt;/li&gt;
-&lt;li&gt;继承nn.Module基类构建模型，并辅助应用模型容器(nn.Sequential,
+          &lt;h1 id=&quot;Pytorch构建模型的方式&quot;&gt;&lt;a href=&quot;#Pytorch构建模型的方式&quot; class=&quot;headerlink&quot;
         
       
     
@@ -278,7 +380,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/01/pytorch-ji-chu-zhi-shi/01-zhang-liang-he-zhang-liang-cao-zuo/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/01/pytorch-ji-chu-zhi-shi/01-zhang-liang-he-zhang-liang-cao-zuo/</id>
     <published>2023-04-01T11:30:31.000Z</published>
-    <updated>2023-06-06T14:01:26.880Z</updated>
+    <updated>2023-10-04T02:02:45.736Z</updated>
     
     <summary type="html">
     
@@ -286,7 +388,8 @@
       
         
         
-          &lt;h1 id=&quot;张量&quot;&gt;&lt;a href=&quot;#张量&quot; class=&quot;headerlink&quot; title=&quot;张量&quot;&gt;&lt;/a&gt;张量&lt;/h1&gt;&lt;h2 id=&quot;创建张量&quot;&gt;&lt;a href=&quot;#创建张量&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;张量&quot;&gt;&lt;a href=&quot;#张量&quot; class=&quot;headerlink&quot; title=&quot;张量&quot;&gt;&lt;/a&gt;张量&lt;/h1&gt;&lt;p&gt;张量是基于向量和矩阵的推广，其本质就是多维数组。&lt;/p&gt;
+&lt;h2 id=&quot;创建张量&quot;&gt;&lt;a href=&quot;#创建张量&quot;
         
       
     
@@ -306,7 +409,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/shen-du-xue-xi-xun-lian-dai-ma-mo-ban/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/shen-du-xue-xi-xun-lian-dai-ma-mo-ban/</id>
     <published>2023-03-23T11:30:31.000Z</published>
-    <updated>2023-06-06T14:22:03.118Z</updated>
+    <updated>2023-10-04T02:07:19.353Z</updated>
     
     <summary type="html">
     
@@ -314,12 +417,7 @@
       
         
         
-          &lt;p&gt;从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，总结了一套较为直观的模板。目录如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;导入包以及设置随机种子&lt;/li&gt;
-&lt;li&gt;以类的方式定义超参数&lt;/li&gt;
-&lt;li&gt;定义自己的模型&lt;/li&gt;
-&lt;li&gt;定义早停类(此步骤可以省略)&lt;/
+          &lt;h1 id=&quot;Pytorch训练代码模板&quot;&gt;&lt;a href=&quot;#Pytorch训练代码模板&quot; class=&quot;headerlink&quot;
         
       
     
@@ -339,7 +437,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/bao-cun-he-jia-zai-mo-xing-duan-dian-ji-xu-xun-lian/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/bao-cun-he-jia-zai-mo-xing-duan-dian-ji-xu-xun-lian/</id>
     <published>2023-03-23T09:30:31.000Z</published>
-    <updated>2023-06-06T14:21:50.914Z</updated>
+    <updated>2023-10-04T02:09:29.404Z</updated>
     
     <summary type="html">
     
@@ -347,7 +445,7 @@
       
         
         
-          &lt;h1 id=&quot;三个重要函数&quot;&gt;&lt;a href=&quot;#三个重要函数&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Pytorch模型保存和加载&quot;&gt;&lt;a href=&quot;#Pytorch模型保存和加载&quot; class=&quot;headerlink&quot;
         
       
     
@@ -363,11 +461,11 @@
   </entry>
   
   <entry>
-    <title>深度学习中的学习率衰减</title>
+    <title>Pytorch中的学习率衰减</title>
     <link href="https://github.com/merryTong/merryTong.github.io/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/</id>
     <published>2023-02-21T11:30:31.000Z</published>
-    <updated>2023-07-31T14:13:29.268Z</updated>
+    <updated>2023-10-04T02:46:32.074Z</updated>
     
     <summary type="html">
     
@@ -375,7 +473,7 @@
       
         
         
-          &lt;h1 id=&quot;学习率衰减原理&quot;&gt;&lt;a href=&quot;#学习率衰减原理&quot; class=&quot;headerlink&quot; title=&quot;学习率衰减原理&quot;&gt;&lt;/a&gt;学习率衰减原理&lt;/h1&gt;&lt;p&gt;&lt;a
+          &lt;h1 id=&quot;学习率衰减原理&quot;&gt;&lt;a href=&quot;#学习率衰减原理&quot; class=&quot;headerlink&quot;
         
       
     
@@ -391,11 +489,11 @@
   </entry>
   
   <entry>
-    <title>Python的装饰器</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/</id>
+    <title>Python的@staticmethod和@classmethod</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/</id>
     <published>2023-02-17T11:30:31.000Z</published>
-    <updated>2023-06-06T14:29:50.273Z</updated>
+    <updated>2023-10-04T02:12:39.394Z</updated>
     
     <summary type="html">
     
@@ -403,7 +501,7 @@
       
         
         
-          &lt;h1 id=&quot;装饰器是什么&quot;&gt;&lt;a href=&quot;#装饰器是什么&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Python中的类方法和静态方法&quot;&gt;&lt;a href=&quot;#Python中的类方法和静态方法&quot; class=&quot;headerlink&quot;
         
       
     
@@ -419,11 +517,11 @@
   </entry>
   
   <entry>
-    <title>Python的@staticmethod和@classmethod</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/</id>
+    <title>Python的装饰器</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/</id>
     <published>2023-02-17T11:30:31.000Z</published>
-    <updated>2023-07-31T14:16:23.671Z</updated>
+    <updated>2023-10-04T02:14:11.078Z</updated>
     
     <summary type="html">
     
@@ -431,7 +529,7 @@
       
         
         
-          &lt;h1 id=&quot;原理&quot;&gt;&lt;a href=&quot;#原理&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Python的装饰器&quot;&gt;&lt;a href=&quot;#Python的装饰器&quot; class=&quot;headerlink&quot;
         
       
     
@@ -448,10 +546,10 @@
   
   <entry>
     <title>深度学习的优化算法</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi-you-hua-suan-fa/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi-you-hua-suan-fa/</id>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi/shen-du-xue-xi-you-hua-suan-fa/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi/shen-du-xue-xi-you-hua-suan-fa/</id>
     <published>2023-02-15T09:30:31.000Z</published>
-    <updated>2023-06-06T14:07:34.387Z</updated>
+    <updated>2023-10-04T02:58:41.042Z</updated>
     
     <summary type="html">
     
@@ -459,8 +557,7 @@
       
         
         
-          &lt;p&gt;炼丹师的日常：拿来药材（数据），架起八卦炉（模型），点着六味真火（优化算法），就摇着蒲扇等着丹药出炉了。不过，同样的食材，同样的菜谱，但火候不一样了，这出来的口味可是千差万别。火小了夹生，火大了易糊，火不匀则半生半糊。&lt;/p&gt;
-&lt;h1 id=&quot;回顾优化算法&quot;&gt;&lt;a
+          &lt;h1 id=&quot;深度学习的优化算法&quot;&gt;&lt;a href=&quot;#深度学习的优化算法&quot; class=&quot;headerlink&quot;
         
       
     
@@ -471,39 +568,9 @@
     
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
+      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
       <category term="优化算法" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo项目部署|PUSH到Github有各种问题</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2022/12/05/ji-lu-yi-ci-hexo-xiang-mu-bu-shu-de-debug-guo-cheng/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2022/12/05/ji-lu-yi-ci-hexo-xiang-mu-bu-shu-de-debug-guo-cheng/</id>
-    <published>2022-12-05T11:30:31.000Z</published>
-    <updated>2023-05-02T14:20:02.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;关注公众号【惜学塔】，每日知识干货马上就来！&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/medias/contact.jpg&quot; alt&gt;&lt;/p&gt;
-&lt;h1 id=&quot;正常部署方式&quot;&gt;&lt;a href=&quot;#正常部署方式&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Debug" scheme="https://github.com/merryTong/merryTong.github.io/categories/Debug/"/>
-    
-    
-      <category term="github项目部署" scheme="https://github.com/merryTong/merryTong.github.io/tags/github%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/"/>
-    
-      <category term="hexo博客" scheme="https://github.com/merryTong/merryTong.github.io/tags/hexo%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   

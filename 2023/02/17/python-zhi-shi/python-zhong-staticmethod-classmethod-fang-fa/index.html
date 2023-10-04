@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的@staticmethod和@classmethod, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="原理一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。Python面向对象编程中，类中定义的方法可以是@classmet">
+    <meta name="description" content="Python中的类方法和静态方法一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。Python面向对象编程中，类中定义的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -423,7 +423,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用<code>@staticmethod</code>或<code>@classmethod</code>，就可以不需要实例化，直接<code>类名.方法名()</code>来调用。<br>Python面向对象编程中，类中定义的方法可以是<code>@classmethod</code>装饰的<strong>类方法</strong>，也可以是<code>@staticmethod</code>装饰的<strong>静态方法</strong>，用的最多的还是不带装饰器的<strong>实例方法。</strong><br>先来看一个简单示例：</p>
+                <h1 id="Python中的类方法和静态方法"><a href="#Python中的类方法和静态方法" class="headerlink" title="Python中的类方法和静态方法"></a>Python中的类方法和静态方法</h1><p>一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用<code>@staticmethod</code>或<code>@classmethod</code>，就可以不需要实例化，直接<code>类名.方法名()</code>来调用。<br>Python面向对象编程中，类中定义的方法可以是<code>@classmethod</code>装饰的<strong>类方法</strong>，也可以是<code>@staticmethod</code>装饰的<strong>静态方法</strong>，用的最多的还是不带装饰器的<strong>实例方法。</strong><br>先来看一个简单示例：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
     <span class="token keyword">def</span> <span class="token function">m1</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -449,7 +449,7 @@ A<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
 <li>第五步：调用A.m2(1)时，<strong>python内部隐式地把</strong><mark>类对象</mark><strong>传递给 cls 参数</strong>，cls 和 A 都指向类对象。</li>
 </ul>
 <p><img src="/images/python_class.png" alt><br>严格意义上来说，左边的都是变量名，是对象的引用，右边才是真正的对像</p>
-<h1 id="几个方法的介绍"><a href="#几个方法的介绍" class="headerlink" title="几个方法的介绍"></a>几个方法的介绍</h1><h2 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m1<span class="token punctuation">)</span>
+<h2 id="几个方法的介绍和区别"><a href="#几个方法的介绍和区别" class="headerlink" title="几个方法的介绍和区别"></a>几个方法的介绍和区别</h2><h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m1<span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># A.m1在py2中显示为&lt;unbound method A.m1></span>
 <span class="token operator">&lt;</span>function A<span class="token punctuation">.</span>m1 at <span class="token number">0x000002BF7FF9A488</span><span class="token operator">></span>
 
@@ -460,7 +460,7 @@ A<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
 <span class="token comment" spellcheck="true"># 等价于</span>
 a<span class="token punctuation">.</span>m1<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><strong>如果未绑定的方法</strong><code>**A.m1**</code><strong>不传实例对象给 self 时，就会报参数缺失错误</strong></p>
-<h2 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h2><p>m2是<strong>类方法</strong>，不管是<code>A.m2</code>还是<code>a.m2</code>，都是已经自动绑定了类对象A的方法，对于<code>a.m2</code>，因为python可以通过实例对象a找到它所属的类是A，找到A之后自动绑定到 cls。</p>
+<h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><p>m2是<strong>类方法</strong>，不管是<code>A.m2</code>还是<code>a.m2</code>，都是已经自动绑定了类对象A的方法，对于<code>a.m2</code>，因为python可以通过实例对象a找到它所属的类是A，找到A之后自动绑定到 cls。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m2<span class="token punctuation">)</span>
 <span class="token operator">&lt;</span>bound method A<span class="token punctuation">.</span>m2 of <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.A'</span><span class="token operator">>></span>
 
@@ -474,7 +474,7 @@ a<span class="token punctuation">.</span>m2<span class="token punctuation">(</sp
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">m1</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self:"</span><span class="token punctuation">,</span> self<span class="token punctuation">)</span>
     self<span class="token punctuation">.</span>m2<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><p>m3是类里面的一个<strong>静态方法</strong>，跟普通函数没什么区别，<strong>与类和实例都没有所谓的绑定关系</strong>，它只不过是碰巧存在类中的一个函数而已。<strong>不论是通过类还是实例都可以引用该方法</strong>。</p>
+<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p>m3是类里面的一个<strong>静态方法</strong>，跟普通函数没什么区别，<strong>与类和实例都没有所谓的绑定关系</strong>，它只不过是碰巧存在类中的一个函数而已。<strong>不论是通过类还是实例都可以引用该方法</strong>。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m3<span class="token punctuation">)</span>
 <span class="token operator">&lt;</span>function A<span class="token punctuation">.</span>m3 at <span class="token number">0x000002BF7FF9A840</span><span class="token operator">></span>
 
@@ -488,7 +488,7 @@ a<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
 <li>可以看成是静态方法已经跟这个类没关系了，相当于已经脱离了这个类，是一个完全独立的函数，只是调用的时候必须通过这个类，或者为了规范代码而将函数放到类中</li>
 <li>当类中的该方法不涉及对该类属性的操作，建议声明为@staticmethod，面向对象思想体现</li>
 </ul>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>静态方法的使用场景： 如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务。例如下面是微信公众号开发中验证微信签名的一个例子，它没有引用任何类或者实例相关的属性和方法。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>静态方法的使用场景： 如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务。例如下面是微信公众号开发中验证微信签名的一个例子，它没有引用任何类或者实例相关的属性和方法。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> hashlib <span class="token keyword">import</span> sha1
 <span class="token keyword">import</span> tornado<span class="token punctuation">.</span>web
 
@@ -547,7 +547,7 @@ a<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
     @classmethod
     <span class="token keyword">def</span> <span class="token function">m3</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
         cls<span class="token punctuation">.</span>m1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># good</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在上述的例子中，有的返回的是 function 类型，有的返回的是 method 类型，function类型是函数，method类型是方法。他们的主要区别在于，函数的传参都是显式传递的；而方法传参往往都会有隐式传递的，具体根据于调用方。隐式传递 self 或者cls数据。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在上述的例子中，有的返回的是 function 类型，有的返回的是 method 类型，function类型是函数，method类型是方法。他们的主要区别在于，函数的传参都是显式传递的；而方法传参往往都会有隐式传递的，具体根据于调用方。隐式传递 self 或者cls数据。</p>
 <ul>
 <li><strong>@staticmethod 的效果是让类对象与实例对象的调用都返回函数。</strong></li>
 <li><strong>@staticmethod不需要表示自身对象的self和自身类的cls参数，就跟使用函数一样。</strong></li>
@@ -715,6 +715,59 @@ a<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/animal/22.jpg" class="responsive-img" alt="Pytorch中的学习率衰减">
+                        
+                        <span class="card-title">Pytorch中的学习率衰减</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Pytorch/" class="post-category">
+                                    Pytorch
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pytorch/">
+                        <span class="chip bg-color">pytorch</span>
+                    </a>
+                    
+                    <a href="/tags/代码模板/">
+                        <span class="chip bg-color">代码模板</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/">
                     <div class="card-image">
                         
@@ -731,9 +784,9 @@ a<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -755,59 +808,6 @@ a<span class="token punctuation">.</span>m3<span class="token punctuation">(</sp
                     
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/02/15/shen-du-xue-xi-you-hua-suan-fa/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/architect/1.jpg" class="responsive-img" alt="深度学习的优化算法">
-                        
-                        <span class="card-title">深度学习的优化算法</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-15
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/深度学习/" class="post-category">
-                                    深度学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/基础知识/">
-                        <span class="chip bg-color">基础知识</span>
-                    </a>
-                    
-                    <a href="/tags/优化算法/">
-                        <span class="chip bg-color">优化算法</span>
                     </a>
                     
                 </div>

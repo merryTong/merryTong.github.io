@@ -4,9 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="深度学习中的学习率衰减, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="学习率衰减原理https://blog.csdn.net/weixin_42030522/article/details/123075824
-在梯度下降算法中，学习率用来控制权重更新的步幅。学习率越大，则权重更新的步子迈得大一些，学习率越小">
+    <meta name="keywords" content="Pytorch中的学习率衰减, AI, 算法, 深度学习, 机器学习，编程">
+    <meta name="description" content="学习率衰减原理在梯度下降算法中，学习率用来控制权重更新的步幅。学习率越大，则权重更新的步子迈得大一些，学习率越小，则权重更新的步子迈得小一些。$w=w- \alpha * \frac{\partial Loss}{\partial w}$如">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深度学习中的学习率衰减 | Merry的博客</title>
+    <title>Pytorch中的学习率衰减 | Merry的博客</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
     
     <style>
@@ -345,12 +344,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/architect/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/animal/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深度学习中的学习率衰减</h1>
+                    <h1 class="description center-align post-title">Pytorch中的学习率衰减</h1>
                 </div>
             </div>
         </div>
@@ -424,8 +423,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="学习率衰减原理"><a href="#学习率衰减原理" class="headerlink" title="学习率衰减原理"></a>学习率衰减原理</h1><p><a href="https://blog.csdn.net/weixin_42030522/article/details/123075824" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42030522/article/details/123075824</a></p>
-<p>在梯度下降算法中，学习率用来控制权重更新的步幅。学习率越大，则权重更新的步子迈得大一些，学习率越小，则权重更新的步子迈得小一些。<br>$w=w- \alpha * \frac{\partial Loss}{\partial w}$<br>如果在训练过程中，学习率保持不变，则可能会出现下面两种情况。</p>
+                <h1 id="学习率衰减原理"><a href="#学习率衰减原理" class="headerlink" title="学习率衰减原理"></a>学习率衰减原理</h1><p>在梯度下降算法中，学习率用来控制权重更新的步幅。学习率越大，则权重更新的步子迈得大一些，学习率越小，则权重更新的步子迈得小一些。<br>$w=w- \alpha * \frac{\partial Loss}{\partial w}$<br>如果在训练过程中，学习率保持不变，则可能会出现下面两种情况。</p>
 <ul>
 <li><p>左侧是学习率较小的情况，这时权重更新步幅小，导致模型收敛很慢。</p>
 </li>
@@ -444,7 +442,7 @@
     train<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
     validate<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
     scheduler<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="lr-scheduler-的学习率衰减策略"><a href="#lr-scheduler-的学习率衰减策略" class="headerlink" title="lr_scheduler()的学习率衰减策略"></a>lr_scheduler()的学习率衰减策略</h1><h2 id="等间隔调整学习率"><a href="#等间隔调整学习率" class="headerlink" title="等间隔调整学习率"></a>等间隔调整学习率</h2><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>StepLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> step_size<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="lr-scheduler-的学习率衰减策略"><a href="#lr-scheduler-的学习率衰减策略" class="headerlink" title="lr_scheduler()的学习率衰减策略"></a>lr_scheduler()的学习率衰减策略</h2><h3 id="等间隔调整学习率"><a href="#等间隔调整学习率" class="headerlink" title="等间隔调整学习率"></a>等间隔调整学习率</h3><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>StepLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> step_size<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该方法有3个参数：</p>
 <ol>
 <li>optimizer是优化器；</li>
@@ -452,7 +450,7 @@
 <li>gamma表示学习率调整的倍数。</li>
 </ol>
 <p>该方法是每训练step_size个epoch，就将学习率调整为 lr<em>gamma。如下图step_size = 10，gamma = 0.8表示每间隔10个epoch将学习率调整为 lr</em>0.8。<br><img src="/images/step_LR.png" alt></p>
-<h2 id="多间隔调整学习率"><a href="#多间隔调整学习率" class="headerlink" title="多间隔调整学习率"></a>多间隔调整学习率</h2><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>MultiStepLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> milestones<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="多间隔调整学习率"><a href="#多间隔调整学习率" class="headerlink" title="多间隔调整学习率"></a>多间隔调整学习率</h3><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>MultiStepLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> milestones<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该方法与StepLR()类似也是间隔调整学习率，但是<strong>间隔并不相等</strong>。它有3个参数：</p>
 <ol>
 <li>optimizer是优化器；</li>
@@ -460,16 +458,16 @@
 <li>gamma表示学习率调整的倍数。</li>
 </ol>
 <p>如下图所示，milestones= [10, 30, 90]，gamma = 0.8表示在epoch = 10、30、90时将学习率调整为 lr*0.8。<br><img src="/images/MultiStepLR.png" alt></p>
-<h2 id="指数衰减调整学习率"><a href="#指数衰减调整学习率" class="headerlink" title="指数衰减调整学习率"></a>指数衰减调整学习率</h2><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>ExponentialLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="指数衰减调整学习率"><a href="#指数衰减调整学习率" class="headerlink" title="指数衰减调整学习率"></a>指数衰减调整学习率</h3><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>ExponentialLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该方法与前两种不同，是<strong>每个epoch都调整学习率</strong>，学习率调整为<br>$lr* gamma^{epoch}$。<br>它有两个参数：</p>
 <ol>
 <li>optimizer是优化器；</li>
 <li>gamma是调整学习率的底数，指数为epoch。</li>
 </ol>
 <p>如下图，gamma = 0.8。<br><img src="/images/ELR.png" alt></p>
-<h2 id="余弦退火函数调整学习率"><a href="#余弦退火函数调整学习率" class="headerlink" title="余弦退火函数调整学习率"></a>余弦退火函数调整学习率</h2><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>CosineAnnealingLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> T_max<span class="token punctuation">,</span> eta_min<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="余弦退火函数调整学习率"><a href="#余弦退火函数调整学习率" class="headerlink" title="余弦退火函数调整学习率"></a>余弦退火函数调整学习率</h3><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>CosineAnnealingLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> T_max<span class="token punctuation">,</span> eta_min<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该方法使得<strong>学习率呈Cos型衰减</strong>，T_max表示0.5个余弦函数周期，也<strong>表示学习率调整为最小时的epoch数值，eta_min表示学习率调整的最小值</strong>，默认为0。如下所示，T_max = 100, eta_min=0表示学习率呈Cos衰减，在epoch = 100时学习率降到最低，即学习率降到0。<br><img src="/images/Cos.png" alt></p>
-<h2 id="根据指标调整学习率"><a href="#根据指标调整学习率" class="headerlink" title="根据指标调整学习率"></a>根据指标调整学习率</h2><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_sheduler<span class="token punctuation">.</span>ReduceLROnPlateau<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'min'</span><span class="token punctuation">,</span> factor<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span> 
+<h3 id="根据指标调整学习率"><a href="#根据指标调整学习率" class="headerlink" title="根据指标调整学习率"></a>根据指标调整学习率</h3><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_sheduler<span class="token punctuation">.</span>ReduceLROnPlateau<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'min'</span><span class="token punctuation">,</span> factor<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span> 
                     patience<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> threshold<span class="token operator">=</span><span class="token number">0.0001</span><span class="token punctuation">,</span> threshold_mode<span class="token operator">=</span><span class="token string">'rel'</span><span class="token punctuation">,</span> 
                     cooldown<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> min_lr<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> eps<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">08</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>该方法<strong>根据监测指标来调整学习率，如训练过程中监测Loss不再降低或是监测Acc不再上升，则调整学习率。</strong>它有如下参数：</p>
@@ -482,7 +480,7 @@
 <li><strong>min_lr</strong>表示学习率的最小值。</li>
 <li><strong>eps</strong>表示学习率的最小变化，若新旧学习率之间的差值小于1e-8则学习率不变。</li>
 </ol>
-<h2 id="自定义调整学习率"><a href="#自定义调整学习率" class="headerlink" title="自定义调整学习率"></a>自定义调整学习率</h2><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> lr_scheduler<span class="token punctuation">.</span>LambdaLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> lr_lambda<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="自定义调整学习率"><a href="#自定义调整学习率" class="headerlink" title="自定义调整学习率"></a>自定义调整学习率</h3><pre class="line-numbers language-python"><code class="language-python">scheduler <span class="token operator">=</span> lr_scheduler<span class="token punctuation">.</span>LambdaLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> lr_lambda<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该方法允许<strong>自定义学习率衰减函数</strong>，它是每个epoch调整一次学习率。<br>该方法的<code>lr_lambda</code>参数表示<strong>自定义的学习率调整函数</strong>，可以是自定义函数，也可以是lambda表达式，自定义的函数须要<strong>接收一个int参数：epoch</strong>，根据epoch定义出学习率的调整倍数。学习率调整为<br>$lr * LR_{lambda}(epoch)$<br>如下所示，自定义学习率调整函数：下面的函数是<strong>自定义的指数衰减</strong>，gamma = 0.8。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">lr_decay</span><span class="token punctuation">(</span>epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token number">0.8</span><span class="token operator">**</span>epoch
@@ -490,7 +488,7 @@ scheduler <span class="token operator">=</span> lr_scheduler<span class="token p
 <p>自定义lambda表达式：下面是<strong>自定义的等间隔学习率调整</strong>，间隔为10epoch。</p>
 <pre class="line-numbers language-python"><code class="language-python">lambda1 <span class="token operator">=</span> <span class="token keyword">lambda</span> epoch<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token number">0.8</span> <span class="token operator">**</span> <span class="token punctuation">(</span>epoch <span class="token operator">//</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 scheduler <span class="token operator">=</span> lr_scheduler<span class="token punctuation">.</span>LambdaLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span>lr_lambda <span class="token operator">=</span> lambda1<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="手动调整学习率"><a href="#手动调整学习率" class="headerlink" title="手动调整学习率"></a>手动调整学习率</h1><p>我们可以通过下面两种方式来访问模型中的学习率。optimizer通过<code>param_groups</code>来管理参数组，<code>param_groups</code>中保存了模型的参数组及其对应的学习率，通过<code>param_group[&#39;lr&#39;]</code>就可以访问到对应参数组的学习率。</p>
+<h2 id="手动调整学习率"><a href="#手动调整学习率" class="headerlink" title="手动调整学习率"></a>手动调整学习率</h2><p>我们可以通过下面两种方式来访问模型中的学习率。optimizer通过<code>param_groups</code>来管理参数组，<code>param_groups</code>中保存了模型的参数组及其对应的学习率，通过<code>param_group[&#39;lr&#39;]</code>就可以访问到对应参数组的学习率。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 下面两种方式等价</span>
 <span class="token keyword">print</span> <span class="token punctuation">(</span>optimizer<span class="token punctuation">.</span>param_groups<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'lr'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span> <span class="token punctuation">(</span>optimizer<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'param_groups'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'lr'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -717,13 +715,13 @@ scheduler <span class="token operator">=</span> lr_scheduler<span class="token p
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/">
+                <a href="/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/architect/19.jpg" class="responsive-img" alt="Python的装饰器">
+                        <img src="/medias/featureimages/architect/14.jpg" class="responsive-img" alt="Python的@staticmethod和@classmethod">
                         
-                        <span class="card-title">Python的装饰器</span>
+                        <span class="card-title">Python的@staticmethod和@classmethod</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

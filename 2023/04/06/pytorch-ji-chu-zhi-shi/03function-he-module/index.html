@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|模型和参数, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="这里的function和Module是指nn.functional和nn.Module。Pytorch和神经网络相关的功能组件大多都封装在torch.nn模块下。这些功能组件的绝大部分既有函数形式实现，也有类形式实现。其中nn.functi">
+    <meta name="description" content="Pytorch中的Module和function这里的function和Module是指nn.functional和nn.Module。Pytorch和神经网络相关的功能组件大多都封装在torch.nn模块下。这些功能组件的绝大部分既有函数">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -423,7 +423,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里的function和Module是指<code>nn.functional</code>和<code>nn.Module</code>。<br>Pytorch和神经网络相关的功能组件大多都封装在<code>torch.nn</code>模块下。这些功能组件的绝大部分既有<strong>函数形式</strong>实现，也有<strong>类形式</strong>实现。<br>其中<code>nn.functional</code>(一般引入后改名为F)有各种功能组件的<strong>函数实现</strong>。为了便于对参数进行管理，一般通过继承<code>nn.Module</code>转换成为<strong>类的实现形式</strong>，并直接封装在 nn 模块下。例如：</p>
+                <h1 id="Pytorch中的Module和function"><a href="#Pytorch中的Module和function" class="headerlink" title="Pytorch中的Module和function"></a>Pytorch中的Module和function</h1><p>这里的function和Module是指<code>nn.functional</code>和<code>nn.Module</code>。<br>Pytorch和神经网络相关的功能组件大多都封装在<code>torch.nn</code>模块下。这些功能组件的绝大部分既有<strong>函数形式</strong>实现，也有<strong>类形式</strong>实现。<br>其中<code>nn.functional</code>(一般引入后改名为F)有各种功能组件的<strong>函数实现</strong>。为了便于对参数进行管理，一般通过继承<code>nn.Module</code>转换成为<strong>类的实现形式</strong>，并直接封装在 nn 模块下。例如：</p>
 <table>
 <thead>
 <tr>
@@ -469,7 +469,7 @@
 </tr>
 </tbody></table>
 <p>实际上<code>nn.Module</code>除了可以管理其引用的各种参数，还可以管理其引用的子模块，功能十分强大。</p>
-<h1 id="使用nn-Module来管理参数"><a href="#使用nn-Module来管理参数" class="headerlink" title="使用nn.Module来管理参数"></a>使用nn.Module来管理参数</h1><p>在Pytorch中，模型的参数是需要被优化器训练的，因此，通常要设置其参数为<code>requires_grad = True</code>的张量。同时，在一个模型中，往往有许多的参数，要手动管理这些参数并不是一件容易的事情。<br>Pytorch一般将参数用<code>nn.Parameter</code>来表示，并且用<code>nn.Module</code>来管理其结构下的所有参数。<br> <code>nn.Parameter</code>具有<code>requires_grad = True</code>属性。</p>
+<h2 id="使用nn-Module来管理参数"><a href="#使用nn-Module来管理参数" class="headerlink" title="使用nn.Module来管理参数"></a>使用nn.Module来管理参数</h2><p>在Pytorch中，模型的参数是需要被优化器训练的，因此，通常要设置其参数为<code>requires_grad = True</code>的张量。同时，在一个模型中，往往有许多的参数，要手动管理这些参数并不是一件容易的事情。<br>Pytorch一般将参数用<code>nn.Parameter</code>来表示，并且用<code>nn.Module</code>来管理其结构下的所有参数。<br> <code>nn.Parameter</code>具有<code>requires_grad = True</code>属性。</p>
 <pre class="line-numbers language-python"><code class="language-python">w <span class="token operator">=</span> nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>w<span class="token punctuation">.</span>requires_grad<span class="token punctuation">)</span>
@@ -591,7 +591,7 @@ torch<span class="token punctuation">.</span>Size<span class="token punctuation"
     <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> input<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> F<span class="token punctuation">.</span>linear<span class="token punctuation">(</span>input<span class="token punctuation">,</span> self<span class="token punctuation">.</span>weight<span class="token punctuation">,</span> self<span class="token punctuation">.</span>bias<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="使用nn-Module来管理子模块"><a href="#使用nn-Module来管理子模块" class="headerlink" title="使用nn.Module来管理子模块"></a>使用nn.Module来管理子模块</h1><p> 一般情况下，我们都很少直接使用<code>nn.Parameter</code>来定义参数构建模型，而是通过拼装一些常用的模型层来构造模型。<br>这些模型层也是继承自nn.Module的对象，本身也包括参数，属于我们要定义的模块的子模块。<br>nn.Module提供了一些方法可以管理这些子模块。</p>
+<h2 id="使用nn-Module来管理子模块"><a href="#使用nn-Module来管理子模块" class="headerlink" title="使用nn.Module来管理子模块"></a>使用nn.Module来管理子模块</h2><p>一般情况下，我们都很少直接使用<code>nn.Parameter</code>来定义参数构建模型，而是通过拼装一些常用的模型层来构造模型。<br>这些模型层也是继承自nn.Module的对象，本身也包括参数，属于我们要定义的模块的子模块。<br>nn.Module提供了一些方法可以管理这些子模块。</p>
 <ul>
 <li><code>children()</code>方法：返回一个生成器，包括模块下的所有子模块。</li>
 <li><code>named_children()</code>方法：返回一个生成器，包括模块下的所有子模块，以及它们的名字。</li>

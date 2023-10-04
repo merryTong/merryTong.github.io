@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|构建数据管道, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="功能简介Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。而DataLoader定义了按ba">
+    <meta name="description" content="Pytorch数据管道构建简介Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。而DataL">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -423,8 +423,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h1><p>Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。<br>Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。<br>而DataLoader定义了按batch加载数据集的方法，它是一个实现了<code>__iter__</code>方法的可迭代对象，每次迭代输出一个batch的数据。<br>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>在绝大部分情况下，用户只需实现Dataset的<code>__len__</code>方法和<code>__getitem__</code>方法，就可以轻松构建自己的数据集，并用默认数据管道进行加载。对于一些复杂的数据集，用户可能还要自己设计 DataLoader中的<code>collate_fn</code>方法以便将获取的一个批次的数据整理成模型需要的输入形式。</p>
-<h1 id="深入理解Dataset和DataLoader原理"><a href="#深入理解Dataset和DataLoader原理" class="headerlink" title="深入理解Dataset和DataLoader原理"></a>深入理解Dataset和DataLoader原理</h1><h2 id="获取一个batch数据的步骤"><a href="#获取一个batch数据的步骤" class="headerlink" title="获取一个batch数据的步骤"></a><strong>获取一个batch数据的步骤</strong></h2><p>假定数据集的特征和标签分别表示为张量$X$和$Y$，数据集可以表示为$(X, Y)$，假定batch大小为$m$。</p>
+                <h1 id="Pytorch数据管道构建简介"><a href="#Pytorch数据管道构建简介" class="headerlink" title="Pytorch数据管道构建简介"></a>Pytorch数据管道构建简介</h1><p>Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。<br>Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。<br>而DataLoader定义了按batch加载数据集的方法，它是一个实现了<code>__iter__</code>方法的可迭代对象，每次迭代输出一个batch的数据。<br>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>在绝大部分情况下，用户只需实现Dataset的<code>__len__</code>方法和<code>__getitem__</code>方法，就可以轻松构建自己的数据集，并用默认数据管道进行加载。对于一些复杂的数据集，用户可能还要自己设计 DataLoader中的<code>collate_fn</code>方法以便将获取的一个批次的数据整理成模型需要的输入形式。</p>
+<h2 id="深入理解Dataset和DataLoader原理"><a href="#深入理解Dataset和DataLoader原理" class="headerlink" title="深入理解Dataset和DataLoader原理"></a>深入理解Dataset和DataLoader原理</h2><h3 id="获取一个batch数据的步骤"><a href="#获取一个batch数据的步骤" class="headerlink" title="获取一个batch数据的步骤"></a><strong>获取一个batch数据的步骤</strong></h3><p>假定数据集的特征和标签分别表示为张量$X$和$Y$，数据集可以表示为$(X, Y)$，假定batch大小为$m$。</p>
 <ol>
 <li>首先我们要确定数据集的长度$n$。结果类似：$n = 1000$。</li>
 <li>然后我们从$0$到$n-1$的范围中抽样出$m$个数(batch大小)。假定$m=4$，拿到的结果是一个列表，类似：<code>indices = [1,4,8,9]</code>。</li>
@@ -432,7 +432,7 @@
 <li>最后我们将结果整理成<strong>两个张量</strong>作为输出。</li>
 </ol>
 <p>拿到的结果是两个张量，类似batch = (features, labels)，其中<code>features = torch.stack([X[1],X[4],X[8],X[9]])</code>；<code>labels = torch.stack([Y[1],Y[4],Y[8],Y[9]])</code>。</p>
-<h2 id="Dataset和DataLoader的功能分工"><a href="#Dataset和DataLoader的功能分工" class="headerlink" title="Dataset和DataLoader的功能分工"></a>Dataset和DataLoader的功能分工</h2><p>第1个步骤确定数据集的长度是由 Dataset的<code>__len__</code>方法实现的。<br>第2个步骤从$0$到$n-1$的范围中抽样出$m$个数的方法是由 DataLoader的<code>sampler</code>和<code>batch_sampler</code>参数指定的。<code>sampler</code>参数<strong>指定单个元素抽样方法</strong>，一般无需用户设置，程序默认在DataLoader的参数<code>shuffle=True</code>时采用随机抽样，<code>shuffle=False</code>时采用顺序抽样。<code>batch_sampler</code>参数<strong>将多个抽样的元素整理成一个列表</strong>，一般无需用户设置，默认方法在DataLoader的参数<code>drop_last=True</code>时会丢弃数据集最后一个长度不能被batch大小整除的批次，在<code>drop_last=False</code>时保留最后一个批次。<br>第3个步骤的核心逻辑根据下标取数据集中的元素，是由 Dataset的<code>__getitem__</code>方法实现的。<br>第4个步骤的逻辑由DataLoader的参数<code>collate_fn</code>指定。一般情况下也无需用户设置。<br>Dataset和DataLoader的一般使用方式如下：</p>
+<h3 id="Dataset和DataLoader的功能分工"><a href="#Dataset和DataLoader的功能分工" class="headerlink" title="Dataset和DataLoader的功能分工"></a>Dataset和DataLoader的功能分工</h3><p>第1个步骤确定数据集的长度是由 Dataset的<code>__len__</code>方法实现的。<br>第2个步骤从$0$到$n-1$的范围中抽样出$m$个数的方法是由 DataLoader的<code>sampler</code>和<code>batch_sampler</code>参数指定的。<code>sampler</code>参数<strong>指定单个元素抽样方法</strong>，一般无需用户设置，程序默认在DataLoader的参数<code>shuffle=True</code>时采用随机抽样，<code>shuffle=False</code>时采用顺序抽样。<code>batch_sampler</code>参数<strong>将多个抽样的元素整理成一个列表</strong>，一般无需用户设置，默认方法在DataLoader的参数<code>drop_last=True</code>时会丢弃数据集最后一个长度不能被batch大小整除的批次，在<code>drop_last=False</code>时保留最后一个批次。<br>第3个步骤的核心逻辑根据下标取数据集中的元素，是由 Dataset的<code>__getitem__</code>方法实现的。<br>第4个步骤的逻辑由DataLoader的参数<code>collate_fn</code>指定。一般情况下也无需用户设置。<br>Dataset和DataLoader的一般使用方式如下：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch   
 <span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> TensorDataset<span class="token punctuation">,</span>Dataset<span class="token punctuation">,</span>DataLoader  
 <span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> RandomSampler<span class="token punctuation">,</span>BatchSampler   
@@ -473,7 +473,7 @@ batch <span class="token operator">=</span> <span class="token punctuation">[</s
 features<span class="token punctuation">,</span>labels <span class="token operator">=</span> collate_fn<span class="token punctuation">(</span>batch<span class="token punctuation">)</span>  
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"features = "</span><span class="token punctuation">,</span>features<span class="token punctuation">)</span>  
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"labels = "</span><span class="token punctuation">,</span>labels<span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="Dataset和DataLoader的核心源码"><a href="#Dataset和DataLoader的核心源码" class="headerlink" title="Dataset和DataLoader的核心源码"></a><strong>Dataset和DataLoader的核心源码</strong></h2><p>以下是 Dataset和 DataLoader的核心源码，省略了为了提升性能而引入的诸如多进程读取数据相关的代码。</p>
+<h3 id="Dataset和DataLoader的核心源码"><a href="#Dataset和DataLoader的核心源码" class="headerlink" title="Dataset和DataLoader的核心源码"></a><strong>Dataset和DataLoader的核心源码</strong></h3><p>以下是 Dataset和 DataLoader的核心源码，省略了为了提升性能而引入的诸如多进程读取数据相关的代码。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch  
 
 <span class="token keyword">class</span> <span class="token class-name">Dataset</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>  
@@ -502,7 +502,7 @@ features<span class="token punctuation">,</span>labels <span class="token operat
 
     <span class="token keyword">def</span> <span class="token function">__iter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>  
         <span class="token keyword">return</span> self <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="Sampler原理"><a href="#Sampler原理" class="headerlink" title="Sampler原理"></a>Sampler原理</h1><h2 id="Sampler参数传递"><a href="#Sampler参数传递" class="headerlink" title="Sampler参数传递"></a>Sampler参数传递</h2><p>假设数据是一组图像，每一张图像对应一个index，那么如果要读取数据就只需要对应的index即可，即上面代码中的indices，而选取index的方式有多种，有按顺序的，也有乱序的，所以这个工作需要Sampler完成。<br>首先看一下DataLoader的源代码长什么样。为方便理解只选取了num_works为0的情况（num_works简单理解就是能够并行化地读取数据）。</p>
+<h2 id="Sampler原理"><a href="#Sampler原理" class="headerlink" title="Sampler原理"></a>Sampler原理</h2><h3 id="Sampler参数传递"><a href="#Sampler参数传递" class="headerlink" title="Sampler参数传递"></a>Sampler参数传递</h3><p>假设数据是一组图像，每一张图像对应一个index，那么如果要读取数据就只需要对应的index即可，即上面代码中的indices，而选取index的方式有多种，有按顺序的，也有乱序的，所以这个工作需要Sampler完成。<br>首先看一下DataLoader的源代码长什么样。为方便理解只选取了num_works为0的情况（num_works简单理解就是能够并行化地读取数据）。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">DataLoader</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> sampler<span class="token operator">=</span>None<span class="token punctuation">,</span>
                  batch_sampler<span class="token operator">=</span>None<span class="token punctuation">,</span> num_workers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> collate_fn<span class="token operator">=</span>default_collate<span class="token punctuation">,</span>
@@ -538,7 +538,7 @@ features<span class="token punctuation">,</span>labels <span class="token operat
 </ul>
 </li>
 </ul>
-<h2 id="自定义Sampler和BatchSampler"><a href="#自定义Sampler和BatchSampler" class="headerlink" title="自定义Sampler和BatchSampler"></a>自定义Sampler和BatchSampler</h2><p>查看源代码其实可以发现，所有采样器其实都继承自同一个父类，即Sampler,其代码定义如下：</p>
+<h3 id="自定义Sampler和BatchSampler"><a href="#自定义Sampler和BatchSampler" class="headerlink" title="自定义Sampler和BatchSampler"></a>自定义Sampler和BatchSampler</h3><p>查看源代码其实可以发现，所有采样器其实都继承自同一个父类，即Sampler,其代码定义如下：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Sampler</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data_source<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -550,7 +550,7 @@ features<span class="token punctuation">,</span>labels <span class="token operat
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data_source<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>所以要做的就是定义好<code>__iter__(self)</code>函数，不过要注意的是该函数的返回值需要是可迭代的。例如<code>SequentialSampler</code>返回的是<code>iter(range(len(self.data_source)))</code>。<br>另外<code>BatchSampler</code>与其他Sampler的主要区别是它需要将Sampler作为参数进行打包，进而每次迭代返回以batch_size为大小的index列表。也就是说在后面的读取数据过程中使用的都是batch sampler。</p>
-<h1 id="创建数据集的3种方式"><a href="#创建数据集的3种方式" class="headerlink" title="创建数据集的3种方式"></a>创建数据集的3种方式</h1><p>Dataset创建数据集常用的方法有：</p>
+<h2 id="创建数据集的3种方式"><a href="#创建数据集的3种方式" class="headerlink" title="创建数据集的3种方式"></a>创建数据集的3种方式</h2><p>Dataset创建数据集常用的方法有：</p>
 <ol>
 <li>使用<code>torch.utils.data.TensorDataset</code>根据Tensor创建数据集(numpy的array，Pandas的DataFrame需要先转换成Tensor)。</li>
 <li>使用<code>torchvision.datasets.ImageFolder</code>根据图片目录创建图片数据集。</li>
@@ -561,7 +561,7 @@ features<span class="token punctuation">,</span>labels <span class="token operat
 <li><code>torch.utils.data.random_split</code>将一个数据集分割成多份，常用于分割训练集，验证集和测试集。</li>
 <li>调用Dataset的加法运算符($+$)将多个数据集合并成一个数据集。</li>
 </ul>
-<h2 id="根据Tensor创建数据集"><a href="#根据Tensor创建数据集" class="headerlink" title="根据Tensor创建数据集"></a><strong>根据Tensor创建数据集</strong></h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np   
+<h3 id="根据Tensor创建数据集"><a href="#根据Tensor创建数据集" class="headerlink" title="根据Tensor创建数据集"></a><strong>根据Tensor创建数据集</strong></h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np   
 <span class="token keyword">import</span> torch   
 <span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> TensorDataset<span class="token punctuation">,</span>Dataset<span class="token punctuation">,</span>DataLoader<span class="token punctuation">,</span>random_split 
 
@@ -592,7 +592,7 @@ ds_data <span class="token operator">=</span> ds_train <span class="token operat
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'len(ds_valid) = '</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ds_val<span class="token punctuation">)</span><span class="token punctuation">)</span>  
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'len(ds_train+ds_valid) = '</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ds_data<span class="token punctuation">)</span><span class="token punctuation">)</span>  
 <span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>ds_data<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="根据图片目录创建图片数据集"><a href="#根据图片目录创建图片数据集" class="headerlink" title="根据图片目录创建图片数据集"></a><strong>根据图片目录创建图片数据集</strong></h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np   
+<h3 id="根据图片目录创建图片数据集"><a href="#根据图片目录创建图片数据集" class="headerlink" title="根据图片目录创建图片数据集"></a><strong>根据图片目录创建图片数据集</strong></h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np   
 <span class="token keyword">import</span> torch   
 <span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader  
 <span class="token keyword">from</span> torchvision <span class="token keyword">import</span> transforms<span class="token punctuation">,</span>datasets   
@@ -630,7 +630,7 @@ dl_val <span class="token operator">=</span> DataLoader<span class="token punctu
     <span class="token keyword">print</span><span class="token punctuation">(</span>features<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
     <span class="token keyword">print</span><span class="token punctuation">(</span>labels<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
     <span class="token keyword">break</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="创建自定义数据集"><a href="#创建自定义数据集" class="headerlink" title="创建自定义数据集"></a><strong>创建自定义数据集</strong></h2><p>下面通过继承<code>torch.utils.data.Dataset</code>创建自定义数据集的方式来对 cifar2 构建数据管道。</p>
+<h3 id="创建自定义数据集"><a href="#创建自定义数据集" class="headerlink" title="创建自定义数据集"></a><strong>创建自定义数据集</strong></h3><p>下面通过继承<code>torch.utils.data.Dataset</code>创建自定义数据集的方式来对 cifar2 构建数据管道。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path   
 <span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image   
 
@@ -663,7 +663,7 @@ dl_val <span class="token operator">=</span> DataLoader<span class="token punctu
     <span class="token keyword">print</span><span class="token punctuation">(</span>features<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
     <span class="token keyword">print</span><span class="token punctuation">(</span>labels<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
     <span class="token keyword">break</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="使用DataLoader加载数据集"><a href="#使用DataLoader加载数据集" class="headerlink" title="使用DataLoader加载数据集"></a>使用DataLoader加载数据集</h1><p>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>DataLoader的函数签名如下。</p>
+<h2 id="使用DataLoader加载数据集"><a href="#使用DataLoader加载数据集" class="headerlink" title="使用DataLoader加载数据集"></a>使用DataLoader加载数据集</h2><p>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>DataLoader的函数签名如下。</p>
 <pre class="line-numbers language-python"><code class="language-python">DataLoader<span class="token punctuation">(</span>  
     dataset<span class="token punctuation">,</span>  
     batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>  

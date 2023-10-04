@@ -5,14 +5,14 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|动态计算图, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="本节我们将介绍 Pytorch的动态计算图。包括： 
+    <meta name="description" content="Pytorch的动态图简介本节我们将介绍 Pytorch的动态计算图。包括： 
 
 动态计算图简介
 计算图中的Function
 计算图和反向传播
 叶子节点和非叶子节点
 
-动态图简介Pytorch的计算图由节点和边组成，节点表示张量或者Function，边表示张量和Fu">
+动态计算图简介Pytorch的计算图由节点和边组成，节点表示张量或者Fu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -430,14 +430,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本节我们将介绍 Pytorch的动态计算图。<br>包括： </p>
+                <h1 id="Pytorch的动态图简介"><a href="#Pytorch的动态图简介" class="headerlink" title="Pytorch的动态图简介"></a>Pytorch的动态图简介</h1><p>本节我们将介绍 Pytorch的动态计算图。<br>包括： </p>
 <ul>
 <li>动态计算图简介</li>
 <li>计算图中的Function</li>
 <li>计算图和反向传播</li>
 <li>叶子节点和非叶子节点</li>
 </ul>
-<h1 id="动态图简介"><a href="#动态图简介" class="headerlink" title="动态图简介"></a>动态图简介</h1><p>Pytorch的计算图由节点和边组成，节点表示张量或者Function，边表示张量和Function之间的依赖关系。<br>Pytorch中的计算图是动态图。这里的动态主要有两重含义。</p>
+<h2 id="动态计算图简介"><a href="#动态计算图简介" class="headerlink" title="动态计算图简介"></a>动态计算图简介</h2><p>Pytorch的计算图由节点和边组成，节点表示张量或者Function，边表示张量和Function之间的依赖关系。<br>Pytorch中的计算图是动态图。这里的动态主要有两重含义。</p>
 <ol>
 <li>计算图的正向传播是立即执行的。无需等待完整的计算图创建完毕，每条语句都会在计算图中动态添加节点和边，并立即执行正向传播得到计算结果。</li>
 <li>计算图在反向传播后立即销毁，下次调用需要重新构建计算图。如果在程序中使用了backward方法执行了反向传播，或者利用torch.autograd.grad方法计算了梯度，那么创建的计算图会被立即销毁，释放存储空间，下次调用需要重新创建。</li>
@@ -477,7 +477,7 @@ loss <span class="token operator">=</span> torch<span class="token punctuation">
 loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#loss.backward(retain_graph = True) </span>
 
 <span class="token comment" spellcheck="true">#loss.backward() #如果再次执行反向传播将报错</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="计算图中的Function"><a href="#计算图中的Function" class="headerlink" title="计算图中的Function"></a>计算图中的Function</h1><p>计算图中的张量我们已经比较熟悉了，计算图中的另外一种节点是Function，实际上就是 Pytorch中各种对张量操作的函数。<br>这些Function和我们Python中的函数有一个较大的区别，那就是它同时包括正向计算逻辑和反向传播的逻辑。我们可以通过继承<code>torch.autograd.Function</code>来创建这种支持反向传播的Function。</p>
+<h2 id="计算图中的Function"><a href="#计算图中的Function" class="headerlink" title="计算图中的Function"></a>计算图中的Function</h2><p>计算图中的张量我们已经比较熟悉了，计算图中的另外一种节点是Function，实际上就是 Pytorch中各种对张量操作的函数。<br>这些Function和我们Python中的函数有一个较大的区别，那就是它同时包括正向计算逻辑和反向传播的逻辑。我们可以通过继承<code>torch.autograd.Function</code>来创建这种支持反向传播的Function。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyReLU</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>Function<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
     <span class="token comment" spellcheck="true">#正向传播逻辑，可以用ctx存储一些值，供反向传播使用。</span>
@@ -512,7 +512,7 @@ loss<span class="token punctuation">.</span>backward<span class="token punctuati
 tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">4.5000</span><span class="token punctuation">,</span> <span class="token number">4.5000</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">4.5000</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token operator">&lt;</span>torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>function<span class="token punctuation">.</span>MyReLUBackward object at <span class="token number">0x7f6979f47200</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="计算图与反向传播"><a href="#计算图与反向传播" class="headerlink" title="计算图与反向传播"></a>计算图与反向传播</h1><p>了解了Function的功能，我们可以简单地理解一下反向传播的原理和过程。理解该部分原理需要一些高等数学中求导链式法则的基础知识。 </p>
+<h2 id="计算图与反向传播"><a href="#计算图与反向传播" class="headerlink" title="计算图与反向传播"></a>计算图与反向传播</h2><p>了解了Function的功能，我们可以简单地理解一下反向传播的原理和过程。理解该部分原理需要一些高等数学中求导链式法则的基础知识。 </p>
 <pre class="line-numbers language-python"><code class="language-python">x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
 y1 <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">1</span>
 y2 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>x
@@ -526,7 +526,7 @@ loss<span class="token punctuation">.</span>backward<span class="token punctuati
 <li>y2和y1根据其自身梯度以及关联的backward方法, 分别计算出其对应的自变量x的梯度，x.grad将其收到的多个梯度值累加。</li>
 </ol>
 <p>注意，1,2,3步骤的求梯度顺序和对多个梯度值的累加规则恰好是求导链式法则的程序表述。<br>正因为求导链式法则衍生的梯度累加规则，张量的grad梯度不会自动清零，在需要的时候需要手动置零。</p>
-<h1 id="叶子节点和非叶子节点"><a href="#叶子节点和非叶子节点" class="headerlink" title="叶子节点和非叶子节点"></a>叶子节点和非叶子节点</h1><p>执行下面代码，我们会发现 loss.grad并不是我们期望的1，而是 None。类似地 y1.grad 以及 y2.grad也是 None。<br>这是为什么呢？这是由于它们不是叶子节点张量。<br>在反向传播过程中，只有 is_leaf=True 的叶子节点，需要求导的张量的导数结果才会被最后保留下来。那么什么是叶子节点张量呢？叶子节点张量需要满足两个条件。</p>
+<h2 id="叶子节点和非叶子节点"><a href="#叶子节点和非叶子节点" class="headerlink" title="叶子节点和非叶子节点"></a>叶子节点和非叶子节点</h2><p>执行下面代码，我们会发现 loss.grad并不是我们期望的1，而是 None。类似地 y1.grad 以及 y2.grad也是 None。<br>这是为什么呢？这是由于它们不是叶子节点张量。<br>在反向传播过程中，只有 is_leaf=True 的叶子节点，需要求导的张量的导数结果才会被最后保留下来。那么什么是叶子节点张量呢？叶子节点张量需要满足两个条件。</p>
 <ol>
 <li>叶子节点张量是由用户直接创建的张量，而非由某个Function通过计算得到的张量。</li>
 <li>叶子节点张量的 requires_grad属性必须为True.</li>

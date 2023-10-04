@@ -5,14 +5,14 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的装饰器, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="装饰器是什么装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。装饰器的使用场景：
+    <meta name="description" content="Python的装饰器装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。装饰器的使用场景：
 
 增强被装饰函数的行为
 提高代码复用
 
 一个良好的装饰器必须要遵守两个原则：
 
-不能修改被">
+不">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -430,7 +430,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><p>装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。<br>装饰器的使用场景：</p>
+                <h1 id="Python的装饰器"><a href="#Python的装饰器" class="headerlink" title="Python的装饰器"></a>Python的装饰器</h1><p>装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。<br>装饰器的使用场景：</p>
 <ol>
 <li>增强被装饰函数的行为</li>
 <li>提高代码复用</li>
@@ -440,12 +440,12 @@
 <li>不能修改被装饰函数的代码</li>
 <li>不能修改被装饰函数的调用方式</li>
 </ul>
-<h1 id="装饰器理解基础"><a href="#装饰器理解基础" class="headerlink" title="装饰器理解基础"></a>装饰器理解基础</h1><p>如果想要很好的理解装饰器，那下面的两个内容需要先有所认知。</p>
+<h2 id="装饰器理解基础"><a href="#装饰器理解基础" class="headerlink" title="装饰器理解基础"></a>装饰器理解基础</h2><p>如果想要很好的理解装饰器，那下面的两个内容需要先有所认知。</p>
 <ul>
 <li>函数名可以赋值给变量</li>
 <li>高阶函数</li>
 </ul>
-<h2 id="函数名可以赋值给变量"><a href="#函数名可以赋值给变量" class="headerlink" title="函数名可以赋值给变量"></a>函数名可以赋值给变量</h2><p>看下这个例子：</p>
+<h3 id="函数名可以赋值给变量"><a href="#函数名可以赋值给变量" class="headerlink" title="函数名可以赋值给变量"></a>函数名可以赋值给变量</h3><p>看下这个例子：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'我是{}！慌的一逼！'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
@@ -457,7 +457,7 @@ y<span class="token punctuation">(</span><span class="token string">'勒夫'</sp
 <span class="token comment" spellcheck="true"># 我是梅西！慌的一逼！</span>
 <span class="token comment" spellcheck="true"># 我是勒夫！慌的一逼！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码中我们首先定义了函数<code>func</code>，并调用了<code>func</code>函数，并且把<code>func</code>赋值给y。<code>y = func</code>表明了：<strong>函数名可以赋值给变量，并且不影响调用</strong>。</p>
-<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><p>高阶函数满足如下两个条件中的任意一个：</p>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>高阶函数满足如下两个条件中的任意一个：</p>
 <ol>
 <li>可以接收函数名作为实参；</li>
 <li>返回值中可以包含函数名。</li>
@@ -478,7 +478,7 @@ r <span class="token operator">=</span> map<span class="token punctuation">(</sp
 a <span class="token operator">=</span> f<span class="token punctuation">(</span>l<span class="token punctuation">)</span>
 <span class="token keyword">for</span> i <span class="token keyword">in</span> a<span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'当前天台人数：'</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="实现一个类似的装饰器"><a href="#实现一个类似的装饰器" class="headerlink" title="实现一个类似的装饰器"></a>实现一个类似的装饰器</h1><p>现在已经知道了<strong>函数名赋值</strong>和<strong>高阶函数</strong>，有了这两个基础，就可以尝试实现一个类似的装饰器。</p>
+<h2 id="实现一个类似的装饰器"><a href="#实现一个类似的装饰器" class="headerlink" title="实现一个类似的装饰器"></a>实现一个类似的装饰器</h2><p>现在已经知道了<strong>函数名赋值</strong>和<strong>高阶函数</strong>，有了这两个基础，就可以尝试实现一个类似的装饰器。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">status</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'慌的一逼！'</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> func
@@ -517,7 +517,7 @@ name<span class="token punctuation">(</span><span class="token punctuation">)</s
 <li><strong>写一个高阶函数</strong>，即参数是函数，返回的也是函数。</li>
 <li>在<strong>利用语法糖@，简化赋值操作</strong>。</li>
 </ul>
-<h1 id="装饰器进阶"><a href="#装饰器进阶" class="headerlink" title="装饰器进阶"></a>装饰器进阶</h1><p>能够处理返回值的装饰器：</p>
+<h2 id="装饰器进阶"><a href="#装饰器进阶" class="headerlink" title="装饰器进阶"></a>装饰器进阶</h2><p>能够处理返回值的装饰器：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">guess_win</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">rooftop_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         result <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -560,7 +560,7 @@ y <span class="token operator">=</span> german_team<span class="token punctuatio
 <span class="token comment" spellcheck="true"># 西班牙必胜！</span>
 <span class="token comment" spellcheck="true"># 天台已满，请排队！</span>
 <span class="token comment" spellcheck="true"># 赢了会所嫩模！输了下海干活！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>装饰器的<strong>本质是函数</strong>，<strong>其参数是另一个函数（被装饰的函数）</strong>。装饰器通常会额外处理被装饰的函数，然后把它返回，或者将其替换成另一个函数或可调用对象。行为良好的装饰器可以重用，以减少代码量。<br>代码运行的理解通式：</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>装饰器的<strong>本质是函数</strong>，<strong>其参数是另一个函数（被装饰的函数）</strong>。装饰器通常会额外处理被装饰的函数，然后把它返回，或者将其替换成另一个函数或可调用对象。行为良好的装饰器可以重用，以减少代码量。<br>代码运行的理解通式：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">xxx</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> func
 
@@ -724,59 +724,6 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/architect/18.jpg" class="responsive-img" alt="深度学习中的学习率衰减">
-                        
-                        <span class="card-title">深度学习中的学习率衰减</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-21
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Pytorch/" class="post-category">
-                                    Pytorch
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/pytorch/">
-                        <span class="chip bg-color">pytorch</span>
-                    </a>
-                    
-                    <a href="/tags/代码模板/">
-                        <span class="chip bg-color">代码模板</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/">
                     <div class="card-image">
                         
@@ -793,9 +740,9 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -817,6 +764,63 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
                     
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/15/shen-du-xue-xi/shen-du-xue-xi-you-hua-suan-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/architect/1.jpg" class="responsive-img" alt="深度学习的优化算法">
+                        
+                        <span class="card-title">深度学习的优化算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/深度学习/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/基础知识/">
+                        <span class="chip bg-color">基础知识</span>
+                    </a>
+                    
+                    <a href="/tags/数学/">
+                        <span class="chip bg-color">数学</span>
+                    </a>
+                    
+                    <a href="/tags/优化算法/">
+                        <span class="chip bg-color">优化算法</span>
                     </a>
                     
                 </div>

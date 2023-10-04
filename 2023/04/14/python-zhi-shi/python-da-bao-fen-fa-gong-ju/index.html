@@ -5,11 +5,9 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python打包分发工具：setuptools, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="setuptools库的前身是distutils（一个python标准库），setuptools本身不是标准库，所以需要自行安装。setuptools提供的主要的功能有：
+    <meta name="description" content="Python打包工具setuptools介绍setuptools库的前身是distutils（一个python标准库），setuptools本身不是标准库，所以需要自行安装。setuptools提供的主要的功能有：
 
-python库的打包分发
-依赖包安装与版本管理
-python环境限">
+python库的打包分">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -427,7 +425,7 @@ python环境限">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>setuptools库的前身是distutils（一个python标准库），<strong>setuptools本身不是标准库，所以需要自行安装</strong>。setuptools提供的主要的功能有：</p>
+                <h1 id="Python打包工具setuptools介绍"><a href="#Python打包工具setuptools介绍" class="headerlink" title="Python打包工具setuptools介绍"></a>Python打包工具setuptools介绍</h1><p>setuptools库的前身是distutils（一个python标准库），<strong>setuptools本身不是标准库，所以需要自行安装</strong>。setuptools提供的主要的功能有：</p>
 <ul>
 <li><strong>python库的打包分发</strong></li>
 <li><strong>依赖包安装与版本管理</strong></li>
@@ -435,7 +433,7 @@ python环境限">
 <li><strong>生成脚本</strong></li>
 <li><strong>c/c++ 拓展</strong></li>
 </ul>
-<h1 id="库的打包分发"><a href="#库的打包分发" class="headerlink" title="库的打包分发"></a>库的打包分发</h1><p>python库的打包分发方式有两种：<strong>源码包source dist</strong>（简称sdist）、<strong>二进制包binary dist</strong>（简称bdist）。<br>源码包sdist就是我们熟悉的 .zip 、.tar.gz 等后缀文件。就是一个压缩包，里面包含了所需要的的所有源码文件以及一些静态文件（txt文本、css、图片等）。常见的格式有：</p>
+<h2 id="库的打包分发"><a href="#库的打包分发" class="headerlink" title="库的打包分发"></a>库的打包分发</h2><p>python库的打包分发方式有两种：<strong>源码包source dist</strong>（简称sdist）、<strong>二进制包binary dist</strong>（简称bdist）。<br>源码包sdist就是我们熟悉的 .zip 、.tar.gz 等后缀文件。就是一个压缩包，里面包含了所需要的的所有源码文件以及一些静态文件（txt文本、css、图片等）。常见的格式有：</p>
 <table>
 <thead>
 <tr>
@@ -481,7 +479,7 @@ python环境限">
 <td>.whl</td>
 </tr>
 </tbody></table>
-<h2 id="源码包sdist"><a href="#源码包sdist" class="headerlink" title="源码包sdist"></a>源码包sdist</h2><p>打包分发源码包命令</p>
+<h3 id="源码包sdist"><a href="#源码包sdist" class="headerlink" title="源码包sdist"></a>源码包sdist</h3><p>打包分发源码包命令</p>
 <pre class="line-numbers language-shell"><code class="language-shell">$ python setup.py sdist --formats=gztar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>setup.py</code>指定了打包分发的配置信息。<code>--formats</code> 参数用来指定压缩格式，若不指定format格式，那么 sdist 将根据当前平台创建默认格式：在类 Unix 平台上，将创建后缀名为.tar.gz分发包，而在Windows上为 .zip 文件。<br>安装源码包命令。安装源码包有两种方法，先解压缩源码包，或者直接安装源码包。</p>
 <ol>
@@ -495,7 +493,7 @@ $ python setup.py install<span aria-hidden="true" class="line-numbers-rows"><spa
 <li>直接pip安装源码包</li>
 </ol>
 <pre class="line-numbers language-shell"><code class="language-shell">$ pip install  xxx.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="二进制包bdist"><a href="#二进制包bdist" class="headerlink" title="二进制包bdist"></a>二进制包bdist</h2><p>打包分发二进制包命令。</p>
+<h3 id="二进制包bdist"><a href="#二进制包bdist" class="headerlink" title="二进制包bdist"></a>二进制包bdist</h3><p>打包分发二进制包命令。</p>
 <table>
 <thead>
 <tr>
@@ -533,7 +531,7 @@ $ python setup.py install<span aria-hidden="true" class="line-numbers-rows"><spa
 <pre class="line-numbers language-shell"><code class="language-shell">$ python setup.py bdist_wheel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装二进制包命令</p>
 <pre class="line-numbers language-shell"><code class="language-shell">$ pip install xxx.whl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="eggs-与-wheels-有什么区别？"><a href="#eggs-与-wheels-有什么区别？" class="headerlink" title="eggs 与 wheels 有什么区别？"></a>eggs 与 wheels 有什么区别？</h2><p>Egg 格式是由 setuptools 在 2004 年引入，而 Wheel 格式是由 PEP427 在 2012 年定义。Wheel 的出现是为了替代 Egg，它的本质是一个zip包，其现在被认为是 Python 的二进制包的标准格式。<br>以下是 Wheel 和 Egg 的主要区别：</p>
+<h3 id="eggs-与-wheels-有什么区别？"><a href="#eggs-与-wheels-有什么区别？" class="headerlink" title="eggs 与 wheels 有什么区别？"></a>eggs 与 wheels 有什么区别？</h3><p>Egg 格式是由 setuptools 在 2004 年引入，而 Wheel 格式是由 PEP427 在 2012 年定义。Wheel 的出现是为了替代 Egg，它的本质是一个zip包，其现在被认为是 Python 的二进制包的标准格式。<br>以下是 Wheel 和 Egg 的主要区别：</p>
 <ul>
 <li>Wheel 有一个官方的 PEP427 来定义，而 Egg 没有 PEP 定义</li>
 <li>Wheel 是一种分发格式，即打包格式。而 Egg 既是一种分发格式，也是一种运行时安装的格式，并且是可以被直接 import</li>
@@ -554,7 +552,7 @@ $ python setup.py install<span aria-hidden="true" class="line-numbers-rows"><spa
 <li><strong>cmdclass自定义命令行为</strong></li>
 </ul>
 <h2 id="setup函数的配置信息"><a href="#setup函数的配置信息" class="headerlink" title="setup函数的配置信息"></a>setup函数的配置信息</h2><p>setup.py 的参数非常多，能够不借助文档写好一个setup.py好像没那么简单。<br><img src="/images/setuptools.png" alt></p>
-<h2 id="python库的基本信息"><a href="#python库的基本信息" class="headerlink" title="python库的基本信息"></a><strong>python库的基本信息</strong></h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> setuptools <span class="token keyword">import</span> setup
+<h3 id="python库的基本信息"><a href="#python库的基本信息" class="headerlink" title="python库的基本信息"></a><strong>python库的基本信息</strong></h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> setuptools <span class="token keyword">import</span> setup
 <span class="token keyword">def</span> <span class="token function">readme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'README.md'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
         content <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -693,7 +691,7 @@ setup<span class="token punctuation">(</span>
 <li><code>docutils &gt;= 0.3</code>，这是比较常用的形式。 当对某个库比较信任时，这种形式可以自动保持版本为最新。</li>
 <li><code>Django &gt;= 1.11, != 1.11.1, &lt;= 2</code>，这是比较复杂的形式。 如这个例子，保证了Django的大版本在1.11和2之间，也即1.11.x；并且，排除了已知有问题的版本1.11.1（仅举例）。 对于一些大型、复杂的库，这种形式是最合适的。</li>
 </ol>
-<h2 id="python环境限制"><a href="#python环境限制" class="headerlink" title="python环境限制"></a>python环境限制</h2><pre class="line-numbers language-python"><code class="language-python">setup<span class="token punctuation">(</span>python_requires<span class="token operator">=</span><span class="token string">'>=2.7, &lt;=3'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="python环境限制"><a href="#python环境限制" class="headerlink" title="python环境限制"></a>python环境限制</h3><pre class="line-numbers language-python"><code class="language-python">setup<span class="token punctuation">(</span>python_requires<span class="token operator">=</span><span class="token string">'>=2.7, &lt;=3'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="生成脚本"><a href="#生成脚本" class="headerlink" title="生成脚本"></a>生成脚本</h2><p>有时候我们的库包含了一些非常重要的功能，每次都提供python XXX.py来运行不太方便，最好是把脚本放入系统环境path，以命令行的形式来执行。比如tensorRT就提供了trtexec命令。<br>那么setup函数提供了entry_points和scripts这两个参数。它们的区别在于：</p>
 <ul>
 <li>entry_points是把<strong>python文件中的函数</strong>自动生成为可执行脚本</li>
