@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2023-10-04T02:58:22.234Z</updated>
+  <updated>2023-10-05T09:16:15.962Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pytorch|张量的特殊操作</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/</id>
+    <published>2023-10-04T11:30:31.000Z</published>
+    <updated>2023-10-05T09:16:15.962Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;张量的特殊操作&quot;&gt;&lt;a href=&quot;#张量的特殊操作&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/Pytorch/"/>
+    
+  </entry>
   
   <entry>
     <title>深度学习中的正则化</title>
@@ -292,11 +320,11 @@
   </entry>
   
   <entry>
-    <title>Pytorch|构建数据管道</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
+    <title>Pytorch|模型和参数</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</id>
     <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:32:20.136Z</updated>
+    <updated>2023-10-04T00:36:47.413Z</updated>
     
     <summary type="html">
     
@@ -304,7 +332,7 @@
       
         
         
-          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
         
       
     
@@ -320,11 +348,11 @@
   </entry>
   
   <entry>
-    <title>Pytorch|模型和参数</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</id>
+    <title>Pytorch|构建数据管道</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
     <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:36:47.413Z</updated>
+    <updated>2023-10-04T00:32:20.136Z</updated>
     
     <summary type="html">
     
@@ -332,7 +360,7 @@
       
         
         
-          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
         
       
     
@@ -541,36 +569,6 @@
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
       <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深度学习的优化算法</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi/shen-du-xue-xi-you-hua-suan-fa/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi/shen-du-xue-xi-you-hua-suan-fa/</id>
-    <published>2023-02-15T09:30:31.000Z</published>
-    <updated>2023-10-04T02:58:41.042Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;深度学习的优化算法&quot;&gt;&lt;a href=&quot;#深度学习的优化算法&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="优化算法" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
