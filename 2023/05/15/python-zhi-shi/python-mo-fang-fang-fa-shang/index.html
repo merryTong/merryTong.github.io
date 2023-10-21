@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Python的魔法方法, AI, 算法, 深度学习, 机器学习，编程">
+    <meta name="keywords" content="Python的魔法方法(上), AI, 算法, 深度学习, 机器学习，编程">
     <meta name="description" content="Python的魔法方法魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两个下划线。
 基础方法__ init__ 和__ new__这两个魔法方法能够改变一个类实例化对象时的行为。
 __n">
@@ -19,7 +19,7 @@ __n">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python的魔法方法 | Merry的博客</title>
+    <title>Python的魔法方法(上) | Merry的博客</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
     
     <style>
@@ -346,12 +346,12 @@ __n">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/architect/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/animal/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python的魔法方法</h1>
+                    <h1 class="description center-align post-title">Python的魔法方法(上)</h1>
                 </div>
             </div>
         </div>
@@ -438,10 +438,10 @@ __n">
         self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"__init__"</span><span class="token punctuation">)</span>
 
-o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+o <span class="token operator">=</span> A<span class="token punctuation">(</span>xxx<span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># 等价于</span>
-<span class="token comment" spellcheck="true"># 1. obj = __new__(A)</span>
-<span class="token comment" spellcheck="true"># 2. __init__(obj)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment" spellcheck="true"># 1. obj = __new__(A, xxx)</span>
+<span class="token comment" spellcheck="true"># 2. __init__(obj, xxx)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果在建立object的过程中传入了若干参数，则这些参数既会被传入到<code>__new__</code>中，也会被传入到<code>__ini__</code>中。<code>__new__</code>因为是建立object，所以是有返回值的。</p>
 <h3 id="del"><a href="#del" class="headerlink" title="__ del__"></a>__ del__</h3><p><code>__del__</code>可以粗略的认为是一个析构函数，是描述一个object被释放的过程。但是由于Python的对象释放过程较为复杂，因此该方法不可控。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
@@ -450,8 +450,8 @@ o <span class="token operator">=</span> A<span class="token punctuation">(</span
 o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>注意</strong>：这里的<code>__del__</code>和关键字<code>del</code>没有关系，<code>del o</code>并不一定会触发<code>__del__</code>方法，只是让对象的引用-1。</p>
 <h3 id="repr-str-和-format"><a href="#repr-str-和-format" class="headerlink" title="__ repr__ , __ str__ 和__ format__"></a>__ repr__ , __ str__ 和__ format__</h3><p><code>__repr__</code>和<code>__str__</code>这两个方法的功能是相似的，都是返回一个object的字符串表示，这两个方法主要是语义的不同。</p>
-<p><code>__repr</code>：representation，一般要有更详细的信息，可以通过<code>repr()</code>内置方法调用该方法。</p>
-<p><code>__str__</code>：注重可读性，可以通过<code>str()</code>内置方法调用该方法，<code>print</code>内部就是使用了<code>str()</code>方法。</p>
+<p><code>__repr</code>：representation，一般要有更详细的信息，可以通过<code>repr()</code>内置函数调用该方法。</p>
+<p><code>__str__</code>：注重可读性，可以通过<code>str()</code>内置函数调用该方法，<code>print</code>内部就是使用了<code>str()</code>方法。</p>
 <p><code>__format__</code>：使用某种格式打印object时，会调用该方法。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 10进制</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"{:b}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 2进制</span>
@@ -657,14 +657,14 @@ o <span class="token operator">=</span> A<span class="token punctuation">(</span
 <span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>test<span class="token punctuation">)</span> 
 <span class="token comment" spellcheck="true"># getting test</span>
 <span class="token comment" spellcheck="true"># None</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="setattr-和-delattr"><a href="#setattr-和-delattr" class="headerlink" title="__ setattr__ 和 __ delattr__"></a>__ setattr__ 和 __ delattr__</h3><p><code>__setattr__</code>：尝试写入object的属性时，描述该过程中object的行为。该方法有两个参数：一是属性名，二是属性值。如果该object属性不存在，则会调用<code>__setattr__()</code>对该属性进行赋值。</p>
+<h3 id="setattr-和-delattr"><a href="#setattr-和-delattr" class="headerlink" title="__ setattr__ 和 __ delattr__"></a>__ setattr__ 和 __ delattr__</h3><p><code>__setattr__</code>：尝试写入object的属性时，描述该过程中object的行为。该方法有两个参数：一是属性名，二是属性值。一般情况下调用<code>super().__setattr__()</code>执行该方法的默认行为。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">"abc"</span>
         self<span class="token punctuation">.</span>counter <span class="token operator">=</span> <span class="token number">0</span>
     <span class="token keyword">def</span> <span class="token function">__setatter__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"set{name}"</span><span class="token punctuation">)</span>
-        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__setattr<span class="token punctuation">(</span>name<span class="token punctuation">,</span> val<span class="token punctuation">)</span>
+        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__setattr__<span class="token punctuation">(</span>name<span class="token punctuation">,</span> val<span class="token punctuation">)</span>
 o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># set data</span>
@@ -695,6 +695,73 @@ a <span class="token operator">=</span> list<span class="token punctuation">(</s
 
 o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>dir<span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># []</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="描述器"><a href="#描述器" class="headerlink" title="描述器"></a>描述器</h2><p>描述器的定义：在Python代码层面，如果一个类的内部定义了<code>__get__()</code>、<code>__set__()</code>或<code>__delete__()</code>这三个方法中的其中一个，则这个类被称为描述器。</p>
+<p>如下代码是描述器最简单的用法，其中类<code>Name</code>就是一个描述器，内部定义了一个<code>__get__()</code>方法，该方的两个参数<code>obj</code>和<code>objtype</code>是必须的。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Name</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__get__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">,</span> objtype<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">"Peter"</span>
+
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    name <span class="token operator">=</span> Name<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># Peter</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># Peter</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上面代码的运行结果可以推断出，调用<code>o.name</code>实际上是执行类<code>Name</code>的<code>__get__</code>方法，同样调用<code>A.name</code>也是执行类<code>Name</code>的<code>__get__</code>方法。这里的执行原理和Python内部关于描述器的机制有关，暂且不展开了。</p>
+<h3 id="get"><a href="#get" class="headerlink" title="__ get __"></a>__ get __</h3><p>上述的代码中，描述器方法的<code>self</code>参数是描述器对象本身，也就是name，<code>obj</code>是对应类A的对象，也就是o，<code>objtype</code>是对象o的类型。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Name</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__get__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">,</span> objtype<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> objtype<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token string">"Peter"</span>
+
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    name <span class="token operator">=</span> Name<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># &lt;__main__.A object at 0x7f87ab86a400> &lt;class '__main__.A'></span>
+<span class="token comment" spellcheck="true"># Peter</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="set"><a href="#set" class="headerlink" title="__ set __"></a>__ set __</h3><p>通过<code>__get__</code>和<code>__set__</code>可以实现一个设置属性和读取属性的功能，与上述<code>__setattr_</code>和<code>__getattr__</code>相同的功能。不过描述器是class级别的(见下面代码的o2)。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>val <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">def</span> <span class="token function">__get__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">,</span> objtype<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>val
+    <span class="token keyword">def</span> <span class="token function">__set__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>val <span class="token operator">=</span> value
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+o2 <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 0</span>
+o<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>o2<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="delete"><a href="#delete" class="headerlink" title="__ delete __"></a>__ delete __</h3><p>当调用<code>del o.x</code>时会执行<code>__delete__</code>方法</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>val <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">def</span> <span class="token function">__get__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">,</span> objtype<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>val
+    <span class="token keyword">def</span> <span class="token function">__set__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>val <span class="token operator">=</span> value
+    <span class="token keyword">def</span> <span class="token function">__delete__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"delete"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">del</span> o<span class="token punctuation">.</span>x <span class="token comment" spellcheck="true"># delete</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="slots"><a href="#slots" class="headerlink" title="__ slots __"></a>__ slots __</h3><p><code>__slots__</code>不是一个方法，但是是一个有特殊含义的变量。它规定了当前这个类的对象可以有哪些自定义的属性，是一个类的白名单。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    __slots__ <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">]</span>
+
+o <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+o<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment" spellcheck="true"># 报错</span>
+o<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment" spellcheck="true"># 正常</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="迭代器：-iter-和-next"><a href="#迭代器：-iter-和-next" class="headerlink" title="迭代器：__ iter__ 和__ next__"></a>迭代器：__ iter__ 和__ next__</h2><p>迭代器就是重复地做一些事情，可以简单的理解为循环。</p>
 <ul>
 <li>迭代是访问集合元素的一种方式。</li>
@@ -817,7 +884,7 @@ a <span class="token operator">=</span> MyRange<span class="token punctuation">(
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa/">https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa/</a>
+                    <a href="https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-shang/">https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-shang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -943,13 +1010,13 @@ a <span class="token operator">=</span> MyRange<span class="token punctuation">(
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/05/28/pytorch-duo-qia-xun-lian/">
+                <a href="/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-xia/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/architect/23.jpg" class="responsive-img" alt="Python的魔法方法(下)">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">Python的魔法方法(下)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -960,15 +1027,31 @@ a <span class="token operator">=</span> MyRange<span class="token punctuation">(
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-15
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            MerryTong
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/基础知识/">
+                        <span class="chip bg-color">基础知识</span>
+                    </a>
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
                 </div>
                 
             </div>

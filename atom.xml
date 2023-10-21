@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2023-10-05T09:16:15.962Z</updated>
+  <updated>2023-10-21T09:12:17.119Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python中的MRO</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/10/10/python-zhi-shi/python-zhong-de-mro/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/10/10/python-zhi-shi/python-zhong-de-mro/</id>
+    <published>2023-10-10T11:35:35.000Z</published>
+    <updated>2023-10-21T09:12:17.119Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Python中的MRO&quot;&gt;&lt;a href=&quot;#Python中的MRO&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/categories/Python/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>Pytorch|张量的特殊操作</title>
@@ -132,11 +160,11 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/05/28/pytorch-duo-qia-xun-lian/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/05/28/pytorch-duo-qia-xun-lian/</id>
-    <published>2023-05-28T13:01:19.722Z</published>
-    <updated>2023-05-26T22:02:24.000Z</updated>
+    <title>Python的魔法方法(下)</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-xia/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-xia/</id>
+    <published>2023-05-15T11:35:35.000Z</published>
+    <updated>2023-10-19T00:14:41.630Z</updated>
     
     <summary type="html">
     
@@ -144,21 +172,27 @@
       
         
         
-          &lt;h1 id=&quot;Pytorch多卡训练&quot;&gt;&lt;a href=&quot;#Pytorch多卡训练&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Python的魔法方法（下）&quot;&gt;&lt;a href=&quot;#Python的魔法方法（下）&quot; class=&quot;headerlink&quot;
         
       
     
     </summary>
     
+      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/categories/Python/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
     
   </entry>
   
   <entry>
-    <title>Python的魔法方法</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa/</id>
+    <title>Python的魔法方法(上)</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-shang/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-shang/</id>
     <published>2023-05-15T11:30:31.000Z</published>
-    <updated>2023-07-31T13:59:15.765Z</updated>
+    <updated>2023-10-20T14:51:21.047Z</updated>
     
     <summary type="html">
     
@@ -513,34 +547,6 @@
       <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
     
       <category term="代码模板" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python的@staticmethod和@classmethod</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/</id>
-    <published>2023-02-17T11:30:31.000Z</published>
-    <updated>2023-10-04T02:12:39.394Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Python中的类方法和静态方法&quot;&gt;&lt;a href=&quot;#Python中的类方法和静态方法&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/categories/Python/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
     
   </entry>
   
