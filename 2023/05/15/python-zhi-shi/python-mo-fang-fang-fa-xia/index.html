@@ -5,8 +5,8 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的魔法方法(下), AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="Python的魔法方法（下）魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两个下划线。
-与类的建立有关的方法__ init_subclass__这个魔法方法需要定义在基类里，当以这个类">
+    <meta name="description" content="Python的魔法方法（下）本文是对B站UP主“码农高天”的《Python的魔法方法》系列视频的总结和整理，搭配视频食用本文效果更佳。
+魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -424,7 +424,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Python的魔法方法（下）"><a href="#Python的魔法方法（下）" class="headerlink" title="Python的魔法方法（下）"></a>Python的魔法方法（下）</h1><p>魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两个下划线。</p>
+                <h1 id="Python的魔法方法（下）"><a href="#Python的魔法方法（下）" class="headerlink" title="Python的魔法方法（下）"></a>Python的魔法方法（下）</h1><p>本文是对B站UP主“码农高天”的《Python的魔法方法》系列视频的总结和整理，搭配视频食用本文效果更佳。</p>
+<p>魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两个下划线。</p>
 <h2 id="与类的建立有关的方法"><a href="#与类的建立有关的方法" class="headerlink" title="与类的建立有关的方法"></a>与类的建立有关的方法</h2><h3 id="init-subclass"><a href="#init-subclass" class="headerlink" title="__ init_subclass__"></a>__ init_subclass__</h3><p>这个魔法方法需要定义在基类里，当以这个类为基类，定义一个派生类的时候，这个方法就会被调用。运行下面的代码就会打印出类A。其中<code>cls</code>参数就是定义的派生类。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Base</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init_subclass__</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -538,7 +539,7 @@ v2 <span class="token operator">=</span> Vector<span class="token punctuation">(
         <span class="token keyword">pass</span>
         <span class="token comment" spellcheck="true"># pow(v1, v2, mod) => (v1**v2)%mod</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里有几个注意的地方：首先，<code>self</code>和<code>other</code>并不一定是相同的类型，比如self是一个Vector对象，而other是一个int整数。可以在这个方法里实现数乘和点乘的功能。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__mul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
             <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
@@ -546,7 +547,7 @@ v2 <span class="token operator">=</span> Vector<span class="token punctuation">(
             <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>另外，使用魔法方法只是借用这个符号，并不一定要符合原来的定义，比如在C++ 中将左移运算符重新定义为<code>cout.print</code>，因此在使用<code>&lt;&lt;</code>符号时本质是在执行打印功能。</p>
 <p>最后看一个例子，我们在下面的代码中执行<code>print(v1*2)</code>时本质是<code>v1.__mul__(2)</code>，可以正确得到结果，那么如果是执行<code>print(2*v1)</code>则会报错，对于这种情况应该怎么办呢？</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
         self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
@@ -561,19 +562,19 @@ v1 <span class="token operator">=</span> Vector<span class="token punctuation">(
 <span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 等价于 v1.__mul__(2)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>v1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 报错</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此时，可以定义方法<code>__rmul__</code>来解决：如果操作符左侧的对象没有定义运算操作怎么完成时，就会尝试去找操作符右侧的数据对象的<strong>r版本</strong>的运算方法，也即执行<code>other*self</code>时，<code>other</code>不知道怎么做乘法时，就会调用<code>self</code>的<code>__rmul__</code>方法，然后把<code>other</code>作为参数传入，方法内部的实现与<code>__mul__</code>方法完全相同。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
         self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
     <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
     <span class="token keyword">def</span> <span class="token function">__mul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> Vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
     <span class="token keyword">def</span> <span class="token function">__rmul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> Vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>        
