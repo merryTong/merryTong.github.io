@@ -1,12 +1,15 @@
+https://github.com/merryTong/merryTong.github.io/2023/10/27/pytorch-ji-chu-zhi-shi/tu-xiang-du-qu/
+https://github.com/merryTong/merryTong.github.io/2023/10/16/python-zhi-shi/python-mo-fang-fang-fa-xia/
+https://github.com/merryTong/merryTong.github.io/2023/10/15/python-zhi-shi/python-mo-fang-fang-fa-shang/
 https://github.com/merryTong/merryTong.github.io/2023/10/10/python-zhi-shi/python-zhong-de-mro/
 https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/
-https://github.com/merryTong/merryTong.github.io/2023/07/19/shen-du-xue-xi/shen-du-xue-xi-zheng-ze-hua/
+https://github.com/merryTong/merryTong.github.io/2023/08/19/ji-suan-ji-ji-chu/vim-shi-yong-jian-yi-jiao-cheng/
+https://github.com/merryTong/merryTong.github.io/2023/07/19/suan-fa/shen-du-xue-xi-zheng-ze-hua/
 https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/
-https://github.com/merryTong/merryTong.github.io/2023/07/14/shen-du-xue-xi/shen-du-xue-xi-chang-yong-sun-shi-han-shu/
-https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-xia/
-https://github.com/merryTong/merryTong.github.io/2023/05/15/python-zhi-shi/python-mo-fang-fang-fa-shang/
+https://github.com/merryTong/merryTong.github.io/2023/07/14/suan-fa/shen-du-xue-xi-chang-yong-sun-shi-han-shu/
+https://github.com/merryTong/merryTong.github.io/2023/06/16/suan-fa/dtw-suan-fa-yuan-li-yu-shi-xian/
 https://github.com/merryTong/merryTong.github.io/2023/05/13/shu-xue/chang-jian-de-zui-you-hua-fang-fa/
-https://github.com/merryTong/merryTong.github.io/2023/05/03/c-jie-gou-ti/
+https://github.com/merryTong/merryTong.github.io/2023/05/03/c-zhi-shi/c-jie-gou-ti/
 https://github.com/merryTong/merryTong.github.io/2023/04/14/python-zhi-shi/python-da-bao-fen-fa-gong-ju/
 https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/
 https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/
@@ -19,5 +22,5 @@ https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-s
 https://github.com/merryTong/merryTong.github.io/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/
 https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/
 https://github.com/merryTong/merryTong.github.io/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/
-https://github.com/merryTong/merryTong.github.io/2023/02/15/shen-du-xue-xi/shen-du-xue-xi-you-hua-suan-fa/
+https://github.com/merryTong/merryTong.github.io/2023/02/15/suan-fa/shen-du-xue-xi-you-hua-suan-fa/
 https://github.com/merryTong/merryTong.github.io/2022/12/05/ji-lu-yi-ci-hexo-xiang-mu-bu-shu-de-debug-guo-cheng/
