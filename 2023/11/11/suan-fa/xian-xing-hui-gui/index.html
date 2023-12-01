@@ -1,0 +1,1365 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="线性回归算法原理与实现, AI, 算法, 深度学习, 机器学习，编程">
+    <meta name="description" content="线性回归基本原理线性模型试图通过线性组合的方式对目标进行拟合或逼近。它的一般形式如$\hat y &amp;#x3D; f(x) &amp;#x3D; w_1x_1+w_2x_2+…+w_dx_d+b$
+其中$ x_1,x_2,…,x_d$是我们的输入数据">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>线性回归算法原理与实现 | Merry的博客</title>
+    <link rel="icon" type="image/png" href="/medias/logo.png">
+    
+    <style>
+        body{
+            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Merry的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Merry的博客</div>
+        <div class="logo-desc">
+            
+            算法工程师 | 人工智能 | 黑客精神
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/merryTong/merryTong.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/merryTong/merryTong.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">线性回归算法原理与实现</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/算法知识/">
+                                <span class="chip bg-color">算法知识</span>
+                            </a>
+                        
+                            <a href="/tags/机器学习/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/算法/" class="post-category">
+                                算法
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-11-11
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>线性模型试图<strong>通过线性组合的方式对目标进行拟合或逼近</strong>。它的一般形式如$\hat y &#x3D; f(x) &#x3D; w_1x_1+w_2x_2+…+w_dx_d+b$</p>
+<p>其中$ x_1,x_2,…,x_d$是我们的输入数据，$x_i$表示样本数据的某个特征，$ w_1,w_2,…,w_d $和$b$是线性回归模型的参数，将其改写为向量形式：</p>
+<p>$\hat y &#x3D; f(x) &#x3D; w^T*x + b$</p>
+<p>当建立了这样一个形如$\hat{y}&#x3D;w*x+b$的模型之后，我们并不知道参数$w$和$b$的具体数值是多少，那么怎么确定参数$w$和$b$呢？首先考虑一种简单的情形：输入的样本数据只有一个特征。假设有一批数据${ (x_1,y_1),(x_2,y_2),…,(x_d,y_d) }$，已经知道数据$x_i$和对应的结果$y_i$，则可以定义线性回归模型的损失为：真实值$y$与预测值$\hat{y}$的差的平方和——MSE损失（Mean Square Error）。</p>
+<p>$\begin{aligned} L &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \hat{y_i})^2 \end{aligned}$</p>
+<p>则线性回归模型的参数$w$和$b$可以通过下面的公式得到，当真实值$y$和预测值$\hat{y}$的损失达到最小时，此时线性回归模型的参数$w^*$和$b^*$就是我们要找的模型参数。</p>
+<p>$\begin{aligned} (w^{*}, b^{*}) &#x3D; \arg \mathop{\min}\limits_{(w,b)} \sum_{i&#x3D;1}^N (y_i-f(x_i))^2 \ &#x3D; \arg \mathop{\min}\limits_{(w,b)} \sum_{i&#x3D;1}^N (y_i-w*x_i - b)^2 \end{aligned}$</p>
+<p>由均方差损失（MSE）可知该损失函数是一个关于$w$和$b$的凸函数，当该函数对$w$和$b$的导数均为0时，该函数达到极小值，即可求得模型参数$w^*$和$b^*$。因此，将损失$L$对两个参数分别求导</p>
+<p>$\begin{aligned} \frac{\partial L}{\partial w} &#x3D; 2\sum_{i&#x3D;1}^N (y_i - w*x_i - b)(-x_i)&#x3D;2(w\sum_{i&#x3D;1}^N x_i^2 - \sum_{i&#x3D;1}^N(y_i -b)x_i) \end{aligned}$</p>
+<p>$\begin{aligned} \frac{\partial L}{\partial b} &#x3D; 2\sum_{i&#x3D;1}^N (y_i - w*x_i - b)(-1)&#x3D;2(Nb- \sum_{i&#x3D;1}^N (y_i-wx_i)) \end{aligned}$</p>
+<p>令导数$\frac{\partial L}{\partial b}&#x3D;0$，则</p>
+<p>$\begin{aligned} Nb &amp;&#x3D;\sum_{i&#x3D;1}^N (y_i-wx_i)\\ b &amp;&#x3D;\frac{1}{N}\sum_{i&#x3D;1}^N (y_i-wx_i) \\ b^* &amp;&#x3D;\bar y - w \bar x  \end{aligned}$</p>
+<p>令导数$\frac{\partial L}{\partial w}&#x3D;0$，并将$b&#x3D;\bar y - w \bar x $带入，则</p>
+<p>$\begin{aligned} w\sum_{i&#x3D;1}^N x_i^2 &amp;&#x3D; \sum_{i&#x3D;1}^N y_i x_i - \sum_{i&#x3D;1}^N bx_i &#x3D; \sum_{i&#x3D;1}^N y_i x_i - \sum_{i&#x3D;1}^N (\bar y-w\bar x)x_i \Rightarrow \\ w\sum_{i&#x3D;1}^N x_i^2 &amp;&#x3D; \sum_{i&#x3D;1}^N y_i x_i - \bar y \sum_{i&#x3D;1}^N x_i + w\bar x \sum_{i&#x3D;1}^N x_i \\ w &amp;&#x3D; \frac{\sum_{i&#x3D;1}^N y_i x_i - \bar y \sum_{i&#x3D;1}^N x_i }{\sum_{i&#x3D;1}^N x_i^2 - \bar x \sum_{i&#x3D;1}^N x_i} \end{aligned}$</p>
+<p>又有$\bar y \sum_{i&#x3D;1}^N x_i &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^N y_i \sum_{i&#x3D;1}^N x_i &#x3D; \bar x \sum_{i&#x3D;1}^N y_i $，$\bar x \sum_{i&#x3D;1}^N x_i &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^N x_i \sum_{i&#x3D;1}^N x_i&#x3D;\frac{1}{N} (\sum_{i&#x3D;1}^N x_i)^2$，将其代入上式：</p>
+<p>$\begin{aligned} w^* &#x3D; \frac{\sum_{i&#x3D;1}^N y_i(x_i - \bar x)}{\sum_{i&#x3D;1}^N x_i^2 - \frac{1}{N}(\sum_{i&#x3D;1}^N x_i)^2}  \end{aligned}$</p>
+<p>推广到矩阵形式，若每个样本有<code>d</code>个特征，则线性回归模型的数学表达式为：</p>
+<p>$\hat{Y}&#x3D;\begin{bmatrix} \hat{y}_1 \\ \hat{y}_2\\ \vdots\\ \hat{y}_N \end {bmatrix}&#x3D;XW+b&#x3D;  \begin {bmatrix} x_1^1 &amp; x_1^2 &amp; \cdots &amp; x_1^d\\ x_2^1 &amp; x_2^2 &amp; \cdots &amp; x_2^d\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\ x_N^1 &amp; x_N^2 &amp; \cdots &amp; x_N^d \end {bmatrix} \begin {bmatrix} w_1 \\ w_2\\ \vdots\\ x_d \end {bmatrix} + b$</p>
+<p>为便于讨论将参数$W$和$b$合并为一个矩阵$\widehat W &#x3D; (w; b)$，相应地样本数据$X$变为一个$N*(d+1)$大小的新矩阵$X$，如下式：</p>
+<p>$\hat{Y}&#x3D;X \widehat W&#x3D;  \begin {bmatrix} x_1^1 &amp; x_1^2 &amp; \cdots &amp; x_1^d &amp; 1\\ x_2^1 &amp; x_2^2 &amp; \cdots &amp; x_2^d &amp; 1\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ x_N^1 &amp; x_N^2 &amp; \cdots &amp; x_N^d &amp; 1 \end {bmatrix} \begin {bmatrix} w_1 \\ w_2\\ \vdots\\ x_d  \\ b\end {bmatrix} $</p>
+<p>可以得出损失函数为如下形式</p>
+<p>$L &#x3D; (Y-X \widehat W)^T (Y-X \widehat W)$</p>
+<p>则当损失$L$为最小时，可求得参数$\widehat W$为最优解，令损失$L$对参数$\widehat W$求导，得</p>
+<p>$\begin{aligned} \widehat W^* &amp;&#x3D; \arg \mathop{\min}\limits_{\widehat W} (Y-X \widehat W)^T (Y-X \widehat W) \Rightarrow  \\ \frac{\partial L}{\partial \widehat W} &amp;&#x3D; \frac{\partial}{\partial \widehat W} \big[ Y^TY -Y^TX\widehat W - \widehat W^TX^TY + \widehat W^TX^T X \widehat W \big] \\ &amp;&#x3D;0-X^TY - X^TY + (X^TX+X^TX)\widehat W \\ &amp;&#x3D; 2X^T(X\widehat W-Y) \end{aligned}$</p>
+<p>令$\frac{\partial L}{\partial \widehat W} &#x3D; 0$，则</p>
+<p>$\begin{aligned} 2X^T(X\widehat W-Y) &amp;&#x3D; 0 \Rightarrow X^TX \widehat W &#x3D; X^T Y \\ \widehat W^* &amp;&#x3D; (X^TX)^{-1} X^TY\end{aligned}$</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>上面介绍了线性回归的基本原理，下面通过Python和Numpy来实现一个线性回归模型。首先定义模型的参数并初始化，参数$w$和$b$全部初始化为0。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">initialize_params</span><span class="token punctuation">(</span>dims<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    w <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>dims<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    b <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">return</span> w<span class="token punctuation">,</span> b
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后定义线性回归模型的计算、损失计算和求导计算。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 模型公式</span>
+    y_hat <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">)</span> <span class="token operator">+</span> b 
+    <span class="token keyword">return</span> y_hat
+
+<span class="token keyword">def</span> <span class="token function">cal_loss</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> y_hat<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 损失函数</span>
+    loss <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">(</span>y_hat<span class="token operator">-</span>y<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> loss
+
+<span class="token keyword">def</span> <span class="token function">cal_grad</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> y_hat<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    num_train <span class="token operator">=</span> X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true"># 参数的偏导</span>
+    dw <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>X<span class="token punctuation">.</span>T<span class="token punctuation">,</span> <span class="token punctuation">(</span>y_hat<span class="token operator">-</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> num_train
+    db <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">(</span>y_hat<span class="token operator">-</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>    
+    <span class="token keyword">return</span> dw<span class="token punctuation">,</span> db
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里使用梯度下降算法求解模型参数$w$和$b$。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">linear_train</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> learning_rate<span class="token punctuation">,</span> epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    w<span class="token punctuation">,</span> b <span class="token operator">=</span> initialize_params<span class="token punctuation">(</span>X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  
+    loss_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>        
+        <span class="token comment" spellcheck="true"># 计算当前预测值、损失和参数偏导</span>
+        y_hat <span class="token operator">=</span> forward<span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+        loss <span class="token operator">=</span> cal_loss<span class="token punctuation">(</span>y<span class="token punctuation">,</span> y_hat<span class="token punctuation">)</span> 
+        loss_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss<span class="token punctuation">)</span>      
+        dw<span class="token punctuation">,</span> db <span class="token operator">=</span> cal_grad<span class="token punctuation">(</span>X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> y_hat<span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 基于梯度下降的参数更新过程</span>
+        w <span class="token operator">+=</span> <span class="token operator">-</span>learning_rate <span class="token operator">*</span> dw
+        b <span class="token operator">+=</span> <span class="token operator">-</span>learning_rate <span class="token operator">*</span> db   
+
+        <span class="token comment" spellcheck="true"># 打印迭代次数和损失</span>
+        <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">10000</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'epoch %d loss %f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> loss<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+               
+        <span class="token comment" spellcheck="true"># 保存参数</span>
+        params <span class="token operator">=</span> <span class="token punctuation">{</span>            
+            <span class="token string">'w'</span><span class="token punctuation">:</span> w<span class="token punctuation">,</span>            
+            <span class="token string">'b'</span><span class="token punctuation">:</span> b
+        <span class="token punctuation">}</span>        
+        <span class="token comment" spellcheck="true"># 保存梯度</span>
+        grads <span class="token operator">=</span> <span class="token punctuation">{</span>            
+            <span class="token string">'dw'</span><span class="token punctuation">:</span> dw<span class="token punctuation">,</span>            
+            <span class="token string">'db'</span><span class="token punctuation">:</span> db
+        <span class="token punctuation">}</span>    
+    <span class="token keyword">return</span> loss_list<span class="token punctuation">,</span> loss<span class="token punctuation">,</span> params<span class="token punctuation">,</span> grads
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面基本实现了一个线性回归的功能，为了检测我们实现的线性回归模型的有效性，这里使用波士顿房价预测的数据进行测试，为了后面的可视化，自变量只用了房屋面积一个维度，即通过房屋面积去拟合房价。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>datasets <span class="token keyword">import</span> load_boston
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+dataset <span class="token operator">=</span> load_boston<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+dataframe <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>dataset<span class="token punctuation">[</span><span class="token string">"data"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+dataframe<span class="token punctuation">.</span>columns <span class="token operator">=</span> dataset<span class="token punctuation">[</span><span class="token string">"feature_names"</span><span class="token punctuation">]</span>
+dataframe<span class="token punctuation">[</span><span class="token string">"price"</span><span class="token punctuation">]</span> <span class="token operator">=</span> dataset<span class="token punctuation">[</span><span class="token string">"target"</span><span class="token punctuation">]</span>
+X<span class="token punctuation">,</span> y <span class="token operator">=</span> dataframe<span class="token punctuation">[</span><span class="token string">"RM"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>values<span class="token punctuation">,</span> dataframe<span class="token punctuation">[</span><span class="token string">"price"</span><span class="token punctuation">]</span>
+X<span class="token punctuation">,</span> y <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 训练集与测试集的简单划分</span>
+offset <span class="token operator">=</span> int<span class="token punctuation">(</span>X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">0.9</span><span class="token punctuation">)</span>
+X_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> X<span class="token punctuation">[</span><span class="token punctuation">:</span>offset<span class="token punctuation">]</span><span class="token punctuation">,</span> y<span class="token punctuation">[</span><span class="token punctuation">:</span>offset<span class="token punctuation">]</span>
+X_test<span class="token punctuation">,</span> y_test <span class="token operator">=</span> X<span class="token punctuation">[</span>offset<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> y<span class="token punctuation">[</span>offset<span class="token punctuation">:</span><span class="token punctuation">]</span>
+X_train <span class="token operator">=</span> X_train<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+X_test <span class="token operator">=</span> X_test<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+y_train <span class="token operator">=</span> y_train<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+y_test <span class="token operator">=</span> y_test<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'X_train='</span><span class="token punctuation">,</span> X_train<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># X_train= (455, 1)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'X_test='</span><span class="token punctuation">,</span> X_test<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># X_test= (51, 1)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'y_train='</span><span class="token punctuation">,</span> y_train<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># y_train= (455, 1)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'y_test='</span><span class="token punctuation">,</span> y_test<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># y_test= (51, 1)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接着使用训练数据训练模型，使用测试数据预测结果</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 训练</span>
+loss_list<span class="token punctuation">,</span> loss<span class="token punctuation">,</span> params<span class="token punctuation">,</span> grads <span class="token operator">=</span> linear_train<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> <span class="token number">0.001</span><span class="token punctuation">,</span> <span class="token number">100000</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 预测结果并绘图</span>
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+f <span class="token operator">=</span> X_test<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">'w'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> params<span class="token punctuation">[</span><span class="token string">'b'</span><span class="token punctuation">]</span>
+
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>X_test<span class="token punctuation">,</span> y_test<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>X_test<span class="token punctuation">,</span> f<span class="token punctuation">,</span> color <span class="token operator">=</span> <span class="token string">'darkorange'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'X'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/linear_reg.png"></p>
+<p>最后，为了更好的评估模型，使用K折交叉验证来评估我们实现的线性回归模型，计算的指标是回归中常用的$R^2$。可以看到$R^2$的均值为168，结合上面测试集的散点图和拟合直线，说明回归的效果不是非常理想，这是因为但从房屋面积去拟合房价是有失偏颇的。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    w <span class="token operator">=</span> params<span class="token punctuation">[</span><span class="token string">'w'</span><span class="token punctuation">]</span>
+    b <span class="token operator">=</span> params<span class="token punctuation">[</span><span class="token string">'b'</span><span class="token punctuation">]</span>
+
+    y_pred <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">)</span> <span class="token operator">+</span> b    
+    <span class="token keyword">return</span> y_pred
+
+<span class="token keyword">def</span> <span class="token function">linear_cross_validation</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> k<span class="token punctuation">,</span> randomize<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>   
+    <span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>utils <span class="token keyword">import</span> shuffle
+    <span class="token keyword">if</span> randomize<span class="token punctuation">:</span>
+        data <span class="token operator">=</span> list<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+        shuffle<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    slices <span class="token operator">=</span> <span class="token punctuation">[</span>data<span class="token punctuation">[</span>i<span class="token punctuation">:</span><span class="token punctuation">:</span>k<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">]</span>      
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        validation <span class="token operator">=</span> slices<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        train <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> s <span class="token keyword">in</span> slices<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> s <span class="token keyword">is</span> <span class="token operator">not</span> validation<span class="token punctuation">:</span>
+                train<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+
+        train <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>train<span class="token punctuation">)</span>
+        validation <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>validation<span class="token punctuation">)</span>            
+        <span class="token keyword">yield</span> train<span class="token punctuation">,</span> validation
+        
+<span class="token comment" spellcheck="true"># K折交叉验证</span>
+data <span class="token operator">=</span> np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span><span class="token punctuation">(</span>X<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> 
+<span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+
+r_square_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> train<span class="token punctuation">,</span> validation <span class="token keyword">in</span> linear_cross_validation<span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X_train <span class="token operator">=</span> train<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+    y_train <span class="token operator">=</span> train<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    X_valid <span class="token operator">=</span> validation<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+    y_valid <span class="token operator">=</span> validation<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    loss_list<span class="token punctuation">,</span> loss<span class="token punctuation">,</span> params<span class="token punctuation">,</span> grads <span class="token operator">=</span> linear_train<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> <span class="token number">0.001</span><span class="token punctuation">,</span> <span class="token number">100000</span><span class="token punctuation">)</span>
+    y_pred <span class="token operator">=</span> predict<span class="token punctuation">(</span>X_valid<span class="token punctuation">,</span> params<span class="token punctuation">)</span>
+    r_square <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">(</span>y_valid<span class="token operator">-</span>y<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+    r_square_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>r_square<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'five kold cross validation score is'</span><span class="token punctuation">,</span> r_square_list<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># five kold cross validation score is [162.41398318220567, 164.19161507455092, 178.86012366454037, 179.2822412241224, 159.51121355613822]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'valid score is'</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>r_square_list<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># valid score is 168.85183534031154</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">MerryTong</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://github.com/merryTong/merryTong.github.io/2023/11/11/suan-fa/xian-xing-hui-gui/">https://github.com/merryTong/merryTong.github.io/2023/11/11/suan-fa/xian-xing-hui-gui/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">MerryTong</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/算法知识/">
+                                    <span class="chip bg-color">算法知识</span>
+                                </a>
+                            
+                                <a href="/tags/机器学习/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/11/25/c-zhi-shi/you-yuan-yu-yun-suan-fu-chong-zai/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/animal/10.jpg" class="responsive-img" alt="C++|友元与运算符重载">
+                        
+                        <span class="card-title">C++|友元与运算符重载</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/编程语言/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/11/06/c-zhi-shi/zhi-zhen-yu-yin-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="C++|指针与引用">
+                        
+                        <span class="card-title">C++|指针与引用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/编程语言/" class="post-category">
+                                    编程语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <a href="/about" target="_blank">MerryTong</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2023";
+                        var startMonth = "5";
+                        var startDate = "3";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/merryTong" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1779306478@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1779306478" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1779306478" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 10) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+
+</html>

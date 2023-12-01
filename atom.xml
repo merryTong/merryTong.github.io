@@ -43,11 +43,39 @@
   </entry>
   
   <entry>
+    <title>线性回归算法原理与实现</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/11/11/suan-fa/xian-xing-hui-gui/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/11/11/suan-fa/xian-xing-hui-gui/</id>
+    <published>2023-11-11T09:30:31.000Z</published>
+    <updated>2023-12-01T23:12:16.427Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;线性回归&quot;&gt;&lt;a href=&quot;#线性回归&quot; class=&quot;headerlink&quot; title=&quot;线性回归&quot;&gt;&lt;/a&gt;线性回归&lt;/h1&gt;&lt;h2 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="机器学习" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++|指针与引用</title>
     <link href="https://github.com/merryTong/merryTong.github.io/2023/11/06/c-zhi-shi/zhi-zhen-yu-yin-yong/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/11/06/c-zhi-shi/zhi-zhen-yu-yin-yong/</id>
     <published>2023-11-06T11:30:31.000Z</published>
-    <updated>2023-11-26T06:14:30.868Z</updated>
+    <updated>2023-12-01T23:37:10.168Z</updated>
     
     <summary type="html">
     
@@ -382,7 +410,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/05/03/c-zhi-shi/c-jie-gou-ti/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/05/03/c-zhi-shi/c-jie-gou-ti/</id>
     <published>2023-05-03T11:30:31.000Z</published>
-    <updated>2023-10-28T00:42:40.650Z</updated>
+    <updated>2023-12-01T23:36:47.456Z</updated>
     
     <summary type="html">
     
@@ -464,7 +492,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</id>
     <published>2023-04-08T11:30:31.000Z</published>
-    <updated>2023-10-04T00:29:24.949Z</updated>
+    <updated>2023-12-01T23:34:35.028Z</updated>
     
     <summary type="html">
     
@@ -529,34 +557,6 @@
         
         
           &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytorch|构建模型的3种方式</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/</id>
-    <published>2023-04-05T11:30:31.000Z</published>
-    <updated>2023-10-04T00:41:37.094Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Pytorch构建模型的方式&quot;&gt;&lt;a href=&quot;#Pytorch构建模型的方式&quot; class=&quot;headerlink&quot;
         
       
     

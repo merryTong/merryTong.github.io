@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/11/06/c-zhi-shi/zhi-zhen-yu-yin-yong/</loc>
-    <lastmod>2023-11-26</lastmod>
+    <lastmod>2023-12-01</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/05/03/c-zhi-shi/c-jie-gou-ti/</loc>
+    <lastmod>2023-12-01</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</loc>
+    <lastmod>2023-12-01</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/11/11/suan-fa/xian-xing-hui-gui/</loc>
+    <lastmod>2023-12-01</lastmod>
   </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/11/25/c-zhi-shi/you-yuan-yu-yun-suan-fu-chong-zai/</loc>
     <lastmod>2023-11-26</lastmod>
@@ -49,9 +58,6 @@
     <loc>https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/</loc>
     <lastmod>2023-10-28</lastmod>
   </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/05/03/c-zhi-shi/c-jie-gou-ti/</loc>
-    <lastmod>2023-10-28</lastmod>
-  </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/</loc>
     <lastmod>2023-10-05</lastmod>
   </url>  <url>
@@ -77,9 +83,6 @@
     <lastmod>2023-10-04</lastmod>
   </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</loc>
     <lastmod>2023-10-04</lastmod>
   </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/</loc>

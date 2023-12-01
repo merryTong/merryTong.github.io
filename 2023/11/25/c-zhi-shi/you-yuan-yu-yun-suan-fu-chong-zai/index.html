@@ -456,7 +456,8 @@ protected保护权限，类内可以访问  类外不">
     <span class="token comment" spellcheck="true">//p.m_Password = 123; //私有权限类外访问不到</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在C++中<code>struct</code>和<code>class</code>唯一的区别在于 <strong>默认的访问权限不同</strong>：<code>struct</code>默认权限为公共权限，<code>class</code>默认权限为私有权限。</p>
 <p>C++中友元的目的就是让一个函数或者类访问<strong>另一个类中非公有成员</strong>，即可以访问<code>protected</code>和<code>private</code>修饰的成员，该成员既可以是属性也可以是方法。友元的关键字为<code>friend</code>，友元的三种实现：</p>
 <ul>
@@ -495,7 +496,8 @@ protected保护权限，类内可以访问  类外不">
     Building b<span class="token punctuation">;</span>
     <span class="token function">goodGay</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="成员函数做友元"><a href="#成员函数做友元" class="headerlink" title="成员函数做友元"></a>成员函数做友元</h3><p>不能把其他类的私有成员函数声明为友元。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Building</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 提前声明Building类</span>
 <span class="token keyword">class</span> <span class="token class-name">goodGay</span>
@@ -540,7 +542,8 @@ goodGay<span class="token operator">::</span><span class="token function">goodGa
     goodGay  gg<span class="token punctuation">;</span>
     gg<span class="token punctuation">.</span><span class="token function">visit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>C++中如果类中定义另一个类（包括引用和指针，比如<code>Person</code>, <code>Person &amp;</code>, <code>Person *</code>）作为成员变量，那么一定要<strong>保证另一个类在本类之前已定义</strong>。如果另一个类没定义，而是采用的先写一句声明语句的方式（即前向声明），则在本类成员函数中访问另一个类的成员会报错。为了解决上述问题，实际上有两种策略：</p>
 <ul>
 <li>可以让另一个类提前定义好，这是最简单和直接的方法，就是将另一个类的定义放在本类之前，这样编译器就可以知道另一个类的大小和结构。</li>
@@ -588,8 +591,9 @@ goodGay<span class="token operator">::</span><span class="token function">goodGa
     goodGay gg<span class="token punctuation">;</span>
     gg<span class="token punctuation">.</span><span class="token function">visit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>友元类和友元函数，使用<code>friend</code>关键字进行声明即可，与访问权限无关。所以，可以放在private/pulic/protected任意区域内。</p>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>友元类和友元函数，使用<code>friend</code>关键字进行声明即可，与访问权限无关。所以，可以放在private&#x2F;pulic&#x2F;protected任意区域内。</p>
 <p>友元类的访问权限不会被继承。即使子类继承了父类的友元类关系，子类的友元类仍然不能访问父类的私有成员。例如：</p>
 <blockquote>
 <p>假设有一个基类Base和一个派生类Derived，并且Base类中有一个友元类FriendClass，可以看到友元关系不会传递给Derived类。</p>
@@ -623,14 +627,16 @@ goodGay<span class="token operator">::</span><span class="token function">goodGa
     friendObj<span class="token punctuation">.</span><span class="token function">modifyPrivateData</span><span class="token punctuation">(</span>baseObj<span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 正确，Base类的友元类可以访问私有成员</span>
     friendObj<span class="token punctuation">.</span><span class="token function">modifyPrivateData</span><span class="token punctuation">(</span>derivedObj<span class="token punctuation">,</span> <span class="token number">88</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误，Derived类的友元类不能访问私有成员</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p>运算符重载（Operator overload）是对已有的运算符赋予多重含义，使同一个运算符作用于不同类型的数据时表现出不同的行为。C++预定义的运算符，只能用于基本数据类型的运算，这些运算符有：<code>+、-、*、/、%、&amp;、~、！、|、=、&lt;&lt;、&gt;&gt;、！=</code>等。为了实现自定义数据类型的运算，需要对这些运算符进行重新定义，扩展C++中提供的运算符的适用范围，以适应自定义的数据类型。</p>
 <p><strong>运算符重载的本质是函数重载</strong>。</p>
 <h3 id="运算符重载的语法格式"><a href="#运算符重载的语法格式" class="headerlink" title="运算符重载的语法格式"></a>运算符重载的语法格式</h3><p>重载的运算符是具有特殊名字的函数：它们的函数名由关键字<code>operator</code>开始，后跟要重载的运算符。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">返回类型 <span class="token keyword">operator</span> 运算符（参数列表）
 <span class="token punctuation">{</span>
     函数体<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运算符重载可以重载为普通函数，也可以重载为类的成员函数；使用时把含运算符重载的表达式转换成为对运算符函数的调用，把运算符的操作数转换成运算符函数的参数；当运算符被多次重载时，根据实参的类型决定调用哪个运算符函数。</p>
 <h3 id="运算符重载的两种方式"><a href="#运算符重载的两种方式" class="headerlink" title="运算符重载的两种方式"></a>运算符重载的两种方式</h3><h4 id="重载为类的成员函数"><a href="#重载为类的成员函数" class="headerlink" title="重载为类的成员函数"></a>重载为类的成员函数</h4><p><strong>重载为成员函数时，参数个数为运算符目数减一</strong>。</p>
 <h5 id="双目运算符"><a href="#双目运算符" class="headerlink" title="双目运算符"></a>双目运算符</h5><p>双目运算符有两个操作数，如果将双目运算符重载为类的成员函数，则左操作数是该类的对象，由this指针指出，右操作数则通过运算符重载函数的参数表来传递。如下是加法运算的重载。</p>
@@ -658,7 +664,8 @@ goodGay<span class="token operator">::</span><span class="token function">goodGa
     Vector a<span class="token punctuation">;</span>
     a <span class="token operator">=</span> v1 <span class="token operator">+</span> v2<span class="token punctuation">;</span>
     a<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在Vector类中重载了运算符+，该重载只对Vector类的对象有效。执行<code>a=v1+v2;</code>语句时，编译器检测到+号左边是一个Vector类对象（+号具有左结合性，所以先检测左边），就会调用成员函数<code>operator+()</code>，也就是转换为：<code>a = v1.operate+(v2);</code>。</p>
 <h5 id="单目运算符"><a href="#单目运算符" class="headerlink" title="单目运算符"></a>单目运算符</h5><p>单目运算符的操作数只有一个，比如自增和自减运算符，但是需要区分前置(++i)和后置(i++)运算符。为了区分所重载的运算符是前置运算符还是后置运算符，C++规定：前置运算符作为一元运算符重载，后置运算符作为二元运算符重载，这样从重载函数的参数列表就可以区分前置和后置了。</p>
 <p>运算符的前置形式因为是一元运算符，与声明其他任何一元运算符的方式完全相同；后置形式因为是二元运算符，需要接受 <strong><code>int</code></strong> 类型的额外参数。</p>
@@ -675,15 +682,15 @@ goodGay<span class="token operator">::</span><span class="token function">goodGa
     <span class="token punctuation">}</span>
     Vector<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//++i 前置++实现</span>
     <span class="token punctuation">{</span>
-        <span class="token operator">++</span>x<span class="token punctuation">;</span>    
+        <span class="token operator">++</span>x<span class="token punctuation">;</span>	
         <span class="token operator">++</span>y<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//后引用</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//后引用</span>
     <span class="token punctuation">}</span>
-    Vector <span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//i++ 后置++实现</span>
+    Vector <span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">//i++ 后置++实现</span>
     <span class="token punctuation">{</span>
-        Vector a <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//保存对象引用</span>
-        <span class="token operator">++</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//自增，调用前面实现的前置++</span>
-        <span class="token keyword">return</span> a<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//返回先前保存的对象</span>
+        Vector a <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//保存对象引用</span>
+        <span class="token operator">++</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//自增，调用前面实现的前置++</span>
+        <span class="token keyword">return</span> a<span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//返回先前保存的对象</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         cout <span class="token operator">&lt;&lt;</span> <span class="token string">"x="</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"y="</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
@@ -695,7 +702,8 @@ goodGay<span class="token operator">::</span><span class="token function">goodGa
     <span class="token punctuation">(</span>v1<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x=1,y=2</span>
     <span class="token punctuation">(</span><span class="token operator">++</span>v2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x=4,y=5</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>调用<code>++s</code>即为<code>s.operator++()</code>；调用<code>s++</code>则为<code>s.operator++(0)</code>。</p>
 <h4 id="重载为普通函数"><a href="#重载为普通函数" class="headerlink" title="重载为普通函数"></a>重载为普通函数</h4><p><strong>重载为普通函数时，重载函数的参数个数为运算符目数</strong>。</p>
 <p>如果是双目运算符，则重载函数的参数列表有两个形参，如果是单目运算符，则参数列表只有一个形参。</p>
@@ -722,12 +730,14 @@ Vector <span class="token keyword">operator</span><span class="token operator">+
     Vector a<span class="token punctuation">;</span>
     a <span class="token operator">=</span> v1 <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
     a<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x=3,y=4</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="重载为类的友元函数"><a href="#重载为类的友元函数" class="headerlink" title="重载为类的友元函数"></a>重载为类的友元函数</h5><p>运算符重载为类的友元函数，只是在函数前加一个<code>friend</code>关键字。运算符重载为类的友元函数时，由于没有隐含的<code>this</code>指针，因此操作数的个数没有变化，所有的操作数都必须通过函数形参进行传递，函数的参数与操作数 自左自右保持一一对应。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">friend</span> 返回类型 <span class="token keyword">operator</span> 运算符（参数列表）
 <span class="token punctuation">{</span>
     函数体；
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如下的例子。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Vector</span>
 <span class="token punctuation">{</span>
@@ -754,7 +764,8 @@ Vector <span class="token keyword">operator</span><span class="token operator">+
     Vector a<span class="token punctuation">;</span>
     a <span class="token operator">=</span> v1 <span class="token operator">+</span> v2<span class="token punctuation">;</span>
     a<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x=4,y=6</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ol>
 <li>重载为成员函数时，参数个数为运算符目数减一；重载为普通函数时，参数个数为运算符目数。</li>
 <li>成员函数运算符重载时，运算符左值类型必须为所在类类型；而非成员函数运算符重载则不必。</li>
@@ -960,13 +971,13 @@ Vector <span class="token keyword">operator</span><span class="token operator">+
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/11/06/c-zhi-shi/zhi-zhen-yu-yin-yong/">
+                <a href="/2023/11/11/suan-fa/xian-xing-hui-gui/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="C++|指针与引用">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="线性回归算法原理与实现">
                         
-                        <span class="card-title">C++|指针与引用</span>
+                        <span class="card-title">线性回归算法原理与实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -977,14 +988,14 @@ Vector <span class="token keyword">operator</span><span class="token operator">+
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/编程语言/" class="post-category">
-                                    编程语言
+                            <a href="/categories/算法/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -994,8 +1005,12 @@ Vector <span class="token keyword">operator</span><span class="token operator">+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C++</span>
+                    <a href="/tags/算法知识/">
+                        <span class="chip bg-color">算法知识</span>
+                    </a>
+                    
+                    <a href="/tags/机器学习/">
+                        <span class="chip bg-color">机器学习</span>
                     </a>
                     
                 </div>
@@ -1123,6 +1138,8 @@ Vector <span class="token keyword">operator</span><span class="token operator">+
         tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
     });
 </script>
+
+
 
 
 

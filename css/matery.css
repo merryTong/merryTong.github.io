@@ -2294,3 +2294,8 @@ body.DarkMode .theme-btn:hover {
     font-weight: 900;
     color: #d9534f;
 }
+#busuanzi_container_site_pv,
+#busuanzi_value_site_pv,
+#busuanzi_container_site_uv{
+   display: inline !important;
+}

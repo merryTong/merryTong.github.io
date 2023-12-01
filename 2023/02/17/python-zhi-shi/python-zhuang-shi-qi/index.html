@@ -448,14 +448,15 @@
 <h3 id="函数名可以赋值给变量"><a href="#函数名可以赋值给变量" class="headerlink" title="函数名可以赋值给变量"></a>函数名可以赋值给变量</h3><p>看下这个例子：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'我是{}！慌的一逼！'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
+    
 func<span class="token punctuation">(</span><span class="token string">'梅西'</span><span class="token punctuation">)</span>
 y <span class="token operator">=</span> func
 y<span class="token punctuation">(</span><span class="token string">'勒夫'</span><span class="token punctuation">)</span>
 
 <span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
 <span class="token comment" spellcheck="true"># 我是梅西！慌的一逼！</span>
-<span class="token comment" spellcheck="true"># 我是勒夫！慌的一逼！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment" spellcheck="true"># 我是勒夫！慌的一逼！</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码中我们首先定义了函数<code>func</code>，并调用了<code>func</code>函数，并且把<code>func</code>赋值给y。<code>y = func</code>表明了：<strong>函数名可以赋值给变量，并且不影响调用</strong>。</p>
 <h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>高阶函数满足如下两个条件中的任意一个：</p>
 <ol>
@@ -471,47 +472,52 @@ r <span class="token operator">=</span> map<span class="token punctuation">(</sp
 <span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
 <span class="token comment" spellcheck="true"># 当前天台人数： 3</span>
 <span class="token comment" spellcheck="true"># 当前天台人数： 6</span>
-<span class="token comment" spellcheck="true"># 当前天台人数： 12</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment" spellcheck="true"># 当前天台人数： 12</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>自定义一个能返回函数的函数，也是高阶函数：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> map<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token operator">*</span><span class="token number">5</span><span class="token punctuation">,</span> l<span class="token punctuation">)</span>
 a <span class="token operator">=</span> f<span class="token punctuation">(</span>l<span class="token punctuation">)</span>
 <span class="token keyword">for</span> i <span class="token keyword">in</span> a<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'当前天台人数：'</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'当前天台人数：'</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="实现一个类似的装饰器"><a href="#实现一个类似的装饰器" class="headerlink" title="实现一个类似的装饰器"></a>实现一个类似的装饰器</h2><p>现在已经知道了<strong>函数名赋值</strong>和<strong>高阶函数</strong>，有了这两个基础，就可以尝试实现一个类似的装饰器。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">status</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'慌的一逼！'</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> func
-
+    
 <span class="token keyword">def</span> <span class="token function">name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'我是梅西！'</span><span class="token punctuation">)</span>
-
+    
 temp <span class="token operator">=</span> status<span class="token punctuation">(</span>name<span class="token punctuation">)</span>
 temp<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 <span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
 <span class="token comment" spellcheck="true"># 慌的一逼！</span>
-<span class="token comment" spellcheck="true"># 我是梅西！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在这个例子中我们定义了一个 status 函数，status 接收一个函数名然后直接返回该函数名。这样我们实现了不修改原函数 name，并且添加了一个新功能的需求。但是这里有个<strong>缺陷就是函数的调用方式改变了</strong>。即不是原本的 name，而是 temp。<br>要解决这个问题很简单，相信 a = a<em>3 这样的表达式大家都见过，那么上述代码中的 temp = status(name) 同样可以修改为 name = status(name)，这样我们就完美的解决了问题：*</em>既添加新功能又没有修改原函数和其调用方式**。修改后的代码如下：</p>
+<span class="token comment" spellcheck="true"># 我是梅西！</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个例子中我们定义了一个 status 函数，status 接收一个函数名然后直接返回该函数名。这样我们实现了不修改原函数 name，并且添加了一个新功能的需求。但是这里有个<strong>缺陷就是函数的调用方式改变了</strong>。即不是原本的 name，而是 temp。<br>要解决这个问题很简单，相信 a &#x3D; a*3 这样的表达式大家都见过，那么上述代码中的 temp &#x3D; status(name) 同样可以修改为 name &#x3D; status(name)，这样我们就完美的解决了问题：<strong>既添加新功能又没有修改原函数和其调用方式</strong>。修改后的代码如下：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">status</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'慌的一逼！'</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> func
-
+    
 <span class="token keyword">def</span> <span class="token function">name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'我是梅西！'</span><span class="token punctuation">)</span>
-
+    
 name <span class="token operator">=</span> status<span class="token punctuation">(</span>name<span class="token punctuation">)</span>
-name<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>但这样的代码却有个不便之处，即每次使用这样的装饰器，我们都要写类似 name = status(name) 的代码。在 python 中为了简化这种情况，提供了一个语法糖 @，<strong>在每个被装饰的函数上方使用这个语法糖</strong>就可以省掉这一句代码 name = status(name)，最后的代码如下：</p>
+name<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但这样的代码却有个不便之处，即每次使用这样的装饰器，我们都要写类似 name &#x3D; status(name) 的代码。在 python 中为了简化这种情况，提供了一个语法糖 @，<strong>在每个被装饰的函数上方使用这个语法糖</strong>就可以省掉这一句代码 name &#x3D; status(name)，最后的代码如下：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">status</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'慌的一逼！'</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> func
-
+    
 @status
 <span class="token keyword">def</span> <span class="token function">name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'我是梅西！'</span><span class="token punctuation">)</span>
-
-name<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    
+name<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样我们就弄清楚了装饰器的工作原理：</p>
 <ul>
 <li><strong>写一个高阶函数</strong>，即参数是函数，返回的也是函数。</li>
@@ -536,7 +542,8 @@ x <span class="token operator">=</span> german_team<span class="token punctuatio
 <span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
 <span class="token comment" spellcheck="true"># 德国必胜！</span>
 <span class="token comment" spellcheck="true"># 天台已满，请排队！</span>
-<span class="token comment" spellcheck="true"># 赢了会所嫩模！输了下海干活！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment" spellcheck="true"># 赢了会所嫩模！输了下海干活！</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>能够处理参数的装饰器：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">guess_win</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">rooftop_status</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -559,7 +566,8 @@ y <span class="token operator">=</span> german_team<span class="token punctuatio
 <span class="token comment" spellcheck="true"># 天台已满，请排队！</span>
 <span class="token comment" spellcheck="true"># 西班牙必胜！</span>
 <span class="token comment" spellcheck="true"># 天台已满，请排队！</span>
-<span class="token comment" spellcheck="true"># 赢了会所嫩模！输了下海干活！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment" spellcheck="true"># 赢了会所嫩模！输了下海干活！</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>装饰器的<strong>本质是函数</strong>，<strong>其参数是另一个函数（被装饰的函数）</strong>。装饰器通常会额外处理被装饰的函数，然后把它返回，或者将其替换成另一个函数或可调用对象。行为良好的装饰器可以重用，以减少代码量。<br>代码运行的理解通式：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">xxx</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> func
@@ -571,7 +579,8 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
 
 等价于下面的方式
 yyy <span class="token operator">=</span> xxx<span class="token punctuation">(</span>yyy<span class="token punctuation">)</span>
-yyy<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+yyy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -724,59 +733,6 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/animal/22.jpg" class="responsive-img" alt="Pytorch中的学习率衰减">
-                        
-                        <span class="card-title">Pytorch中的学习率衰减</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-21
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Pytorch/" class="post-category">
-                                    Pytorch
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/pytorch/">
-                        <span class="chip bg-color">pytorch</span>
-                    </a>
-                    
-                    <a href="/tags/代码模板/">
-                        <span class="chip bg-color">代码模板</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/">
                     <div class="card-image">
                         
@@ -793,9 +749,9 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -817,6 +773,63 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
                     
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/15/suan-fa/shen-du-xue-xi-you-hua-suan-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/architect/1.jpg" class="responsive-img" alt="深度学习的优化算法">
+                        
+                        <span class="card-title">深度学习的优化算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/算法/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/基础知识/">
+                        <span class="chip bg-color">基础知识</span>
+                    </a>
+                    
+                    <a href="/tags/数学/">
+                        <span class="chip bg-color">数学</span>
+                    </a>
+                    
+                    <a href="/tags/优化算法/">
+                        <span class="chip bg-color">优化算法</span>
                     </a>
                     
                 </div>
@@ -944,6 +957,8 @@ yyy<span class="token punctuation">(</span><span class="token punctuation">)</sp
         tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
     });
 </script>
+
+
 
 
 
