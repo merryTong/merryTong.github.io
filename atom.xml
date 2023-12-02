@@ -516,11 +516,11 @@
   </entry>
   
   <entry>
-    <title>Pytorch|模型和参数</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</id>
+    <title>Pytorch|构建数据管道</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
     <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:36:47.413Z</updated>
+    <updated>2023-10-04T00:32:20.136Z</updated>
     
     <summary type="html">
     
@@ -528,7 +528,7 @@
       
         
         
-          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
         
       
     
@@ -544,11 +544,11 @@
   </entry>
   
   <entry>
-    <title>Pytorch|构建数据管道</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
+    <title>Pytorch|模型和参数</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</id>
     <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:32:20.136Z</updated>
+    <updated>2023-10-04T00:36:47.413Z</updated>
     
     <summary type="html">
     
@@ -556,7 +556,7 @@
       
         
         
-          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
         
       
     
