@@ -5,17 +5,14 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|动态计算图, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Pytorch的动态图简介
-本节我们将介绍 Pytorch的动态计算图。
-包括：
+    <meta name="description" content="Pytorch的动态图简介本节我们将介绍 Pytorch的动态计算图。包括： 
 
 动态计算图简介
 计算图中的Function
 计算图和反向传播
 叶子节点和非叶子节点
 
- 动态计算图简介
-Pytorch的计算图由节点和边组成，节点表示张量">
+动态计算图简介Pytorch的计算图由节点和边组成，节点表示张量或者Fu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -424,11 +421,6 @@ Pytorch的计算图由节点和边组成，节点表示张量">
                 
 
                 
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
-                </div>
-                
 
                 
 
@@ -448,176 +440,162 @@ Pytorch的计算图由节点和边组成，节点表示张量">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="pytorch的动态图简介"><a class="markdownIt-Anchor" href="#pytorch的动态图简介"></a> Pytorch的动态图简介</h1>
-<p>本节我们将介绍 Pytorch的动态计算图。<br>
-包括：</p>
+                <h1 id="Pytorch的动态图简介"><a href="#Pytorch的动态图简介" class="headerlink" title="Pytorch的动态图简介"></a>Pytorch的动态图简介</h1><p>本节我们将介绍 Pytorch的动态计算图。<br>包括： </p>
 <ul>
 <li>动态计算图简介</li>
 <li>计算图中的Function</li>
 <li>计算图和反向传播</li>
 <li>叶子节点和非叶子节点</li>
 </ul>
-<h2 id="动态计算图简介"><a class="markdownIt-Anchor" href="#动态计算图简介"></a> 动态计算图简介</h2>
-<p>Pytorch的计算图由节点和边组成，节点表示张量或者Function，边表示张量和Function之间的依赖关系。<br>
-Pytorch中的计算图是动态图。这里的动态主要有两重含义。</p>
+<h2 id="动态计算图简介"><a href="#动态计算图简介" class="headerlink" title="动态计算图简介"></a>动态计算图简介</h2><p>Pytorch的计算图由节点和边组成，节点表示张量或者Function，边表示张量和Function之间的依赖关系。<br>Pytorch中的计算图是动态图。这里的动态主要有两重含义。</p>
 <ol>
 <li>计算图的正向传播是立即执行的。无需等待完整的计算图创建完毕，每条语句都会在计算图中动态添加节点和边，并立即执行正向传播得到计算结果。</li>
 <li>计算图在反向传播后立即销毁，下次调用需要重新构建计算图。如果在程序中使用了backward方法执行了反向传播，或者利用torch.autograd.grad方法计算了梯度，那么创建的计算图会被立即销毁，释放存储空间，下次调用需要重新创建。</li>
 </ol>
 <p><strong>计算图的正向传播是立即执行的</strong>。</p>
-<pre class="highlight"><code class="python">w = torch.tensor([[<span class="hljs-number">3.0</span>,<span class="hljs-number">1.0</span>]],requires_grad=<span class="hljs-literal">True</span>)
-b = torch.tensor([[<span class="hljs-number">3.0</span>]],requires_grad=<span class="hljs-literal">True</span>)
-X = torch.randn(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)
-Y = torch.randn(<span class="hljs-number">10</span>,<span class="hljs-number">1</span>)
+<pre class="line-numbers language-python"><code class="language-python">w <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">,</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+X <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+Y <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
 
-Y_hat = X@w.t() + b  <span class="hljs-comment"># Y_hat定义后其正向传播被立即执行，与其后面的loss创建语句无关</span>
-loss = torch.mean(torch.<span class="hljs-built_in">pow</span>(Y_hat-Y,<span class="hljs-number">2</span>))
+Y_hat <span class="token operator">=</span> X@w<span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> b  <span class="token comment" spellcheck="true"># Y_hat定义后其正向传播被立即执行，与其后面的loss创建语句无关</span>
+loss <span class="token operator">=</span> torch<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>pow<span class="token punctuation">(</span>Y_hat<span class="token operator">-</span>Y<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-<span class="hljs-built_in">print</span>(loss.data)
-<span class="hljs-built_in">print</span>(Y_hat.data)
+<span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>Y_hat<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-tensor(<span class="hljs-number">36.4831</span>)
-tensor([[-<span class="hljs-number">0.0435</span>],
-        [ <span class="hljs-number">3.1951</span>],
-        [ <span class="hljs-number">5.3738</span>],
-        [ <span class="hljs-number">4.2230</span>],
-        [<span class="hljs-number">14.0631</span>],
-        [ <span class="hljs-number">1.2098</span>],
-        [ <span class="hljs-number">4.8157</span>],
-        [ <span class="hljs-number">2.8586</span>],
-        [ <span class="hljs-number">3.0681</span>],
-        [ <span class="hljs-number">8.1599</span>]])
-</code></pre>
-<p>**计算图在反向传播后立即销毁。**�<br>
-计算图在反向传播后立即销毁，如果需要保留计算图, 需要设置<code>retain_graph = True</code>。</p>
-<pre class="highlight"><code class="python">w = torch.tensor([[<span class="hljs-number">3.0</span>,<span class="hljs-number">1.0</span>]],requires_grad=<span class="hljs-literal">True</span>)
-b = torch.tensor([[<span class="hljs-number">3.0</span>]],requires_grad=<span class="hljs-literal">True</span>)
-X = torch.randn(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)
-Y = torch.randn(<span class="hljs-number">10</span>,<span class="hljs-number">1</span>)
-Y_hat = X@w.t() + b  <span class="hljs-comment"># Y_hat定义后其正向传播被立即执行，与其后面的loss创建语句无关</span>
-loss = torch.mean(torch.<span class="hljs-built_in">pow</span>(Y_hat-Y,<span class="hljs-number">2</span>))
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token number">36.4831</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.0435</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">3.1951</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">5.3738</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">4.2230</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">14.0631</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">1.2098</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">4.8157</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">2.8586</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">3.0681</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">8.1599</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>计算图在反向传播后立即销毁。</strong> <br>计算图在反向传播后立即销毁，如果需要保留计算图, 需要设置<code>retain_graph = True</code>。</p>
+<pre class="line-numbers language-python"><code class="language-python">w <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">,</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+X <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+Y <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+Y_hat <span class="token operator">=</span> X@w<span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> b  <span class="token comment" spellcheck="true"># Y_hat定义后其正向传播被立即执行，与其后面的loss创建语句无关</span>
+loss <span class="token operator">=</span> torch<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>pow<span class="token punctuation">(</span>Y_hat<span class="token operator">-</span>Y<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-loss.backward()  <span class="hljs-comment">#loss.backward(retain_graph = True) </span>
+loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#loss.backward(retain_graph = True) </span>
 
-<span class="hljs-comment">#loss.backward() #如果再次执行反向传播将报错</span>
-</code></pre>
-<h2 id="计算图中的function"><a class="markdownIt-Anchor" href="#计算图中的function"></a> 计算图中的Function</h2>
-<p>计算图中的张量我们已经比较熟悉了，计算图中的另外一种节点是Function，实际上就是 Pytorch中各种对张量操作的函数。<br>
-这些Function和我们Python中的函数有一个较大的区别，那就是它同时包括正向计算逻辑和反向传播的逻辑。我们可以通过继承<code>torch.autograd.Function</code>来创建这种支持反向传播的Function。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyReLU</span>(torch.autograd.Function):
+<span class="token comment" spellcheck="true">#loss.backward() #如果再次执行反向传播将报错</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="计算图中的Function"><a href="#计算图中的Function" class="headerlink" title="计算图中的Function"></a>计算图中的Function</h2><p>计算图中的张量我们已经比较熟悉了，计算图中的另外一种节点是Function，实际上就是 Pytorch中各种对张量操作的函数。<br>这些Function和我们Python中的函数有一个较大的区别，那就是它同时包括正向计算逻辑和反向传播的逻辑。我们可以通过继承<code>torch.autograd.Function</code>来创建这种支持反向传播的Function。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyReLU</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>Function<span class="token punctuation">)</span><span class="token punctuation">:</span>
    
-    <span class="hljs-comment">#正向传播逻辑，可以用ctx存储一些值，供反向传播使用。</span>
-<span class="hljs-meta">    @staticmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">ctx, <span class="hljs-built_in">input</span></span>):
-        ctx.save_for_backward(<span class="hljs-built_in">input</span>)
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">input</span>.clamp(<span class="hljs-built_in">min</span>=<span class="hljs-number">0</span>)
+    <span class="token comment" spellcheck="true">#正向传播逻辑，可以用ctx存储一些值，供反向传播使用。</span>
+    @staticmethod
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> input<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ctx<span class="token punctuation">.</span>save_for_backward<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> input<span class="token punctuation">.</span>clamp<span class="token punctuation">(</span>min<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 
-    <span class="hljs-comment">#反向传播逻辑</span>
-<span class="hljs-meta">    @staticmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">backward</span>(<span class="hljs-params">ctx, grad_output</span>):
-        <span class="hljs-built_in">input</span>, = ctx.saved_tensors
-        grad_input = grad_output.clone()
-        grad_input[<span class="hljs-built_in">input</span> &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span>
-        <span class="hljs-keyword">return</span> grad_input
-</code></pre>
-<pre class="highlight"><code class="python">w = torch.tensor([[<span class="hljs-number">3.0</span>,<span class="hljs-number">1.0</span>]],requires_grad=<span class="hljs-literal">True</span>)
-b = torch.tensor([[<span class="hljs-number">3.0</span>]],requires_grad=<span class="hljs-literal">True</span>)
-X = torch.tensor([[-<span class="hljs-number">1.0</span>,-<span class="hljs-number">1.0</span>],[<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>]])
-Y = torch.tensor([[<span class="hljs-number">2.0</span>,<span class="hljs-number">3.0</span>]])
+    <span class="token comment" spellcheck="true">#反向传播逻辑</span>
+    @staticmethod
+    <span class="token keyword">def</span> <span class="token function">backward</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> grad_output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        input<span class="token punctuation">,</span> <span class="token operator">=</span> ctx<span class="token punctuation">.</span>saved_tensors
+        grad_input <span class="token operator">=</span> grad_output<span class="token punctuation">.</span>clone<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        grad_input<span class="token punctuation">[</span>input <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">return</span> grad_input
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">w <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">,</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+X <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+Y <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2.0</span><span class="token punctuation">,</span><span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-relu = MyReLU.apply <span class="hljs-comment"># relu现在也可以具有正向传播和反向传播功能</span>
-Y_hat = relu(X@w.t() + b)
-loss = torch.mean(torch.<span class="hljs-built_in">pow</span>(Y_hat-Y,<span class="hljs-number">2</span>))
+relu <span class="token operator">=</span> MyReLU<span class="token punctuation">.</span>apply <span class="token comment" spellcheck="true"># relu现在也可以具有正向传播和反向传播功能</span>
+Y_hat <span class="token operator">=</span> relu<span class="token punctuation">(</span>X@w<span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> b<span class="token punctuation">)</span>
+loss <span class="token operator">=</span> torch<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>pow<span class="token punctuation">(</span>Y_hat<span class="token operator">-</span>Y<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-loss.backward()
+loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<span class="hljs-built_in">print</span>(w.grad)
-<span class="hljs-built_in">print</span>(b.grad)
-<span class="hljs-built_in">print</span>(Y_hat.grad_fn)
+<span class="token keyword">print</span><span class="token punctuation">(</span>w<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>Y_hat<span class="token punctuation">.</span>grad_fn<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-tensor([[<span class="hljs-number">4.5000</span>, <span class="hljs-number">4.5000</span>]])
-tensor([[<span class="hljs-number">4.5000</span>]])
-&lt;torch.autograd.function.MyReLUBackward <span class="hljs-built_in">object</span> at <span class="hljs-number">0x7f6979f47200</span>&gt;
-</code></pre>
-<h2 id="计算图与反向传播"><a class="markdownIt-Anchor" href="#计算图与反向传播"></a> 计算图与反向传播</h2>
-<p>了解了Function的功能，我们可以简单地理解一下反向传播的原理和过程。理解该部分原理需要一些高等数学中求导链式法则的基础知识。�</p>
-<pre class="highlight"><code class="python">x = torch.tensor(<span class="hljs-number">3.0</span>,requires_grad=<span class="hljs-literal">True</span>)
-y1 = x + <span class="hljs-number">1</span>
-y2 = <span class="hljs-number">2</span>*x
-loss = (y1-y2)**<span class="hljs-number">2</span>
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">4.5000</span><span class="token punctuation">,</span> <span class="token number">4.5000</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">4.5000</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token operator">&lt;</span>torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>function<span class="token punctuation">.</span>MyReLUBackward object at <span class="token number">0x7f6979f47200</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="计算图与反向传播"><a href="#计算图与反向传播" class="headerlink" title="计算图与反向传播"></a>计算图与反向传播</h2><p>了解了Function的功能，我们可以简单地理解一下反向传播的原理和过程。理解该部分原理需要一些高等数学中求导链式法则的基础知识。 </p>
+<pre class="line-numbers language-python"><code class="language-python">x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y1 <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">1</span>
+y2 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>x
+loss <span class="token operator">=</span> <span class="token punctuation">(</span>y1<span class="token operator">-</span>y2<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span>
 
-loss.backward()
-</code></pre>
+loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>loss.backward()</code>语句调用后，依次发生以下计算过程。</p>
 <ol>
 <li>loss自己的grad梯度赋值为1，即对自身的梯度为1。</li>
 <li>loss根据其自身梯度以及关联的backward方法，计算出其对应的自变量即y1和y2的梯度，将该值赋值到y1.grad和y2.grad。</li>
 <li>y2和y1根据其自身梯度以及关联的backward方法, 分别计算出其对应的自变量x的梯度，x.grad将其收到的多个梯度值累加。</li>
 </ol>
-<p>注意，1,2,3步骤的求梯度顺序和对多个梯度值的累加规则恰好是求导链式法则的程序表述。<br>
-正因为求导链式法则衍生的梯度累加规则，张量的grad梯度不会自动清零，在需要的时候需要手动置零。</p>
-<h2 id="叶子节点和非叶子节点"><a class="markdownIt-Anchor" href="#叶子节点和非叶子节点"></a> 叶子节点和非叶子节点</h2>
-<p>执行下面代码，我们会发现 loss.grad并不是我们期望的1，而是 None。类似地 y1.grad 以及 y2.grad也是 None。<br>
-这是为什么呢？这是由于它们不是叶子节点张量。<br>
-在反向传播过程中，只有 is_leaf=True 的叶子节点，需要求导的张量的导数结果才会被最后保留下来。那么什么是叶子节点张量呢？叶子节点张量需要满足两个条件。</p>
+<p>注意，1,2,3步骤的求梯度顺序和对多个梯度值的累加规则恰好是求导链式法则的程序表述。<br>正因为求导链式法则衍生的梯度累加规则，张量的grad梯度不会自动清零，在需要的时候需要手动置零。</p>
+<h2 id="叶子节点和非叶子节点"><a href="#叶子节点和非叶子节点" class="headerlink" title="叶子节点和非叶子节点"></a>叶子节点和非叶子节点</h2><p>执行下面代码，我们会发现 loss.grad并不是我们期望的1，而是 None。类似地 y1.grad 以及 y2.grad也是 None。<br>这是为什么呢？这是由于它们不是叶子节点张量。<br>在反向传播过程中，只有 is_leaf&#x3D;True 的叶子节点，需要求导的张量的导数结果才会被最后保留下来。那么什么是叶子节点张量呢？叶子节点张量需要满足两个条件。</p>
 <ol>
 <li>叶子节点张量是由用户直接创建的张量，而非由某个Function通过计算得到的张量。</li>
 <li>叶子节点张量的 requires_grad属性必须为True.</li>
 </ol>
-<p>Pytorch设计这样的规则主要是为了节约内存或者显存空间，因为几乎所有的时候，用户只会关心他自己直接创建的张量的梯度。<br>
-所有依赖于叶子节点张量的张量, 其requires_grad 属性必定是True的，但其梯度值只在计算过程中被用到，不会最终存储到grad属性中。<br>
-如果需要保留中间计算结果的梯度到grad属性中，可以使用 retain_grad方法。如果仅仅是为了调试代码查看梯度值，可以利用register_hook打印日志。</p>
-<pre class="highlight"><code class="python">x = torch.tensor(<span class="hljs-number">3.0</span>,requires_grad=<span class="hljs-literal">True</span>)
-y1 = x + <span class="hljs-number">1</span>
-y2 = <span class="hljs-number">2</span>*x
-loss = (y1-y2)**<span class="hljs-number">2</span>
+<p>Pytorch设计这样的规则主要是为了节约内存或者显存空间，因为几乎所有的时候，用户只会关心他自己直接创建的张量的梯度。<br>所有依赖于叶子节点张量的张量, 其requires_grad 属性必定是True的，但其梯度值只在计算过程中被用到，不会最终存储到grad属性中。<br>如果需要保留中间计算结果的梯度到grad属性中，可以使用 retain_grad方法。如果仅仅是为了调试代码查看梯度值，可以利用register_hook打印日志。</p>
+<pre class="line-numbers language-python"><code class="language-python">x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y1 <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">1</span>
+y2 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>x
+loss <span class="token operator">=</span> <span class="token punctuation">(</span>y1<span class="token operator">-</span>y2<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span>
 
-loss.backward()
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;loss.grad:&quot;</span>, loss.grad) <span class="hljs-comment"># non-leaf</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;y1.grad:&quot;</span>, y1.grad) <span class="hljs-comment"># non-leaf</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;y2.grad:&quot;</span>, y2.grad) <span class="hljs-comment"># non-leaf</span>
-<span class="hljs-built_in">print</span>(x.grad)
+loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"loss.grad:"</span><span class="token punctuation">,</span> loss<span class="token punctuation">.</span>grad<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># non-leaf</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"y1.grad:"</span><span class="token punctuation">,</span> y1<span class="token punctuation">.</span>grad<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># non-leaf</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"y2.grad:"</span><span class="token punctuation">,</span> y2<span class="token punctuation">.</span>grad<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># non-leaf</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
 
-<span class="hljs-built_in">print</span>(x.is_leaf)
-<span class="hljs-built_in">print</span>(y1.is_leaf)
-<span class="hljs-built_in">print</span>(y2.is_leaf)
-<span class="hljs-built_in">print</span>(loss.is_leaf)
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>is_leaf<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y1<span class="token punctuation">.</span>is_leaf<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y2<span class="token punctuation">.</span>is_leaf<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">.</span>is_leaf<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-loss.grad: <span class="hljs-literal">None</span>
-y1.grad: <span class="hljs-literal">None</span>
-y2.grad: <span class="hljs-literal">None</span>
-tensor(<span class="hljs-number">4.</span>)
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+loss<span class="token punctuation">.</span>grad<span class="token punctuation">:</span> None
+y1<span class="token punctuation">.</span>grad<span class="token punctuation">:</span> None
+y2<span class="token punctuation">.</span>grad<span class="token punctuation">:</span> None
+tensor<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
 
-<span class="hljs-literal">True</span>
-<span class="hljs-literal">False</span>
-<span class="hljs-literal">False</span>
-<span class="hljs-literal">False</span>
-</code></pre>
+<span class="token boolean">True</span>
+<span class="token boolean">False</span>
+<span class="token boolean">False</span>
+<span class="token boolean">False</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>利用<code>retain_grad</code>可以保留非叶子节点的梯度值。利用<code>register_hook</code>可以查看非叶子节点的梯度值。</p>
-<pre class="highlight"><code class="python">x = torch.tensor(<span class="hljs-number">3.0</span>,requires_grad=<span class="hljs-literal">True</span>)
-y1 = x + <span class="hljs-number">1</span>
-y2 = <span class="hljs-number">2</span>*x
-loss = (y1-y2)**<span class="hljs-number">2</span>
+<pre class="line-numbers language-python"><code class="language-python">x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y1 <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">1</span>
+y2 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>x
+loss <span class="token operator">=</span> <span class="token punctuation">(</span>y1<span class="token operator">-</span>y2<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span>
 
-<span class="hljs-comment"># 非叶子节点梯度显示控制</span>
-y1.register_hook(<span class="hljs-keyword">lambda</span> grad: <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;y1 grad: &#x27;</span>, grad))
-y2.register_hook(<span class="hljs-keyword">lambda</span> grad: <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;y2 grad: &#x27;</span>, grad))
-loss.retain_grad()
+<span class="token comment" spellcheck="true"># 非叶子节点梯度显示控制</span>
+y1<span class="token punctuation">.</span>register_hook<span class="token punctuation">(</span><span class="token keyword">lambda</span> grad<span class="token punctuation">:</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'y1 grad: '</span><span class="token punctuation">,</span> grad<span class="token punctuation">)</span><span class="token punctuation">)</span>
+y2<span class="token punctuation">.</span>register_hook<span class="token punctuation">(</span><span class="token keyword">lambda</span> grad<span class="token punctuation">:</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'y2 grad: '</span><span class="token punctuation">,</span> grad<span class="token punctuation">)</span><span class="token punctuation">)</span>
+loss<span class="token punctuation">.</span>retain_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<span class="hljs-comment"># 反向传播</span>
-loss.backward()
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;loss.grad:&quot;</span>, loss.grad)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x.grad:&quot;</span>, x.grad)
+<span class="token comment" spellcheck="true"># 反向传播</span>
+loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"loss.grad:"</span><span class="token punctuation">,</span> loss<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"x.grad:"</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-y2 grad:  tensor(<span class="hljs-number">4.</span>)
-y1 grad:  tensor(-<span class="hljs-number">4.</span>)
-loss.grad: tensor(<span class="hljs-number">1.</span>)
-x.grad: tensor(<span class="hljs-number">4.</span>)
-</code></pre>
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+y2 grad<span class="token punctuation">:</span>  tensor<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+y1 grad<span class="token punctuation">:</span>  tensor<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+loss<span class="token punctuation">.</span>grad<span class="token punctuation">:</span> tensor<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+x<span class="token punctuation">.</span>grad<span class="token punctuation">:</span> tensor<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

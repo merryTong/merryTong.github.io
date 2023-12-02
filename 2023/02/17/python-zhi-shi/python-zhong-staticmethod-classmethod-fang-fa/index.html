@@ -5,9 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的@staticmethod和@classmethod, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Python中的类方法和静态方法
-一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。
-Python面向对象编程中，类中">
+    <meta name="description" content="Python中的类方法和静态方法一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。Python面向对象编程中，类中定义的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -416,11 +414,6 @@ Python面向对象编程中，类中">
                 
 
                 
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
-                </div>
-                
 
                 
 
@@ -440,153 +433,140 @@ Python面向对象编程中，类中">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="python中的类方法和静态方法"><a class="markdownIt-Anchor" href="#python中的类方法和静态方法"></a> Python中的类方法和静态方法</h1>
-<p>一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用<code>@staticmethod</code>或<code>@classmethod</code>，就可以不需要实例化，直接<code>类名.方法名()</code>来调用。<br>
-Python面向对象编程中，类中定义的方法可以是<code>@classmethod</code>装饰的<strong>类方法</strong>，也可以是<code>@staticmethod</code>装饰的<strong>静态方法</strong>，用的最多的还是不带装饰器的<strong>实例方法。</strong><br>
-先来看一个简单示例：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(<span class="hljs-title class_ inherited__">object</span>):
+                <h1 id="Python中的类方法和静态方法"><a href="#Python中的类方法和静态方法" class="headerlink" title="Python中的类方法和静态方法"></a>Python中的类方法和静态方法</h1><p>一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用<code>@staticmethod</code>或<code>@classmethod</code>，就可以不需要实例化，直接<code>类名.方法名()</code>来调用。<br>Python面向对象编程中，类中定义的方法可以是<code>@classmethod</code>装饰的<strong>类方法</strong>，也可以是<code>@staticmethod</code>装饰的<strong>静态方法</strong>，用的最多的还是不带装饰器的<strong>实例方法。</strong><br>先来看一个简单示例：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
     
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">m1</span>(<span class="hljs-params">self, n</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;self:&quot;</span>, self)
+    <span class="token keyword">def</span> <span class="token function">m1</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self:"</span><span class="token punctuation">,</span> self<span class="token punctuation">)</span>
 
-<span class="hljs-meta">    @classmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">m2</span>(<span class="hljs-params">cls, n</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;cls:&quot;</span>, cls)
+    @classmethod
+    <span class="token keyword">def</span> <span class="token function">m2</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cls:"</span><span class="token punctuation">,</span> cls<span class="token punctuation">)</span>
 
-<span class="hljs-meta">    @staticmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">m3</span>(<span class="hljs-params">n</span>):
-        <span class="hljs-keyword">pass</span>
+    @staticmethod
+    <span class="token keyword">def</span> <span class="token function">m3</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
 
-a = A()
-a.m1(<span class="hljs-number">1</span>) <span class="hljs-comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span>
-A.m2(<span class="hljs-number">1</span>) <span class="hljs-comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span>
-A.m3(<span class="hljs-number">1</span>)
-</code></pre>
-<p>在类中一共定义了3个方法，m1 是<strong>实例方法</strong>，第一个参数必须是<code>self</code>（约定俗成的）。m2 是<strong>类方法</strong>，第一个参数必须是<code>cls</code>（同样是约定俗成），m3 是<strong>静态方法</strong>，参数根据业务需求定，可有可无。<br>
-当程序运行时，大概发生了这么几件事（结合下面的图来看）：</p>
+a <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+a<span class="token punctuation">.</span>m1<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># self: &lt;__main__.A object at 0x000001E596E41A90></span>
+A<span class="token punctuation">.</span>m2<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># cls: &lt;class '__main__.A'></span>
+A<span class="token punctuation">.</span>m3<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在类中一共定义了3个方法，m1 是<strong>实例方法</strong>，第一个参数必须是<code>self</code>（约定俗成的）。m2 是<strong>类方法</strong>，第一个参数必须是<code>cls</code>（同样是约定俗成），m3 是<strong>静态方法</strong>，参数根据业务需求定，可有可无。<br>当程序运行时，大概发生了这么几件事（结合下面的图来看）：</p>
 <ul>
 <li>第一步：代码从第一行开始执行 class 命令，此时会创建一个类 A 对象（<mark>类也是对象</mark>，一切皆对象嘛）同时初始化类里面的属性和方法；记住，此刻实例对象还没创建出来。</li>
-<li>第二、三步：接着执行 a=A()，系统自动调用类的构造器，构造出实例对象 a。</li>
+<li>第二、三步：接着执行 a&#x3D;A()，系统自动调用类的构造器，构造出实例对象 a。</li>
 <li>第四步：接着调用<code>a.m1(1)</code>，m1 是实例方法，<strong>内部会自动把</strong><mark>实例对象</mark>传递给 self 参数进行绑定**，也就是说， self 和 a 指向的都是同一个实例对象。</li>
 <li>第五步：调用A.m2(1)时，<strong>python内部隐式地把</strong><mark>类对象</mark><strong>传递给 cls 参数</strong>，cls 和 A 都指向类对象。</li>
 </ul>
-<p><img src="/images/python_class.png" alt><br>
-严格意义上来说，左边的都是变量名，是对象的引用，右边才是真正的对像</p>
-<h2 id="几个方法的介绍和区别"><a class="markdownIt-Anchor" href="#几个方法的介绍和区别"></a> 几个方法的介绍和区别</h2>
-<h3 id="实例方法"><a class="markdownIt-Anchor" href="#实例方法"></a> 实例方法</h3>
-<pre class="highlight"><code class="python"><span class="hljs-built_in">print</span>(A.m1)
-<span class="hljs-comment"># A.m1在py2中显示为&lt;unbound method A.m1&gt;</span>
-&lt;function A.m1 at <span class="hljs-number">0x000002BF7FF9A488</span>&gt;
+<p><img src="/images/python_class.png"><br>严格意义上来说，左边的都是变量名，是对象的引用，右边才是真正的对像</p>
+<h2 id="几个方法的介绍和区别"><a href="#几个方法的介绍和区别" class="headerlink" title="几个方法的介绍和区别"></a>几个方法的介绍和区别</h2><h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m1<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># A.m1在py2中显示为&lt;unbound method A.m1></span>
+<span class="token operator">&lt;</span>function A<span class="token punctuation">.</span>m1 at <span class="token number">0x000002BF7FF9A488</span><span class="token operator">></span>
 
-<span class="hljs-built_in">print</span>(a.m1)
-&lt;bound method A.m1 of &lt;__main__.A <span class="hljs-built_in">object</span> at <span class="hljs-number">0x000002BF7FFA2BE0</span>&gt;&gt;
-</code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>m1<span class="token punctuation">)</span>
+<span class="token operator">&lt;</span>bound method A<span class="token punctuation">.</span>m1 of <span class="token operator">&lt;</span>__main__<span class="token punctuation">.</span>A object at <span class="token number">0x000002BF7FFA2BE0</span><span class="token operator">>></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>A.m1</code>是一个还没有绑定实例对象的方法，对于未绑定方法，调用<code>A.m1</code>时必须显示地传入一个实例对象进去，而<code>a.m1</code>是已经绑定了实例的方法，python隐式地把对象传递给了self参数，所以不再手动传递参数，这是调用实例方法的过程。</p>
-<pre class="highlight"><code class="python">A.m1(a, <span class="hljs-number">1</span>)
-<span class="hljs-comment"># 等价于</span>
-a.m1(<span class="hljs-number">1</span>)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">A<span class="token punctuation">.</span>m1<span class="token punctuation">(</span>a<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 等价于</span>
+a<span class="token punctuation">.</span>m1<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><strong>如果未绑定的方法</strong><code>**A.m1**</code><strong>不传实例对象给 self 时，就会报参数缺失错误</strong></p>
-<h3 id="类方法"><a class="markdownIt-Anchor" href="#类方法"></a> 类方法</h3>
-<p>m2是<strong>类方法</strong>，不管是<code>A.m2</code>还是<code>a.m2</code>，都是已经自动绑定了类对象A的方法，对于<code>a.m2</code>，因为python可以通过实例对象a找到它所属的类是A，找到A之后自动绑定到 cls。</p>
-<pre class="highlight"><code class="python"><span class="hljs-built_in">print</span>(A.m2)
-&lt;bound method A.m2 of &lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;__main__.A&#x27;</span>&gt;&gt;
+<h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><p>m2是<strong>类方法</strong>，不管是<code>A.m2</code>还是<code>a.m2</code>，都是已经自动绑定了类对象A的方法，对于<code>a.m2</code>，因为python可以通过实例对象a找到它所属的类是A，找到A之后自动绑定到 cls。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m2<span class="token punctuation">)</span>
+<span class="token operator">&lt;</span>bound method A<span class="token punctuation">.</span>m2 of <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.A'</span><span class="token operator">>></span>
 
-<span class="hljs-built_in">print</span>(a.m2)
-&lt;bound method A.m2 of &lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;__main__.A&#x27;</span>&gt;&gt;
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>m2<span class="token punctuation">)</span>
+<span class="token operator">&lt;</span>bound method A<span class="token punctuation">.</span>m2 of <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.A'</span><span class="token operator">>></span>
 
-A.m2(<span class="hljs-number">1</span>) 
-<span class="hljs-comment"># 等价于</span>
-a.m2(<span class="hljs-number">1</span>)
-</code></pre>
-<p>这使得我们可以在实例方法中通过使用<code>self.m2()</code>这种方式来调用类方法和静态方法。<br>
-类方法只能访问类变量，不能访问实例变量，也就是跟类有关，跟实例无关。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">m1</span>(<span class="hljs-params">self, n</span>):
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;self:&quot;</span>, self)
-    self.m2(n)
-</code></pre>
-<h3 id="静态方法"><a class="markdownIt-Anchor" href="#静态方法"></a> 静态方法</h3>
-<p>m3是类里面的一个<strong>静态方法</strong>，跟普通函数没什么区别，<strong>与类和实例都没有所谓的绑定关系</strong>，它只不过是碰巧存在类中的一个函数而已。<strong>不论是通过类还是实例都可以引用该方法</strong>。</p>
-<pre class="highlight"><code class="python"><span class="hljs-built_in">print</span>(A.m3)
-&lt;function A.m3 at <span class="hljs-number">0x000002BF7FF9A840</span>&gt;
+A<span class="token punctuation">.</span>m2<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true"># 等价于</span>
+a<span class="token punctuation">.</span>m2<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这使得我们可以在实例方法中通过使用<code>self.m2()</code>这种方式来调用类方法和静态方法。<br>类方法只能访问类变量，不能访问实例变量，也就是跟类有关，跟实例无关。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">m1</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self:"</span><span class="token punctuation">,</span> self<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>m2<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p>m3是类里面的一个<strong>静态方法</strong>，跟普通函数没什么区别，<strong>与类和实例都没有所谓的绑定关系</strong>，它只不过是碰巧存在类中的一个函数而已。<strong>不论是通过类还是实例都可以引用该方法</strong>。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>m3<span class="token punctuation">)</span>
+<span class="token operator">&lt;</span>function A<span class="token punctuation">.</span>m3 at <span class="token number">0x000002BF7FF9A840</span><span class="token operator">></span>
 
-<span class="hljs-built_in">print</span>(a.m3)
-&lt;function A.m3 at <span class="hljs-number">0x000002BF7FF9A840</span>&gt;
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>m3<span class="token punctuation">)</span>
+<span class="token operator">&lt;</span>function A<span class="token punctuation">.</span>m3 at <span class="token number">0x000002BF7FF9A840</span><span class="token operator">></span>
 
-A.m3(<span class="hljs-number">1</span>) 
-<span class="hljs-comment"># 等价于</span>
-a.m3(<span class="hljs-number">1</span>)
-</code></pre>
+A<span class="token punctuation">.</span>m3<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true"># 等价于</span>
+a<span class="token punctuation">.</span>m3<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>可以看成是静态方法已经跟这个类没关系了，相当于已经脱离了这个类，是一个完全独立的函数，只是调用的时候必须通过这个类，或者为了规范代码而将函数放到类中</li>
 <li>当类中的该方法不涉及对该类属性的操作，建议声明为@staticmethod，面向对象思想体现</li>
 </ul>
-<h2 id="应用场景"><a class="markdownIt-Anchor" href="#应用场景"></a> 应用场景</h2>
-<p>静态方法的使用场景： 如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务。例如下面是微信公众号开发中验证微信签名的一个例子，它没有引用任何类或者实例相关的属性和方法。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> hashlib <span class="hljs-keyword">import</span> sha1
-<span class="hljs-keyword">import</span> tornado.web
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>静态方法的使用场景： 如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务。例如下面是微信公众号开发中验证微信签名的一个例子，它没有引用任何类或者实例相关的属性和方法。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> hashlib <span class="token keyword">import</span> sha1
+<span class="token keyword">import</span> tornado<span class="token punctuation">.</span>web
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">SignatureHandler</span>(tornado.web.RequestHandler):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-string">&quot;&quot;&quot;
+<span class="token keyword">class</span> <span class="token class-name">SignatureHandler</span><span class="token punctuation">(</span>tornado<span class="token punctuation">.</span>web<span class="token punctuation">.</span>RequestHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
          根据签名判断请求是否来自微信
-        &quot;&quot;&quot;</span>
-        signature = self.get_query_argument(<span class="hljs-string">&quot;signature&quot;</span>, <span class="hljs-literal">None</span>)
-        echostr = self.get_query_argument(<span class="hljs-string">&quot;echostr&quot;</span>, <span class="hljs-literal">None</span>)
-        timestamp = self.get_query_argument(<span class="hljs-string">&quot;timestamp&quot;</span>, <span class="hljs-literal">None</span>)
-        nonce = self.get_query_argument(<span class="hljs-string">&quot;nonce&quot;</span>, <span class="hljs-literal">None</span>)
-        <span class="hljs-keyword">if</span> self._check_sign(TOKEN, timestamp, nonce, signature):
-            logger.info(<span class="hljs-string">&quot;微信签名校验成功&quot;</span>)
-            self.write(echostr)
-        <span class="hljs-keyword">else</span>:
-            self.write(<span class="hljs-string">&quot;你不是微信发过来的请求&quot;</span>)
+        """</span>
+        signature <span class="token operator">=</span> self<span class="token punctuation">.</span>get_query_argument<span class="token punctuation">(</span><span class="token string">"signature"</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span>
+        echostr <span class="token operator">=</span> self<span class="token punctuation">.</span>get_query_argument<span class="token punctuation">(</span><span class="token string">"echostr"</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span>
+        timestamp <span class="token operator">=</span> self<span class="token punctuation">.</span>get_query_argument<span class="token punctuation">(</span><span class="token string">"timestamp"</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span>
+        nonce <span class="token operator">=</span> self<span class="token punctuation">.</span>get_query_argument<span class="token punctuation">(</span><span class="token string">"nonce"</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_check_sign<span class="token punctuation">(</span>TOKEN<span class="token punctuation">,</span> timestamp<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> signature<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            logger<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">"微信签名校验成功"</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>write<span class="token punctuation">(</span>echostr<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"你不是微信发过来的请求"</span><span class="token punctuation">)</span>
 
-<span class="hljs-meta">    @staticmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_check_sign</span>(<span class="hljs-params">token, timestamp, nonce, signature</span>):
-        sign = [token, timestamp, nonce]
-        sign.sort()
-        sign = <span class="hljs-string">&quot;&quot;</span>.join(sign)
-        sign = sha1(sign).hexdigest()
-        <span class="hljs-keyword">return</span> sign == signature
-</code></pre>
+    @staticmethod
+    <span class="token keyword">def</span> <span class="token function">_check_sign</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> timestamp<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> signature<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        sign <span class="token operator">=</span> <span class="token punctuation">[</span>token<span class="token punctuation">,</span> timestamp<span class="token punctuation">,</span> nonce<span class="token punctuation">]</span>
+        sign<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        sign <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>sign<span class="token punctuation">)</span>
+        sign <span class="token operator">=</span> sha1<span class="token punctuation">(</span>sign<span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> sign <span class="token operator">==</span> signature
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>类方法的使用场景有：作为工厂方法创建实例对象，例如内置模块 datetime.date 类中就有大量使用类方法作为工厂方法，以此来创建date对象。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">date</span>:
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">date</span><span class="token punctuation">:</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">cls, year, month=<span class="hljs-literal">None</span>, day=<span class="hljs-literal">None</span></span>):
-        self = <span class="hljs-built_in">object</span>.__new__(cls)
-        self._year = year
-        self._month = month
-        self._day = day
-        <span class="hljs-keyword">return</span> self
+    <span class="token keyword">def</span> <span class="token function">__new__</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> year<span class="token punctuation">,</span> month<span class="token operator">=</span>None<span class="token punctuation">,</span> day<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self <span class="token operator">=</span> object<span class="token punctuation">.</span>__new__<span class="token punctuation">(</span>cls<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>_year <span class="token operator">=</span> year
+        self<span class="token punctuation">.</span>_month <span class="token operator">=</span> month
+        self<span class="token punctuation">.</span>_day <span class="token operator">=</span> day
+        <span class="token keyword">return</span> self
 
-<span class="hljs-meta">    @classmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">fromtimestamp</span>(<span class="hljs-params">cls, t</span>):
-        y, m, d, hh, mm, ss, weekday, jday, dst = _time.localtime(t)
-        <span class="hljs-keyword">return</span> cls(y, m, d)
+    @classmethod
+    <span class="token keyword">def</span> <span class="token function">fromtimestamp</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        y<span class="token punctuation">,</span> m<span class="token punctuation">,</span> d<span class="token punctuation">,</span> hh<span class="token punctuation">,</span> mm<span class="token punctuation">,</span> ss<span class="token punctuation">,</span> weekday<span class="token punctuation">,</span> jday<span class="token punctuation">,</span> dst <span class="token operator">=</span> _time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cls<span class="token punctuation">(</span>y<span class="token punctuation">,</span> m<span class="token punctuation">,</span> d<span class="token punctuation">)</span>
 
-<span class="hljs-meta">    @classmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">today</span>(<span class="hljs-params">cls</span>):
-        t = _time.time()
-        <span class="hljs-keyword">return</span> cls.fromtimestamp(t)
-</code></pre>
-<p>如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。<br>
-如果在@staticmethod中要调用到这个类的一些属性方法，只能直接<code>类名.属性名</code>或<code>类名.方法名</code>。而@classmethod因为持有cls参数，可以来调用类的属性，类的方法，实例化对象等，避免硬编码。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
+    @classmethod
+    <span class="token keyword">def</span> <span class="token function">today</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        t <span class="token operator">=</span> _time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cls<span class="token punctuation">.</span>fromtimestamp<span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。<br>如果在@staticmethod中要调用到这个类的一些属性方法，只能直接<code>类名.属性名</code>或<code>类名.方法名</code>。而@classmethod因为持有cls参数，可以来调用类的属性，类的方法，实例化对象等，避免硬编码。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
 
-<span class="hljs-meta">    @staticmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">m1</span>()
-        <span class="hljs-keyword">pass</span>
+    @staticmethod
+    <span class="token keyword">def</span> <span class="token function">m1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">pass</span>
 
-<span class="hljs-meta">    @staticmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">m2</span>():
-        A.m1() <span class="hljs-comment"># bad</span>
+    @staticmethod
+    <span class="token keyword">def</span> <span class="token function">m2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        A<span class="token punctuation">.</span>m1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># bad</span>
 
-<span class="hljs-meta">    @classmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">m3</span>(<span class="hljs-params">cls</span>):
-        cls.m1() <span class="hljs-comment"># good</span>
-</code></pre>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
-<p>在上述的例子中，有的返回的是 function 类型，有的返回的是 method 类型，function类型是函数，method类型是方法。他们的主要区别在于，函数的传参都是显式传递的；而方法传参往往都会有隐式传递的，具体根据于调用方。隐式传递 self 或者cls数据。</p>
+    @classmethod
+    <span class="token keyword">def</span> <span class="token function">m3</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        cls<span class="token punctuation">.</span>m1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># good</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在上述的例子中，有的返回的是 function 类型，有的返回的是 method 类型，function类型是函数，method类型是方法。他们的主要区别在于，函数的传参都是显式传递的；而方法传参往往都会有隐式传递的，具体根据于调用方。隐式传递 self 或者cls数据。</p>
 <ul>
 <li><strong>@staticmethod 的效果是让类对象与实例对象的调用都返回函数。</strong></li>
 <li><strong>@staticmethod不需要表示自身对象的self和自身类的cls参数，就跟使用函数一样。</strong></li>

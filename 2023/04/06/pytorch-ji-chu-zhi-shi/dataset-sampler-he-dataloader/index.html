@@ -5,10 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|构建数据管道, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Pytorch数据管道构建简介
-Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。
-Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。
-而D">
+    <meta name="description" content="Pytorch数据管道构建简介Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。而DataL">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -417,11 +414,6 @@ Dataset定义了数据集的内容，它相当于一个类似列表的数据结�
                 
 
                 
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.8k
-                </div>
-                
 
                 
 
@@ -441,126 +433,109 @@ Dataset定义了数据集的内容，它相当于一个类似列表的数据结�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="pytorch数据管道构建简介"><a class="markdownIt-Anchor" href="#pytorch数据管道构建简介"></a> Pytorch数据管道构建简介</h1>
-<p>Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。<br>
-Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。<br>
-而DataLoader定义了按batch加载数据集的方法，它是一个实现了<code>__iter__</code>方法的可迭代对象，每次迭代输出一个batch的数据。<br>
-DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>
-在绝大部分情况下，用户只需实现Dataset的<code>__len__</code>方法和<code>__getitem__</code>方法，就可以轻松构建自己的数据集，并用默认数据管道进行加载。对于一些复杂的数据集，用户可能还要自己设计 DataLoader中的<code>collate_fn</code>方法以便将获取的一个批次的数据整理成模型需要的输入形式。</p>
-<h2 id="深入理解dataset和dataloader原理"><a class="markdownIt-Anchor" href="#深入理解dataset和dataloader原理"></a> 深入理解Dataset和DataLoader原理</h2>
-<h3 id="获取一个batch数据的步骤"><a class="markdownIt-Anchor" href="#获取一个batch数据的步骤"></a> <strong>获取一个batch数据的步骤</strong></h3>
-<p>假定数据集的特征和标签分别表示为张量<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>，数据集可以表示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X, Y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mclose">)</span></span></span></span>，假定batch大小为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>。</p>
+                <h1 id="Pytorch数据管道构建简介"><a href="#Pytorch数据管道构建简介" class="headerlink" title="Pytorch数据管道构建简介"></a>Pytorch数据管道构建简介</h1><p>Pytorch通常使用Dataset和DataLoader这两个工具类来构建数据管道。<br>Dataset定义了数据集的内容，它相当于一个类似列表的数据结构，具有确定的长度，能够用索引获取数据集中的元素。<br>而DataLoader定义了按batch加载数据集的方法，它是一个实现了<code>__iter__</code>方法的可迭代对象，每次迭代输出一个batch的数据。<br>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>在绝大部分情况下，用户只需实现Dataset的<code>__len__</code>方法和<code>__getitem__</code>方法，就可以轻松构建自己的数据集，并用默认数据管道进行加载。对于一些复杂的数据集，用户可能还要自己设计 DataLoader中的<code>collate_fn</code>方法以便将获取的一个批次的数据整理成模型需要的输入形式。</p>
+<h2 id="深入理解Dataset和DataLoader原理"><a href="#深入理解Dataset和DataLoader原理" class="headerlink" title="深入理解Dataset和DataLoader原理"></a>深入理解Dataset和DataLoader原理</h2><h3 id="获取一个batch数据的步骤"><a href="#获取一个batch数据的步骤" class="headerlink" title="获取一个batch数据的步骤"></a><strong>获取一个batch数据的步骤</strong></h3><p>假定数据集的特征和标签分别表示为张量$X$和$Y$，数据集可以表示为$(X, Y)$，假定batch大小为$m$。</p>
 <ol>
-<li>首先我们要确定数据集的长度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>。结果类似：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">n = 1000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span>。</li>
-<li>然后我们从<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>的范围中抽样出<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>个数(batch大小)。假定<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">m=4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span>，拿到的结果是一个列表，类似：<code>indices = [1,4,8,9]</code>。</li>
-<li>接着我们从数据集中去取这<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>个数对应下标的元素。拿到的结果是一个元组列表，类似：<code>samples = [(X[1],Y[1]),(X[4],Y[4]),(X[8],Y[8]),(X[9],Y[9])]</code>。</li>
+<li>首先我们要确定数据集的长度$n$。结果类似：$n &#x3D; 1000$。</li>
+<li>然后我们从$0$到$n-1$的范围中抽样出$m$个数(batch大小)。假定$m&#x3D;4$，拿到的结果是一个列表，类似：<code>indices = [1,4,8,9]</code>。</li>
+<li>接着我们从数据集中去取这$m$个数对应下标的元素。拿到的结果是一个元组列表，类似：<code>samples = [(X[1],Y[1]),(X[4],Y[4]),(X[8],Y[8]),(X[9],Y[9])]</code>。</li>
 <li>最后我们将结果整理成<strong>两个张量</strong>作为输出。</li>
 </ol>
-<p>拿到的结果是两个张量，类似batch = (features, labels)，其中<code>features = torch.stack([X[1],X[4],X[8],X[9]])</code>；<code>labels = torch.stack([Y[1],Y[4],Y[8],Y[9]])</code>。</p>
-<h3 id="dataset和dataloader的功能分工"><a class="markdownIt-Anchor" href="#dataset和dataloader的功能分工"></a> Dataset和DataLoader的功能分工</h3>
-<p>第1个步骤确定数据集的长度是由 Dataset的<code>__len__</code>方法实现的。<br>
-第2个步骤从<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>的范围中抽样出<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>个数的方法是由 DataLoader的<code>sampler</code>和<code>batch_sampler</code>参数指定的。<code>sampler</code>参数<strong>指定单个元素抽样方法</strong>，一般无需用户设置，程序默认在DataLoader的参数<code>shuffle=True</code>时采用随机抽样，<code>shuffle=False</code>时采用顺序抽样。<code>batch_sampler</code>参数<strong>将多个抽样的元素整理成一个列表</strong>，一般无需用户设置，默认方法在DataLoader的参数<code>drop_last=True</code>时会丢弃数据集最后一个长度不能被batch大小整除的批次，在<code>drop_last=False</code>时保留最后一个批次。<br>
-第3个步骤的核心逻辑根据下标取数据集中的元素，是由 Dataset的<code>__getitem__</code>方法实现的。<br>
-第4个步骤的逻辑由DataLoader的参数<code>collate_fn</code>指定。一般情况下也无需用户设置。<br>
-Dataset和DataLoader的一般使用方式如下：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> torch   
-<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> TensorDataset,Dataset,DataLoader  
-<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> RandomSampler,BatchSampler   
+<p>拿到的结果是两个张量，类似batch &#x3D; (features, labels)，其中<code>features = torch.stack([X[1],X[4],X[8],X[9]])</code>；<code>labels = torch.stack([Y[1],Y[4],Y[8],Y[9]])</code>。</p>
+<h3 id="Dataset和DataLoader的功能分工"><a href="#Dataset和DataLoader的功能分工" class="headerlink" title="Dataset和DataLoader的功能分工"></a>Dataset和DataLoader的功能分工</h3><p>第1个步骤确定数据集的长度是由 Dataset的<code>__len__</code>方法实现的。<br>第2个步骤从$0$到$n-1$的范围中抽样出$m$个数的方法是由 DataLoader的<code>sampler</code>和<code>batch_sampler</code>参数指定的。<code>sampler</code>参数<strong>指定单个元素抽样方法</strong>，一般无需用户设置，程序默认在DataLoader的参数<code>shuffle=True</code>时采用随机抽样，<code>shuffle=False</code>时采用顺序抽样。<code>batch_sampler</code>参数<strong>将多个抽样的元素整理成一个列表</strong>，一般无需用户设置，默认方法在DataLoader的参数<code>drop_last=True</code>时会丢弃数据集最后一个长度不能被batch大小整除的批次，在<code>drop_last=False</code>时保留最后一个批次。<br>第3个步骤的核心逻辑根据下标取数据集中的元素，是由 Dataset的<code>__getitem__</code>方法实现的。<br>第4个步骤的逻辑由DataLoader的参数<code>collate_fn</code>指定。一般情况下也无需用户设置。<br>Dataset和DataLoader的一般使用方式如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch   
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> TensorDataset<span class="token punctuation">,</span>Dataset<span class="token punctuation">,</span>DataLoader  
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> RandomSampler<span class="token punctuation">,</span>BatchSampler   
   
   
-ds = TensorDataset(torch.randn(<span class="hljs-number">1000</span>,<span class="hljs-number">3</span>),  
-                   torch.randint(low=<span class="hljs-number">0</span>,high=<span class="hljs-number">2</span>,size=(<span class="hljs-number">1000</span>,)).<span class="hljs-built_in">float</span>())  
-dl = DataLoader(ds, batch_size=<span class="hljs-number">4</span>, drop_last = <span class="hljs-literal">False</span>)  
+ds <span class="token operator">=</span> TensorDataset<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  
+                   torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>low<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>high<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>float<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
+dl <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>ds<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> drop_last <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>  
 
-features, labels = <span class="hljs-built_in">next</span>(<span class="hljs-built_in">iter</span>(dl))  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;features = &quot;</span>,features )  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;labels = &quot;</span>,labels )
-</code></pre>
+features<span class="token punctuation">,</span> labels <span class="token operator">=</span> next<span class="token punctuation">(</span>iter<span class="token punctuation">(</span>dl<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"features = "</span><span class="token punctuation">,</span>features <span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"labels = "</span><span class="token punctuation">,</span>labels <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>将DataLoader内部调用方式步骤拆解如下：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># step1: 确定数据集长度 (Dataset的 __len__ 方法实现)  </span>
-ds = TensorDataset(torch.randn(<span class="hljs-number">1000</span>,<span class="hljs-number">3</span>),  
-                   torch.randint(low=<span class="hljs-number">0</span>,high=<span class="hljs-number">2</span>,size=(<span class="hljs-number">1000</span>,)).<span class="hljs-built_in">float</span>())  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;n = &quot;</span>, <span class="hljs-built_in">len</span>(ds)) <span class="hljs-comment"># len(ds)等价于 ds.__len__()  </span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># step1: 确定数据集长度 (Dataset的 __len__ 方法实现)  </span>
+ds <span class="token operator">=</span> TensorDataset<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  
+                   torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>low<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>high<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>float<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"n = "</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>ds<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># len(ds)等价于 ds.__len__()  </span>
   
-<span class="hljs-comment"># step2: 确定抽样indices (DataLoader中的 Sampler和BatchSampler实现)  </span>
-sampler = RandomSampler(data_source = ds)  
-batch_sampler = BatchSampler(sampler = sampler,   
-                             batch_size = <span class="hljs-number">4</span>, drop_last = <span class="hljs-literal">False</span>)  
-<span class="hljs-keyword">for</span> idxs <span class="hljs-keyword">in</span> batch_sampler:  
-    indices = idxs  
-    <span class="hljs-keyword">break</span>   
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;indices = &quot;</span>,indices)  
+<span class="token comment" spellcheck="true"># step2: 确定抽样indices (DataLoader中的 Sampler和BatchSampler实现)  </span>
+sampler <span class="token operator">=</span> RandomSampler<span class="token punctuation">(</span>data_source <span class="token operator">=</span> ds<span class="token punctuation">)</span>  
+batch_sampler <span class="token operator">=</span> BatchSampler<span class="token punctuation">(</span>sampler <span class="token operator">=</span> sampler<span class="token punctuation">,</span>   
+                             batch_size <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">,</span> drop_last <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>  
+<span class="token keyword">for</span> idxs <span class="token keyword">in</span> batch_sampler<span class="token punctuation">:</span>  
+    indices <span class="token operator">=</span> idxs  
+    <span class="token keyword">break</span>   
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"indices = "</span><span class="token punctuation">,</span>indices<span class="token punctuation">)</span>  
   
-<span class="hljs-comment"># step3: 取出一批样本batch (Dataset的 __getitem__ 方法实现)  </span>
-batch = [ds[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span>  indices]  <span class="hljs-comment">#  ds[i] 等价于 ds.__getitem__(i)  </span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;batch = &quot;</span>, batch)  
+<span class="token comment" spellcheck="true"># step3: 取出一批样本batch (Dataset的 __getitem__ 方法实现)  </span>
+batch <span class="token operator">=</span> <span class="token punctuation">[</span>ds<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span>  indices<span class="token punctuation">]</span>  <span class="token comment" spellcheck="true">#  ds[i] 等价于 ds.__getitem__(i)  </span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"batch = "</span><span class="token punctuation">,</span> batch<span class="token punctuation">)</span>  
   
-<span class="hljs-comment"># step4: 整理成features和labels (DataLoader 的 collate_fn 方法实现)  </span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">collate_fn</span>(<span class="hljs-params">batch</span>):  
-    features = torch.stack([sample[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> sample <span class="hljs-keyword">in</span> batch])  
-    labels = torch.stack([sample[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> sample <span class="hljs-keyword">in</span> batch])  
-    <span class="hljs-keyword">return</span> features,labels   
+<span class="token comment" spellcheck="true"># step4: 整理成features和labels (DataLoader 的 collate_fn 方法实现)  </span>
+<span class="token keyword">def</span> <span class="token function">collate_fn</span><span class="token punctuation">(</span>batch<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    features <span class="token operator">=</span> torch<span class="token punctuation">.</span>stack<span class="token punctuation">(</span><span class="token punctuation">[</span>sample<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">for</span> sample <span class="token keyword">in</span> batch<span class="token punctuation">]</span><span class="token punctuation">)</span>  
+    labels <span class="token operator">=</span> torch<span class="token punctuation">.</span>stack<span class="token punctuation">(</span><span class="token punctuation">[</span>sample<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">for</span> sample <span class="token keyword">in</span> batch<span class="token punctuation">]</span><span class="token punctuation">)</span>  
+    <span class="token keyword">return</span> features<span class="token punctuation">,</span>labels   
   
-features,labels = collate_fn(batch)  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;features = &quot;</span>,features)  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;labels = &quot;</span>,labels) 
-</code></pre>
-<h3 id="dataset和dataloader的核心源码"><a class="markdownIt-Anchor" href="#dataset和dataloader的核心源码"></a> <strong>Dataset和DataLoader的核心源码</strong></h3>
-<p>以下是 Dataset和 DataLoader的核心源码，省略了为了提升性能而引入的诸如多进程读取数据相关的代码。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> torch  
+features<span class="token punctuation">,</span>labels <span class="token operator">=</span> collate_fn<span class="token punctuation">(</span>batch<span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"features = "</span><span class="token punctuation">,</span>features<span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"labels = "</span><span class="token punctuation">,</span>labels<span class="token punctuation">)</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Dataset和DataLoader的核心源码"><a href="#Dataset和DataLoader的核心源码" class="headerlink" title="Dataset和DataLoader的核心源码"></a><strong>Dataset和DataLoader的核心源码</strong></h3><p>以下是 Dataset和 DataLoader的核心源码，省略了为了提升性能而引入的诸如多进程读取数据相关的代码。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch  
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Dataset</span>(<span class="hljs-title class_ inherited__">object</span>):  
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):  
-        <span class="hljs-keyword">pass</span>  
+<span class="token keyword">class</span> <span class="token class-name">Dataset</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token keyword">pass</span>  
       
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):  
-        <span class="hljs-keyword">raise</span> NotImplementedError  
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token keyword">raise</span> NotImplementedError  
           
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self,index</span>):  
-        <span class="hljs-keyword">raise</span> NotImplementedError  
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>index<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token keyword">raise</span> NotImplementedError  
           
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">DataLoader</span>(<span class="hljs-title class_ inherited__">object</span>):  
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,dataset,batch_size,collate_fn = <span class="hljs-literal">None</span>,shuffle = <span class="hljs-literal">True</span>,drop_last = <span class="hljs-literal">False</span></span>):  
-        self.dataset = dataset  
-        self.sampler = torch.utils.data.RandomSampler <span class="hljs-keyword">if</span> shuffle <span class="hljs-keyword">else</span> torch.utils.data.SequentialSampler  
-        self.batch_sampler = torch.utils.data.BatchSampler  
-        self.sample_iter = self.batch_sampler(self.sampler(self.dataset),  
-            			batch_size = batch_size, drop_last = drop_last)  
-        self.collate_fn = collate_fn <span class="hljs-keyword">if</span> collate_fn <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> torch.utils.data._utils.collate.default_collate  
+<span class="token keyword">class</span> <span class="token class-name">DataLoader</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>dataset<span class="token punctuation">,</span>batch_size<span class="token punctuation">,</span>collate_fn <span class="token operator">=</span> None<span class="token punctuation">,</span>shuffle <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span>drop_last <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        self<span class="token punctuation">.</span>dataset <span class="token operator">=</span> dataset  
+        self<span class="token punctuation">.</span>sampler <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>RandomSampler <span class="token keyword">if</span> shuffle <span class="token keyword">else</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>SequentialSampler  
+        self<span class="token punctuation">.</span>batch_sampler <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>BatchSampler  
+        self<span class="token punctuation">.</span>sample_iter <span class="token operator">=</span> self<span class="token punctuation">.</span>batch_sampler<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sampler<span class="token punctuation">(</span>self<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">,</span>  
+                        batch_size <span class="token operator">=</span> batch_size<span class="token punctuation">,</span> drop_last <span class="token operator">=</span> drop_last<span class="token punctuation">)</span>  
+        self<span class="token punctuation">.</span>collate_fn <span class="token operator">=</span> collate_fn <span class="token keyword">if</span> collate_fn <span class="token keyword">is</span> <span class="token operator">not</span> None <span class="token keyword">else</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>_utils<span class="token punctuation">.</span>collate<span class="token punctuation">.</span>default_collate  
           
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):  
-        indices = <span class="hljs-built_in">next</span>(<span class="hljs-built_in">iter</span>(self.sample_iter))  
-        batch = self.collate_fn([self.dataset[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> indices])  
-        <span class="hljs-keyword">return</span> batch  
+    <span class="token keyword">def</span> <span class="token function">__next__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        indices <span class="token operator">=</span> next<span class="token punctuation">(</span>iter<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sample_iter<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+        batch <span class="token operator">=</span> self<span class="token punctuation">.</span>collate_fn<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>dataset<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span><span class="token punctuation">)</span>  
+        <span class="token keyword">return</span> batch  
       
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):  
-        <span class="hljs-keyword">return</span> self 
-</code></pre>
-<h2 id="sampler原理"><a class="markdownIt-Anchor" href="#sampler原理"></a> Sampler原理</h2>
-<h3 id="sampler参数传递"><a class="markdownIt-Anchor" href="#sampler参数传递"></a> Sampler参数传递</h3>
-<p>假设数据是一组图像，每一张图像对应一个index，那么如果要读取数据就只需要对应的index即可，即上面代码中的indices，而选取index的方式有多种，有按顺序的，也有乱序的，所以这个工作需要Sampler完成。<br>
-首先看一下DataLoader的源代码长什么样。为方便理解只选取了num_works为0的情况（num_works简单理解就是能够并行化地读取数据）。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DataLoader</span>(<span class="hljs-title class_ inherited__">object</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, dataset, batch_size=<span class="hljs-number">1</span>, shuffle=<span class="hljs-literal">False</span>, sampler=<span class="hljs-literal">None</span>,
-                 batch_sampler=<span class="hljs-literal">None</span>, num_workers=<span class="hljs-number">0</span>, collate_fn=default_collate,
-                 pin_memory=<span class="hljs-literal">False</span>, drop_last=<span class="hljs-literal">False</span>, timeout=<span class="hljs-number">0</span>,
-                 worker_init_fn=<span class="hljs-literal">None</span></span>):
-        ...
-    ...    
-    ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">if</span> self.num_workers == <span class="hljs-number">0</span>:  
-            indices = <span class="hljs-built_in">next</span>(self.sample_iter)  <span class="hljs-comment"># Sampler</span>
-            batch = self.collate_fn([self.dataset[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> indices]) <span class="hljs-comment"># Dataset</span>
-            <span class="hljs-keyword">if</span> self.pin_memory:
-                batch = _utils.pin_memory.pin_memory_batch(batch)
-            <span class="hljs-keyword">return</span> batch
-</code></pre>
-<p>可以看到初始化参数里有两种sampler：<code>sampler</code>和<code>batch_sampler</code>，都默认为None。前者的作用是生成一系列的index，而batch_sampler则是将sampler生成的indices打包分组，得到一个又一个batch的index。例如下面示例中，<code>BatchSampler</code>将<code>SequentialSampler</code>生成的index按照指定的batch size分组。<br>
-<code>collate_fn</code>的作用就是将一个batch的数据进行整理合并的操作。默认的<code>collate_fn</code>是将img和label分别合并成imgs和labels，所以如果你的__getitem__方法只是返回 img、label，那么你可以使用默认的collate_fn方法，但是如果你每次读取的数据有img，box，label等等，那么你就需要自定义<code>collate_fn</code>来将对应的数据合并成一个batch数据，这样方便后续的训练步骤。</p>
-<pre class="highlight"><code class="python">&gt;&gt;&gt;<span class="hljs-keyword">in</span> : <span class="hljs-built_in">list</span>(BatchSampler(SequentialSampler(<span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)), batch_size=<span class="hljs-number">3</span>, drop_last=<span class="hljs-literal">False</span>))
-&gt;&gt;&gt;out: [[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>], [<span class="hljs-number">9</span>]]
-</code></pre>
+    <span class="token keyword">def</span> <span class="token function">__iter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token keyword">return</span> self 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Sampler原理"><a href="#Sampler原理" class="headerlink" title="Sampler原理"></a>Sampler原理</h2><h3 id="Sampler参数传递"><a href="#Sampler参数传递" class="headerlink" title="Sampler参数传递"></a>Sampler参数传递</h3><p>假设数据是一组图像，每一张图像对应一个index，那么如果要读取数据就只需要对应的index即可，即上面代码中的indices，而选取index的方式有多种，有按顺序的，也有乱序的，所以这个工作需要Sampler完成。<br>首先看一下DataLoader的源代码长什么样。为方便理解只选取了num_works为0的情况（num_works简单理解就是能够并行化地读取数据）。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">DataLoader</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> sampler<span class="token operator">=</span>None<span class="token punctuation">,</span>
+                 batch_sampler<span class="token operator">=</span>None<span class="token punctuation">,</span> num_workers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> collate_fn<span class="token operator">=</span>default_collate<span class="token punctuation">,</span>
+                 pin_memory<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> drop_last<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>
+                 worker_init_fn<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>    
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">def</span> <span class="token function">__next__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>num_workers <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>  
+            indices <span class="token operator">=</span> next<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sample_iter<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Sampler</span>
+            batch <span class="token operator">=</span> self<span class="token punctuation">.</span>collate_fn<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>dataset<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Dataset</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>pin_memory<span class="token punctuation">:</span>
+                batch <span class="token operator">=</span> _utils<span class="token punctuation">.</span>pin_memory<span class="token punctuation">.</span>pin_memory_batch<span class="token punctuation">(</span>batch<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> batch
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到初始化参数里有两种sampler：<code>sampler</code>和<code>batch_sampler</code>，都默认为None。前者的作用是生成一系列的index，而batch_sampler则是将sampler生成的indices打包分组，得到一个又一个batch的index。例如下面示例中，<code>BatchSampler</code>将<code>SequentialSampler</code>生成的index按照指定的batch size分组。<br><code>collate_fn</code>的作用就是将一个batch的数据进行整理合并的操作。默认的<code>collate_fn</code>是将img和label分别合并成imgs和labels，所以如果你的__getitem__方法只是返回 img、label，那么你可以使用默认的collate_fn方法，但是如果你每次读取的数据有img，box，label等等，那么你就需要自定义<code>collate_fn</code>来将对应的数据合并成一个batch数据，这样方便后续的训练步骤。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span><span class="token keyword">in</span> <span class="token punctuation">:</span> list<span class="token punctuation">(</span>BatchSampler<span class="token punctuation">(</span>SequentialSampler<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> drop_last<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>out<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>Pytorch中已经实现的Sampler有如下几种：</p>
 <ul>
 <li>SequentialSampler</li>
@@ -572,30 +547,26 @@ features,labels = collate_fn(batch)
 <ul>
 <li>如果自定义了<code>batch_sampler</code>，那么这些参数都必须使用默认值：batch_size，shuffle，sampler，drop_last.</li>
 <li>如果自定义了<code>sampler</code>，那么<code>shuffle</code>需要设置为False</li>
-<li>如果<code>sampler</code>和<code>batch_sampler</code>都为None，那么<code>batch_sampler</code>使用Pytorch已经实现好的BatchSampler，而sampler分两种情况：
-<ul>
+<li>如果<code>sampler</code>和<code>batch_sampler</code>都为None，那么<code>batch_sampler</code>使用Pytorch已经实现好的BatchSampler，而sampler分两种情况：<ul>
 <li>若<code>shuffle=True</code>，则<code>sampler=RandomSampler(dataset)</code></li>
 <li>若<code>shuffle=False</code>，则<code>sampler=SequentialSampler(dataset)</code></li>
 </ul>
 </li>
 </ul>
-<h3 id="自定义sampler和batchsampler"><a class="markdownIt-Anchor" href="#自定义sampler和batchsampler"></a> 自定义Sampler和BatchSampler</h3>
-<p>查看源代码其实可以发现，所有采样器其实都继承自同一个父类，即Sampler,其代码定义如下：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Sampler</span>(<span class="hljs-title class_ inherited__">object</span>):
+<h3 id="自定义Sampler和BatchSampler"><a href="#自定义Sampler和BatchSampler" class="headerlink" title="自定义Sampler和BatchSampler"></a>自定义Sampler和BatchSampler</h3><p>查看源代码其实可以发现，所有采样器其实都继承自同一个父类，即Sampler,其代码定义如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Sampler</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data_source</span>):
-        <span class="hljs-keyword">pass</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data_source<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">raise</span> NotImplementedError
+    <span class="token keyword">def</span> <span class="token function">__iter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> NotImplementedError
         
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(self.data_source)
-</code></pre>
-<p>所以要做的就是定义好<code>__iter__(self)</code>函数，不过要注意的是该函数的返回值需要是可迭代的。例如<code>SequentialSampler</code>返回的是<code>iter(range(len(self.data_source)))</code>。<br>
-另外<code>BatchSampler</code>与其他Sampler的主要区别是它需要将Sampler作为参数进行打包，进而每次迭代返回以batch_size为大小的index列表。也就是说在后面的读取数据过程中使用的都是batch sampler。</p>
-<h2 id="创建数据集的3种方式"><a class="markdownIt-Anchor" href="#创建数据集的3种方式"></a> 创建数据集的3种方式</h2>
-<p>Dataset创建数据集常用的方法有：</p>
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data_source<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以要做的就是定义好<code>__iter__(self)</code>函数，不过要注意的是该函数的返回值需要是可迭代的。例如<code>SequentialSampler</code>返回的是<code>iter(range(len(self.data_source)))</code>。<br>另外<code>BatchSampler</code>与其他Sampler的主要区别是它需要将Sampler作为参数进行打包，进而每次迭代返回以batch_size为大小的index列表。也就是说在后面的读取数据过程中使用的都是batch sampler。</p>
+<h2 id="创建数据集的3种方式"><a href="#创建数据集的3种方式" class="headerlink" title="创建数据集的3种方式"></a>创建数据集的3种方式</h2><p>Dataset创建数据集常用的方法有：</p>
 <ol>
 <li>使用<code>torch.utils.data.TensorDataset</code>根据Tensor创建数据集(numpy的array，Pandas的DataFrame需要先转换成Tensor)。</li>
 <li>使用<code>torchvision.datasets.ImageFolder</code>根据图片目录创建图片数据集。</li>
@@ -604,136 +575,131 @@ features,labels = collate_fn(batch)
 <p>此外，还可以通过</p>
 <ul>
 <li><code>torch.utils.data.random_split</code>将一个数据集分割成多份，常用于分割训练集，验证集和测试集。</li>
-<li>调用Dataset的加法运算符(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">+</span></span></span></span>)将多个数据集合并成一个数据集。</li>
+<li>调用Dataset的加法运算符($+$)将多个数据集合并成一个数据集。</li>
 </ul>
-<h3 id="根据tensor创建数据集"><a class="markdownIt-Anchor" href="#根据tensor创建数据集"></a> <strong>根据Tensor创建数据集</strong></h3>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np   
-<span class="hljs-keyword">import</span> torch   
-<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> TensorDataset,Dataset,DataLoader,random_split 
+<h3 id="根据Tensor创建数据集"><a href="#根据Tensor创建数据集" class="headerlink" title="根据Tensor创建数据集"></a><strong>根据Tensor创建数据集</strong></h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np   
+<span class="token keyword">import</span> torch   
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> TensorDataset<span class="token punctuation">,</span>Dataset<span class="token punctuation">,</span>DataLoader<span class="token punctuation">,</span>random_split 
 
-<span class="hljs-comment"># 根据Tensor创建数据集  </span>
-<span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets   
-iris = datasets.load_iris()  
-ds_iris = TensorDataset(torch.tensor(iris.data), torch.tensor(iris.target))  
+<span class="token comment" spellcheck="true"># 根据Tensor创建数据集  </span>
+<span class="token keyword">from</span> sklearn <span class="token keyword">import</span> datasets   
+iris <span class="token operator">=</span> datasets<span class="token punctuation">.</span>load_iris<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+ds_iris <span class="token operator">=</span> TensorDataset<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>iris<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>iris<span class="token punctuation">.</span>target<span class="token punctuation">)</span><span class="token punctuation">)</span>  
   
-<span class="hljs-comment"># 分割成训练集和预测集  </span>
-n_train = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(ds_iris)*<span class="hljs-number">0.8</span>)  
-n_val = <span class="hljs-built_in">len</span>(ds_iris) - n_train  
-ds_train, ds_val = random_split(ds_iris,[n_train,n_val])  
+<span class="token comment" spellcheck="true"># 分割成训练集和预测集  </span>
+n_train <span class="token operator">=</span> int<span class="token punctuation">(</span>len<span class="token punctuation">(</span>ds_iris<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">0.8</span><span class="token punctuation">)</span>  
+n_val <span class="token operator">=</span> len<span class="token punctuation">(</span>ds_iris<span class="token punctuation">)</span> <span class="token operator">-</span> n_train  
+ds_train<span class="token punctuation">,</span> ds_val <span class="token operator">=</span> random_split<span class="token punctuation">(</span>ds_iris<span class="token punctuation">,</span><span class="token punctuation">[</span>n_train<span class="token punctuation">,</span>n_val<span class="token punctuation">]</span><span class="token punctuation">)</span>  
   
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(ds_iris))  
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(ds_train)) 
-</code></pre>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 使用DataLoader加载数据集  </span>
-dl_train,dl_val = DataLoader(ds_train, batch_size = <span class="hljs-number">8</span>), DataLoader(ds_val, batch_size = <span class="hljs-number">8</span>)  
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>ds_iris<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>ds_train<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 使用DataLoader加载数据集  </span>
+dl_train<span class="token punctuation">,</span>dl_val <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>ds_train<span class="token punctuation">,</span> batch_size <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> DataLoader<span class="token punctuation">(</span>ds_val<span class="token punctuation">,</span> batch_size <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">)</span>  
   
-<span class="hljs-keyword">for</span> features,labels <span class="hljs-keyword">in</span> dl_train:  
-    <span class="hljs-built_in">print</span>(features,labels)  
-    <span class="hljs-keyword">break</span>  
+<span class="token keyword">for</span> features<span class="token punctuation">,</span>labels <span class="token keyword">in</span> dl_train<span class="token punctuation">:</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>features<span class="token punctuation">,</span>labels<span class="token punctuation">)</span>  
+    <span class="token keyword">break</span>  
 
 
-<span class="hljs-comment"># 演示加法运算符（`+`）的合并作用  </span>
-ds_data = ds_train + ds_val  
+<span class="token comment" spellcheck="true"># 演示加法运算符（`+`）的合并作用  </span>
+ds_data <span class="token operator">=</span> ds_train <span class="token operator">+</span> ds_val  
   
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;len(ds_train) = &#x27;</span>,<span class="hljs-built_in">len</span>(ds_train))  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;len(ds_valid) = &#x27;</span>,<span class="hljs-built_in">len</span>(ds_val))  
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;len(ds_train+ds_valid) = &#x27;</span>,<span class="hljs-built_in">len</span>(ds_data))  
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(ds_data))  
-</code></pre>
-<h3 id="根据图片目录创建图片数据集"><a class="markdownIt-Anchor" href="#根据图片目录创建图片数据集"></a> <strong>根据图片目录创建图片数据集</strong></h3>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np   
-<span class="hljs-keyword">import</span> torch   
-<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> DataLoader  
-<span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms,datasets   
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'len(ds_train) = '</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ds_train<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'len(ds_valid) = '</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ds_val<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'len(ds_train+ds_valid) = '</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ds_data<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>ds_data<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="根据图片目录创建图片数据集"><a href="#根据图片目录创建图片数据集" class="headerlink" title="根据图片目录创建图片数据集"></a><strong>根据图片目录创建图片数据集</strong></h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np   
+<span class="token keyword">import</span> torch   
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader  
+<span class="token keyword">from</span> torchvision <span class="token keyword">import</span> transforms<span class="token punctuation">,</span>datasets   
 
-<span class="hljs-comment"># 定义图片增强操作  </span>
-transform_train = transforms.Compose([  
-   transforms.RandomHorizontalFlip(), <span class="hljs-comment">#随机水平翻转  </span>
-   transforms.RandomVerticalFlip(), <span class="hljs-comment">#随机垂直翻转  </span>
-   transforms.RandomRotation(<span class="hljs-number">45</span>),  <span class="hljs-comment">#随机在45度角度内旋转  </span>
-   transforms.ToTensor() <span class="hljs-comment">#转换成张量并进行标准化</span>
-  ]  
-)   
-transform_valid = transforms.Compose([  
-    transforms.ToTensor()  
-  ]  
-)  
+<span class="token comment" spellcheck="true"># 定义图片增强操作  </span>
+transform_train <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>  
+   transforms<span class="token punctuation">.</span>RandomHorizontalFlip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">#随机水平翻转  </span>
+   transforms<span class="token punctuation">.</span>RandomVerticalFlip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">#随机垂直翻转  </span>
+   transforms<span class="token punctuation">.</span>RandomRotation<span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">#随机在45度角度内旋转  </span>
+   transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#转换成张量并进行标准化</span>
+  <span class="token punctuation">]</span>  
+<span class="token punctuation">)</span>   
+transform_valid <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>  
+    transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+  <span class="token punctuation">]</span>  
+<span class="token punctuation">)</span>  
 
 
-<span class="hljs-comment"># 根据图片目录创建数据集  </span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">transform_label</span>(<span class="hljs-params">x</span>):  
-    <span class="hljs-keyword">return</span> torch.tensor([x]).<span class="hljs-built_in">float</span>()  
+<span class="token comment" spellcheck="true"># 根据图片目录创建数据集  </span>
+<span class="token keyword">def</span> <span class="token function">transform_label</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    <span class="token keyword">return</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>float<span class="token punctuation">(</span><span class="token punctuation">)</span>  
   
-ds_train = datasets.ImageFolder(<span class="hljs-string">&quot;xx/xxx/cifar2/train/&quot;</span>,  
-            transform = transform_train, target_transform= transform_label)  
-ds_val = datasets.ImageFolder(<span class="hljs-string">&quot;xx/xxx/cifar2/test/&quot;</span>,  
-            transform = transform_valid, target_transform= transform_label)  
-<span class="hljs-built_in">print</span>(ds_train.class_to_idx)  
+ds_train <span class="token operator">=</span> datasets<span class="token punctuation">.</span>ImageFolder<span class="token punctuation">(</span><span class="token string">"xx/xxx/cifar2/train/"</span><span class="token punctuation">,</span>  
+            transform <span class="token operator">=</span> transform_train<span class="token punctuation">,</span> target_transform<span class="token operator">=</span> transform_label<span class="token punctuation">)</span>  
+ds_val <span class="token operator">=</span> datasets<span class="token punctuation">.</span>ImageFolder<span class="token punctuation">(</span><span class="token string">"xx/xxx/cifar2/test/"</span><span class="token punctuation">,</span>  
+            transform <span class="token operator">=</span> transform_valid<span class="token punctuation">,</span> target_transform<span class="token operator">=</span> transform_label<span class="token punctuation">)</span>  
+<span class="token keyword">print</span><span class="token punctuation">(</span>ds_train<span class="token punctuation">.</span>class_to_idx<span class="token punctuation">)</span>  
 
 
-<span class="hljs-comment"># 使用DataLoader加载数据集  </span>
-dl_train = DataLoader(ds_train, batch_size = <span class="hljs-number">50</span>, shuffle = <span class="hljs-literal">True</span>)  
-dl_val = DataLoader(ds_val, batch_size = <span class="hljs-number">50</span>, shuffle = <span class="hljs-literal">True</span>)  
+<span class="token comment" spellcheck="true"># 使用DataLoader加载数据集  </span>
+dl_train <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>ds_train<span class="token punctuation">,</span> batch_size <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">,</span> shuffle <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>  
+dl_val <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>ds_val<span class="token punctuation">,</span> batch_size <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">,</span> shuffle <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>  
   
-<span class="hljs-keyword">for</span> features,labels <span class="hljs-keyword">in</span> dl_train:  
-    <span class="hljs-built_in">print</span>(features.shape)  
-    <span class="hljs-built_in">print</span>(labels.shape)  
-    <span class="hljs-keyword">break</span>  
-</code></pre>
-<h3 id="创建自定义数据集"><a class="markdownIt-Anchor" href="#创建自定义数据集"></a> <strong>创建自定义数据集</strong></h3>
-<p>下面通过继承<code>torch.utils.data.Dataset</code>创建自定义数据集的方式来对 cifar2 构建数据管道。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path   
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image   
+<span class="token keyword">for</span> features<span class="token punctuation">,</span>labels <span class="token keyword">in</span> dl_train<span class="token punctuation">:</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>features<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>labels<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
+    <span class="token keyword">break</span>  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="创建自定义数据集"><a href="#创建自定义数据集" class="headerlink" title="创建自定义数据集"></a><strong>创建自定义数据集</strong></h3><p>下面通过继承<code>torch.utils.data.Dataset</code>创建自定义数据集的方式来对 cifar2 构建数据管道。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path   
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image   
   
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Cifar2Dataset</span>(<span class="hljs-title class_ inherited__">Dataset</span>):  
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,imgs_dir, img_transform</span>):  
-        self.files = <span class="hljs-built_in">list</span>(Path(imgs_dir).rglob(<span class="hljs-string">&quot;*.jpg&quot;</span>))  
-        self.transform = img_transform  
+<span class="token keyword">class</span> <span class="token class-name">Cifar2Dataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>imgs_dir<span class="token punctuation">,</span> img_transform<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        self<span class="token punctuation">.</span>files <span class="token operator">=</span> list<span class="token punctuation">(</span>Path<span class="token punctuation">(</span>imgs_dir<span class="token punctuation">)</span><span class="token punctuation">.</span>rglob<span class="token punctuation">(</span><span class="token string">"*.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
+        self<span class="token punctuation">.</span>transform <span class="token operator">=</span> img_transform  
           
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self,</span>):  
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(self.files)  
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>files<span class="token punctuation">)</span>  
       
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self,i</span>):  
-        file_i = <span class="hljs-built_in">str</span>(self.files[i])  
-        img = Image.<span class="hljs-built_in">open</span>(file_i)  
-        tensor = self.transform(img)  
-        label = torch.tensor([<span class="hljs-number">1.0</span>]) <span class="hljs-keyword">if</span>  <span class="hljs-string">&quot;1_automobile&quot;</span> <span class="hljs-keyword">in</span> file_i <span class="hljs-keyword">else</span> torch.tensor([<span class="hljs-number">0.0</span>])  
-        <span class="hljs-keyword">return</span> tensor,label   
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        file_i <span class="token operator">=</span> str<span class="token punctuation">(</span>self<span class="token punctuation">.</span>files<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>  
+        img <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span>file_i<span class="token punctuation">)</span>  
+        tensor <span class="token operator">=</span> self<span class="token punctuation">.</span>transform<span class="token punctuation">(</span>img<span class="token punctuation">)</span>  
+        label <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">if</span>  <span class="token string">"1_automobile"</span> <span class="token keyword">in</span> file_i <span class="token keyword">else</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  
+        <span class="token keyword">return</span> tensor<span class="token punctuation">,</span>label   
        
-</code></pre>
-<pre class="highlight"><code class="python">train_dir = <span class="hljs-string">&quot;xx/xxx/cifar2/train/&quot;</span>  
-test_dir = <span class="hljs-string">&quot;xx/xxx/cifar2/test/&quot;</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">train_dir <span class="token operator">=</span> <span class="token string">"xx/xxx/cifar2/train/"</span>  
+test_dir <span class="token operator">=</span> <span class="token string">"xx/xxx/cifar2/test/"</span> 
 
-<span class="hljs-comment"># 图片增强使用上一小节定义的</span>
-ds_train = Cifar2Dataset(train_dir, transform_train)  
-ds_val = Cifar2Dataset(test_dir, transform_val)  
+<span class="token comment" spellcheck="true"># 图片增强使用上一小节定义的</span>
+ds_train <span class="token operator">=</span> Cifar2Dataset<span class="token punctuation">(</span>train_dir<span class="token punctuation">,</span> transform_train<span class="token punctuation">)</span>  
+ds_val <span class="token operator">=</span> Cifar2Dataset<span class="token punctuation">(</span>test_dir<span class="token punctuation">,</span> transform_val<span class="token punctuation">)</span>  
   
-dl_train = DataLoader(ds_train,batch_size = <span class="hljs-number">50</span>,shuffle = <span class="hljs-literal">True</span>)  
-dl_val = DataLoader(ds_val,batch_size = <span class="hljs-number">50</span>,shuffle = <span class="hljs-literal">True</span>)  
+dl_train <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>ds_train<span class="token punctuation">,</span>batch_size <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">,</span>shuffle <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>  
+dl_val <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>ds_val<span class="token punctuation">,</span>batch_size <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">,</span>shuffle <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>  
 
-<span class="hljs-keyword">for</span> features,labels <span class="hljs-keyword">in</span> dl_train:  
-    <span class="hljs-built_in">print</span>(features.shape)  
-    <span class="hljs-built_in">print</span>(labels.shape)  
-    <span class="hljs-keyword">break</span>  
-</code></pre>
-<h2 id="使用dataloader加载数据集"><a class="markdownIt-Anchor" href="#使用dataloader加载数据集"></a> 使用DataLoader加载数据集</h2>
-<p>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>
-DataLoader的函数签名如下。</p>
-<pre class="highlight"><code class="python">DataLoader(  
-    dataset,  
-    batch_size=<span class="hljs-number">1</span>,  
-    shuffle=<span class="hljs-literal">False</span>,  
-    sampler=<span class="hljs-literal">None</span>,  
-    batch_sampler=<span class="hljs-literal">None</span>,  
-    num_workers=<span class="hljs-number">0</span>,  
-    collate_fn=<span class="hljs-literal">None</span>,  
-    pin_memory=<span class="hljs-literal">False</span>,  
-    drop_last=<span class="hljs-literal">False</span>,  
-    timeout=<span class="hljs-number">0</span>,  
-    worker_init_fn=<span class="hljs-literal">None</span>,  
-    multiprocessing_context=<span class="hljs-literal">None</span>,  
-)  
-</code></pre>
+<span class="token keyword">for</span> features<span class="token punctuation">,</span>labels <span class="token keyword">in</span> dl_train<span class="token punctuation">:</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>features<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>labels<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  
+    <span class="token keyword">break</span>  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用DataLoader加载数据集"><a href="#使用DataLoader加载数据集" class="headerlink" title="使用DataLoader加载数据集"></a>使用DataLoader加载数据集</h2><p>DataLoader能够控制batch的大小，batch中元素的采样方法，以及将batch结果整理成模型所需输入形式的方法，并且能够使用多进程读取数据。<br>DataLoader的函数签名如下。</p>
+<pre class="line-numbers language-python"><code class="language-python">DataLoader<span class="token punctuation">(</span>  
+    dataset<span class="token punctuation">,</span>  
+    batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>  
+    shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>  
+    sampler<span class="token operator">=</span>None<span class="token punctuation">,</span>  
+    batch_sampler<span class="token operator">=</span>None<span class="token punctuation">,</span>  
+    num_workers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>  
+    collate_fn<span class="token operator">=</span>None<span class="token punctuation">,</span>  
+    pin_memory<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>  
+    drop_last<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>  
+    timeout<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>  
+    worker_init_fn<span class="token operator">=</span>None<span class="token punctuation">,</span>  
+    multiprocessing_context<span class="token operator">=</span>None<span class="token punctuation">,</span>  
+<span class="token punctuation">)</span>  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>dataset : 数据集</li>
 <li>batch_size: 批次大小</li>
@@ -747,8 +713,7 @@ DataLoader的函数签名如下。</p>
 <li>timeout: 加载一个数据批次的最长等待时间，一般无需设置。</li>
 <li>worker_init_fn: 每个worker中dataset的初始化函数，常用于IterableDataset。一般不使用。</li>
 </ul>
-<p>一般情况下，我们仅仅会配置<code>dataset</code>，<code>batch_size</code>，<code>shuffle</code>，<code>num_workers</code>，<code>pin_memory</code>，<code>drop_last</code>这六个参数，有时候对于一些复杂结构的数据集，还需要自定义collate_fn函数，其他参数一般使用默认值即可。<br>
-DataLoader除了可以加载我们前面讲的<code>torch.utils.data.Dataset</code>外，还能够加载另外一种数据集 <code>torch.utils.data.IterableDataset</code>。和Dataset数据集相当于一种列表结构不同，IterableDataset相当于一种迭代器结构。它更加复杂，一般较少使用。</p>
+<p>一般情况下，我们仅仅会配置<code>dataset</code>，<code>batch_size</code>，<code>shuffle</code>，<code>num_workers</code>，<code>pin_memory</code>，<code>drop_last</code>这六个参数，有时候对于一些复杂结构的数据集，还需要自定义collate_fn函数，其他参数一般使用默认值即可。<br>DataLoader除了可以加载我们前面讲的<code>torch.utils.data.Dataset</code>外，还能够加载另外一种数据集 <code>torch.utils.data.IterableDataset</code>。和Dataset数据集相当于一种列表结构不同，IterableDataset相当于一种迭代器结构。它更加复杂，一般较少使用。</p>
 
                 
             </div>
@@ -901,13 +866,13 @@ DataLoader除了可以加载我们前面讲的<code>torch.utils.data.Dataset</co
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/">
+                <a href="/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Pytorch|自动微分和反向求导">
+                        <img src="/medias/featureimages/architect/15.jpg" class="responsive-img" alt="Pytorch|模型和参数">
                         
-                        <span class="card-title">Pytorch|自动微分和反向求导</span>
+                        <span class="card-title">Pytorch|模型和参数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -918,7 +883,7 @@ DataLoader除了可以加载我们前面讲的<code>torch.utils.data.Dataset</co
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-08
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-06
                         </span>
                         <span class="publish-author">
                             
@@ -954,13 +919,13 @@ DataLoader除了可以加载我们前面讲的<code>torch.utils.data.Dataset</co
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/">
+                <a href="/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/architect/15.jpg" class="responsive-img" alt="Pytorch|模型和参数">
+                        <img src="/medias/featureimages/animal/5.jpg" class="responsive-img" alt="Pytorch|构建模型的3种方式">
                         
-                        <span class="card-title">Pytorch|模型和参数</span>
+                        <span class="card-title">Pytorch|构建模型的3种方式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -971,7 +936,7 @@ DataLoader除了可以加载我们前面讲的<code>torch.utils.data.Dataset</co
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-05
                             </span>
                         <span class="publish-author">
                             

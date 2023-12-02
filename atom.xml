@@ -29,8 +29,7 @@
       
         
         
-          &lt;h1 id=&quot;友元与运算符重载&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#友元与运算符重载&quot;&gt;&lt;/a&gt; 友元与运算符重载&lt;/h1&gt;
-&lt;h2 id=&quot;友元&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#友元&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;友元与运算符重载&quot;&gt;&lt;a href=&quot;#友元与运算符重载&quot; class=&quot;headerlink&quot; title=&quot;友元与运算符重载&quot;&gt;&lt;/a&gt;友元与运算符重载&lt;/h1&gt;&lt;h2 id=&quot;友元&quot;&gt;&lt;a href=&quot;#友元&quot; class=&quot;headerlink&quot;
         
       
     
@@ -56,8 +55,7 @@
       
         
         
-          &lt;h1 id=&quot;线性回归&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#线性回归&quot;&gt;&lt;/a&gt; 线性回归&lt;/h1&gt;
-&lt;h2 id=&quot;基本原理&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基本原理&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;线性回归&quot;&gt;&lt;a href=&quot;#线性回归&quot; class=&quot;headerlink&quot; title=&quot;线性回归&quot;&gt;&lt;/a&gt;线性回归&lt;/h1&gt;&lt;h2 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot;
         
       
     
@@ -85,8 +83,7 @@
       
         
         
-          &lt;h1 id=&quot;指针与引用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#指针与引用&quot;&gt;&lt;/a&gt; 指针与引用&lt;/h1&gt;
-&lt;h2 id=&quot;指针定义和使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
+          &lt;h1 id=&quot;指针与引用&quot;&gt;&lt;a href=&quot;#指针与引用&quot; class=&quot;headerlink&quot; title=&quot;指针与引用&quot;&gt;&lt;/a&gt;指针与引用&lt;/h1&gt;&lt;h2 id=&quot;指针定义和使用&quot;&gt;&lt;a href=&quot;#指针定义和使用&quot; class=&quot;headerlink&quot;
         
       
     
@@ -112,7 +109,7 @@
       
         
         
-          &lt;h1 id=&quot;深度学习中的图像操作&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#深度学习中的图像操作&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;深度学习中的图像操作&quot;&gt;&lt;a href=&quot;#深度学习中的图像操作&quot; class=&quot;headerlink&quot;
         
       
     
@@ -140,7 +137,7 @@
       
         
         
-          &lt;h1 id=&quot;python的魔法方法下&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python的魔法方法下&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;Python的魔法方法（下）&quot;&gt;&lt;a href=&quot;#Python的魔法方法（下）&quot; class=&quot;headerlink&quot;
         
       
     
@@ -168,7 +165,7 @@
       
         
         
-          &lt;h1 id=&quot;python的魔法方法上&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python的魔法方法上&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;Python的魔法方法（上）&quot;&gt;&lt;a href=&quot;#Python的魔法方法（上）&quot; class=&quot;headerlink&quot;
         
       
     
@@ -196,7 +193,7 @@
       
         
         
-          &lt;h1 id=&quot;python中的mro&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python中的mro&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;Python中的MRO&quot;&gt;&lt;a href=&quot;#Python中的MRO&quot; class=&quot;headerlink&quot;
         
       
     
@@ -224,7 +221,7 @@
       
         
         
-          &lt;h1 id=&quot;张量的特殊操作&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#张量的特殊操作&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;张量的特殊操作&quot;&gt;&lt;a href=&quot;#张量的特殊操作&quot; class=&quot;headerlink&quot;
         
       
     
@@ -252,8 +249,7 @@
       
         
         
-          &lt;h1 id=&quot;vim命令的基本使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#vim命令的基本使用&quot;&gt;&lt;/a&gt; vim命令的基本使用&lt;/h1&gt;
-&lt;p&gt;vim 是一个全屏幕纯文本编辑器，是 vi
+          &lt;h1 id=&quot;vim命令的基本使用&quot;&gt;&lt;a href=&quot;#vim命令的基本使用&quot; class=&quot;headerlink&quot; title=&quot;vim命令的基本使用&quot;&gt;&lt;/a&gt;vim命令的基本使用&lt;/h1&gt;&lt;p&gt;vim 是一个全屏幕纯文本编辑器，是 vi
         
       
     
@@ -281,8 +277,7 @@
       
         
         
-          &lt;h1 id=&quot;深度学习中的正则化&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#深度学习中的正则化&quot;&gt;&lt;/a&gt; 深度学习中的正则化&lt;/h1&gt;
-&lt;p&gt;先来看一个python实现的最简单的单参数线性回归模型。&lt;/p&gt;
+          &lt;h1 id=&quot;深度学习中的正则化&quot;&gt;&lt;a href=&quot;#深度学习中的正则化&quot; class=&quot;headerlink&quot; title=&quot;深度学习中的正则化&quot;&gt;&lt;/a&gt;深度学习中的正则化&lt;/h1&gt;&lt;p&gt;先来看一个python实现的最简单的单参数线性回归模型。&lt;/p&gt;
 &lt;h2
         
       
@@ -311,8 +306,7 @@
       
         
         
-          &lt;h1 id=&quot;python中的argparse模块&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python中的argparse模块&quot;&gt;&lt;/a&gt; Python中的argparse模块&lt;/h1&gt;
-&lt;p&gt;argparse 模块是 Python
+          &lt;h1 id=&quot;Python中的argparse模块&quot;&gt;&lt;a href=&quot;#Python中的argparse模块&quot; class=&quot;headerlink&quot;
         
       
     
@@ -340,8 +334,7 @@
       
         
         
-          &lt;h1 id=&quot;深度学习中常用的损失函数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#深度学习中常用的损失函数&quot;&gt;&lt;/a&gt; 深度学习中常用的损失函数&lt;/h1&gt;
-&lt;p&gt;机器学习中的监督学习本质是给定一系列训练样本&lt;span
+          &lt;h1 id=&quot;深度学习中常用的损失函数&quot;&gt;&lt;a href=&quot;#深度学习中常用的损失函数&quot; class=&quot;headerlink&quot; title=&quot;深度学习中常用的损失函数&quot;&gt;&lt;/a&gt;深度学习中常用的损失函数&lt;/h1&gt;&lt;p&gt;机器学习中的监督学习本质是给定一系列训练样本$(x_i,
         
       
     
@@ -371,8 +364,7 @@
       
         
         
-          &lt;h1 id=&quot;dtw算法原理与实现&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#dtw算法原理与实现&quot;&gt;&lt;/a&gt; DTW算法原理与实现&lt;/h1&gt;
-&lt;p&gt;Dynamic Time
+          &lt;h1 id=&quot;DTW算法原理与实现&quot;&gt;&lt;a href=&quot;#DTW算法原理与实现&quot; class=&quot;headerlink&quot; title=&quot;DTW算法原理与实现&quot;&gt;&lt;/a&gt;DTW算法原理与实现&lt;/h1&gt;&lt;p&gt;Dynamic Time
         
       
     
@@ -398,7 +390,7 @@
       
         
         
-          &lt;h1 id=&quot;常见的最优化方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#常见的最优化方法&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;常见的最优化方法&quot;&gt;&lt;a href=&quot;#常见的最优化方法&quot; class=&quot;headerlink&quot;
         
       
     
@@ -426,8 +418,7 @@
       
         
         
-          &lt;h1 id=&quot;结构体&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#结构体&quot;&gt;&lt;/a&gt; 结构体&lt;/h1&gt;
-&lt;h2 id=&quot;1-结构体的定义和使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
+          &lt;h1 id=&quot;结构体&quot;&gt;&lt;a href=&quot;#结构体&quot; class=&quot;headerlink&quot; title=&quot;结构体&quot;&gt;&lt;/a&gt;结构体&lt;/h1&gt;&lt;h2 id=&quot;1-结构体的定义和使用&quot;&gt;&lt;a href=&quot;#1-结构体的定义和使用&quot; class=&quot;headerlink&quot;
         
       
     
@@ -453,7 +444,7 @@
       
         
         
-          &lt;h1 id=&quot;python打包工具setuptools介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python打包工具setuptools介绍&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;Python打包工具setuptools介绍&quot;&gt;&lt;a href=&quot;#Python打包工具setuptools介绍&quot; class=&quot;headerlink&quot;
         
       
     
@@ -481,8 +472,7 @@
       
         
         
-          &lt;h1 id=&quot;pytorch的动态图简介&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pytorch的动态图简介&quot;&gt;&lt;/a&gt; Pytorch的动态图简介&lt;/h1&gt;
-&lt;p&gt;本节我们将介绍
+          &lt;h1 id=&quot;Pytorch的动态图简介&quot;&gt;&lt;a href=&quot;#Pytorch的动态图简介&quot; class=&quot;headerlink&quot; title=&quot;Pytorch的动态图简介&quot;&gt;&lt;/a&gt;Pytorch的动态图简介&lt;/h1&gt;&lt;p&gt;本节我们将介绍
         
       
     
@@ -510,35 +500,7 @@
       
         
         
-          &lt;h1 id=&quot;pytorch自动微分简介&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pytorch自动微分简介&quot;&gt;&lt;/a&gt;
-        
-      
-    
-    </summary>
-    
-      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytorch|构建数据管道</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
-    <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:32:20.136Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;pytorch数据管道构建简介&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pytorch数据管道构建简介&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;Pytorch自动微分简介&quot;&gt;&lt;a href=&quot;#Pytorch自动微分简介&quot; class=&quot;headerlink&quot;
         
       
     
@@ -566,7 +528,35 @@
       
         
         
-          &lt;h1 id=&quot;pytorch中的module和function&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pytorch中的module和function&quot;&gt;&lt;/a&gt;
+          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pytorch|构建数据管道</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
+    <published>2023-04-06T11:30:31.000Z</published>
+    <updated>2023-10-04T00:32:20.136Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
         
       
     
