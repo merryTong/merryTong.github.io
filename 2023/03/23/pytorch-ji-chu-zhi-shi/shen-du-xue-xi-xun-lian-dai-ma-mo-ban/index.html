@@ -5,13 +5,14 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch训练代码模板, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="Pytorch训练代码模板从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，本文总结了一套较为直观的代码模板。目录如下：
+    <meta name="description" content=" Pytorch训练代码模板
+从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，本文总结了一套较为直观的代码模板。目录如下：
 
 导入包以及设置随机种子
 以类的方式定义超参数
 定义自己的模型
 定义早停类(此步骤可以省略)
-定义自己的数">
+定义自己">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -413,12 +414,27 @@
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-04
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    874
+                </div>
                 
 
                 
 
                 
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -429,7 +445,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Pytorch训练代码模板"><a href="#Pytorch训练代码模板" class="headerlink" title="Pytorch训练代码模板"></a>Pytorch训练代码模板</h1><p>从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，本文总结了一套较为直观的代码模板。目录如下：</p>
+                <h1 id="pytorch训练代码模板"><a class="markdownIt-Anchor" href="#pytorch训练代码模板"></a> Pytorch训练代码模板</h1>
+<p>从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，本文总结了一套较为直观的代码模板。目录如下：</p>
 <ol>
 <li>导入包以及设置随机种子</li>
 <li>以类的方式定义超参数</li>
@@ -441,172 +458,181 @@
 <li>绘图</li>
 <li>预测</li>
 </ol>
-<h2 id="导入包以及设置随机种子"><a href="#导入包以及设置随机种子" class="headerlink" title="导入包以及设置随机种子"></a>导入包以及设置随机种子</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token keyword">import</span> torch
-<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
-<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
-<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader<span class="token punctuation">,</span> Dataset
-<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> train_test_split
-<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
-<span class="token keyword">import</span> random
+<h2 id="导入包以及设置随机种子"><a class="markdownIt-Anchor" href="#导入包以及设置随机种子"></a> 导入包以及设置随机种子</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> DataLoader, Dataset
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> random
 
-seed <span class="token operator">=</span> <span class="token number">42</span>
-random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># seed for module random</span>
-np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># seed for numpy</span>
-torch<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># seed for PyTorch CPU</span>
-torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># seed for current PyTorch GPU</span>
-torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed_all<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># seed for all PyTorch GPUs</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="以类的方式定义超参数"><a href="#以类的方式定义超参数" class="headerlink" title="以类的方式定义超参数"></a>以类的方式定义超参数</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">argparse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">pass</span>
+seed = <span class="hljs-number">42</span>
+random.seed(seed)  <span class="hljs-comment"># seed for module random</span>
+np.random.seed(seed)  <span class="hljs-comment"># seed for numpy</span>
+torch.manual_seed(seed)  <span class="hljs-comment"># seed for PyTorch CPU</span>
+torch.cuda.manual_seed(seed)  <span class="hljs-comment"># seed for current PyTorch GPU</span>
+torch.cuda.manual_seed_all(seed)  <span class="hljs-comment"># seed for all PyTorch GPUs</span>
+</code></pre>
+<h2 id="以类的方式定义超参数"><a class="markdownIt-Anchor" href="#以类的方式定义超参数"></a> 以类的方式定义超参数</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">argparse</span>():
+    <span class="hljs-keyword">pass</span>
 
-args <span class="token operator">=</span> argparse<span class="token punctuation">(</span><span class="token punctuation">)</span>
-args<span class="token punctuation">.</span>epochs<span class="token punctuation">,</span> args<span class="token punctuation">.</span>learning_rate<span class="token punctuation">,</span> args<span class="token punctuation">.</span>patience <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">0.001</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
-args<span class="token punctuation">.</span>hidden_size<span class="token punctuation">,</span> args<span class="token punctuation">.</span>input_size<span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">]</span>
-args<span class="token punctuation">.</span>device<span class="token punctuation">,</span> <span class="token operator">=</span> <span class="token punctuation">[</span>torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">"cuda:0"</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">"cpu"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Your_model</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>Your_model<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">pass</span>
+args = argparse()
+args.epochs, args.learning_rate, args.patience = [<span class="hljs-number">30</span>, <span class="hljs-number">0.001</span>, <span class="hljs-number">4</span>]
+args.hidden_size, args.input_size= [<span class="hljs-number">40</span>, <span class="hljs-number">30</span>]
+args.device, = [torch.device(<span class="hljs-string">&quot;cuda:0&quot;</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;cpu&quot;</span>),]
+</code></pre>
+<h2 id="定义模型"><a class="markdownIt-Anchor" href="#定义模型"></a> 定义模型</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Your_model</span>(nn.Module):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>(Your_model, self).__init__()
+        <span class="hljs-keyword">pass</span>
 
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
-        <span class="token keyword">return</span> x
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="定义早停类-可选"><a href="#定义早停类-可选" class="headerlink" title="定义早停类(可选)"></a>定义早停类(可选)</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">EarlyStopping</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> patience<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> delta<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>patience <span class="token operator">=</span> patience
-        self<span class="token punctuation">.</span>verbose <span class="token operator">=</span> verbose
-        self<span class="token punctuation">.</span>counter <span class="token operator">=</span> <span class="token number">0</span>
-        self<span class="token punctuation">.</span>best_score <span class="token operator">=</span> None
-        self<span class="token punctuation">.</span>early_stop <span class="token operator">=</span> <span class="token boolean">False</span>
-        self<span class="token punctuation">.</span>val_loss_min <span class="token operator">=</span> np<span class="token punctuation">.</span>Inf
-        self<span class="token punctuation">.</span>delta <span class="token operator">=</span> delta
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self,x</span>):
+        <span class="hljs-keyword">pass</span>
+        <span class="hljs-keyword">return</span> x
+</code></pre>
+<h2 id="定义早停类可选"><a class="markdownIt-Anchor" href="#定义早停类可选"></a> 定义早停类(可选)</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">EarlyStopping</span>():
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, patience=<span class="hljs-number">7</span>, verbose=<span class="hljs-literal">False</span>, delta=<span class="hljs-number">0</span></span>):
+        self.patience = patience
+        self.verbose = verbose
+        self.counter = <span class="hljs-number">0</span>
+        self.best_score = <span class="hljs-literal">None</span>
+        self.early_stop = <span class="hljs-literal">False</span>
+        self.val_loss_min = np.Inf
+        self.delta = delta
         
-    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> val_loss<span class="token punctuation">,</span> model<span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"val_loss={}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>val_loss<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        score <span class="token operator">=</span> <span class="token operator">-</span>val_loss
-        <span class="token keyword">if</span> self<span class="token punctuation">.</span>best_score <span class="token keyword">is</span> None<span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>best_score <span class="token operator">=</span> score
-            self<span class="token punctuation">.</span>save_checkpoint<span class="token punctuation">(</span>val_loss<span class="token punctuation">,</span> model<span class="token punctuation">,</span>path<span class="token punctuation">)</span>
-        <span class="token keyword">elif</span> score <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>best_score<span class="token operator">+</span>self<span class="token punctuation">.</span>delta<span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>counter<span class="token operator">+=</span><span class="token number">1</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'EarlyStopping counter: {self.counter} out of {self.patience}'</span><span class="token punctuation">)</span>
-            <span class="token keyword">if</span> self<span class="token punctuation">.</span>counter<span class="token operator">>=</span>self<span class="token punctuation">.</span>patience<span class="token punctuation">:</span>
-                self<span class="token punctuation">.</span>early_stop <span class="token operator">=</span> <span class="token boolean">True</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>best_score <span class="token operator">=</span> score
-            self<span class="token punctuation">.</span>save_checkpoint<span class="token punctuation">(</span>val_loss<span class="token punctuation">,</span> model<span class="token punctuation">,</span>path<span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>counter <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self, val_loss, model, path</span>):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;val_loss={}&quot;</span>.<span class="hljs-built_in">format</span>(val_loss))
+        score = -val_loss
+        <span class="hljs-keyword">if</span> self.best_score <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            self.best_score = score
+            self.save_checkpoint(val_loss, model,path)
+        <span class="hljs-keyword">elif</span> score &lt; self.best_score+self.delta:
+            self.counter+=<span class="hljs-number">1</span>
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;EarlyStopping counter: <span class="hljs-subst">{self.counter}</span> out of <span class="hljs-subst">{self.patience}</span>&#x27;</span>)
+            <span class="hljs-keyword">if</span> self.counter&gt;=self.patience:
+                self.early_stop = <span class="hljs-literal">True</span>
+        <span class="hljs-keyword">else</span>:
+            self.best_score = score
+            self.save_checkpoint(val_loss, model,path)
+            self.counter = <span class="hljs-number">0</span>
             
-    <span class="token keyword">def</span> <span class="token function">save_checkpoint</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> val_loss<span class="token punctuation">,</span>model<span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> self<span class="token punctuation">.</span>verbose<span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...'</span><span class="token punctuation">)</span>
-        torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> path<span class="token operator">+</span><span class="token string">'/'</span><span class="token operator">+</span><span class="token string">'model_checkpoint.pth'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>val_loss_min <span class="token operator">=</span> val_loss
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="定义数据集Dataset-DataLoader"><a href="#定义数据集Dataset-DataLoader" class="headerlink" title="定义数据集Dataset,DataLoader"></a>定义数据集Dataset,DataLoader</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dataset_name</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> flag<span class="token operator">=</span><span class="token string">'train'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">assert</span> flag <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'train'</span><span class="token punctuation">,</span> <span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token string">'valid'</span><span class="token punctuation">]</span>
-        self<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag
-        self<span class="token punctuation">.</span>__load_data__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">save_checkpoint</span>(<span class="hljs-params">self, val_loss,model, path</span>):
+        <span class="hljs-keyword">if</span> self.verbose:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;Validation loss decreased (<span class="hljs-subst">{self.val_loss_min:<span class="hljs-number">.6</span>f}</span> --&gt; <span class="hljs-subst">{val_loss:<span class="hljs-number">.6</span>f}</span>).  Saving model ...&#x27;</span>)
+        torch.save(model.state_dict(), path+<span class="hljs-string">&#x27;/&#x27;</span>+<span class="hljs-string">&#x27;model_checkpoint.pth&#x27;</span>)
+        self.val_loss_min = val_loss
+</code></pre>
+<h2 id="定义数据集datasetdataloader"><a class="markdownIt-Anchor" href="#定义数据集datasetdataloader"></a> 定义数据集Dataset,DataLoader</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dataset_name</span>(<span class="hljs-title class_ inherited__">Dataset</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, flag=<span class="hljs-string">&#x27;train&#x27;</span></span>):
+        <span class="hljs-keyword">assert</span> flag <span class="hljs-keyword">in</span> [<span class="hljs-string">&#x27;train&#x27;</span>, <span class="hljs-string">&#x27;test&#x27;</span>, <span class="hljs-string">&#x27;valid&#x27;</span>]
+        self.flag = flag
+        self.__load_data__()
 
-    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
-    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, index</span>):
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">pass</span>
 
-    <span class="token keyword">def</span> <span class="token function">__load_data__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> csv_paths<span class="token punctuation">:</span> list<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">pass</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>
-            <span class="token string">"train_X.shape:{}\ntrain_Y.shape:{}\nvalid_X.shape:{}\nvalid_Y.shape:{}\n"</span>
-            <span class="token punctuation">.</span>format<span class="token punctuation">(</span>self<span class="token punctuation">.</span>train_X<span class="token punctuation">.</span>shape<span class="token punctuation">,</span> self<span class="token punctuation">.</span>train_Y<span class="token punctuation">.</span>shape<span class="token punctuation">,</span> self<span class="token punctuation">.</span>valid_X<span class="token punctuation">.</span>shape<span class="token punctuation">,</span> self<span class="token punctuation">.</span>valid_Y<span class="token punctuation">.</span>shape<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__load_data__</span>(<span class="hljs-params">self, csv_paths: <span class="hljs-built_in">list</span></span>):
+        <span class="hljs-keyword">pass</span>
+        <span class="hljs-built_in">print</span>(
+            <span class="hljs-string">&quot;train_X.shape:{}\ntrain_Y.shape:{}\nvalid_X.shape:{}\nvalid_Y.shape:{}\n&quot;</span>
+            .<span class="hljs-built_in">format</span>(self.train_X.shape, self.train_Y.shape, self.valid_X.shape, self.valid_Y.shape))
 
-train_dataset <span class="token operator">=</span> Dataset_name<span class="token punctuation">(</span>flag<span class="token operator">=</span><span class="token string">'train'</span><span class="token punctuation">)</span>
-train_dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token operator">=</span>train_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-valid_dataset <span class="token operator">=</span> Dataset_name<span class="token punctuation">(</span>flag<span class="token operator">=</span><span class="token string">'valid'</span><span class="token punctuation">)</span>
-valid_dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token operator">=</span>valid_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="实例化模型，设置loss，优化器等"><a href="#实例化模型，设置loss，优化器等" class="headerlink" title="实例化模型，设置loss，优化器等"></a>实例化模型，设置loss，优化器等</h2><pre class="line-numbers language-python"><code class="language-python">model <span class="token operator">=</span> Your_model<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
-criterion <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
-optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>Your_model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>args<span class="token punctuation">.</span>learning_rate<span class="token punctuation">)</span>
+train_dataset = Dataset_name(flag=<span class="hljs-string">&#x27;train&#x27;</span>)
+train_dataloader = DataLoader(dataset=train_dataset, batch_size=<span class="hljs-number">64</span>, shuffle=<span class="hljs-literal">True</span>)
+valid_dataset = Dataset_name(flag=<span class="hljs-string">&#x27;valid&#x27;</span>)
+valid_dataloader = DataLoader(dataset=valid_dataset, batch_size=<span class="hljs-number">64</span>, shuffle=<span class="hljs-literal">True</span>)
+</code></pre>
+<h2 id="实例化模型设置loss优化器等"><a class="markdownIt-Anchor" href="#实例化模型设置loss优化器等"></a> 实例化模型，设置loss，优化器等</h2>
+<pre class="highlight"><code class="python">model = Your_model().to(args.device)
+criterion = torch.nn.MSELoss()
+optimizer = torch.optim.Adam(Your_model.parameters(), lr=args.learning_rate)
 
-train_loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-valid_loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-train_epochs_loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-valid_epochs_loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+train_loss = []
+valid_loss = []
+train_epochs_loss = []
+valid_epochs_loss = []
 
-early_stopping <span class="token operator">=</span> EarlyStopping<span class="token punctuation">(</span>patience<span class="token operator">=</span>args<span class="token punctuation">.</span>patience<span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="开始训练以及调整lr"><a href="#开始训练以及调整lr" class="headerlink" title="开始训练以及调整lr"></a>开始训练以及调整lr</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>args<span class="token punctuation">.</span>epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    Your_model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    train_epoch_loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token keyword">for</span> idx<span class="token punctuation">,</span><span class="token punctuation">(</span>data_x<span class="token punctuation">,</span>data_y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>train_dataloader<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        data_x <span class="token operator">=</span> data_x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
-        data_y <span class="token operator">=</span> data_y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+early_stopping = EarlyStopping(patience=args.patience, verbose=<span class="hljs-literal">True</span>)
+</code></pre>
+<h2 id="开始训练以及调整lr"><a class="markdownIt-Anchor" href="#开始训练以及调整lr"></a> 开始训练以及调整lr</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(args.epochs):
+    Your_model.train()
+    train_epoch_loss = []
+    <span class="hljs-keyword">for</span> idx,(data_x,data_y) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_dataloader,<span class="hljs-number">0</span>):
+        data_x = data_x.to(torch.float32).to(args.device)
+        data_y = data_y.to(torch.float32).to(args.device)
         
-        outputs <span class="token operator">=</span> Your_model<span class="token punctuation">(</span>data_x<span class="token punctuation">)</span>
+        outputs = Your_model(data_x)
         
-        optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>data_y<span class="token punctuation">,</span> outputs<span class="token punctuation">)</span>
-        loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        optimizer.zero_grad()
+        loss = criterion(data_y, outputs)
+        loss.backward()
+        optimizer.step()
         
-        train_epoch_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        train_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> idx<span class="token operator">%</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>train_dataloader<span class="token punctuation">)</span><span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"epoch={}/{},{}/{}of train, loss={}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>
-                epoch<span class="token punctuation">,</span> args<span class="token punctuation">.</span>epochs<span class="token punctuation">,</span> idx<span class="token punctuation">,</span> len<span class="token punctuation">(</span>train_dataloader<span class="token punctuation">)</span><span class="token punctuation">,</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    train_epochs_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>np<span class="token punctuation">.</span>average<span class="token punctuation">(</span>train_epoch_loss<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        train_epoch_loss.append(loss.item())
+        train_loss.append(loss.item())
+        <span class="hljs-keyword">if</span> idx%(<span class="hljs-built_in">len</span>(train_dataloader)//<span class="hljs-number">2</span>)==<span class="hljs-number">0</span>:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;epoch={}/{},{}/{}of train, loss={}&quot;</span>.<span class="hljs-built_in">format</span>(
+                epoch, args.epochs, idx, <span class="hljs-built_in">len</span>(train_dataloader), loss.item()))
+    train_epochs_loss.append(np.average(train_epoch_loss))
 
-    <span class="token comment" spellcheck="true">#=====================valid============================</span>
-    Your_model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    valid_epoch_loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token keyword">for</span> idx<span class="token punctuation">,</span><span class="token punctuation">(</span>data_x<span class="token punctuation">,</span>data_y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>valid_dataloader<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        data_x <span class="token operator">=</span> data_x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
-        data_y <span class="token operator">=</span> data_y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
-        outputs <span class="token operator">=</span> Your_model<span class="token punctuation">(</span>data_x<span class="token punctuation">)</span>
-        loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span>data_y<span class="token punctuation">)</span>
-        valid_epoch_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        valid_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    valid_epochs_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>np<span class="token punctuation">.</span>average<span class="token punctuation">(</span>valid_epoch_loss<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="hljs-comment">#=====================valid============================</span>
+    Your_model.<span class="hljs-built_in">eval</span>()
+    valid_epoch_loss = []
+    <span class="hljs-keyword">for</span> idx,(data_x,data_y) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(valid_dataloader,<span class="hljs-number">0</span>):
+        data_x = data_x.to(torch.float32).to(args.device)
+        data_y = data_y.to(torch.float32).to(args.device)
+        outputs = Your_model(data_x)
+        loss = criterion(outputs,data_y)
+        valid_epoch_loss.append(loss.item())
+        valid_loss.append(loss.item())
+    valid_epochs_loss.append(np.average(valid_epoch_loss))
     
-    <span class="token comment" spellcheck="true">#==================early stopping======================</span>
-    early_stopping<span class="token punctuation">(</span>valid_epochs_loss<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> model<span class="token operator">=</span>Your_model<span class="token punctuation">,</span> path<span class="token operator">=</span>r<span class="token string">'c:\\your_model_to_save'</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> early_stopping<span class="token punctuation">.</span>early_stop<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Early stopping"</span><span class="token punctuation">)</span>
-        <span class="token keyword">break</span>
+    <span class="hljs-comment">#==================early stopping======================</span>
+    early_stopping(valid_epochs_loss[-<span class="hljs-number">1</span>], model=Your_model, path=<span class="hljs-string">r&#x27;c:\\your_model_to_save&#x27;</span>)
+    <span class="hljs-keyword">if</span> early_stopping.early_stop:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Early stopping&quot;</span>)
+        <span class="hljs-keyword">break</span>
         
-    <span class="token comment" spellcheck="true">#====================adjust lr========================</span>
-    lr_adjust <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token number">2</span><span class="token punctuation">:</span> <span class="token number">5e</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">:</span> <span class="token number">1e</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">:</span> <span class="token number">5e</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">:</span> <span class="token number">1e</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">,</span>
-            <span class="token number">10</span><span class="token punctuation">:</span> <span class="token number">5e</span><span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">:</span> <span class="token number">1e</span><span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">:</span> <span class="token number">5e</span><span class="token operator">-</span><span class="token number">8</span>
-        <span class="token punctuation">}</span>
-    <span class="token keyword">if</span> epoch <span class="token keyword">in</span> lr_adjust<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        lr <span class="token operator">=</span> lr_adjust<span class="token punctuation">[</span>epoch<span class="token punctuation">]</span>
-        <span class="token keyword">for</span> param_group <span class="token keyword">in</span> optimizer<span class="token punctuation">.</span>param_groups<span class="token punctuation">:</span>
-            param_group<span class="token punctuation">[</span><span class="token string">'lr'</span><span class="token punctuation">]</span> <span class="token operator">=</span> lr
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Updating learning rate to {}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>lr<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><pre class="line-numbers language-python"><code class="language-python">plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="hljs-comment">#====================adjust lr========================</span>
+    lr_adjust = {
+            <span class="hljs-number">2</span>: <span class="hljs-number">5e-5</span>, <span class="hljs-number">4</span>: <span class="hljs-number">1e-5</span>, <span class="hljs-number">6</span>: <span class="hljs-number">5e-6</span>, <span class="hljs-number">8</span>: <span class="hljs-number">1e-6</span>,
+            <span class="hljs-number">10</span>: <span class="hljs-number">5e-7</span>, <span class="hljs-number">15</span>: <span class="hljs-number">1e-7</span>, <span class="hljs-number">20</span>: <span class="hljs-number">5e-8</span>
+        }
+    <span class="hljs-keyword">if</span> epoch <span class="hljs-keyword">in</span> lr_adjust.keys():
+        lr = lr_adjust[epoch]
+        <span class="hljs-keyword">for</span> param_group <span class="hljs-keyword">in</span> optimizer.param_groups:
+            param_group[<span class="hljs-string">&#x27;lr&#x27;</span>] = lr
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Updating learning rate to {}&#x27;</span>.<span class="hljs-built_in">format</span>(lr))
+</code></pre>
+<h2 id="绘图"><a class="markdownIt-Anchor" href="#绘图"></a> 绘图</h2>
+<pre class="highlight"><code class="python">plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">4</span>))
 
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">121</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>train_loss<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"train_loss"</span><span class="token punctuation">)</span>
+plt.subplot(<span class="hljs-number">121</span>)
+plt.plot(train_loss[:])
+plt.title(<span class="hljs-string">&quot;train_loss&quot;</span>)
 
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">122</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>train_epochs_loss<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'-o'</span><span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">"train_loss"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>valid_epochs_loss<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'-o'</span><span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">"valid_loss"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"epochs_loss"</span><span class="token punctuation">)</span>
+plt.subplot(<span class="hljs-number">122</span>)
+plt.plot(train_epochs_loss[<span class="hljs-number">1</span>:],<span class="hljs-string">&#x27;-o&#x27;</span>,label=<span class="hljs-string">&quot;train_loss&quot;</span>)
+plt.plot(valid_epochs_loss[<span class="hljs-number">1</span>:],<span class="hljs-string">&#x27;-o&#x27;</span>,label=<span class="hljs-string">&quot;valid_loss&quot;</span>)
+plt.title(<span class="hljs-string">&quot;epochs_loss&quot;</span>)
 
-plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 此处可定义一个预测集的Dataloader。也可以直接将你的预测数据reshape,添加batch_size=1</span>
-Your_model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-predict <span class="token operator">=</span> Your_model<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+plt.legend()
+plt.show()
+</code></pre>
+<h2 id="预测"><a class="markdownIt-Anchor" href="#预测"></a> 预测</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 此处可定义一个预测集的Dataloader。也可以直接将你的预测数据reshape,添加batch_size=1</span>
+Your_model.<span class="hljs-built_in">eval</span>()
+predict = Your_model(data)
+</code></pre>
 
                 
             </div>

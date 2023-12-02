@@ -5,12 +5,14 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="C++结构体, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="结构体1. 结构体的定义和使用语法：struct 结构体名 { 结构体成员列表 };
+    <meta name="description" content=" 结构体
+ 1. 结构体的定义和使用
+语法：struct 结构体名 { 结构体成员列表 };
 创建结构体变量时，可以省略struct关键字
 三种创建结构体变量的方式：
 struct Student{
     string name;
-    int">
+   ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -408,12 +410,27 @@ struct Student{
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-12-02
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    401
+                </div>
                 
 
                 
 
                 
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -424,85 +441,91 @@ struct Student{
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><h2 id="1-结构体的定义和使用"><a href="#1-结构体的定义和使用" class="headerlink" title="1. 结构体的定义和使用"></a>1. 结构体的定义和使用</h2><p>语法：<code>struct 结构体名 { 结构体成员列表 };</code></p>
+                <h1 id="结构体"><a class="markdownIt-Anchor" href="#结构体"></a> 结构体</h1>
+<h2 id="1-结构体的定义和使用"><a class="markdownIt-Anchor" href="#1-结构体的定义和使用"></a> 1. 结构体的定义和使用</h2>
+<p>语法：<code>struct 结构体名 { 结构体成员列表 };</code></p>
 <p>创建结构体变量时，可以省略<code>struct</code>关键字</p>
 <p>三种创建结构体变量的方式：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Student<span class="token punctuation">{</span>
-    string name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">float</span> score<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>s3<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// s3在定义结构体时创建结构体变量</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span>{
+    string name;
+    <span class="hljs-type">int</span> age;
+    <span class="hljs-type">float</span> score;
+}s3; <span class="hljs-comment">// s3在定义结构体时创建结构体变量</span>
 
-<span class="token comment" spellcheck="true">// struct可省略</span>
-<span class="token keyword">struct</span> Student s1<span class="token punctuation">;</span> 
-s1<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
-s1<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-s1<span class="token punctuation">.</span>score <span class="token operator">=</span> <span class="token number">89.5</span><span class="token punctuation">;</span>
-<span class="token keyword">struct</span> Student s2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"李四"</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">80.5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="2-结构体数组"><a href="#2-结构体数组" class="headerlink" title="2. 结构体数组"></a>2. 结构体数组</h2><p>作用：将自定义结构体存入数组中</p>
-<h2 id="3-结构体指针"><a href="#3-结构体指针" class="headerlink" title="3. 结构体指针"></a>3. 结构体指针</h2><p>作用：通过指针访问结构体中的成员</p>
+<span class="hljs-comment">// struct可省略</span>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span> s1; 
+s1.name = <span class="hljs-string">&quot;张三&quot;</span>;
+s1.age = <span class="hljs-number">20</span>;
+s1.score = <span class="hljs-number">89.5</span>;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span> s2 = {<span class="hljs-string">&quot;李四&quot;</span>, <span class="hljs-number">19</span>, <span class="hljs-number">80.5</span>};
+</code></pre>
+<h2 id="2-结构体数组"><a class="markdownIt-Anchor" href="#2-结构体数组"></a> 2. 结构体数组</h2>
+<p>作用：将自定义结构体存入数组中</p>
+<h2 id="3-结构体指针"><a class="markdownIt-Anchor" href="#3-结构体指针"></a> 3. 结构体指针</h2>
+<p>作用：通过指针访问结构体中的成员</p>
 <p>利用<code>-&gt;</code>可以通过结构体指针访问结构体属性</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Student<span class="token punctuation">{</span>
-    string name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">float</span> score<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span>{
+    string name;
+    <span class="hljs-type">int</span> age;
+    <span class="hljs-type">float</span> score;
+};
 
-Student s <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"李四"</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">80.5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-Student<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>s<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span>name <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span>age <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span>score <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="4-嵌套结构体"><a href="#4-嵌套结构体" class="headerlink" title="4. 嵌套结构体"></a>4. 嵌套结构体</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Student<span class="token punctuation">{</span>
-    string name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">float</span> score<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">struct</span> Teacher<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    string name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    Student stu<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="5-结构体做函数参数"><a href="#5-结构体做函数参数" class="headerlink" title="5. 结构体做函数参数"></a>5. 结构体做函数参数</h2><p>函数参数有两种形式：1. 值传递。2. 地址传递</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Student<span class="token punctuation">{</span>
-    string name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">float</span> score<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 值传递</span>
-<span class="token keyword">void</span> <span class="token function">myprint1</span><span class="token punctuation">(</span>Student s<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    cout <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span>name <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span>age <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span>score <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> 
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">// 地指传递</span>
-<span class="token keyword">void</span> <span class="token function">myprint2</span><span class="token punctuation">(</span>Student<span class="token operator">*</span> s<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    cout <span class="token operator">&lt;&lt;</span> s<span class="token operator">-</span><span class="token operator">></span>name <span class="token operator">&lt;&lt;</span> s<span class="token operator">-</span><span class="token operator">></span>age <span class="token operator">&lt;&lt;</span> s<span class="token operator">-</span><span class="token operator">></span>score <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+Student s = {<span class="hljs-string">&quot;李四&quot;</span>, <span class="hljs-number">19</span>, <span class="hljs-number">80.5</span>};
+Student* p = &amp;s;
+cout &lt;&lt; p-&gt;name &lt;&lt; p-&gt;age &lt;&lt; p-&gt;score &lt;&lt; endl;
+</code></pre>
+<h2 id="4-嵌套结构体"><a class="markdownIt-Anchor" href="#4-嵌套结构体"></a> 4. 嵌套结构体</h2>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span>{
+    string name;
+    <span class="hljs-type">int</span> age;
+    <span class="hljs-type">float</span> score;
+};
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Teacher</span>{
+    <span class="hljs-type">int</span> id;
+    string name;
+    <span class="hljs-type">int</span> age;
+    Student stu;
+};
+</code></pre>
+<h2 id="5-结构体做函数参数"><a class="markdownIt-Anchor" href="#5-结构体做函数参数"></a> 5. 结构体做函数参数</h2>
+<p>函数参数有两种形式：1. 值传递。2. 地址传递</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span>{
+    string name;
+    <span class="hljs-type">int</span> age;
+    <span class="hljs-type">float</span> score;
+};
+<span class="hljs-comment">// 值传递</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">myprint1</span><span class="hljs-params">(Student s)</span></span>{
+    cout &lt;&lt; s.name &lt;&lt; s.age &lt;&lt; s.score &lt;&lt; endl; 
+}
+<span class="hljs-comment">// 地指传递</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">myprint2</span><span class="hljs-params">(Student* s)</span></span>{
+    cout &lt;&lt; s-&gt;name &lt;&lt; s-&gt;age &lt;&lt; s-&gt;score &lt;&lt; endl;
+}
 
-<span class="token keyword">struct</span> Student s1<span class="token punctuation">;</span> 
-s1<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
-s1<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-s1<span class="token punctuation">.</span>score <span class="token operator">=</span> <span class="token number">89.5</span><span class="token punctuation">;</span>
-<span class="token function">myprint1</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span> s1; 
+s1.name = <span class="hljs-string">&quot;张三&quot;</span>;
+s1.age = <span class="hljs-number">20</span>;
+s1.score = <span class="hljs-number">89.5</span>;
+<span class="hljs-built_in">myprint1</span>(s);
+</code></pre>
 <ul>
 <li><code>const</code>在结构体中使用，用<code>const</code>防止误操作</li>
 </ul>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Student<span class="token punctuation">{</span>
-    string name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">float</span> score<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span>{
+    string name;
+    <span class="hljs-type">int</span> age;
+    <span class="hljs-type">float</span> score;
+};
 
-<span class="token keyword">void</span> <span class="token function">myprint2</span><span class="token punctuation">(</span><span class="token keyword">const</span> Student<span class="token operator">*</span> s<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// s->age = 150; 报错</span>
-    cout <span class="token operator">&lt;&lt;</span> s<span class="token operator">-</span><span class="token operator">></span>name <span class="token operator">&lt;&lt;</span> s<span class="token operator">-</span><span class="token operator">></span>age <span class="token operator">&lt;&lt;</span> s<span class="token operator">-</span><span class="token operator">></span>score <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">myprint2</span><span class="hljs-params">(<span class="hljs-type">const</span> Student* s)</span></span>{
+    <span class="hljs-comment">// s-&gt;age = 150; 报错</span>
+    cout &lt;&lt; s-&gt;name &lt;&lt; s-&gt;age &lt;&lt; s-&gt;score &lt;&lt; endl;
+}
 
-<span class="token keyword">struct</span> Student s1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"李四"</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">80.5</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
-<span class="token function">myprint2</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span> s1 = {<span class="hljs-string">&quot;李四&quot;</span>, <span class="hljs-number">19</span>, <span class="hljs-number">80.5</span>}; 
+<span class="hljs-built_in">myprint2</span>(s);
+</code></pre>
 
                 
             </div>

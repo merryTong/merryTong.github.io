@@ -5,13 +5,15 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="C++|指针与引用, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="指针与引用指针定义和使用作用：通过指针间接访问内存，指针保存数据的地址。
+    <meta name="description" content=" 指针与引用
+ 指针定义和使用
+作用：通过指针间接访问内存，指针保存数据的地址。
 语法：数据类型* 指针变量名
 通过解引用的方式找到指针指向的内存——即找到指针指向的内存的数据
 int a = 10;
 int* p = &amp;amp;a;
 
-cout ">
+c">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,12 +411,27 @@ cout ">
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-12-02
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1k
+                </div>
                 
 
                 
 
                 
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -425,148 +442,165 @@ cout ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="指针与引用"><a href="#指针与引用" class="headerlink" title="指针与引用"></a>指针与引用</h1><h2 id="指针定义和使用"><a href="#指针定义和使用" class="headerlink" title="指针定义和使用"></a>指针定义和使用</h2><p>作用：通过指针间接访问内存，<strong>指针保存数据的地址</strong>。</p>
+                <h1 id="指针与引用"><a class="markdownIt-Anchor" href="#指针与引用"></a> 指针与引用</h1>
+<h2 id="指针定义和使用"><a class="markdownIt-Anchor" href="#指针定义和使用"></a> 指针定义和使用</h2>
+<p>作用：通过指针间接访问内存，<strong>指针保存数据的地址</strong>。</p>
 <p>语法：<code>数据类型* 指针变量名</code></p>
 <p>通过解引用的方式找到指针指向的内存——即找到指针指向的内存的数据</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span>* p = &amp;a;
 
-cout <span class="token operator">&lt;&lt;</span> <span class="token operator">&amp;</span>a <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout &lt;&lt; &amp;a &lt;&lt; endl;
+cout &lt;&lt; p &lt;&lt; endl;
 
-cout <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 解引用</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="指针所占的内存空间"><a href="#指针所占的内存空间" class="headerlink" title="指针所占的内存空间"></a>指针所占的内存空间</h3><p>占据的内存空间与数据类型无关，与操作系统有关</p>
+cout &lt;&lt; a &lt;&lt; endl;
+cout &lt;&lt; *p &lt;&lt; endl; <span class="hljs-comment">// 解引用</span>
+</code></pre>
+<h3 id="指针所占的内存空间"><a class="markdownIt-Anchor" href="#指针所占的内存空间"></a> 指针所占的内存空间</h3>
+<p>占据的内存空间与数据类型无关，与操作系统有关</p>
 <p>32位系统下，占用4个字节，64位系统下，占用8个字节</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">;</span>
-p <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span>* p;
+p = &amp;a;
 
-cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="空指针和野指针"><a href="#空指针和野指针" class="headerlink" title="空指针和野指针"></a>空指针和野指针</h3><p>空指针：指针变量指向内存中编号为0的空间</p>
+cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(p) &lt;&lt; endl;
+cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(<span class="hljs-type">int</span>*) &lt;&lt; endl;
+</code></pre>
+<h3 id="空指针和野指针"><a class="markdownIt-Anchor" href="#空指针和野指针"></a> 空指针和野指针</h3>
+<p>空指针：指针变量指向内存中编号为0的空间</p>
 <p>空指针用途：初始化指针变量</p>
 <p>注意：空指针指向的内存不可以访问（0-255之间的内存编号由系统占用）</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 空指针</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span>* p = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 空指针</span>
+</code></pre>
 <p>野指针：指针变量指向非法的内存空间，不是自己申请的空间</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0x1100</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 野指针</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="const修饰指针"><a href="#const修饰指针" class="headerlink" title="const修饰指针"></a>const修饰指针</h3><h4 id="常量指针"><a href="#常量指针" class="headerlink" title="常量指针"></a>常量指针</h4><p>指针的指向可以修改，但是指针指向的数据不可以修改</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
-p <span class="token operator">=</span> <span class="token operator">&amp;</span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 正确</span>
-<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="指针常量"><a href="#指针常量" class="headerlink" title="指针常量"></a>指针常量</h4><p>指针的指向不可以修改，但是指针指向的数据可以修改</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">*</span> <span class="token keyword">const</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
-p <span class="token operator">=</span> <span class="token operator">&amp;</span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误</span>
-<span class="token operator">*</span>P <span class="token operator">=</span> <span class="token number">200</span>； <span class="token comment" spellcheck="true">// 正确</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="既修饰指针又修饰常量"><a href="#既修饰指针又修饰常量" class="headerlink" title="既修饰指针又修饰常量"></a>既修饰指针又修饰常量</h4><p>指针的指向不可以修改，指针指向的数据也不可以修改</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">*</span> <span class="token keyword">const</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
-p <span class="token operator">=</span> <span class="token operator">&amp;</span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误</span>
-<span class="token operator">*</span>P <span class="token operator">=</span> <span class="token number">200</span>； <span class="token comment" spellcheck="true">// 错误</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="指针和数组"><a href="#指针和数组" class="headerlink" title="指针和数组"></a>指针和数组</h3><p>利用指针访问数组的元素</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 遍历数组</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">,</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 方式一</span>
-    cout <span class="token operator">&lt;&lt;</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 方式二</span>
-    cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-    p<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="引用的定义和使用"><a href="#引用的定义和使用" class="headerlink" title="引用的定义和使用"></a>引用的定义和使用</h2><p>作用：给变量取别名，降低操作指针的风险，简化代码。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span>* p = (<span class="hljs-type">int</span>*)<span class="hljs-number">0x1100</span>; <span class="hljs-comment">// 野指针</span>
+</code></pre>
+<h3 id="const修饰指针"><a class="markdownIt-Anchor" href="#const修饰指针"></a> const修饰指针</h3>
+<h4 id="常量指针"><a class="markdownIt-Anchor" href="#常量指针"></a> 常量指针</h4>
+<p>指针的指向可以修改，但是指针指向的数据不可以修改</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span> b = <span class="hljs-number">10</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">int</span>* p = &amp;a;
+p = &amp;b; <span class="hljs-comment">// 正确</span>
+*p = <span class="hljs-number">200</span>; <span class="hljs-comment">// 错误</span>
+</code></pre>
+<h4 id="指针常量"><a class="markdownIt-Anchor" href="#指针常量"></a> 指针常量</h4>
+<p>指针的指向不可以修改，但是指针指向的数据可以修改</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span> b = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;a;
+p = &amp;b; <span class="hljs-comment">// 错误</span>
+*P = <span class="hljs-number">200</span>； <span class="hljs-comment">// 正确</span>
+</code></pre>
+<h4 id="既修饰指针又修饰常量"><a class="markdownIt-Anchor" href="#既修饰指针又修饰常量"></a> 既修饰指针又修饰常量</h4>
+<p>指针的指向不可以修改，指针指向的数据也不可以修改</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span> b = <span class="hljs-number">10</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;a;
+p = &amp;b; <span class="hljs-comment">// 错误</span>
+*P = <span class="hljs-number">200</span>； <span class="hljs-comment">// 错误</span>
+</code></pre>
+<h3 id="指针和数组"><a class="markdownIt-Anchor" href="#指针和数组"></a> 指针和数组</h3>
+<p>利用指针访问数组的元素</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> arr[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+<span class="hljs-type">int</span>* p = arr;
+<span class="hljs-comment">// 遍历数组</span>
+<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>, i++){
+    <span class="hljs-comment">// 方式一</span>
+    cout &lt;&lt; arr[i] &lt;&lt; endl;
+    <span class="hljs-comment">// 方式二</span>
+    cout &lt;&lt; *p &lt;&lt; endl;
+    p++;
+}
+</code></pre>
+<h2 id="引用的定义和使用"><a class="markdownIt-Anchor" href="#引用的定义和使用"></a> 引用的定义和使用</h2>
+<p>作用：给变量取别名，降低操作指针的风险，简化代码。</p>
 <p>语法：<code>数据类型&amp; 别名 = 原名</code></p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">&amp;</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-type">int</span>&amp; b = a;
 
-cout <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 10</span>
-cout <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 10</span>
+cout &lt;&lt; a &lt;&lt; endl; <span class="hljs-comment">// 10</span>
+cout &lt;&lt; b &lt;&lt; endl; <span class="hljs-comment">// 10</span>
 
-b <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 100</span>
-cout <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 100</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h3><ul>
+b = <span class="hljs-number">100</span>;
+cout &lt;&lt; a &lt;&lt; endl; <span class="hljs-comment">// 100</span>
+cout &lt;&lt; b &lt;&lt; endl; <span class="hljs-comment">// 100</span>
+</code></pre>
+<h3 id="使用注意事项"><a class="markdownIt-Anchor" href="#使用注意事项"></a> 使用注意事项</h3>
+<ul>
 <li>引用必须<strong>初始化</strong></li>
 <li>引用一旦初始化，就不可以更改了**(本质是指针常量)**，详细看下节【引用的本质】</li>
 </ul>
-<h3 id="引用做函数参数"><a href="#引用做函数参数" class="headerlink" title="引用做函数参数"></a>引用做函数参数</h3><p>函数参数有值传递和地址传递</p>
+<h3 id="引用做函数参数"><a class="markdownIt-Anchor" href="#引用做函数参数"></a> 引用做函数参数</h3>
+<p>函数参数有值传递和地址传递</p>
 <p>作用：在函数传参时，可以使用<strong>引用</strong>作为形参。此时的形参可以修改实参</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">swap1</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">int</span> temp <span class="token operator">=</span> a<span class="token punctuation">;</span>
-    a <span class="token operator">=</span> b<span class="token punctuation">;</span>
-    b <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">swap2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token operator">*</span>a<span class="token punctuation">;</span>
-    <span class="token operator">*</span>a <span class="token operator">=</span> <span class="token operator">*</span>b<span class="token punctuation">;</span>
-    <span class="token operator">*</span>b <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">swap3</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">int</span> temp <span class="token operator">=</span> a<span class="token punctuation">;</span>
-    a <span class="token operator">=</span> b<span class="token punctuation">;</span>
-    b <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="引用做函数返回值"><a href="#引用做函数返回值" class="headerlink" title="引用做函数返回值"></a>引用做函数返回值</h3><ol>
-<li><p>引用可以作为函数的返回值</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap1</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span>{
+    <span class="hljs-type">int</span> temp = a;
+    a = b;
+    b = temp;
+}
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap2</span><span class="hljs-params">(<span class="hljs-type">int</span>* a, <span class="hljs-type">int</span>* b)</span></span>{
+    <span class="hljs-type">int</span> temp = *a;
+    *a = *b;
+    *b = temp;
+}
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap3</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp; a, <span class="hljs-type">int</span>&amp; b)</span></span>{
+    <span class="hljs-type">int</span> temp = a;
+    a = b;
+    b = temp;
+}
+</code></pre>
+<h3 id="引用做函数返回值"><a class="markdownIt-Anchor" href="#引用做函数返回值"></a> 引用做函数返回值</h3>
+<ol>
+<li>
+<p>引用可以作为函数的返回值</p>
 </li>
-<li><p>如果函数的返回值是引用，则<strong>函数调用</strong>可以作为左值</p>
+<li>
+<p>如果函数的返回值是引用，则<strong>函数调用</strong>可以作为左值</p>
 </li>
 </ol>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span><span class="token operator">&amp;</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">int</span><span class="token operator">&amp;</span> ref <span class="token operator">=</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> ref <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 局部变量被释放</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">int</span>&amp; <span class="hljs-title">test1</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">return</span> a;
+}
+<span class="hljs-type">int</span>&amp; ref = <span class="hljs-built_in">test1</span>();
+cout &lt;&lt; ref &lt;&lt; endl; <span class="hljs-comment">// 局部变量被释放</span>
 
-<span class="token keyword">int</span><span class="token operator">&amp;</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">static</span> <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">int</span><span class="token operator">&amp;</span> ref2 <span class="token operator">=</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> ref2 <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 10</span>
-<span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 函数调用作为左值</span>
-cout <span class="token operator">&lt;&lt;</span> ref2 <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1000</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-function"><span class="hljs-type">int</span>&amp; <span class="hljs-title">test2</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-type">static</span> <span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">return</span> a;
+}
+<span class="hljs-type">int</span>&amp; ref2 = <span class="hljs-built_in">test2</span>();
+cout &lt;&lt; ref2 &lt;&lt; endl; <span class="hljs-comment">// 10</span>
+<span class="hljs-built_in">test2</span>() = <span class="hljs-number">1000</span>; <span class="hljs-comment">// 函数调用作为左值</span>
+cout &lt;&lt; ref2 &lt;&lt; endl; <span class="hljs-comment">// 1000</span>
+</code></pre>
 <p><code>test2()</code>返回的是静态变量<code>a</code>的引用，<code>ref2</code>同理，和静态变量<code>a</code>指向同一块内存，因此<code>test2()</code>作为左值表示的是<code>a</code>的引用。</p>
-<h3 id="引用的本质"><a href="#引用的本质" class="headerlink" title="引用的本质"></a>引用的本质</h3><p>本质：引用的本质是一个<strong>指针常量</strong></p>
+<h3 id="引用的本质"><a class="markdownIt-Anchor" href="#引用的本质"></a> 引用的本质</h3>
+<p>本质：引用的本质是一个<strong>指针常量</strong></p>
 <p>编译器会把引用转换为指针常量</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<pre class="highlight"><code class="cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
 
-<span class="token keyword">int</span><span class="token operator">&amp;</span> ref <span class="token operator">=</span> a<span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 转换为 int* const ref = &amp;a;</span>
-ref <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 转换为 *ref = 100;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h3><p>作用：常量引用主要修饰形参，防止误操作。在函数的形参列表中，可以加<code>const</code>修饰形参<strong>防止形参改变实参</strong>。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> val<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    val <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 误操作，修改了外部的实参</span>
-    cout <span class="token operator">&lt;&lt;</span> val <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> val<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    val <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 代码报错</span>
-    cout <span class="token operator">&lt;&lt;</span> val <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="hljs-type">int</span>&amp; ref = a;
+<span class="hljs-comment">// 转换为 int* const ref = &amp;a;</span>
+ref = <span class="hljs-number">100</span>;
+<span class="hljs-comment">// 转换为 *ref = 100;</span>
+</code></pre>
+<h3 id="常量引用"><a class="markdownIt-Anchor" href="#常量引用"></a> 常量引用</h3>
+<p>作用：常量引用主要修饰形参，防止误操作。在函数的形参列表中，可以加<code>const</code>修饰形参<strong>防止形参改变实参</strong>。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test1</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp; val)</span></span>{
+    val = <span class="hljs-number">1000</span>; <span class="hljs-comment">// 误操作，修改了外部的实参</span>
+    cout &lt;&lt; val &lt;&lt; endl;
+}
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test2</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span>&amp; val)</span></span>{
+    val = <span class="hljs-number">1000</span>; <span class="hljs-comment">// 代码报错</span>
+    cout &lt;&lt; val &lt;&lt; endl;
+}
 
-<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token function">test1</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 导致变量a被误修改</span>
-<span class="token function">test2</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// const修饰之后使其无法修改</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">test1</span>(a); <span class="hljs-comment">// 导致变量a被误修改</span>
+<span class="hljs-built_in">test2</span>(a); <span class="hljs-comment">// const修饰之后使其无法修改</span>
+</code></pre>
 
                 
             </div>

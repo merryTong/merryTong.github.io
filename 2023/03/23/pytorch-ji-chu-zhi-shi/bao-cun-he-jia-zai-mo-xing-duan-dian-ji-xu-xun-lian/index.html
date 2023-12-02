@@ -5,9 +5,10 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch保存和加载模型&amp;断点训练, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="Pytorch模型保存和加载Pytorch保存和加载模型需要掌握3个重要的函数：
+    <meta name="description" content=" Pytorch模型保存和加载
+Pytorch保存和加载模型需要掌握3个重要的函数：
 
-torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Python 的 pickle 工具进行序列化。用这个函数可以保存模型 (model)、">
+torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Python 的 pickle 工具进行序列化。用这个函数可以保存模型 (model">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,12 +410,27 @@ torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Py
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-04
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.6k
+                </div>
                 
 
                 
 
                 
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -425,190 +441,210 @@ torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Py
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Pytorch模型保存和加载"><a href="#Pytorch模型保存和加载" class="headerlink" title="Pytorch模型保存和加载"></a>Pytorch模型保存和加载</h1><p>Pytorch保存和加载模型需要掌握3个重要的函数：</p>
+                <h1 id="pytorch模型保存和加载"><a class="markdownIt-Anchor" href="#pytorch模型保存和加载"></a> Pytorch模型保存和加载</h1>
+<p>Pytorch保存和加载模型需要掌握3个重要的函数：</p>
 <ol>
-<li><strong>torch.save：</strong> 将一个序列化的对象保存到磁盘。这个函数使用 Python 的 pickle 工具进行序列化。用这个函数可以保存<strong>模型 (model)<strong>、</strong>张量 (tensor)</strong> 和<strong>各种对象的字典 (dict)</strong> 。</li>
+<li><strong>torch.save：</strong> 将一个序列化的对象保存到磁盘。这个函数使用 Python 的 pickle 工具进行序列化。用这个函数可以保存<strong>模型 (model)</strong>、<strong>张量 (tensor)</strong> 和<strong>各种对象的字典 (dict)</strong> 。</li>
 <li><strong>torch.load：</strong> 将 pickle 对象文件反序列化到内存，也便于将数据加载到设备中。</li>
 <li><strong>torch.nn.Module.load_state_dict()：</strong> 加载模型的参数。</li>
 </ol>
-<h2 id="state-dict"><a href="#state-dict" class="headerlink" title="state_dict"></a>state_dict</h2><h3 id="state-dict-介绍"><a href="#state-dict-介绍" class="headerlink" title="state_dict 介绍"></a>state_dict 介绍</h3><p>PyTorch 中，<code>torch.nn.Module</code>里面的可学习的参数 (weights 和 biases) 都放在<code>model.parameters()</code>里面。而<code>state_dict</code>是一个Python dictionary object，将每一层映射到它的 parameter tensor 上。<br><strong>注意</strong>：只有含有可学习参数的层 (convolutional layers, linear layers)，或者含有<code>registered buffers</code>的层 (batchnorm’s running_mean) 才有 state_dict。优化器的对象 (torch.optim) 也有 state_dict，存储了优化器的状态和它的超参数。<br>因为<code>state_dict</code>是一个 Python字典对象，所以保存，加载，更新它比较容易。<br>下面我们通过一个例子直观感受下 state_dict 的用法：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Define model</span>
-<span class="token keyword">class</span> <span class="token class-name">TheModelClass</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>TheModelClass<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>pool <span class="token operator">=</span> nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>fc1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">16</span> <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>fc2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">120</span><span class="token punctuation">,</span> <span class="token number">84</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>fc3 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">84</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+<h2 id="state_dict"><a class="markdownIt-Anchor" href="#state_dict"></a> state_dict</h2>
+<h3 id="state_dict-介绍"><a class="markdownIt-Anchor" href="#state_dict-介绍"></a> state_dict 介绍</h3>
+<p>PyTorch 中，<code>torch.nn.Module</code>里面的可学习的参数 (weights 和 biases) 都放在<code>model.parameters()</code>里面。而<code>state_dict</code>是一个Python dictionary object，将每一层映射到它的 parameter tensor 上。<br>
+<strong>注意</strong>：只有含有可学习参数的层 (convolutional layers, linear layers)，或者含有<code>registered buffers</code>的层 (batchnorm’s running_mean) 才有 state_dict。优化器的对象 (torch.optim) 也有 state_dict，存储了优化器的状态和它的超参数。<br>
+因为<code>state_dict</code>是一个 Python字典对象，所以保存，加载，更新它比较容易。<br>
+下面我们通过一个例子直观感受下 state_dict 的用法：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># Define model</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TheModelClass</span>(nn.Module):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>(TheModelClass, self).__init__()
+        self.conv1 = nn.Conv2d(<span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>)
+        self.pool = nn.MaxPool2d(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)
+        self.conv2 = nn.Conv2d(<span class="hljs-number">6</span>, <span class="hljs-number">16</span>, <span class="hljs-number">5</span>)
+        self.fc1 = nn.Linear(<span class="hljs-number">16</span> * <span class="hljs-number">5</span> * <span class="hljs-number">5</span>, <span class="hljs-number">120</span>)
+        self.fc2 = nn.Linear(<span class="hljs-number">120</span>, <span class="hljs-number">84</span>)
+        self.fc3 = nn.Linear(<span class="hljs-number">84</span>, <span class="hljs-number">10</span>)
 
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>conv2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        x <span class="token operator">=</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">16</span> <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">)</span>
-        x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc1<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        x <span class="token operator">=</span> self<span class="token punctuation">.</span>fc3<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> x
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = x.view(-<span class="hljs-number">1</span>, <span class="hljs-number">16</span> * <span class="hljs-number">5</span> * <span class="hljs-number">5</span>)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        <span class="hljs-keyword">return</span> x
 
-<span class="token comment" spellcheck="true"># Initialize model</span>
-model <span class="token operator">=</span> TheModelClass<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="hljs-comment"># Initialize model</span>
+model = TheModelClass()
 
-<span class="token comment" spellcheck="true"># Initialize optimizer</span>
-optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">,</span> momentum<span class="token operator">=</span><span class="token number">0.9</span><span class="token punctuation">)</span>
+<span class="hljs-comment"># Initialize optimizer</span>
+optimizer = optim.SGD(model.parameters(), lr=<span class="hljs-number">0.001</span>, momentum=<span class="hljs-number">0.9</span>)
 
-<span class="token comment" spellcheck="true"># Print model's state_dict</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Model's state_dict:"</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> param_tensor <span class="token keyword">in</span> model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>param_tensor<span class="token punctuation">,</span> <span class="token string">"\t"</span><span class="token punctuation">,</span> model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span>param_tensor<span class="token punctuation">]</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="hljs-comment"># Print model&#x27;s state_dict</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Model&#x27;s state_dict:&quot;</span>)
+<span class="hljs-keyword">for</span> param_tensor <span class="hljs-keyword">in</span> model.state_dict():
+    <span class="hljs-built_in">print</span>(param_tensor, <span class="hljs-string">&quot;\t&quot;</span>, model.state_dict()[param_tensor].size())
 
-<span class="token comment" spellcheck="true"># Print optimizer's state_dict</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Optimizer's state_dict:"</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> var_name <span class="token keyword">in</span> optimizer<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>var_name<span class="token punctuation">,</span> <span class="token string">"\t"</span><span class="token punctuation">,</span> optimizer<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span>var_name<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-comment"># Print optimizer&#x27;s state_dict</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Optimizer&#x27;s state_dict:&quot;</span>)
+<span class="hljs-keyword">for</span> var_name <span class="hljs-keyword">in</span> optimizer.state_dict():
+    <span class="hljs-built_in">print</span>(var_name, <span class="hljs-string">&quot;\t&quot;</span>, optimizer.state_dict()[var_name])
+</code></pre>
 <p>输出</p>
-<pre class="line-numbers language-python"><code class="language-python">Model's state_dict<span class="token punctuation">:</span>
-conv1<span class="token punctuation">.</span>weight     torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-conv1<span class="token punctuation">.</span>bias   torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-conv2<span class="token punctuation">.</span>weight     torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-conv2<span class="token punctuation">.</span>bias   torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-fc1<span class="token punctuation">.</span>weight   torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">120</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-fc1<span class="token punctuation">.</span>bias     torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">120</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-fc2<span class="token punctuation">.</span>weight   torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">84</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-fc2<span class="token punctuation">.</span>bias     torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">84</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-fc3<span class="token punctuation">.</span>weight   torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">84</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-fc3<span class="token punctuation">.</span>bias     torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">Model<span class="hljs-string">&#x27;s state_dict:
+conv1.weight     torch.Size([6, 3, 5, 5])
+conv1.bias   torch.Size([6])
+conv2.weight     torch.Size([16, 6, 5, 5])
+conv2.bias   torch.Size([16])
+fc1.weight   torch.Size([120, 400])
+fc1.bias     torch.Size([120])
+fc2.weight   torch.Size([84, 120])
+fc2.bias     torch.Size([84])
+fc3.weight   torch.Size([10, 84])
+fc3.bias     torch.Size([10])
 
-Optimizer's state_dict<span class="token punctuation">:</span>
-state    <span class="token punctuation">{</span><span class="token punctuation">}</span>
-param_groups     <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'lr'</span><span class="token punctuation">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span> <span class="token string">'momentum'</span><span class="token punctuation">:</span> <span class="token number">0.9</span><span class="token punctuation">,</span> <span class="token string">'dampening'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">'weight_decay'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> 
-                   <span class="token string">'nesterov'</span><span class="token punctuation">:</span> <span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token string">'params'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4675713712</span><span class="token punctuation">,</span> <span class="token number">4675713784</span><span class="token punctuation">,</span> <span class="token number">4675714000</span><span class="token punctuation">,</span> 
-                                                 <span class="token number">4675714072</span><span class="token punctuation">,</span> <span class="token number">4675714216</span><span class="token punctuation">,</span> <span class="token number">4675714288</span><span class="token punctuation">,</span> 
-                                                 <span class="token number">4675714432</span><span class="token punctuation">,</span> <span class="token number">4675714504</span><span class="token punctuation">,</span> <span class="token number">4675714648</span><span class="token punctuation">,</span> 
-                                                 <span class="token number">4675714720</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="保存和加载模型"><a href="#保存和加载模型" class="headerlink" title="保存和加载模型"></a>保存和加载模型</h2><h3 id="保存和加载-state-dict-已经训练完，无需继续训练"><a href="#保存和加载-state-dict-已经训练完，无需继续训练" class="headerlink" title="保存和加载 state_dict (已经训练完，无需继续训练)"></a>保存和加载 state_dict (已经训练完，无需继续训练)</h3><p>保存</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+Optimizer&#x27;</span>s state_dict:
+state    {}
+param_groups     [{<span class="hljs-string">&#x27;lr&#x27;</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">&#x27;momentum&#x27;</span>: <span class="hljs-number">0.9</span>, <span class="hljs-string">&#x27;dampening&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;weight_decay&#x27;</span>: <span class="hljs-number">0</span>, 
+                   <span class="hljs-string">&#x27;nesterov&#x27;</span>: <span class="hljs-literal">False</span>, <span class="hljs-string">&#x27;params&#x27;</span>: [<span class="hljs-number">4675713712</span>, <span class="hljs-number">4675713784</span>, <span class="hljs-number">4675714000</span>, 
+                                                 <span class="hljs-number">4675714072</span>, <span class="hljs-number">4675714216</span>, <span class="hljs-number">4675714288</span>, 
+                                                 <span class="hljs-number">4675714432</span>, <span class="hljs-number">4675714504</span>, <span class="hljs-number">4675714648</span>, 
+                                                 <span class="hljs-number">4675714720</span>]}]
+</code></pre>
+<h2 id="保存和加载模型"><a class="markdownIt-Anchor" href="#保存和加载模型"></a> 保存和加载模型</h2>
+<h3 id="保存和加载-state_dict-已经训练完无需继续训练"><a class="markdownIt-Anchor" href="#保存和加载-state_dict-已经训练完无需继续训练"></a> 保存和加载 state_dict (已经训练完，无需继续训练)</h3>
+<p>保存</p>
+<pre class="highlight"><code class="python">torch.save(model.state_dict(), PATH)
+</code></pre>
 <p>加载</p>
-<pre class="line-numbers language-python"><code class="language-python">model <span class="token operator">=</span> TheModelClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">)</span><span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>一般保存为<code>.pt</code>或<code>.pth</code>格式的文件。<br>注意：</p>
+<pre class="highlight"><code class="python">model = TheModelClass(*args, **kwargs)
+model.load_state_dict(torch.load(PATH))
+model.<span class="hljs-built_in">eval</span>()
+</code></pre>
+<p>一般保存为<code>.pt</code>或<code>.pth</code>格式的文件。<br>
+注意：</p>
 <ol>
 <li>可以使用<code>model.eval()</code>将 dropout 和 batch normalization 层设置成 evaluation 模式。</li>
 <li><code>load_state_dict()</code>函数需要一个<strong>dict类型</strong>的输入，而不是保存模型的PATH。</li>
 <li>如果你想<strong>保存验证集上表现最好的模型</strong>，那么这样<code>best_model_state=model.state_dict()</code>是错误的。因为这属于浅复制，也就是说此时这个best_model_state会随着后续的训练过程而不断被更新，最后保存的其实是个 overfit 的模型。所以正确的做法应该是<code>best_model_state=deepcopy(model.state_dict())</code>。</li>
 </ol>
-<h3 id="保存和加载整个模型-已经训练完，无需继续训练"><a href="#保存和加载整个模型-已经训练完，无需继续训练" class="headerlink" title="保存和加载整个模型 (已经训练完，无需继续训练)"></a>保存和加载整个模型 (已经训练完，无需继续训练)</h3><p>保存</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="保存和加载整个模型-已经训练完无需继续训练"><a class="markdownIt-Anchor" href="#保存和加载整个模型-已经训练完无需继续训练"></a> 保存和加载整个模型 (已经训练完，无需继续训练)</h3>
+<p>保存</p>
+<pre class="highlight"><code class="python">torch.save(model, PATH)
+</code></pre>
 <p>加载。注意：<strong>必须提前定义好模型的类</strong>。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Model class must be defined somewhere</span>
-model <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># Model class must be defined somewhere</span>
+model = torch.load(PATH)
+model.<span class="hljs-built_in">eval</span>()
+</code></pre>
 <p>一般保存为<code>.pt</code>或<code>.pth</code>格式的文件。</p>
-<h3 id="保存和加载-state-dict-没有训练完，还会继续训练"><a href="#保存和加载-state-dict-没有训练完，还会继续训练" class="headerlink" title="保存和加载 state_dict (没有训练完，还会继续训练)"></a>保存和加载 state_dict (没有训练完，还会继续训练)</h3><p>保存。除了保存 model_state_dict 之外，还需要保存：optimizer_state_dict，epoch 和 loss，因为继续训练时要知道优化器的状态，epoch 等等。</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">{</span>
-            <span class="token string">'epoch'</span><span class="token punctuation">:</span> epoch<span class="token punctuation">,</span>
-            <span class="token string">'model_state_dict'</span><span class="token punctuation">:</span> model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">'optimizer_state_dict'</span><span class="token punctuation">:</span> optimizer<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">'loss'</span><span class="token punctuation">:</span> loss<span class="token punctuation">,</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="保存和加载-state_dict-没有训练完还会继续训练"><a class="markdownIt-Anchor" href="#保存和加载-state_dict-没有训练完还会继续训练"></a> 保存和加载 state_dict (没有训练完，还会继续训练)</h3>
+<p>保存。除了保存 model_state_dict 之外，还需要保存：optimizer_state_dict，epoch 和 loss，因为继续训练时要知道优化器的状态，epoch 等等。</p>
+<pre class="highlight"><code class="python">torch.save({
+            <span class="hljs-string">&#x27;epoch&#x27;</span>: epoch,
+            <span class="hljs-string">&#x27;model_state_dict&#x27;</span>: model.state_dict(),
+            <span class="hljs-string">&#x27;optimizer_state_dict&#x27;</span>: optimizer.state_dict(),
+            <span class="hljs-string">&#x27;loss&#x27;</span>: loss,
+            ...
+            }, PATH)
+</code></pre>
 <p>加载。除了加载 model_state_dict 之外，还需要加载：optimizer_state_dict，epoch 和 loss。</p>
-<pre class="line-numbers language-python"><code class="language-python">model <span class="token operator">=</span> TheModelClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-optimizer <span class="token operator">=</span> TheOptimizerClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">model = TheModelClass(*args, **kwargs)
+optimizer = TheOptimizerClass(*args, **kwargs)
 
-checkpoint <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'model_state_dict'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-optimizer<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'optimizer_state_dict'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-epoch <span class="token operator">=</span> checkpoint<span class="token punctuation">[</span><span class="token string">'epoch'</span><span class="token punctuation">]</span>
-loss <span class="token operator">=</span> checkpoint<span class="token punctuation">[</span><span class="token string">'loss'</span><span class="token punctuation">]</span>
+checkpoint = torch.load(PATH)
+model.load_state_dict(checkpoint[<span class="hljs-string">&#x27;model_state_dict&#x27;</span>])
+optimizer.load_state_dict(checkpoint[<span class="hljs-string">&#x27;optimizer_state_dict&#x27;</span>])
+epoch = checkpoint[<span class="hljs-string">&#x27;epoch&#x27;</span>]
+loss = checkpoint[<span class="hljs-string">&#x27;loss&#x27;</span>]
 
-model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># - or -</span>
-model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="把多个模型存进一个文件"><a href="#把多个模型存进一个文件" class="headerlink" title="把多个模型存进一个文件"></a>把多个模型存进一个文件</h3><p>保存：把模型 A 和 B 的 state_dict 和 optimizer 都存进一个文件中。</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">{</span>
-            <span class="token string">'modelA_state_dict'</span><span class="token punctuation">:</span> modelA<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">'modelB_state_dict'</span><span class="token punctuation">:</span> modelB<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">'optimizerA_state_dict'</span><span class="token punctuation">:</span> optimizerA<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">'optimizerB_state_dict'</span><span class="token punctuation">:</span> optimizerB<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+model.<span class="hljs-built_in">eval</span>()
+<span class="hljs-comment"># - or -</span>
+model.train()
+</code></pre>
+<h3 id="把多个模型存进一个文件"><a class="markdownIt-Anchor" href="#把多个模型存进一个文件"></a> 把多个模型存进一个文件</h3>
+<p>保存：把模型 A 和 B 的 state_dict 和 optimizer 都存进一个文件中。</p>
+<pre class="highlight"><code class="python">torch.save({
+            <span class="hljs-string">&#x27;modelA_state_dict&#x27;</span>: modelA.state_dict(),
+            <span class="hljs-string">&#x27;modelB_state_dict&#x27;</span>: modelB.state_dict(),
+            <span class="hljs-string">&#x27;optimizerA_state_dict&#x27;</span>: optimizerA.state_dict(),
+            <span class="hljs-string">&#x27;optimizerB_state_dict&#x27;</span>: optimizerB.state_dict(),
+            ...
+            }, PATH)
+</code></pre>
 <p>加载：</p>
-<pre class="line-numbers language-python"><code class="language-python">modelA <span class="token operator">=</span> TheModelAClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-modelB <span class="token operator">=</span> TheModelBClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-optimizerA <span class="token operator">=</span> TheOptimizerAClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-optimizerB <span class="token operator">=</span> TheOptimizerBClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">modelA = TheModelAClass(*args, **kwargs)
+modelB = TheModelBClass(*args, **kwargs)
+optimizerA = TheOptimizerAClass(*args, **kwargs)
+optimizerB = TheOptimizerBClass(*args, **kwargs)
 
-checkpoint <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">)</span>
-modelA<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'modelA_state_dict'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-modelB<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'modelB_state_dict'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-optimizerA<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'optimizerA_state_dict'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-optimizerB<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'optimizerB_state_dict'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+checkpoint = torch.load(PATH)
+modelA.load_state_dict(checkpoint[<span class="hljs-string">&#x27;modelA_state_dict&#x27;</span>])
+modelB.load_state_dict(checkpoint[<span class="hljs-string">&#x27;modelB_state_dict&#x27;</span>])
+optimizerA.load_state_dict(checkpoint[<span class="hljs-string">&#x27;optimizerA_state_dict&#x27;</span>])
+optimizerB.load_state_dict(checkpoint[<span class="hljs-string">&#x27;optimizerB_state_dict&#x27;</span>])
 
-modelA<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-modelB<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># - or -</span>
-modelA<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
-modelB<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="使用其他模型的参数暖启动自己的模型"><a href="#使用其他模型的参数暖启动自己的模型" class="headerlink" title="使用其他模型的参数暖启动自己的模型"></a>使用其他模型的参数暖启动自己的模型</h3><p>有时候训练一个新的复杂模型时，需要加载它的一部分预训练的权重。即使只有几个可用的参数，也会有助于 warmstart 训练过程，帮助模型更快达到收敛。<br>如果手里有的这个 state_dict 缺乏一些 keys，或者多了一些 keys，只要设置<code>strict</code>参数为 False，就能够把 state_dict 能够匹配的 keys 加载进去，而忽略掉那些不匹配的 keys。<br>保存模型 A 的 state_dict ：</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>modelA<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+modelA.<span class="hljs-built_in">eval</span>()
+modelB.<span class="hljs-built_in">eval</span>()
+<span class="hljs-comment"># - or -</span>
+modelA.train()
+modelB.train()
+</code></pre>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<h3 id="使用其他模型的参数暖启动自己的模型"><a class="markdownIt-Anchor" href="#使用其他模型的参数暖启动自己的模型"></a> 使用其他模型的参数暖启动自己的模型</h3>
+<p>有时候训练一个新的复杂模型时，需要加载它的一部分预训练的权重。即使只有几个可用的参数，也会有助于 warmstart 训练过程，帮助模型更快达到收敛。<br>
+如果手里有的这个 state_dict 缺乏一些 keys，或者多了一些 keys，只要设置<code>strict</code>参数为 False，就能够把 state_dict 能够匹配的 keys 加载进去，而忽略掉那些不匹配的 keys。<br>
+保存模型 A 的 state_dict ：</p>
+<pre class="highlight"><code class="python">torch.save(modelA.state_dict(), PATH)
+</code></pre>
 <p>加载到模型 B：</p>
-<pre class="line-numbers language-python"><code class="language-python">modelB <span class="token operator">=</span> TheModelBClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-modelB<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">)</span><span class="token punctuation">,</span> strict<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="不同设备（CPU-GPU）上保存和加载"><a href="#不同设备（CPU-GPU）上保存和加载" class="headerlink" title="不同设备（CPU&#x2F;GPU）上保存和加载"></a>不同设备（CPU&#x2F;GPU）上保存和加载</h3><p>不同设备的保存和加载需要在<code>load()</code>函数中引入一个参数<code>map_location</code>来指定需要将不同设备上保存的模型映射到同一个设备上。如果保存模型和加载模型的是<strong>相同</strong>的设备：CPU-&gt;CPU，GPU-&gt;GPU。则加载模型时可不使用<code>map_location</code>参数。如果保存模型和加载模型的是<strong>不同</strong>的设备：CPU-&gt;GPU，GPU-&gt;CPU。则加载模型时必须使用<code>map_location</code>参数。<br>上述的两种情况下，如果加载的设备是GPU，还需要使用<code>model.to(device)</code>将模型的参数张量转化为CUDA张量。<br>从CPU加载到GPU：</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">modelB = TheModelBClass(*args, **kwargs)
+modelB.load_state_dict(torch.load(PATH), strict=<span class="hljs-literal">False</span>)
+</code></pre>
+<h3 id="不同设备cpugpu上保存和加载"><a class="markdownIt-Anchor" href="#不同设备cpugpu上保存和加载"></a> 不同设备（CPU/GPU）上保存和加载</h3>
+<p>不同设备的保存和加载需要在<code>load()</code>函数中引入一个参数<code>map_location</code>来指定需要将不同设备上保存的模型映射到同一个设备上。如果保存模型和加载模型的是<strong>相同</strong>的设备：CPU-&gt;CPU，GPU-&gt;GPU。则加载模型时可不使用<code>map_location</code>参数。如果保存模型和加载模型的是<strong>不同</strong>的设备：CPU-&gt;GPU，GPU-&gt;CPU。则加载模型时必须使用<code>map_location</code>参数。<br>
+上述的两种情况下，如果加载的设备是GPU，还需要使用<code>model.to(device)</code>将模型的参数张量转化为CUDA张量。<br>
+从CPU加载到GPU：</p>
+<pre class="highlight"><code class="python">torch.save(model.state_dict(), PATH)
 
-device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">"cuda"</span><span class="token punctuation">)</span>
-model <span class="token operator">=</span> TheModelClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">,</span> map_location<span class="token operator">=</span><span class="token string">"cuda"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
-model<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+device = torch.device(<span class="hljs-string">&quot;cuda&quot;</span>)
+model = TheModelClass(*args, **kwargs)
+model.load_state_dict(torch.load(PATH, map_location=<span class="hljs-string">&quot;cuda&quot;</span>))  
+model.to(device)
+</code></pre>
 <p>从GPU加载到CPU：</p>
-<pre class="line-numbers language-python"><code class="language-python">torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> PATH<span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">torch.save(model.state_dict(), PATH)
 
-device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">'cpu'</span><span class="token punctuation">)</span>
-model <span class="token operator">=</span> TheModelClass<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>PATH<span class="token punctuation">,</span> map_location<span class="token operator">=</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="断点继续训练"><a href="#断点继续训练" class="headerlink" title="断点继续训练"></a>断点继续训练</h2><p>将网络训练过程中的网络的权重，优化器的权重保存，以及epoch 保存，便于继续训练恢复。如果使用了学习率衰减，在保存网络中的训练的参数的过程中，还需要保存lr_scheduler的state_dict，然后断点继续训练的时候恢复。</p>
-<pre class="line-numbers language-python"><code class="language-python">checkpoint <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token string">"net"</span><span class="token punctuation">:</span> model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token string">'optimizer'</span><span class="token punctuation">:</span> optimizer<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token string">"epoch"</span><span class="token punctuation">:</span> epoch<span class="token punctuation">,</span>
-    <span class="token string">'lr_schedule'</span><span class="token punctuation">:</span> lr_schedule<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">if</span> <span class="token operator">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isdir<span class="token punctuation">(</span><span class="token string">"./model_parameter/test"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    os<span class="token punctuation">.</span>mkdir<span class="token punctuation">(</span><span class="token string">"./model_parameter/test"</span><span class="token punctuation">)</span>
-torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>checkpoint<span class="token punctuation">,</span> <span class="token string">'./model_parameter/test/ckpt_best_%s.pth'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>str<span class="token punctuation">(</span>epoch<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+device = torch.device(<span class="hljs-string">&#x27;cpu&#x27;</span>)
+model = TheModelClass(*args, **kwargs)
+model.load_state_dict(torch.load(PATH, map_location=device))
+</code></pre>
+<h2 id="断点继续训练"><a class="markdownIt-Anchor" href="#断点继续训练"></a> 断点继续训练</h2>
+<p>将网络训练过程中的网络的权重，优化器的权重保存，以及epoch 保存，便于继续训练恢复。如果使用了学习率衰减，在保存网络中的训练的参数的过程中，还需要保存lr_scheduler的state_dict，然后断点继续训练的时候恢复。</p>
+<pre class="highlight"><code class="python">checkpoint = {
+    <span class="hljs-string">&quot;net&quot;</span>: model.state_dict(),
+    <span class="hljs-string">&#x27;optimizer&#x27;</span>: optimizer.state_dict(),
+    <span class="hljs-string">&quot;epoch&quot;</span>: epoch,
+    <span class="hljs-string">&#x27;lr_schedule&#x27;</span>: lr_schedule.state_dict()
+}
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isdir(<span class="hljs-string">&quot;./model_parameter/test&quot;</span>):
+    os.mkdir(<span class="hljs-string">&quot;./model_parameter/test&quot;</span>)
+torch.save(checkpoint, <span class="hljs-string">&#x27;./model_parameter/test/ckpt_best_%s.pth&#x27;</span> % (<span class="hljs-built_in">str</span>(epoch)))
+</code></pre>
 <p>加载恢复训练参数</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#加载恢复</span>
-<span class="token keyword">if</span> RESUME<span class="token punctuation">:</span>
-    path_checkpoint <span class="token operator">=</span> <span class="token string">"./model_parameter/test/ckpt_best_50.pth"</span>  <span class="token comment" spellcheck="true"># 断点路径</span>
-    checkpoint <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>path_checkpoint<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 加载断点</span>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#加载恢复</span>
+<span class="hljs-keyword">if</span> RESUME:
+    path_checkpoint = <span class="hljs-string">&quot;./model_parameter/test/ckpt_best_50.pth&quot;</span>  <span class="hljs-comment"># 断点路径</span>
+    checkpoint = torch.load(path_checkpoint)  <span class="hljs-comment"># 加载断点</span>
 
 
-    model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'net'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 加载模型可学习参数</span>
+    model.load_state_dict(checkpoint[<span class="hljs-string">&#x27;net&#x27;</span>])  <span class="hljs-comment"># 加载模型可学习参数</span>
 
 
-    optimizer<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'optimizer'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 加载优化器参数</span>
-    start_epoch <span class="token operator">=</span> checkpoint<span class="token punctuation">[</span><span class="token string">'epoch'</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 设置开始的epoch</span>
-    lr_schedule<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>checkpoint<span class="token punctuation">[</span><span class="token string">'lr_schedule'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#加载lr_scheduler</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    optimizer.load_state_dict(checkpoint[<span class="hljs-string">&#x27;optimizer&#x27;</span>])  <span class="hljs-comment"># 加载优化器参数</span>
+    start_epoch = checkpoint[<span class="hljs-string">&#x27;epoch&#x27;</span>]  <span class="hljs-comment"># 设置开始的epoch</span>
+    lr_schedule.load_state_dict(checkpoint[<span class="hljs-string">&#x27;lr_schedule&#x27;</span>])<span class="hljs-comment">#加载lr_scheduler</span>
+</code></pre>
 
                 
             </div>

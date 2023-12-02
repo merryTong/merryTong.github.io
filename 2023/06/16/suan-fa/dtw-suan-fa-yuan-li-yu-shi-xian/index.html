@@ -5,8 +5,10 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="DTW算法原理与实现, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="DTW算法原理与实现Dynamic Time Warping（动态时间规整，简称DTW）是时间序列分析的经典算法，用来比较两个时间序列之间的距离。
-基本原理DTW最初用于识别语音的相似性。我们用数字表示音调高低，例如某个单词发音的音调为1-">
+    <meta name="description" content=" DTW算法原理与实现
+Dynamic Time Warping（动态时间规整，简称DTW）是时间序列分析的经典算法，用来比较两个时间序列之间的距离。
+ 基本原理
+DTW最初用于识别语音的相似性。我们用数字表示音调高低，例如某个单词发音的音">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -404,12 +406,27 @@
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-28
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.1k
+                </div>
                 
 
                 
 
                 
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -420,29 +437,31 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="DTW算法原理与实现"><a href="#DTW算法原理与实现" class="headerlink" title="DTW算法原理与实现"></a>DTW算法原理与实现</h1><p>Dynamic Time Warping（动态时间规整，简称DTW）是时间序列分析的经典算法，用来比较两个时间序列之间的距离。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>DTW最初用于识别语音的相似性。我们用数字表示音调高低，例如某个单词发音的音调为1-3-2-4。现在有两个人说这个单词，一个人在前半部分拖长，其发音为1-1-3-3-2-4；另一个人在后半部分拖长，其发音为1-3-2-2-4-4。</p>
-<p><img src="/images/%E4%B8%A4%E4%B8%AA%E5%BA%8F%E5%88%97.png"></p>
+                <h1 id="dtw算法原理与实现"><a class="markdownIt-Anchor" href="#dtw算法原理与实现"></a> DTW算法原理与实现</h1>
+<p>Dynamic Time Warping（动态时间规整，简称DTW）是时间序列分析的经典算法，用来比较两个时间序列之间的距离。</p>
+<h2 id="基本原理"><a class="markdownIt-Anchor" href="#基本原理"></a> 基本原理</h2>
+<p>DTW最初用于识别语音的相似性。我们用数字表示音调高低，例如某个单词发音的音调为1-3-2-4。现在有两个人说这个单词，一个人在前半部分拖长，其发音为1-1-3-3-2-4；另一个人在后半部分拖长，其发音为1-3-2-2-4-4。</p>
+<p><img src="/images/%E4%B8%A4%E4%B8%AA%E5%BA%8F%E5%88%97.png" alt></p>
 <p>现在要计算1-1-3-3-2-4和1-3-2-2-4-4两个序列的距离（距离越小，相似度越高）。因为两个序列代表同一个单词，所以希望算出的距离越小越好，这样把两个序列识别为同一单词的概率就越大。</p>
 <p>先用传统方法计算两个序列的欧几里得距离，即计算两个序列各个对应的点之间的距离之和。</p>
-<p><img src="/images/%E4%B8%A4%E4%B8%AA%E5%BA%8F%E5%88%97%E7%9A%84%E6%AC%A7%E5%BC%8F%E8%B7%9D%E7%A6%BB.png"></p>
+<p><img src="/images/%E4%B8%A4%E4%B8%AA%E5%BA%8F%E5%88%97%E7%9A%84%E6%AC%A7%E5%BC%8F%E8%B7%9D%E7%A6%BB.png" alt></p>
 <p>两个序列之间的距离计算如下述公式</p>
-<pre class="line-numbers language-plain"><code class="language-plain">距离之和 
+<pre class="highlight"><code class="plain">距离之和 
 = |A(1)-B(1)| + |A(2)-B(2)| + |A(3)-B(3)| + |A(4)-B(4)| + |A(5)-B(5)| + |A(6)-B(6)|
 = |1-1| + |1-3| + |3-2| + |3-2| + |2-4| + |4-4|
 = 6
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>如果允许序列的点与另一序列的多个连续的点相对应（相当于把这个点所代表的音调的发音时间延长），然后再计算对应点之间的距离之和。如下图：B(1)与A(1)、A(2)相对应，B(2)与A(3)、A(4)相对应，A(5)与B(3)、B(4)相对应，A(6)与B(5)、B(6)相对应。</p>
-<p><img src="/images/%E4%B8%A4%E4%B8%AA%E5%BA%8F%E5%88%97%E7%9A%84%E8%A7%84%E6%95%B4%E8%B7%9D%E7%A6%BB.png"></p>
+<p><img src="/images/%E4%B8%A4%E4%B8%AA%E5%BA%8F%E5%88%97%E7%9A%84%E8%A7%84%E6%95%B4%E8%B7%9D%E7%A6%BB.png" alt></p>
 <p>规整之后两个序列之间的距离计算如下述公式</p>
-<pre class="line-numbers language-plain"><code class="language-plain">距离之和
+<pre class="highlight"><code class="plain">距离之和
 = |A(1)-B(1)| + |A(2)-B(1)| + |A(3)-B(2)| + |A(4)-B(2)| + |A(5)-B(3)| + |A(5)-B(4)| + |A(6)-B(5)| + |A(6)-B(6)| 
 = |1-1| + |1-1| + |3-3| + |3-3| + |2-2| + |2-2| + |4-4| + |4-4|
 = 0
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>把这种“可以把序列某个时刻的点跟另一序列多个连续时刻的点相对应”的做法称为时间规整（Time Warping）。现在用一个6*6矩阵M表示序列A(1-1-3-3-2-4)和序列B(1-3-2-2-4-4)各个点之间的距离，M(i, j)等于A的第i个点和B的第j个点之间的距离，即</p>
-<p>$M(i,j)&#x3D;|A(i)-B(j)|, i \le i, j \le 6$</p>
-<p><img src="/images/dtw_path.png"></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">∣</mi><mi>A</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo>−</mo><mi>B</mi><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi><mo separator="true">,</mo><mi>i</mi><mo>≤</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo>≤</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">M(i,j)=|A(i)-B(j)|, i \le i, j \le 6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mord">∣</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span></p>
+<p><img src="/images/dtw_path.png" alt></p>
 <p>灰色的路径表示欧氏距离对应的两个序列的点，正好是对角线；红色的路径表示时间规整方法对应的两个序列的点。</p>
 <p>因此，DTW算法的步骤为：</p>
 <ol>
@@ -450,10 +469,12 @@
 <li><strong>寻找一条从矩阵左上角到右下角的路径，使得路径上的元素和最小。</strong></li>
 </ol>
 <p>称路径上的元素和为路径长度。那么如何寻找长度最小的路径呢？</p>
-<h2 id="DTW求解"><a href="#DTW求解" class="headerlink" title="DTW求解"></a>DTW求解</h2><p>矩阵从左上角到右下角的路径长度有以下性质：</p>
+<h2 id="dtw求解"><a class="markdownIt-Anchor" href="#dtw求解"></a> DTW求解</h2>
+<p>矩阵从左上角到右下角的路径长度有以下性质：</p>
 <ol>
-<li>当前路径长度 &#x3D; 前一步的路径长度 + 当前元素的大小</li>
-<li>对于路径上的某个元素(i, j)，它的前一步的路径长度只可能为以下三者之一：<ul>
+<li>当前路径长度 = 前一步的路径长度 + 当前元素的大小</li>
+<li>对于路径上的某个元素(i, j)，它的前一步的路径长度只可能为以下三者之一：
+<ul>
 <li>左边的相邻元素 (i, j-1)</li>
 <li>上面的相邻元素 (i-1, j)</li>
 <li>左上方的相邻元素 (i-1, j-1)</li>
@@ -461,26 +482,26 @@
 </li>
 </ol>
 <p>即可使用动态规划的思想求解：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">_traceback</span><span class="token punctuation">(</span>D<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">'''
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">_traceback</span>(<span class="hljs-params">D</span>):
+    <span class="hljs-string">&#x27;&#x27;&#x27;
     根据代价矩阵回溯路径
-    '''</span>
-    i<span class="token punctuation">,</span> j <span class="token operator">=</span> array<span class="token punctuation">(</span>D<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
-    path <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">or</span> <span class="token punctuation">(</span>j <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        back <span class="token operator">=</span> argmin<span class="token punctuation">(</span><span class="token punctuation">(</span>D<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">,</span> j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> D<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> D<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>back <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            i <span class="token operator">-=</span> <span class="token number">1</span>
-            j <span class="token operator">-=</span> <span class="token number">1</span>
-        <span class="token keyword">elif</span> <span class="token punctuation">(</span>back <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            j <span class="token operator">-=</span> <span class="token number">1</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            i <span class="token operator">-=</span> <span class="token number">1</span>
-        path<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> list<span class="token punctuation">(</span>reversed<span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    &#x27;&#x27;&#x27;</span>
+    i, j = array(D.shape) - <span class="hljs-number">1</span>
+    path = [(i,j)]
+    <span class="hljs-keyword">while</span> ((i &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (j &gt; <span class="hljs-number">0</span>)):
+        back = argmin((D[i-<span class="hljs-number">1</span>, j-<span class="hljs-number">1</span>], D[i, j-<span class="hljs-number">1</span>], D[i-<span class="hljs-number">1</span>, j]))
+        <span class="hljs-keyword">if</span> (back == <span class="hljs-number">0</span>):
+            i -= <span class="hljs-number">1</span>
+            j -= <span class="hljs-number">1</span>
+        <span class="hljs-keyword">elif</span> (back == <span class="hljs-number">1</span>):
+            j -= <span class="hljs-number">1</span>
+        <span class="hljs-keyword">else</span>:
+            i -= <span class="hljs-number">1</span>
+        path.append((i,j))
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">list</span>(<span class="hljs-built_in">reversed</span>(path))
 
-<span class="token keyword">def</span> <span class="token function">dtw_distance</span><span class="token punctuation">(</span>ts_a<span class="token punctuation">,</span> ts_b<span class="token punctuation">,</span> d<span class="token operator">=</span><span class="token keyword">lambda</span> x<span class="token punctuation">,</span>y<span class="token punctuation">:</span> abs<span class="token punctuation">(</span>x<span class="token operator">-</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span> mww<span class="token operator">=</span>np<span class="token punctuation">.</span>inf<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""Computes dtw distance between two time series
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dtw_distance</span>(<span class="hljs-params">ts_a, ts_b, d=<span class="hljs-keyword">lambda</span> x,y: <span class="hljs-built_in">abs</span>(<span class="hljs-params">x-y</span>), mww=np.inf</span>):
+    <span class="hljs-string">&quot;&quot;&quot;Computes dtw distance between two time series
     
     Args:
         ts_a: time series a
@@ -490,30 +511,30 @@
         
     Returns:
         dtw distance
-    """</span>
+    &quot;&quot;&quot;</span>
     
-    <span class="token comment" spellcheck="true"># Create cost matrix via broadcasting with large int</span>
-    ts_a<span class="token punctuation">,</span> ts_b <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>ts_a<span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>ts_b<span class="token punctuation">)</span>
-    M<span class="token punctuation">,</span> N <span class="token operator">=</span> len<span class="token punctuation">(</span>ts_a<span class="token punctuation">)</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>ts_b<span class="token punctuation">)</span>
-    cost <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="hljs-comment"># Create cost matrix via broadcasting with large int</span>
+    ts_a, ts_b = np.array(ts_a), np.array(ts_b)
+    M, N = <span class="hljs-built_in">len</span>(ts_a), <span class="hljs-built_in">len</span>(ts_b)
+    cost = np.ones((M, N))
 
-    <span class="token comment" spellcheck="true"># Initialize the first row and column</span>
-    cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> d<span class="token punctuation">(</span>ts_a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ts_b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> M<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        cost<span class="token punctuation">[</span>i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> cost<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> d<span class="token punctuation">(</span>ts_a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> ts_b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="hljs-comment"># Initialize the first row and column</span>
+    cost[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] = d(ts_a[<span class="hljs-number">0</span>], ts_b[<span class="hljs-number">0</span>])
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, M):
+        cost[i, <span class="hljs-number">0</span>] = cost[i-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>] + d(ts_a[i], ts_b[<span class="hljs-number">0</span>])
 
-    <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">+</span> d<span class="token punctuation">(</span>ts_a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ts_b<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, N):
+        cost[<span class="hljs-number">0</span>, j] = cost[<span class="hljs-number">0</span>, j-<span class="hljs-number">1</span>] + d(ts_a[<span class="hljs-number">0</span>], ts_b[j])
 
-    <span class="token comment" spellcheck="true"># Populate rest of cost matrix within window</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> M<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>max<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> i <span class="token operator">-</span> mww<span class="token punctuation">)</span><span class="token punctuation">,</span> min<span class="token punctuation">(</span>N<span class="token punctuation">,</span> i <span class="token operator">+</span> mww<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            choices <span class="token operator">=</span> cost<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">,</span> j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> cost<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> cost<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span>
-            cost<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> min<span class="token punctuation">(</span>choices<span class="token punctuation">)</span> <span class="token operator">+</span> d<span class="token punctuation">(</span>ts_a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> ts_b<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="hljs-comment"># Populate rest of cost matrix within window</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, M):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">max</span>(<span class="hljs-number">1</span>, i - mww), <span class="hljs-built_in">min</span>(N, i + mww)):
+            choices = cost[i-<span class="hljs-number">1</span>, j-<span class="hljs-number">1</span>], cost[i, j-<span class="hljs-number">1</span>], cost[i-<span class="hljs-number">1</span>, j]
+            cost[i, j] = <span class="hljs-built_in">min</span>(choices) + d(ts_a[i], ts_b[j])
 
-    <span class="token comment" spellcheck="true"># Return DTW distance given window </span>
-    <span class="token keyword">return</span> cost<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> _traceback<span class="token punctuation">(</span>cost<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="hljs-comment"># Return DTW distance given window </span>
+    <span class="hljs-keyword">return</span> cost[-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>], _traceback(cost)
+</code></pre>
 
                 
             </div>

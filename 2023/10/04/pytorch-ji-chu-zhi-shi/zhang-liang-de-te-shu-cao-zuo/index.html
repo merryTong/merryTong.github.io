@@ -5,8 +5,10 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|张量的特殊操作, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="张量的特殊操作在阅读别人的代码时，会遇到一些针对张量的特殊操作的方法，这些方法的具体使用在Pytorch的官方文档有解释，但是阅读官方文档往往更加迷惑，因此在这里对这些方法进行详细的解释。
-torch.scatter方法torch.scat">
+    <meta name="description" content=" 张量的特殊操作
+在阅读别人的代码时，会遇到一些针对张量的特殊操作的方法，这些方法的具体使用在Pytorch的官方文档有解释，但是阅读官方文档往往更加迷惑，因此在这里对这些方法进行详细的解释。
+ torch.scatter方法
+torch.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -408,12 +410,27 @@ torch.scatter方法torch.scat">
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-05
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.7k
+                </div>
                 
 
                 
 
                 
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -424,22 +441,25 @@ torch.scatter方法torch.scat">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="张量的特殊操作"><a href="#张量的特殊操作" class="headerlink" title="张量的特殊操作"></a>张量的特殊操作</h1><p>在阅读别人的代码时，会遇到一些针对张量的特殊操作的方法，这些方法的具体使用在Pytorch的官方文档有解释，但是阅读官方文档往往更加迷惑，因此在这里对这些方法进行详细的解释。</p>
-<h2 id="torch-scatter方法"><a href="#torch-scatter方法" class="headerlink" title="torch.scatter方法"></a>torch.scatter方法</h2><p><code>torch.scatter()</code>方法正如字面含义“放置”，如代码<code>torch.scatter(B, dim, index, A)</code>，就是将张量A，根据参数dim和index填充到张量B中去；也可以写作<code>B.scatter(dim, index, A)</code>。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> x <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> x
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.9026</span><span class="token punctuation">,</span> <span class="token number">0.3278</span><span class="token punctuation">,</span> <span class="token number">0.4902</span><span class="token punctuation">,</span> <span class="token number">0.6585</span><span class="token punctuation">,</span> <span class="token number">0.1589</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0.3596</span><span class="token punctuation">,</span> <span class="token number">0.5294</span><span class="token punctuation">,</span> <span class="token number">0.6111</span><span class="token punctuation">,</span> <span class="token number">0.5385</span><span class="token punctuation">,</span> <span class="token number">0.2100</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>scatter_<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.9026</span><span class="token punctuation">,</span> <span class="token number">0.5294</span><span class="token punctuation">,</span> <span class="token number">0.6111</span><span class="token punctuation">,</span> <span class="token number">0.6585</span><span class="token punctuation">,</span> <span class="token number">0.1589</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.3278</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.5385</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0.3596</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.4902</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.2100</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h3><p>在代码<code>torch.scatter(B, dim, index, A)</code>中，该方法有几个重要的参数：目标张量(B)、dim、index和源张量(A)，其中各变量及参数的说明如下：</p>
+                <h1 id="张量的特殊操作"><a class="markdownIt-Anchor" href="#张量的特殊操作"></a> 张量的特殊操作</h1>
+<p>在阅读别人的代码时，会遇到一些针对张量的特殊操作的方法，这些方法的具体使用在Pytorch的官方文档有解释，但是阅读官方文档往往更加迷惑，因此在这里对这些方法进行详细的解释。</p>
+<h2 id="torchscatter方法"><a class="markdownIt-Anchor" href="#torchscatter方法"></a> torch.scatter方法</h2>
+<p><code>torch.scatter()</code>方法正如字面含义“放置”，如代码<code>torch.scatter(B, dim, index, A)</code>，就是将张量A，根据参数dim和index填充到张量B中去；也可以写作<code>B.scatter(dim, index, A)</code>。</p>
+<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>x = torch.rand((<span class="hljs-number">2</span>,<span class="hljs-number">5</span>))
+<span class="hljs-meta">&gt;&gt;&gt; </span>x
+tensor([[<span class="hljs-number">0.9026</span>, <span class="hljs-number">0.3278</span>, <span class="hljs-number">0.4902</span>, <span class="hljs-number">0.6585</span>, <span class="hljs-number">0.1589</span>],
+        [<span class="hljs-number">0.3596</span>, <span class="hljs-number">0.5294</span>, <span class="hljs-number">0.6111</span>, <span class="hljs-number">0.5385</span>, <span class="hljs-number">0.2100</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>torch.zeros(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>).scatter_(<span class="hljs-number">0</span>, torch.tensor([[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]]), x)
+tensor([[<span class="hljs-number">0.9026</span>, <span class="hljs-number">0.5294</span>, <span class="hljs-number">0.6111</span>, <span class="hljs-number">0.6585</span>, <span class="hljs-number">0.1589</span>],
+        [<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3278</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5385</span>, <span class="hljs-number">0.0000</span>],
+        [<span class="hljs-number">0.3596</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.4902</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2100</span>]])
+</code></pre>
+<h3 id="参数解释"><a class="markdownIt-Anchor" href="#参数解释"></a> 参数解释</h3>
+<p>在代码<code>torch.scatter(B, dim, index, A)</code>中，该方法有几个重要的参数：目标张量(B)、dim、index和源张量(A)，其中各变量及参数的说明如下：</p>
 <ul>
 <li>目标张量：将在该张量上进行数据的填充，如上述代码的张量<code>B</code></li>
 <li>源张量：将把该张量上的元素逐个填充到目标张量上，如上述代码的张量<code>A</code></li>
-<li>dim：指定轴的方向，即指定<strong>沿着目标张量的哪个轴</strong>进行填充。对于二维张量，dim&#x3D;0表示逐列进行行填充，而dim&#x3D;1表示逐行进行填充</li>
+<li>dim：指定轴的方向，即指定<strong>沿着目标张量的哪个轴</strong>进行填充。对于二维张量，dim=0表示逐列进行行填充，而dim=1表示逐行进行填充</li>
 <li>index：指定<strong>源张量的每个元素将要填充到目标张量的位置</strong>。按照轴方向，在target张量中需要填充的位置</li>
 </ul>
 <p>上述参数的本质即：dim参数指明沿着目标张量的哪个轴进行填充，而index参数指明源张量的每个元素将会填充的位置。为了保证scatter填充的有效性，需要注意：</p>
@@ -447,96 +467,98 @@ tensor<span class="token punctuation">(</span><span class="token punctuation">[<
 <li>index的形状大小必须和源张量保持一致。因为index参数指明源张量的每个元素的填充位置，index的元素和源张量的元素是一一对应的。</li>
 </ol>
 <p>借用网上一张图片来理解上述的内容。</p>
-<p><img src="/images/scatter.jpg"></p>
-<p>如上图所示，因为指定了<code>dim=0</code>，所以是按照目标张量的列方向进行填充，即填充时逐列去填充数据。然后逐列的观察index参数（因为dim&#x3D;0），index的第一列是0和2，上述说明了index参数指明源张量的每个元素将会填充的位置，对应源张量的元素0.3992和0.5735，因此这两个元素放在目标张量的第一列的第一行和第三行（第一行和第三行对应0和2，0和2表示索引）。继续逐列填充，假设进行到第三列，index的第三列是2和0，对应源张量的元素0.9044和0.6797，因此这两个元素放在目标张量的第三列的第三行和第一行。</p>
+<p><img src="/images/scatter.jpg" alt></p>
+<p>如上图所示，因为指定了<code>dim=0</code>，所以是按照目标张量的列方向进行填充，即填充时逐列去填充数据。然后逐列的观察index参数（因为dim=0），index的第一列是0和2，上述说明了index参数指明源张量的每个元素将会填充的位置，对应源张量的元素0.3992和0.5735，因此这两个元素放在目标张量的第一列的第一行和第三行（第一行和第三行对应0和2，0和2表示索引）。继续逐列填充，假设进行到第三列，index的第三列是2和0，对应源张量的元素0.9044和0.6797，因此这两个元素放在目标张量的第三列的第三行和第一行。</p>
 <p>下面的举例将对<code>dim=1</code>进行解释，<code>dim=1</code>按照目标张量的行方向进行填充，即填充时逐行去填充数据。逐行观察index参数，index的第一行是0, 1, 2, 0, 0，对应源张量的0.9026, 0.3278, 0.4902, 0.6585, 0.1589，因此0.3287放在第一行的第二列，0.4902放在第一行的第三列，0.9026,  0.6585, 0.1589这三个数据放在第一行的第一列(index均是0)，因为填充时是逐个元素进行填充的，最后一个元素0.1589把前两个元素0.9026,  0.6585都给覆盖了，最后目标张量的第一行第一列是0.1589。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> x <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> x
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.9026</span><span class="token punctuation">,</span> <span class="token number">0.3278</span><span class="token punctuation">,</span> <span class="token number">0.4902</span><span class="token punctuation">,</span> <span class="token number">0.6585</span><span class="token punctuation">,</span> <span class="token number">0.1589</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0.3596</span><span class="token punctuation">,</span> <span class="token number">0.5294</span><span class="token punctuation">,</span> <span class="token number">0.6111</span><span class="token punctuation">,</span> <span class="token number">0.5385</span><span class="token punctuation">,</span> <span class="token number">0.2100</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>x = torch.rand((<span class="hljs-number">2</span>,<span class="hljs-number">5</span>))
+<span class="hljs-meta">&gt;&gt;&gt; </span>x
+tensor([[<span class="hljs-number">0.9026</span>, <span class="hljs-number">0.3278</span>, <span class="hljs-number">0.4902</span>, <span class="hljs-number">0.6585</span>, <span class="hljs-number">0.1589</span>],
+        [<span class="hljs-number">0.3596</span>, <span class="hljs-number">0.5294</span>, <span class="hljs-number">0.6111</span>, <span class="hljs-number">0.5385</span>, <span class="hljs-number">0.2100</span>]])
 
-<span class="token operator">>></span><span class="token operator">></span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>scatter_<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span>
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.1589</span><span class="token punctuation">,</span> <span class="token number">0.3278</span><span class="token punctuation">,</span> <span class="token number">0.4902</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0.6111</span><span class="token punctuation">,</span> <span class="token number">0.5385</span><span class="token punctuation">,</span> <span class="token number">0.2100</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">,</span> <span class="token number">0.0000</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>torch.zeros(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>).scatter_(<span class="hljs-number">1</span>,torch.tensor([[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]]),x)
+tensor([[<span class="hljs-number">0.1589</span>, <span class="hljs-number">0.3278</span>, <span class="hljs-number">0.4902</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>],
+        [<span class="hljs-number">0.6111</span>, <span class="hljs-number">0.5385</span>, <span class="hljs-number">0.2100</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>],
+        [<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>]])
+</code></pre>
 <p>这个例子可以再分析一下，看看为什么目标张量的第二行第三列是0.2100。具体过程和上述分析是一样的。</p>
-<h3 id="官方文档的说明"><a href="#官方文档的说明" class="headerlink" title="官方文档的说明"></a>官方文档的说明</h3><p>官方文档是张量为3维的情况下进行说明，在3维和3维以上的更高维度下，做法和我们上述的描述是类似的。先来看看官方文档：</p>
-<pre class="line-numbers language-python"><code class="language-python">target<span class="token punctuation">[</span>index<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># dim=0</span>
-target<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>index<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># dim=1</span>
-target<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>index<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># dim=2</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>当dim&#x3D;0时沿着张量的列方向，所以index出现在第0维度的位置；以此类推，dim&#x3D;1沿着张量的行方向，所以index出现在第1维度的位置；dim&#x3D;2沿着张量的通道方向，所以index出现在第2维度的位置。这样理解起来官方文档的解释就清晰明了。</p>
-<h2 id="torch-gather方法"><a href="#torch-gather方法" class="headerlink" title="torch.gather方法"></a>torch.gather方法</h2><p><code>torch.gather()</code>正如字面意思“收集”，即取出张量中对应的某些索引下的具体的元素。如代码<code>torch.gather(data, dim ,index)</code>表示按照dim和index参数从data张量中取出数值。也可以写作<code>data.gather(dim, index)</code>。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> data <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> data
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">3</span><span class="token punctuation">,</span>  <span class="token number">4</span><span class="token punctuation">,</span>  <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">6</span><span class="token punctuation">,</span>  <span class="token number">7</span><span class="token punctuation">,</span>  <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<h3 id="官方文档的说明"><a class="markdownIt-Anchor" href="#官方文档的说明"></a> 官方文档的说明</h3>
+<p>官方文档是张量为3维的情况下进行说明，在3维和3维以上的更高维度下，做法和我们上述的描述是类似的。先来看看官方文档：</p>
+<pre class="highlight"><code class="python">target[index[i][j][k]][j][k] = src[i][j][k] <span class="hljs-comment"># dim=0</span>
+target[i][index[i][j][k]][k] = src[i][j][k] <span class="hljs-comment"># dim=1</span>
+target[i][j][index[i][j][k]] = src[i][j][k] <span class="hljs-comment"># dim=2</span>
+</code></pre>
+<p>当dim=0时沿着张量的列方向，所以index出现在第0维度的位置；以此类推，dim=1沿着张量的行方向，所以index出现在第1维度的位置；dim=2沿着张量的通道方向，所以index出现在第2维度的位置。这样理解起来官方文档的解释就清晰明了。</p>
+<h2 id="torchgather方法"><a class="markdownIt-Anchor" href="#torchgather方法"></a> torch.gather方法</h2>
+<p><code>torch.gather()</code>正如字面意思“收集”，即取出张量中对应的某些索引下的具体的元素。如代码<code>torch.gather(data, dim ,index)</code>表示按照dim和index参数从data张量中取出数值。也可以写作<code>data.gather(dim, index)</code>。</p>
+<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>data = torch.arange(<span class="hljs-number">3</span>, <span class="hljs-number">12</span>).view(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>data
+tensor([[ <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>],
+        [ <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>],
+        [ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]])
 
-<span class="token operator">>></span><span class="token operator">></span> index <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>index = torch.tensor([[<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">0</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[<span class="hljs-number">9</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>]])
+</code></pre>
 <p>gather的操作，其实包含在scatter中。scatter是先根据index和dim找到data中的这些值，然后使用src去替换；而gather就是根据dim和index来找到data中的值，然后把这些值取出来构成新的张量。</p>
 <p>因此，可以先搞明白scatter的操作机制，再来看gather的操作。</p>
 <p>下面是一些代码示例，当传入的index是行向量时，</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> data <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> data
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">3</span><span class="token punctuation">,</span>  <span class="token number">4</span><span class="token punctuation">,</span>  <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">6</span><span class="token punctuation">,</span>  <span class="token number">7</span><span class="token punctuation">,</span>  <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>data = torch.arange(<span class="hljs-number">3</span>, <span class="hljs-number">12</span>).view(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>data
+tensor([[ <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>],
+        [ <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>],
+        [ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]])
 
-<span class="token operator">>></span><span class="token operator">></span> index <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>index = torch.tensor([[<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">0</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[<span class="hljs-number">9</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">1</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]])
+</code></pre>
 <p>当传入的index是列向量时，</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> data <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> data
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">3</span><span class="token punctuation">,</span>  <span class="token number">4</span><span class="token punctuation">,</span>  <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">6</span><span class="token punctuation">,</span>  <span class="token number">7</span><span class="token punctuation">,</span>  <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>data = torch.arange(<span class="hljs-number">3</span>, <span class="hljs-number">12</span>).view(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>data
+tensor([[ <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>],
+        [ <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>],
+        [ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]])
 
-<span class="token operator">>></span><span class="token operator">></span> index <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> index
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>index = torch.tensor([[<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>]]).t()
+<span class="hljs-meta">&gt;&gt;&gt; </span>index
+tensor([[<span class="hljs-number">2</span>],
+        [<span class="hljs-number">1</span>],
+        [<span class="hljs-number">0</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">1</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[<span class="hljs-number">5</span>],
+        [<span class="hljs-number">7</span>],
+        [<span class="hljs-number">9</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">0</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[<span class="hljs-number">9</span>],
+        [<span class="hljs-number">6</span>],
+        [<span class="hljs-number">3</span>]])
+</code></pre>
 <p>当传入的index是矩阵时，</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> data <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> data
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">3</span><span class="token punctuation">,</span>  <span class="token number">4</span><span class="token punctuation">,</span>  <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">6</span><span class="token punctuation">,</span>  <span class="token number">7</span><span class="token punctuation">,</span>  <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>data = torch.arange(<span class="hljs-number">3</span>, <span class="hljs-number">12</span>).view(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>data
+tensor([[ <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>],
+        [ <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>],
+        [ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>]])
 
-<span class="token operator">>></span><span class="token operator">></span> index <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
-                          <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out <span class="token operator">=</span> data<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> out
-tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>index = torch.tensor([[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>], 
+                          [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">1</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[<span class="hljs-number">3</span>, <span class="hljs-number">5</span>],
+        [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>]])
+<span class="hljs-meta">&gt;&gt;&gt; </span>out = data.gather(<span class="hljs-number">0</span>, index)
+<span class="hljs-meta">&gt;&gt;&gt; </span>out
+tensor([[ <span class="hljs-number">3</span>, <span class="hljs-number">10</span>],
+        [ <span class="hljs-number">6</span>, <span class="hljs-number">10</span>]])
+</code></pre>
 
                 
             </div>
