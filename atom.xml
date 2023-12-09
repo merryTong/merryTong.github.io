@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2023-11-26T06:01:32.718Z</updated>
+  <updated>2023-12-09T06:45:12.108Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>对比学习入门</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/12/06/lun-wen-yue-du/dui-bi-xue-xi-ru-men/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/12/06/lun-wen-yue-du/dui-bi-xue-xi-ru-men/</id>
+    <published>2023-12-06T09:30:31.000Z</published>
+    <updated>2023-12-09T06:45:12.108Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;对比学习入门&quot;&gt;&lt;a href=&quot;#对比学习入门&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="论文" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E8%AE%BA%E6%96%87/"/>
+    
+    
+      <category term="论文阅读" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="自监督" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E8%87%AA%E7%9B%91%E7%9D%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分类算法的评估指标</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/11/27/suan-fa/fen-lei-suan-fa-de-ping-gu-zhi-biao/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/11/27/suan-fa/fen-lei-suan-fa-de-ping-gu-zhi-biao/</id>
+    <published>2023-11-27T09:30:31.000Z</published>
+    <updated>2023-12-09T06:21:17.852Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;分类算法的评估指标&quot;&gt;&lt;a href=&quot;#分类算法的评估指标&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法评估" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>C++|友元与运算符重载</title>
@@ -101,7 +157,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/10/27/pytorch-ji-chu-zhi-shi/tu-xiang-du-qu/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/10/27/pytorch-ji-chu-zhi-shi/tu-xiang-du-qu/</id>
     <published>2023-10-27T11:30:31.000Z</published>
-    <updated>2023-10-28T01:28:55.684Z</updated>
+    <updated>2023-12-09T06:43:11.256Z</updated>
     
     <summary type="html">
     
@@ -118,7 +174,7 @@
       <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
     
     
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
+      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/Pytorch/"/>
     
       <category term="计算机视觉" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
     
@@ -213,7 +269,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/</id>
     <published>2023-10-04T11:30:31.000Z</published>
-    <updated>2023-10-05T09:16:15.962Z</updated>
+    <updated>2023-12-09T06:43:31.648Z</updated>
     
     <summary type="html">
     
@@ -464,7 +520,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/</id>
     <published>2023-04-10T11:30:31.000Z</published>
-    <updated>2023-10-04T00:25:21.243Z</updated>
+    <updated>2023-12-09T06:42:43.071Z</updated>
     
     <summary type="html">
     
@@ -483,7 +539,7 @@
     
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
+      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/Pytorch/"/>
     
   </entry>
   
@@ -492,7 +548,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</id>
     <published>2023-04-08T11:30:31.000Z</published>
-    <updated>2023-12-01T23:34:35.028Z</updated>
+    <updated>2023-12-09T06:42:32.675Z</updated>
     
     <summary type="html">
     
@@ -511,63 +567,7 @@
     
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytorch|构建数据管道</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</id>
-    <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:32:20.136Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Pytorch数据管道构建简介&quot;&gt;&lt;a href=&quot;#Pytorch数据管道构建简介&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytorch|模型和参数</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</id>
-    <published>2023-04-06T11:30:31.000Z</published>
-    <updated>2023-10-04T00:36:47.413Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Pytorch中的Module和function&quot;&gt;&lt;a href=&quot;#Pytorch中的Module和function&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/pytorch/"/>
+      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/Pytorch/"/>
     
   </entry>
   

@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/12/06/lun-wen-yue-du/dui-bi-xue-xi-ru-men/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/10/27/pytorch-ji-chu-zhi-shi/tu-xiang-du-qu/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/shen-du-xue-xi-xun-lian-dai-ma-mo-ban/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/bao-cun-he-jia-zai-mo-xing-duan-dian-ji-xu-xun-lian/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/01/pytorch-ji-chu-zhi-shi/01-zhang-liang-he-zhang-liang-cao-zuo/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
+    <loc>https://github.com/merryTong/merryTong.github.io/2023/11/27/suan-fa/fen-lei-suan-fa-de-ping-gu-zhi-biao/</loc>
+    <lastmod>2023-12-09</lastmod>
+  </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/11/11/suan-fa/xian-xing-hui-gui/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>  <url>
@@ -10,14 +49,8 @@
     <loc>https://github.com/merryTong/merryTong.github.io/2023/05/03/c-zhi-shi/c-jie-gou-ti/</loc>
     <lastmod>2023-12-01</lastmod>
   </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/08/pytorch-ji-chu-zhi-shi/04-zi-dong-wei-fen-yu-backward/</loc>
-    <lastmod>2023-12-01</lastmod>
-  </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/11/25/c-zhi-shi/you-yuan-yu-yun-suan-fu-chong-zai/</loc>
     <lastmod>2023-11-26</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/10/27/pytorch-ji-chu-zhi-shi/tu-xiang-du-qu/</loc>
-    <lastmod>2023-10-28</lastmod>
   </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/06/16/suan-fa/dtw-suan-fa-yuan-li-yu-shi-xian/</loc>
     <lastmod>2023-10-28</lastmod>
@@ -58,34 +91,7 @@
     <loc>https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/</loc>
     <lastmod>2023-10-28</lastmod>
   </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/10/04/pytorch-ji-chu-zhi-shi/zhang-liang-de-te-shu-cao-zuo/</loc>
-    <lastmod>2023-10-05</lastmod>
-  </url>  <url>
     <loc>https://github.com/merryTong/merryTong.github.io/2023/05/13/shu-xue/chang-jian-de-zui-you-hua-fang-fa/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/02/21/pytorch-ji-chu-zhi-shi/xue-xi-lu-shuai-jian/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/bao-cun-he-jia-zai-mo-xing-duan-dian-ji-xu-xun-lian/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/03/23/pytorch-ji-chu-zhi-shi/shen-du-xue-xi-xun-lian-dai-ma-mo-ban/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/01/pytorch-ji-chu-zhi-shi/01-zhang-liang-he-zhang-liang-cao-zuo/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/05/pytorch-ji-chu-zhi-shi/02-gou-jian-mo-xing-de-3-chong-fang-shi/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/03function-he-module/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/06/pytorch-ji-chu-zhi-shi/dataset-sampler-he-dataloader/</loc>
-    <lastmod>2023-10-04</lastmod>
-  </url>  <url>
-    <loc>https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/</loc>
     <lastmod>2023-10-04</lastmod>
   </url>
 </urlset>
