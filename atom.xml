@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2024-01-14T08:01:23.169Z</updated>
+  <updated>2024-01-24T23:51:12.221Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2024/01/13/python-zhi-shi/python-de-duo-xian-cheng-he-duo-jin-cheng/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2024/01/13/python-zhi-shi/python-de-duo-xian-cheng-he-duo-jin-cheng/</id>
-    <published>2024-01-13T10:05:21.400Z</published>
-    <updated>2024-01-14T08:01:23.169Z</updated>
+    <title>浮点数和混合精度</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/01/19/ji-suan-ji-ji-chu/jing-du-he-fu-dian-shu/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/01/19/ji-suan-ji-ji-chu/jing-du-he-fu-dian-shu/</id>
+    <published>2024-01-19T09:30:31.000Z</published>
+    <updated>2024-01-24T23:51:12.221Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;浮点数和混合精度&quot;&gt;&lt;a href=&quot;#浮点数和混合精度&quot; class=&quot;headerlink&quot; title=&quot;浮点数和混合精度&quot;&gt;&lt;/a&gt;浮点数和混合精度&lt;/h1&gt;&lt;h2 id=&quot;浮点数存储格式&quot;&gt;&lt;a href=&quot;#浮点数存储格式&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="浮点数和模型精度" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%B5%AE%E7%82%B9%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9E%8B%E7%B2%BE%E5%BA%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python的多线程和多进程</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/01/11/python-zhi-shi/python-de-duo-xian-cheng-he-duo-jin-cheng/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/01/11/python-zhi-shi/python-de-duo-xian-cheng-he-duo-jin-cheng/</id>
+    <published>2024-01-11T11:30:31.000Z</published>
+    <updated>2024-01-24T23:31:47.314Z</updated>
     
     <summary type="html">
     
@@ -35,6 +61,41 @@
     
     </summary>
     
+      <category term="编程语言" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="进程和线程" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++|STL中常用容器</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2023/12/25/c-zhi-shi/chang-jian-de-rong-qi/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2023/12/25/c-zhi-shi/chang-jian-de-rong-qi/</id>
+    <published>2023-12-25T11:30:31.000Z</published>
+    <updated>2024-01-24T23:36:52.764Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;STL中常用容器&quot;&gt;&lt;a href=&quot;#STL中常用容器&quot; class=&quot;headerlink&quot; title=&quot;STL中常用容器&quot;&gt;&lt;/a&gt;STL中常用容器&lt;/h1&gt;&lt;p&gt;本文简要介绍C++的STL中常用容器及其用法。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="编程语言" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="C++" scheme="https://github.com/merryTong/merryTong.github.io/tags/C/"/>
+    
+      <category term="STL" scheme="https://github.com/merryTong/merryTong.github.io/tags/STL/"/>
     
   </entry>
   
@@ -506,62 +567,6 @@
     
     
       <category term="C++" scheme="https://github.com/merryTong/merryTong.github.io/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python打包分发工具：setuptools</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/14/python-zhi-shi/python-da-bao-fen-fa-gong-ju/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/14/python-zhi-shi/python-da-bao-fen-fa-gong-ju/</id>
-    <published>2023-04-14T11:30:31.000Z</published>
-    <updated>2023-10-28T00:43:57.618Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Python打包工具setuptools介绍&quot;&gt;&lt;a href=&quot;#Python打包工具setuptools介绍&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="编程语言" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
-    
-      <category term="工具" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytorch|动态计算图</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/04/10/pytorch-ji-chu-zhi-shi/05-dong-tai-ji-suan-tu/</id>
-    <published>2023-04-10T11:30:31.000Z</published>
-    <updated>2023-12-09T06:42:43.071Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Pytorch的动态图简介&quot;&gt;&lt;a href=&quot;#Pytorch的动态图简介&quot; class=&quot;headerlink&quot; title=&quot;Pytorch的动态图简介&quot;&gt;&lt;/a&gt;Pytorch的动态图简介&lt;/h1&gt;&lt;p&gt;本节我们将介绍
-        
-      
-    
-    </summary>
-    
-      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/categories/Pytorch/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/Pytorch/"/>
     
   </entry>
   
