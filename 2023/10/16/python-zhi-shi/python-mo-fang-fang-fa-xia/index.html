@@ -5,9 +5,8 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的魔法方法(下), AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Python的魔法方法（下）
-本文是对B站UP主“码农高天”的《Python的魔法方法》系列视频的总结和整理，搭配视频食用本文效果更佳。
-魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会">
+    <meta name="description" content="Python的魔法方法（下）本文是对B站UP主“码农高天”的《Python的魔法方法》系列视频的总结和整理，搭配视频食用本文效果更佳。
+魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -438,437 +437,419 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="python的魔法方法下"><a class="markdownIt-Anchor" href="#python的魔法方法下"></a> Python的魔法方法（下）</h1>
-<p>本文是对B站UP主“码农高天”的《Python的魔法方法》系列视频的总结和整理，搭配视频食用本文效果更佳。</p>
+                <h1 id="Python的魔法方法（下）"><a href="#Python的魔法方法（下）" class="headerlink" title="Python的魔法方法（下）"></a>Python的魔法方法（下）</h1><p>本文是对B站UP主“码农高天”的《Python的魔法方法》系列视频的总结和整理，搭配视频食用本文效果更佳。</p>
 <p>魔法方法：Python提供的让用户客制化一个类的方式，定义在类内的一些特殊方法，这些方法的名称前后会有两个下划线。</p>
-<h2 id="与类的建立有关的方法"><a class="markdownIt-Anchor" href="#与类的建立有关的方法"></a> 与类的建立有关的方法</h2>
-<h3 id="__-init_subclass__"><a class="markdownIt-Anchor" href="#__-init_subclass__"></a> __ init_subclass__</h3>
-<p>这个魔法方法需要定义在基类里，当以这个类为基类，定义一个派生类的时候，这个方法就会被调用。运行下面的代码就会打印出类A。其中<code>cls</code>参数就是定义的派生类。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init_subclass__</span>(<span class="hljs-params">cls</span>):
-        <span class="hljs-built_in">print</span>(cls)
+<h2 id="与类的建立有关的方法"><a href="#与类的建立有关的方法" class="headerlink" title="与类的建立有关的方法"></a>与类的建立有关的方法</h2><h3 id="init-subclass"><a href="#init-subclass" class="headerlink" title="__ init_subclass__"></a>__ init_subclass__</h3><p>这个魔法方法需要定义在基类里，当以这个类为基类，定义一个派生类的时候，这个方法就会被调用。运行下面的代码就会打印出类A。其中<code>cls</code>参数就是定义的派生类。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Base</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init_subclass__</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span>
         
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(<span class="hljs-title class_ inherited__">Base</span>):
-    <span class="hljs-keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span>Base<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-comment"># 执行：</span>
-&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;__main__.A&#x27;</span>&gt;
-</code></pre>
+<span class="token comment" spellcheck="true"># 执行：</span>
+<span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.A'</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以在该方法里定义一个空字典，如下所示。同时，该方法也可以传入参数。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init_subclass__</span>(<span class="hljs-params">cls, name</span>):
-        cls.x = {}
-        cls.name = name
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Base</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init_subclass__</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        cls<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        cls<span class="token punctuation">.</span>name <span class="token operator">=</span> name
         
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(Base, name=<span class="hljs-string">&quot;Jack&quot;</span>):
-    <span class="hljs-keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span>Base<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"Jack"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-built_in">print</span>(A.x) <span class="hljs-comment"># {}</span>
-<span class="hljs-built_in">print</span>(A.name) <span class="hljs-comment"># Jack</span>
-</code></pre>
-<h3 id="__-set_name__"><a class="markdownIt-Anchor" href="#__-set_name__"></a> __ set_name__</h3>
-<p>该方法更多是用在描述器里。当在某个类的定义内，去实例化该类的对象时，就会调用这个方法。执行下面的代码，发现owner参数是类A，即表示在哪个类内去实例化对象；而name表示实例化对象时所赋值的变量名。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__set_name__</span>(<span class="hljs-params">self, owner, name</span>):
-        <span class="hljs-built_in">print</span>(owner, name)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    x = D()
-<span class="hljs-comment"># 执行：</span>
-&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;__main__.A&#x27;</span>&gt; x
-</code></pre>
-<h3 id="__-class_getitem__-和__-mro_entries__"><a class="markdownIt-Anchor" href="#__-class_getitem__-和__-mro_entries__"></a> __ class_getitem__ 和__ mro_entries__</h3>
-<p><code>__getitem__</code>：是当<strong>类实例化的对象</strong>使用<code>[]</code>进行取值时调用的方法。</p>
+<span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># {}</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Jack</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="set-name"><a href="#set-name" class="headerlink" title="__ set_name__"></a>__ set_name__</h3><p>该方法更多是用在描述器里。当在某个类的定义内，去实例化该类的对象时，就会调用这个方法。执行下面的代码，发现owner参数是类A，即表示在哪个类内去实例化对象；而name表示实例化对象时所赋值的变量名。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__set_name__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> owner<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>owner<span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 执行：</span>
+<span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.A'</span><span class="token operator">></span> x
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="class-getitem-和-mro-entries"><a href="#class-getitem-和-mro-entries" class="headerlink" title="__ class_getitem__ 和__ mro_entries__"></a>__ class_getitem__ 和__ mro_entries__</h3><p><code>__getitem__</code>：是当<strong>类实例化的对象</strong>使用<code>[]</code>进行取值时调用的方法。</p>
 <p><code>__class_getitem__</code>：是当<strong>类</strong>使用<code>[]</code>进行取值时调用的方法。可以用来对type hint做增强。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__class_getitem__</span>(<span class="hljs-params">cls, item</span>):
-        <span class="hljs-built_in">print</span>(item)
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;abc&quot;</span>
-<span class="hljs-built_in">print</span>(A[<span class="hljs-number">0</span>])
-<span class="hljs-comment"># 0</span>
-<span class="hljs-comment"># abc</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__class_getitem__</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token string">"abc"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 0</span>
+<span class="token comment" spellcheck="true"># abc</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如下的代码，在类型提示中<code>list[int]</code>表示一个由int组成的列表，可以将其赋给一个变量作为类型提示。</p>
-<pre class="highlight"><code class="python">int_arr_type = <span class="hljs-built_in">list</span>[<span class="hljs-built_in">int</span>]
-list1: int_arr_type = []
-list2: int_arr_type = []
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">int_arr_type <span class="token operator">=</span> list<span class="token punctuation">[</span>int<span class="token punctuation">]</span>
+list1<span class="token punctuation">:</span> int_arr_type <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+list2<span class="token punctuation">:</span> int_arr_type <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><code>__mro_entries__</code>：某个类在做继承的时候，大多数是<code>class B(A)</code>的形式，如果直接写做<code>class B(A())</code>的就会报错，报错是因为建立类B的时候寻找自己的基类出现了问题，因此<code>__mro_entries__</code>方法就是在建立类的过程中帮助寻找基类的，该方法会返回一个tuple，表示去哪里找基类。执行下面的代码则不会再报错并能运行了。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__mro_entries__</span>(<span class="hljs-params">self, bases</span>):
-        <span class="hljs-built_in">print</span>(base)
-        <span class="hljs-keyword">return</span> ()
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__mro_entries__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> bases<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>base<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
     
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(A()):
-    <span class="hljs-keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-comment"># 执行：</span>
-<span class="hljs-comment"># (&lt;__main__.A object at 0x7f87ab86a400&gt;,)</span>
-</code></pre>
+<span class="token comment" spellcheck="true"># 执行：</span>
+<span class="token comment" spellcheck="true"># (&lt;__main__.A object at 0x7f87ab86a400>,)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>从上面代码可以看到，<code>__mro_entries__</code>返回的是一个空tuple，因此在建立类B的过程中，类A的实例化对象提供不了类B的基类，如下面的代码打印结果是False。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__mro_entries__</span>(<span class="hljs-params">self, bases</span>):
-        <span class="hljs-built_in">print</span>(base)
-        <span class="hljs-keyword">return</span> ()
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__mro_entries__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> bases<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>base<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
     
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(A()):
-    <span class="hljs-keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">issubclass</span>(B, A)) <span class="hljs-comment"># False</span>
-</code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span>issubclass<span class="token punctuation">(</span>B<span class="token punctuation">,</span> A<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># False</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那再修改一下代码看看，说明B是A的子类，B成功找到了自己的基类。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__mro_entries__</span>(<span class="hljs-params">self, bases</span>):
-        <span class="hljs-built_in">print</span>(base)
-        <span class="hljs-keyword">return</span> (A,)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__mro_entries__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> bases<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>base<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>A<span class="token punctuation">,</span><span class="token punctuation">)</span>
     
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(A()):
-    <span class="hljs-keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">issubclass</span>(B, A)) <span class="hljs-comment"># True</span>
-</code></pre>
-<h2 id="与metaclass有关的方法"><a class="markdownIt-Anchor" href="#与metaclass有关的方法"></a> 与metaclass有关的方法</h2>
-<p>待补充</p>
-<h2 id="运算方法"><a class="markdownIt-Anchor" href="#运算方法"></a> 运算方法</h2>
-<h3 id="常用的运算方法"><a class="markdownIt-Anchor" href="#常用的运算方法"></a> 常用的运算方法</h3>
-<p>在Python中，如果直接对一个对象做数学运算，Python会报错。如下面的代码中的两个向量相加。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>issubclass<span class="token punctuation">(</span>B<span class="token punctuation">,</span> A<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># True</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="与metaclass有关的方法"><a href="#与metaclass有关的方法" class="headerlink" title="与metaclass有关的方法"></a>与metaclass有关的方法</h2><p>待补充</p>
+<h2 id="运算方法"><a href="#运算方法" class="headerlink" title="运算方法"></a>运算方法</h2><h3 id="常用的运算方法"><a href="#常用的运算方法" class="headerlink" title="常用的运算方法"></a>常用的运算方法</h3><p>在Python中，如果直接对一个对象做数学运算，Python会报错。如下面的代码中的两个向量相加。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>
     
-v1 = Vector(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)
-v2 = Vector(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
-<span class="hljs-built_in">print</span>(v1+v2) <span class="hljs-comment"># 报错</span>
-</code></pre>
+v1 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token operator">+</span>v2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 报错</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这个时候可以在类Vector中定义<code>__add__</code>方法，帮助自定义的向量对象做加法操作。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__add__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-keyword">return</span> Vector(self.x + other.x, self.y + other.y)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>
+    <span class="token keyword">def</span> <span class="token function">__add__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">+</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">+</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
     
-v1 = Vector(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)
-v2 = Vector(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
-<span class="hljs-built_in">print</span>(v1+v2) 
-<span class="hljs-comment"># Vector(2, 4)</span>
-</code></pre>
+v1 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token operator">+</span>v2<span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true"># Vector(2, 4)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在Python中可以定义的与数值运算相关的魔法方法如下，这也是对Python中的运算符号(<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>等)进行重写：</p>
 <p>加法<code>__add__</code>、减法<code>__sub__</code>、乘法<code>__mul__</code>、矩阵乘法<code>__matmul__</code>、除法<code>__truediv__</code>、整除<code>__floordiv__</code>、取余<code>__mod__</code>、既拿到商也拿到余数<code>__divmod__</code>、乘方<code>__pow__</code>。</p>
 <p>左移<code>lshift</code>、右移<code>rshift</code>。</p>
 <p>逻辑计算与<code>__and__</code>、逻辑计算异或<code>__xor__</code>、逻辑计算或<code>__or__</code>，注意这里不是对Python的关键字<code>and</code>和<code>or</code>的重写，是对符号<code>&amp;</code>和<code>|</code>的重写。</p>
 <p>这里的魔法方法除了乘方比较特殊外，其余的魔法方法定义形式基本相同。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__xxx__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-comment"># self和other做定义的运算</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__xxx__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># self和other做定义的运算</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>乘方的魔法方法的定义如下，相比于其他方法多了一个参数mod，该参数是指在做完乘方运算后可以再进行取余操作。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__pow__</span>(<span class="hljs-params">self, other, mod=<span class="hljs-literal">None</span></span>):
-        <span class="hljs-keyword">pass</span>
-        <span class="hljs-comment"># pow(v1, v2, mod) =&gt; (v1**v2)%mod</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__pow__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">,</span> mod<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+        <span class="token comment" spellcheck="true"># pow(v1, v2, mod) => (v1**v2)%mod</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里有几个注意的地方：首先，<code>self</code>和<code>other</code>并不一定是相同的类型，比如self是一个Vector对象，而other是一个int整数。可以在这个方法里实现数乘和点乘的功能。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__mul__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(other, <span class="hljs-built_in">int</span>)
-            <span class="hljs-keyword">return</span> Vector(self.x * other, self.y * other)
-       	<span class="hljs-keyword">elif</span> <span class="hljs-built_in">isinstance</span>(other, Vector):
-            <span class="hljs-keyword">return</span> Vector(self.x * other.x, self.y * other.y)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__mul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
+           <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> Vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>另外，使用魔法方法只是借用这个符号，并不一定要符合原来的定义，比如在C++ 中将左移运算符重新定义为<code>cout.print</code>，因此在使用<code>&lt;&lt;</code>符号时本质是在执行打印功能。</p>
 <p>最后看一个例子，我们在下面的代码中执行<code>print(v1*2)</code>时本质是<code>v1.__mul__(2)</code>，可以正确得到结果，那么如果是执行<code>print(2*v1)</code>则会报错，对于这种情况应该怎么办呢？</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__mul__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(other, <span class="hljs-built_in">int</span>)
-            <span class="hljs-keyword">return</span> Vector(self.x * other, self.y * other)
-       	<span class="hljs-keyword">elif</span> <span class="hljs-built_in">isinstance</span>(other, Vector):
-            <span class="hljs-keyword">return</span> Vector(self.x * other.x, self.y * other.y)
-v1 = Vector(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)
-<span class="hljs-built_in">print</span>(v1*<span class="hljs-number">2</span>) <span class="hljs-comment"># 等价于 v1.__mul__(2)</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-number">2</span>*v1) <span class="hljs-comment"># 报错</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__mul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
+           <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> Vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
+v1 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 等价于 v1.__mul__(2)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>v1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 报错</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此时，可以定义方法<code>__rmul__</code>来解决：如果操作符左侧的对象没有定义运算操作怎么完成时，就会尝试去找操作符右侧的数据对象的<strong>r版本</strong>的运算方法，也即执行<code>other*self</code>时，<code>other</code>不知道怎么做乘法时，就会调用<code>self</code>的<code>__rmul__</code>方法，然后把<code>other</code>作为参数传入，方法内部的实现与<code>__mul__</code>方法完全相同。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__mul__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(other, <span class="hljs-built_in">int</span>):
-            <span class="hljs-keyword">return</span> Vector(self.x * other, self.y * other)
-       	<span class="hljs-keyword">elif</span> <span class="hljs-built_in">isinstance</span>(other, Vector):
-            <span class="hljs-keyword">return</span> Vector(self.x * other.x, self.y * other.y)
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__rmul__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(other, <span class="hljs-built_in">int</span>):
-            <span class="hljs-keyword">return</span> Vector(self.x * other, self.y * other)
-       	<span class="hljs-keyword">elif</span> <span class="hljs-built_in">isinstance</span>(other, Vector):
-            <span class="hljs-keyword">return</span> Vector(self.x * other.x, self.y * other.y)        
-v1 = Vector(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)
-<span class="hljs-built_in">print</span>(v1*<span class="hljs-number">2</span>) <span class="hljs-comment"># Vector(0, 2)</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-number">2</span>*v1) <span class="hljs-comment"># Vector(0, 2)</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__mul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
+           <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> Vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">__rmul__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">)</span>
+           <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>other<span class="token punctuation">,</span> Vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x <span class="token operator">*</span> other<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y <span class="token operator">*</span> other<span class="token punctuation">.</span>y<span class="token punctuation">)</span>        
+v1 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>v1<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Vector(0, 2)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>v1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Vector(0, 2)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里提到的所有和数值计算有关的魔法方法，都有对应的r版本，也即在方法名前加一个字母“r”。比如加法<code>__add__</code>和<code>__radd__</code>。</p>
 <p>除了魔法方法的<strong>r 版本</strong>外，还有一个<strong>i版本</strong>，这是指原地（in-place）进行运算操作，修改self自身：相比于上述方法，不是返回一个新的内存数据，而是修改自身的内存数据。对应的运算符号是原来的操作符后面加一个等号，比如加法，<code>v1 += v2</code>就会调用<code>__iadd__</code>方法：<code>v1.__iadd__(v2)</code>。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iadd__</span>(<span class="hljs-params">self, other</span>):
-        <span class="hljs-comment"># v1 += v2</span>
-        self.x += other.x
-        self.y += other.y
-        <span class="hljs-keyword">return</span> self
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__iadd__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># v1 += v2</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">+=</span> other<span class="token punctuation">.</span>x
+        self<span class="token punctuation">.</span>y <span class="token operator">+=</span> other<span class="token punctuation">.</span>y
+        <span class="token keyword">return</span> self
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在所有<strong>使用运算符号</strong>的操作中，都有对应的<strong>i版本</strong>，比如<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>等操作，对应的i版本方法在方法名前加一个字母“i”。</p>
-<h3 id="其他的一元运算"><a class="markdownIt-Anchor" href="#其他的一元运算"></a> 其他的一元运算</h3>
-<p><code>__pos__</code>：对应的操作是在数据对象之前加一个正号</p>
+<h3 id="其他的一元运算"><a href="#其他的一元运算" class="headerlink" title="其他的一元运算"></a>其他的一元运算</h3><p><code>__pos__</code>：对应的操作是在数据对象之前加一个正号</p>
 <p><code>__neg__</code>：对应的操作是在数据对象之前加一个负号</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__pos__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Pos&quot;</span>)
-        <span class="hljs-keyword">return</span> Vector(self.x, self.y)
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__neg__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> Vector(-self.x, -self.y)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__pos__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Pos"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">__neg__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Vector<span class="token punctuation">(</span><span class="token operator">-</span>self<span class="token punctuation">.</span>x<span class="token punctuation">,</span> <span class="token operator">-</span>self<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
     
-v1 = Vector(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)
-<span class="hljs-built_in">print</span>(+v1)
-<span class="hljs-comment"># Pos</span>
-<span class="hljs-comment"># Vector(1,2)</span>
-</code></pre>
+v1 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token operator">+</span>v1<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># Pos</span>
+<span class="token comment" spellcheck="true"># Vector(1,2)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>__abs__</code>：求绝对值操作，对应的运算符是<code>abs</code>，在Python中使用<code>abs(xxx)</code>会调用<code>__abs__</code>方法。</p>
 <p><code>__invert__</code>：取反操作，对应的运算符号是<code>~</code>，一般用作位运算。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__abs__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> Vector(<span class="hljs-built_in">abs</span>(self.x), <span class="hljs-built_in">abs</span>(self.y))
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__neg__</span>(<span class="hljs-params">self</span>):<span class="hljs-comment"># 这里自定义顺序取反</span>
-        <span class="hljs-keyword">return</span> Vector(self.y, self.x)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__abs__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>abs<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> abs<span class="token punctuation">(</span>self<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">__neg__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true"># 这里自定义顺序取反</span>
+        <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>y<span class="token punctuation">,</span> self<span class="token punctuation">.</span>x<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>__int__</code>：使用Python的内置函数<code>int()</code>时，调用该方法</p>
 <p><code>__float__</code>：使用Python的内置函数<code>float()</code>时，调用该方法</p>
 <p><code>__complex__</code>：使用Python的内置函数<code>complex()</code>时，调用该方法</p>
 <p>这三个魔法方法规定，方法的返回值必须是它们对应的数据结构。假如想定义<code>int()</code>操作是对Vector里的x和y都进行<code>int</code>操作，如下代码定义，则执行这段代码会报错。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__int__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> Vector(<span class="hljs-built_in">int</span>(self.x), <span class="hljs-built_in">int</span>(self.y))
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__int__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>int<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> int<span class="token punctuation">(</span>self<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>__index__</code>：表示当把数据对象当作索引使用时，它产生的行为功能是什么。</p>
 <p>当定义了<code>__index__</code>方法，且<code>__int__</code>、<code>__complex__</code>和<code>__float__</code>没有被定义时，使用Python的内置方法<code>int()</code>、<code>float()</code>和<code>complex()</code>时会默认执行<code>__index__</code>方法。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
-        self.x = x
-        self.y = y
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Vector(<span class="hljs-subst">{self.x}</span>, <span class="hljs-subst">{self.y}</span>)&quot;</span>    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__index__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(self.x)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> f<span class="token string">"Vector({self.x}, {self.y})"</span>    
+    <span class="token keyword">def</span> <span class="token function">__index__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> int<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">)</span>
     
-v = Vector(<span class="hljs-number">1.5</span>, <span class="hljs-number">2.5</span>)
-lst = [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
-<span class="hljs-built_in">print</span>(lst[v]) <span class="hljs-comment"># 1</span>
-</code></pre>
-<h3 id="取整操作"><a class="markdownIt-Anchor" href="#取整操作"></a> 取整操作</h3>
-<p><code>__round__</code>：对应Python的内置函数<code>round</code>，四舍五入，取最近的整数</p>
+v <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">)</span>
+lst <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lst<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="取整操作"><a href="#取整操作" class="headerlink" title="取整操作"></a>取整操作</h3><p><code>__round__</code>：对应Python的内置函数<code>round</code>，四舍五入，取最近的整数</p>
 <p><code>__trunc__</code>：math库内的<code>trunc</code>函数，小数点后面不要，即向0取整</p>
 <p><code>__floor__</code>：math库内的<code>floor</code>函数，向下取整，即向负无穷取整</p>
 <p><code>__ceil__</code>：math库内的<code>ceil</code>函数，向上取整，即向正无穷取整</p>
-<h2 id="模拟行为的方法"><a class="markdownIt-Anchor" href="#模拟行为的方法"></a> 模拟行为的方法</h2>
-<h3 id="__-call__"><a class="markdownIt-Anchor" href="#__-call__"></a> __ call__</h3>
-<p><code>__call__</code>：该方法可以以函数调用的形式使用对象。</p>
+<h2 id="模拟行为的方法"><a href="#模拟行为的方法" class="headerlink" title="模拟行为的方法"></a>模拟行为的方法</h2><h3 id="call"><a href="#call" class="headerlink" title="__ call__"></a>__ call__</h3><p><code>__call__</code>：该方法可以以函数调用的形式使用对象。</p>
 <p>如下面代码所示，定义了一个乘法器，乘法倍数是3，该类实例化得到对象o。因为定义了<code>__call__</code>方法，则对象o可以以函数形式被使用。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Multiplier</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, mul</span>):
-        self.mul = mul
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self, arg</span>):
-        <span class="hljs-keyword">return</span> self.mul*arg
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Multiplier</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> mul<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>mul <span class="token operator">=</span> mul
+    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>mul<span class="token operator">*</span>arg
     
-o = Multiplier(<span class="hljs-number">3</span>)
-<span class="hljs-built_in">print</span>(o(<span class="hljs-number">4</span>)) <span class="hljs-comment"># 12</span>
-</code></pre>
-<h3 id="__-len__"><a class="markdownIt-Anchor" href="#__-len__"></a> __ len__</h3>
-<p><code>__len__</code>：描述该对象（容器）的长度。</p>
+o <span class="token operator">=</span> Multiplier<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 12</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="len"><a href="#len" class="headerlink" title="__ len__"></a>__ len__</h3><p><code>__len__</code>：描述该对象（容器）的长度。</p>
 <p>如下代码所示，自定义一个列表容器，这里使用Python内置的list的<code>__len__</code>实现，返回<code>self.data</code>的长度。<code>__len__</code>会被Python内置方法<code>len()</code>调用</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(self.data)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
     
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(x)) <span class="hljs-comment"># 3</span>
-</code></pre>
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果自定义的类内没有定义<code>__bool__</code>方法，而且又把该类的对象当作条件去做判断时，该对象就会尝试调用<code>__len__</code>方法，在<code>__len__</code>被定义的情况下，如果返回长度为0则认为False，否则认为True。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(self.data)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
     
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-keyword">if</span> x:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Hello&quot;</span>)
-<span class="hljs-comment"># Hello</span>
-</code></pre>
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> x<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># Hello</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>该特性和所有Python内置的容器是一样的。比如下面的代码：</p>
-<pre class="highlight"><code class="python">x = <span class="hljs-built_in">list</span>()
-d = <span class="hljs-built_in">dict</span>()
-<span class="hljs-keyword">if</span> x <span class="hljs-keyword">and</span> d:
-    ......
-</code></pre>
-<h3 id="__-getitem__-__-setitem-__-和-__-delitem__"><a class="markdownIt-Anchor" href="#__-getitem__-__-setitem-__-和-__-delitem__"></a> __ getitem__ 、 __ setitem __ 和 __ delitem__</h3>
-<p>这三个方法都是在描述对象使用<code>[]</code>时具体的行为功能。</p>
+<pre class="line-numbers language-python"><code class="language-python">x <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d <span class="token operator">=</span> dict<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> x <span class="token operator">and</span> d<span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="getitem-、-setitem-和-delitem"><a href="#getitem-、-setitem-和-delitem" class="headerlink" title="__ getitem__ 、 __ setitem __ 和 __ delitem__"></a>__ getitem__ 、 __ setitem __ 和 __ delitem__</h3><p>这三个方法都是在描述对象使用<code>[]</code>时具体的行为功能。</p>
 <p><code>__getitem__</code>：对象使用<code>[]</code>去读取数据时会调用该方法。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, index</span>):
-        <span class="hljs-keyword">return</span> self.data[index]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
     
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-built_in">print</span>(x[<span class="hljs-number">1</span>]) <span class="hljs-comment"># 2</span>
-</code></pre>
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 2</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>__setitem__</code>：对象使用<code>[]</code>去赋值数据时会调用该方法。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, index</span>):
-        <span class="hljs-keyword">return</span> self.data[index]        
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__setitem__</span>(<span class="hljs-params">self, index, value</span>):
-        self.data[index] = value
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token punctuation">]</span>        
+    <span class="token keyword">def</span> <span class="token function">__setitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> value
     
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-x[<span class="hljs-number">1</span>] = <span class="hljs-number">10</span>
-<span class="hljs-built_in">print</span>(x[<span class="hljs-number">1</span>]) <span class="hljs-comment"># 10</span>
-</code></pre>
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 10</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>__delitem__</code>：对象使用<code>[]</code>去删除数据时会调用该方法：即被关键字<code>del</code>触发。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, index</span>):
-        <span class="hljs-keyword">return</span> self.data[index]        
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__delitem__</span>(<span class="hljs-params">self, index</span>):
-        self.data = self.data[<span class="hljs-number">0</span>:index] + self.data[index+<span class="hljs-number">1</span>:]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token punctuation">]</span>        
+    <span class="token keyword">def</span> <span class="token function">__delitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>index<span class="token punctuation">]</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
     
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-built_in">print</span>(x[<span class="hljs-number">1</span>]) <span class="hljs-comment"># 2</span>
-<span class="hljs-keyword">del</span> x[<span class="hljs-number">1</span>]
-<span class="hljs-built_in">print</span>(x[<span class="hljs-number">1</span>]) <span class="hljs-comment"># 3</span>
-</code></pre>
-<h3 id="__-reversed__"><a class="markdownIt-Anchor" href="#__-reversed__"></a> __ reversed__</h3>
-<p><code>__reversed__</code>：将对象（容器）里的数据翻转，会被Python内置的<code>reversed()</code>函数调用。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__reversed__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> MyList(self.data[::-<span class="hljs-number">1</span>])    
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">reversed</span>(x).data)
-<span class="hljs-comment"># [3,2,1]</span>
-</code></pre>
-<h3 id="__-contains__"><a class="markdownIt-Anchor" href="#__-contains__"></a> __ contains__</h3>
-<p><code>__contains__</code>：描述对象在使用<code>in</code>操作时的功能行为，即对象在使用<code>in</code>会调用该方法。</p>
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 2</span>
+<span class="token keyword">del</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="reversed"><a href="#reversed" class="headerlink" title="__ reversed__"></a>__ reversed__</h3><p><code>__reversed__</code>：将对象（容器）里的数据翻转，会被Python内置的<code>reversed()</code>函数调用。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__reversed__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> MyList<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>reversed<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># [3,2,1]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="contains"><a href="#contains" class="headerlink" title="__ contains__"></a>__ contains__</h3><p><code>__contains__</code>：描述对象在使用<code>in</code>操作时的功能行为，即对象在使用<code>in</code>会调用该方法。</p>
 <p>如下代码所示，自定义一个列表容器，这里使用Python内置的list的<code>__contains__</code>实现：<code>item in self.data</code>。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__contains__</span>(<span class="hljs-params">self, item</span>):
-        <span class="hljs-keyword">return</span> item <span class="hljs-keyword">in</span> self.data   
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-built_in">print</span>(<span class="hljs-number">2</span> <span class="hljs-keyword">in</span> x) <span class="hljs-comment"># True</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-number">5</span> <span class="hljs-keyword">in</span> x) <span class="hljs-comment"># False</span>
-</code></pre>
-<h3 id="__-iter__"><a class="markdownIt-Anchor" href="#__-iter__"></a> __ iter__</h3>
-<p><code>__iter__</code>：返回该对象（容器）的一个迭代器，会被Python内置的<code>iter()</code>函数调用。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__contains__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> item <span class="token keyword">in</span> self<span class="token punctuation">.</span>data   
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token keyword">in</span> x<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># True</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token keyword">in</span> x<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># False</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="iter"><a href="#iter" class="headerlink" title="__ iter__"></a>__ iter__</h3><p><code>__iter__</code>：返回该对象（容器）的一个迭代器，会被Python内置的<code>iter()</code>函数调用。</p>
 <p>如下代码所示，自定义一个列表容器，这里使用Python内置的list的<code>__iter__</code>实现：<code>iter(self.data)</code>。注意：在使用for循环时，Python会隐性调用<code>iter()</code>函数，所以<code>for i in x</code>其实是<code>for i in iter(x)</code>。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyList</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data</span>):
-        self.data = data
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">iter</span>(self.data)  
-x = MyList([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x:
-    <span class="hljs-built_in">print</span>(i)
-</code></pre>
-<h3 id="上下文__-enter__-和__-exit__"><a class="markdownIt-Anchor" href="#上下文__-enter__-和__-exit__"></a> 上下文__ enter__ 和__ exit__</h3>
-<p>平时的代码<code>with open(xxxx) as f</code>中，<code>with</code>后面的部分就是上下文，要想定义一个上下文，需要定义两个魔法方法：<code>__enter__</code>和<code>__exit__</code>。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MyList</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">def</span> <span class="token function">__iter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> iter<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span>  
+x <span class="token operator">=</span> MyList<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> x<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="上下文-enter-和-exit"><a href="#上下文-enter-和-exit" class="headerlink" title="上下文__ enter__ 和__ exit__"></a>上下文__ enter__ 和__ exit__</h3><p>平时的代码<code>with open(xxxx) as f</code>中，<code>with</code>后面的部分就是上下文，要想定义一个上下文，需要定义两个魔法方法：<code>__enter__</code>和<code>__exit__</code>。</p>
 <p><code>__enter__</code>：与大于运算<code>__gt__</code>方法类似，greater than  or equal to</p>
 <p><code>__exit__</code>：与小于运算<code>__lt__</code>方法类似，less than  or equal to</p>
 <p>如下的代码，自定义一个计时器，执行代码<code>with Timer():</code>，这时会显示花费的时间。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> time
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> time
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Timer</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__enter__</span>(<span class="hljs-params">self</span>):
-        self.start = time.time()
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__exit__</span>(<span class="hljs-params">self, exc_type, exc_value, traceback</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Time: <span class="hljs-subst">{time.time() - self.start}</span>&quot;</span>)
-<span class="hljs-keyword">with</span> Timer():
-    x = <span class="hljs-number">1000</span>*<span class="hljs-number">10</span>
-<span class="hljs-comment"># 执行</span>
-<span class="hljs-comment"># Time: 1.4342545363673e-06</span>
+<span class="token keyword">class</span> <span class="token class-name">Timer</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__enter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">__exit__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exc_type<span class="token punctuation">,</span> exc_value<span class="token punctuation">,</span> traceback<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Time: {time.time() - self.start}"</span><span class="token punctuation">)</span>
+<span class="token keyword">with</span> Timer<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token number">1000</span><span class="token operator">*</span><span class="token number">10</span>
+<span class="token comment" spellcheck="true"># 执行</span>
+<span class="token comment" spellcheck="true"># Time: 1.4342545363673e-06</span>
 
-<span class="hljs-keyword">with</span> Timer() <span class="hljs-keyword">as</span> t:
-    x = <span class="hljs-number">1000</span>*<span class="hljs-number">10</span>
-</code></pre>
+<span class="token keyword">with</span> Timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> t<span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token number">1000</span><span class="token operator">*</span><span class="token number">10</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>一般的代码是<code>with open() as f</code>，如同下面的代码，执行代码<code>with Timer() as t:</code>，这个<code>as t</code>就是将<code>__enter__</code>的返回值保存在t里，一般常见的操作是将对象本身<code>self</code>返回。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Timer</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__enter__</span>(<span class="hljs-params">self</span>):
-        self.start = time.time()
-        <span class="hljs-keyword">return</span> self
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__exit__</span>(<span class="hljs-params">self, exc_type, exc_value, traceback</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Time: <span class="hljs-subst">{time.time() - self.start}</span>&quot;</span>)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Timer</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__enter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self
+    <span class="token keyword">def</span> <span class="token function">__exit__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exc_type<span class="token punctuation">,</span> exc_value<span class="token punctuation">,</span> traceback<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Time: {time.time() - self.start}"</span><span class="token punctuation">)</span>
 
-<span class="hljs-keyword">with</span> Timer() <span class="hljs-keyword">as</span> t:
-    <span class="hljs-built_in">print</span>(t.start)
-    x = <span class="hljs-number">1000</span>*<span class="hljs-number">10</span>
-<span class="hljs-comment"># 执行</span>
-<span class="hljs-comment"># 1231423426.45353</span>
-<span class="hljs-comment"># Time: 1.4342545363673e-05</span>
-</code></pre>
+<span class="token keyword">with</span> Timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> t<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>start<span class="token punctuation">)</span>
+    x <span class="token operator">=</span> <span class="token number">1000</span><span class="token operator">*</span><span class="token number">10</span>
+<span class="token comment" spellcheck="true"># 执行</span>
+<span class="token comment" spellcheck="true"># 1231423426.45353</span>
+<span class="token comment" spellcheck="true"># Time: 1.4342545363673e-05</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>__exit__</code>方法里的几个参数，都是和异常相关的，比如下面的代码，值的注意的是，程序依然得出了花费的时间。即即使代码抛出了异常，<code>__exit__</code>方法内的代码依然被执行了，比如在文件操作中，常常使用<code>with open() as f</code>的代码，而不是<code>f = open()</code>，就可以防止忘记关闭文件，同时就算程序报错，也可以成功把文件关闭</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Timer</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__enter__</span>(<span class="hljs-params">self</span>):
-        self.start = time.time()
-        <span class="hljs-keyword">return</span> self
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__exit__</span>(<span class="hljs-params">self, exc_type, exc_value, traceback</span>):
-        <span class="hljs-built_in">print</span>(exc_type, exc_value, traceback)
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Time: <span class="hljs-subst">{time.time() - self.start}</span>&quot;</span>)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Timer</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__enter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self
+    <span class="token keyword">def</span> <span class="token function">__exit__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exc_type<span class="token punctuation">,</span> exc_value<span class="token punctuation">,</span> traceback<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>exc_type<span class="token punctuation">,</span> exc_value<span class="token punctuation">,</span> traceback<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Time: {time.time() - self.start}"</span><span class="token punctuation">)</span>
 
-<span class="hljs-keyword">with</span> Timer() <span class="hljs-keyword">as</span> t:
-    x = <span class="hljs-number">1000</span> / <span class="hljs-number">0</span>
-<span class="hljs-comment"># 执行</span>
-<span class="hljs-comment"># &lt;class &#x27;ZeroDivisionError&#x27;&gt; division by zero &lt;traceback object at 0x7f6961387800&gt;</span>
-<span class="hljs-comment"># Time:6.103745625e-05</span>
-<span class="hljs-comment"># Traceback (most recent call last):</span>
-<span class="hljs-comment">#   File &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;</span>
-<span class="hljs-comment"># ZeroDivisionError: division by zero</span>
-</code></pre>
+<span class="token keyword">with</span> Timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> t<span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token number">1000</span> <span class="token operator">/</span> <span class="token number">0</span>
+<span class="token comment" spellcheck="true"># 执行</span>
+<span class="token comment" spellcheck="true"># &lt;class 'ZeroDivisionError'> division by zero &lt;traceback object at 0x7f6961387800></span>
+<span class="token comment" spellcheck="true"># Time:6.103745625e-05</span>
+<span class="token comment" spellcheck="true"># Traceback (most recent call last):</span>
+<span class="token comment" spellcheck="true">#   File "&lt;stdin>", line 2, in &lt;module></span>
+<span class="token comment" spellcheck="true"># ZeroDivisionError: division by zero</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
