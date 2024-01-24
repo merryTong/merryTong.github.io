@@ -29,7 +29,8 @@
       
         
         
-          &lt;h1 id=&quot;浮点数和混合精度&quot;&gt;&lt;a href=&quot;#浮点数和混合精度&quot; class=&quot;headerlink&quot; title=&quot;浮点数和混合精度&quot;&gt;&lt;/a&gt;浮点数和混合精度&lt;/h1&gt;&lt;h2 id=&quot;浮点数存储格式&quot;&gt;&lt;a href=&quot;#浮点数存储格式&quot;
+          &lt;h1 id=&quot;浮点数和混合精度&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#浮点数和混合精度&quot;&gt;&lt;/a&gt; 浮点数和混合精度&lt;/h1&gt;
+&lt;h2 id=&quot;浮点数存储格式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
         
       
     
@@ -55,7 +56,8 @@
       
         
         
-          &lt;h1 id=&quot;Python的多线程和多进程&quot;&gt;&lt;a href=&quot;#Python的多线程和多进程&quot; class=&quot;headerlink&quot; title=&quot;Python的多线程和多进程&quot;&gt;&lt;/a&gt;Python的多线程和多进程&lt;/h1&gt;&lt;h2 id=&quot;进程和线程&quot;&gt;&lt;a
+          &lt;h1 id=&quot;python的多线程和多进程&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python的多线程和多进程&quot;&gt;&lt;/a&gt; Python的多线程和多进程&lt;/h1&gt;
+&lt;h2 id=&quot;进程和线程&quot;&gt;&lt;a
         
       
     
@@ -83,8 +85,9 @@
       
         
         
-          &lt;h1 id=&quot;STL中常用容器&quot;&gt;&lt;a href=&quot;#STL中常用容器&quot; class=&quot;headerlink&quot; title=&quot;STL中常用容器&quot;&gt;&lt;/a&gt;STL中常用容器&lt;/h1&gt;&lt;p&gt;本文简要介绍C++的STL中常用容器及其用法。&lt;/p&gt;
-&lt;h2
+          &lt;h1 id=&quot;stl中常用容器&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#stl中常用容器&quot;&gt;&lt;/a&gt; STL中常用容器&lt;/h1&gt;
+&lt;p&gt;本文简要介绍C++的STL中常用容器及其用法。&lt;/p&gt;
+&lt;h2 id=&quot;string容器&quot;&gt;&lt;a
         
       
     
@@ -112,7 +115,7 @@
       
         
         
-          &lt;h1 id=&quot;对比学习入门&quot;&gt;&lt;a href=&quot;#对比学习入门&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;对比学习入门&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#对比学习入门&quot;&gt;&lt;/a&gt;
         
       
     
@@ -140,7 +143,7 @@
       
         
         
-          &lt;h1 id=&quot;分类算法的评估指标&quot;&gt;&lt;a href=&quot;#分类算法的评估指标&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;分类算法的评估指标&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#分类算法的评估指标&quot;&gt;&lt;/a&gt;
         
       
     
@@ -168,7 +171,8 @@
       
         
         
-          &lt;h1 id=&quot;友元与运算符重载&quot;&gt;&lt;a href=&quot;#友元与运算符重载&quot; class=&quot;headerlink&quot; title=&quot;友元与运算符重载&quot;&gt;&lt;/a&gt;友元与运算符重载&lt;/h1&gt;&lt;h2 id=&quot;友元&quot;&gt;&lt;a href=&quot;#友元&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;友元与运算符重载&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#友元与运算符重载&quot;&gt;&lt;/a&gt; 友元与运算符重载&lt;/h1&gt;
+&lt;h2 id=&quot;友元&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#友元&quot;&gt;&lt;/a&gt;
         
       
     
@@ -194,7 +198,8 @@
       
         
         
-          &lt;h1 id=&quot;线性回归&quot;&gt;&lt;a href=&quot;#线性回归&quot; class=&quot;headerlink&quot; title=&quot;线性回归&quot;&gt;&lt;/a&gt;线性回归&lt;/h1&gt;&lt;h2 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;线性回归&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#线性回归&quot;&gt;&lt;/a&gt; 线性回归&lt;/h1&gt;
+&lt;h2 id=&quot;基本原理&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基本原理&quot;&gt;&lt;/a&gt;
         
       
     
@@ -222,7 +227,8 @@
       
         
         
-          &lt;h1 id=&quot;指针与引用&quot;&gt;&lt;a href=&quot;#指针与引用&quot; class=&quot;headerlink&quot; title=&quot;指针与引用&quot;&gt;&lt;/a&gt;指针与引用&lt;/h1&gt;&lt;h2 id=&quot;指针定义和使用&quot;&gt;&lt;a href=&quot;#指针定义和使用&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;指针与引用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#指针与引用&quot;&gt;&lt;/a&gt; 指针与引用&lt;/h1&gt;
+&lt;h2 id=&quot;指针定义和使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
         
       
     
@@ -248,7 +254,7 @@
       
         
         
-          &lt;h1 id=&quot;深度学习中的图像操作&quot;&gt;&lt;a href=&quot;#深度学习中的图像操作&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;深度学习中的图像操作&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#深度学习中的图像操作&quot;&gt;&lt;/a&gt;
         
       
     
@@ -276,7 +282,7 @@
       
         
         
-          &lt;h1 id=&quot;Python的魔法方法（下）&quot;&gt;&lt;a href=&quot;#Python的魔法方法（下）&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;python的魔法方法下&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python的魔法方法下&quot;&gt;&lt;/a&gt;
         
       
     
@@ -304,7 +310,7 @@
       
         
         
-          &lt;h1 id=&quot;Python的魔法方法（上）&quot;&gt;&lt;a href=&quot;#Python的魔法方法（上）&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;python的魔法方法上&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python的魔法方法上&quot;&gt;&lt;/a&gt;
         
       
     
@@ -332,7 +338,7 @@
       
         
         
-          &lt;h1 id=&quot;Python中的MRO&quot;&gt;&lt;a href=&quot;#Python中的MRO&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;python中的mro&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python中的mro&quot;&gt;&lt;/a&gt;
         
       
     
@@ -360,7 +366,7 @@
       
         
         
-          &lt;h1 id=&quot;张量的特殊操作&quot;&gt;&lt;a href=&quot;#张量的特殊操作&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;张量的特殊操作&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#张量的特殊操作&quot;&gt;&lt;/a&gt;
         
       
     
@@ -388,7 +394,8 @@
       
         
         
-          &lt;h1 id=&quot;vim命令的基本使用&quot;&gt;&lt;a href=&quot;#vim命令的基本使用&quot; class=&quot;headerlink&quot; title=&quot;vim命令的基本使用&quot;&gt;&lt;/a&gt;vim命令的基本使用&lt;/h1&gt;&lt;p&gt;vim 是一个全屏幕纯文本编辑器，是 vi
+          &lt;h1 id=&quot;vim命令的基本使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#vim命令的基本使用&quot;&gt;&lt;/a&gt; vim命令的基本使用&lt;/h1&gt;
+&lt;p&gt;vim 是一个全屏幕纯文本编辑器，是 vi
         
       
     
@@ -416,7 +423,8 @@
       
         
         
-          &lt;h1 id=&quot;深度学习中的正则化&quot;&gt;&lt;a href=&quot;#深度学习中的正则化&quot; class=&quot;headerlink&quot; title=&quot;深度学习中的正则化&quot;&gt;&lt;/a&gt;深度学习中的正则化&lt;/h1&gt;&lt;p&gt;先来看一个python实现的最简单的单参数线性回归模型。&lt;/p&gt;
+          &lt;h1 id=&quot;深度学习中的正则化&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#深度学习中的正则化&quot;&gt;&lt;/a&gt; 深度学习中的正则化&lt;/h1&gt;
+&lt;p&gt;先来看一个python实现的最简单的单参数线性回归模型。&lt;/p&gt;
 &lt;h2
         
       
@@ -445,7 +453,8 @@
       
         
         
-          &lt;h1 id=&quot;Python中的argparse模块&quot;&gt;&lt;a href=&quot;#Python中的argparse模块&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;python中的argparse模块&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python中的argparse模块&quot;&gt;&lt;/a&gt; Python中的argparse模块&lt;/h1&gt;
+&lt;p&gt;argparse 模块是 Python
         
       
     
@@ -473,7 +482,8 @@
       
         
         
-          &lt;h1 id=&quot;深度学习中常用的损失函数&quot;&gt;&lt;a href=&quot;#深度学习中常用的损失函数&quot; class=&quot;headerlink&quot; title=&quot;深度学习中常用的损失函数&quot;&gt;&lt;/a&gt;深度学习中常用的损失函数&lt;/h1&gt;&lt;p&gt;机器学习中的监督学习本质是给定一系列训练样本$(x_i,
+          &lt;h1 id=&quot;深度学习中常用的损失函数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#深度学习中常用的损失函数&quot;&gt;&lt;/a&gt; 深度学习中常用的损失函数&lt;/h1&gt;
+&lt;p&gt;机器学习中的监督学习本质是给定一系列训练样本&lt;span
         
       
     
@@ -503,7 +513,8 @@
       
         
         
-          &lt;h1 id=&quot;DTW算法原理与实现&quot;&gt;&lt;a href=&quot;#DTW算法原理与实现&quot; class=&quot;headerlink&quot; title=&quot;DTW算法原理与实现&quot;&gt;&lt;/a&gt;DTW算法原理与实现&lt;/h1&gt;&lt;p&gt;Dynamic Time
+          &lt;h1 id=&quot;dtw算法原理与实现&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#dtw算法原理与实现&quot;&gt;&lt;/a&gt; DTW算法原理与实现&lt;/h1&gt;
+&lt;p&gt;Dynamic Time
         
       
     
@@ -529,7 +540,7 @@
       
         
         
-          &lt;h1 id=&quot;常见的最优化方法&quot;&gt;&lt;a href=&quot;#常见的最优化方法&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;常见的最优化方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#常见的最优化方法&quot;&gt;&lt;/a&gt;
         
       
     
@@ -557,7 +568,8 @@
       
         
         
-          &lt;h1 id=&quot;结构体&quot;&gt;&lt;a href=&quot;#结构体&quot; class=&quot;headerlink&quot; title=&quot;结构体&quot;&gt;&lt;/a&gt;结构体&lt;/h1&gt;&lt;h2 id=&quot;1-结构体的定义和使用&quot;&gt;&lt;a href=&quot;#1-结构体的定义和使用&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;结构体&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#结构体&quot;&gt;&lt;/a&gt; 结构体&lt;/h1&gt;
+&lt;h2 id=&quot;1-结构体的定义和使用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
         
       
     
