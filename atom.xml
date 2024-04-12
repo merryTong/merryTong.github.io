@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2024-01-30T00:24:54.173Z</updated>
+  <updated>2024-04-12T00:11:03.528Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,90 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>时序模型RNN和LSTM</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/03/20/suan-fa/rnn-he-lstm/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/03/20/suan-fa/rnn-he-lstm/</id>
+    <published>2024-03-20T09:30:31.000Z</published>
+    <updated>2024-04-12T00:11:03.528Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;时序模型RNN和LSTM&quot;&gt;&lt;a href=&quot;#时序模型RNN和LSTM&quot; class=&quot;headerlink&quot; title=&quot;时序模型RNN和LSTM&quot;&gt;&lt;/a&gt;时序模型RNN和LSTM&lt;/h1&gt;&lt;h2 id=&quot;RNN的基本原理&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CLIP模型简介</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/03/11/lun-wen-yue-du/clip-mo-xing-xiang-jie/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/03/11/lun-wen-yue-du/clip-mo-xing-xiang-jie/</id>
+    <published>2024-03-11T09:30:31.000Z</published>
+    <updated>2024-04-10T14:47:32.118Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;CLIP模型简介&quot;&gt;&lt;a href=&quot;#CLIP模型简介&quot; class=&quot;headerlink&quot; title=&quot;CLIP模型简介&quot;&gt;&lt;/a&gt;CLIP模型简介&lt;/h1&gt;&lt;p&gt;CLIP（Contrastive Language Image
+        
+      
+    
+    </summary>
+    
+      <category term="论文" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E8%AE%BA%E6%96%87/"/>
+    
+    
+      <category term="论文阅读" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="自监督" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E8%87%AA%E7%9B%91%E7%9D%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>详解扩散模型DDPM</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/02/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddpm/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/02/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddpm/</id>
+    <published>2024-02-18T09:30:31.000Z</published>
+    <updated>2024-04-12T00:01:57.112Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;扩散模型DDPM&quot;&gt;&lt;a href=&quot;#扩散模型DDPM&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>C++|结构体和对象的内存布局</title>
@@ -47,7 +131,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2024/01/26/pytorch-ji-chu-zhi-shi/duo-qia-bing-xing-xun-lian/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2024/01/26/pytorch-ji-chu-zhi-shi/duo-qia-bing-xing-xun-lian/</id>
     <published>2024-01-26T11:30:31.000Z</published>
-    <updated>2024-01-30T00:24:34.189Z</updated>
+    <updated>2024-02-03T14:20:42.719Z</updated>
     
     <summary type="html">
     
@@ -483,90 +567,6 @@
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
       <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python的argparse模块</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/07/17/python-zhi-shi/argparse-xiang-jie/</id>
-    <published>2023-07-17T11:30:31.000Z</published>
-    <updated>2023-10-28T00:43:38.302Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Python中的argparse模块&quot;&gt;&lt;a href=&quot;#Python中的argparse模块&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="编程语言" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="Python" scheme="https://github.com/merryTong/merryTong.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深度学习中的损失函数</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/07/14/suan-fa/shen-du-xue-xi-chang-yong-sun-shi-han-shu/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/07/14/suan-fa/shen-du-xue-xi-chang-yong-sun-shi-han-shu/</id>
-    <published>2023-07-14T09:30:31.000Z</published>
-    <updated>2023-10-28T01:00:56.418Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;深度学习中常用的损失函数&quot;&gt;&lt;a href=&quot;#深度学习中常用的损失函数&quot; class=&quot;headerlink&quot; title=&quot;深度学习中常用的损失函数&quot;&gt;&lt;/a&gt;深度学习中常用的损失函数&lt;/h1&gt;&lt;p&gt;机器学习中的监督学习本质是给定一系列训练样本$(x_i,
-        
-      
-    
-    </summary>
-    
-      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="损失函数" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DTW算法原理与实现</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/06/16/suan-fa/dtw-suan-fa-yuan-li-yu-shi-xian/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/06/16/suan-fa/dtw-suan-fa-yuan-li-yu-shi-xian/</id>
-    <published>2023-06-16T09:30:31.000Z</published>
-    <updated>2023-10-28T01:27:29.376Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;DTW算法原理与实现&quot;&gt;&lt;a href=&quot;#DTW算法原理与实现&quot; class=&quot;headerlink&quot; title=&quot;DTW算法原理与实现&quot;&gt;&lt;/a&gt;DTW算法原理与实现&lt;/h1&gt;&lt;p&gt;Dynamic Time
-        
-      
-    
-    </summary>
-    
-      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
     
   </entry>
   
