@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2024-04-12T00:11:03.528Z</updated>
+  <updated>2024-04-20T06:01:55.525Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++手撕GPT2|交叉熵损失</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/04/18/suan-fa/c-shou-si-gpt2-jiao-cha-shang-sun-shi/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/04/18/suan-fa/c-shou-si-gpt2-jiao-cha-shang-sun-shi/</id>
+    <published>2024-04-18T09:30:31.000Z</published>
+    <updated>2024-04-20T06:01:55.525Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;C-手撕GPT2-交叉熵损失&quot;&gt;&lt;a href=&quot;#C-手撕GPT2-交叉熵损失&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="LLM" scheme="https://github.com/merryTong/merryTong.github.io/tags/LLM/"/>
+    
+  </entry>
   
   <entry>
     <title>时序模型RNN和LSTM</title>
@@ -538,35 +568,6 @@
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
       <category term="vim" scheme="https://github.com/merryTong/merryTong.github.io/tags/vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深度学习中的正则化</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/07/19/suan-fa/shen-du-xue-xi-zheng-ze-hua/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/07/19/suan-fa/shen-du-xue-xi-zheng-ze-hua/</id>
-    <published>2023-07-19T09:30:31.000Z</published>
-    <updated>2023-10-28T01:00:15.049Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;深度学习中的正则化&quot;&gt;&lt;a href=&quot;#深度学习中的正则化&quot; class=&quot;headerlink&quot; title=&quot;深度学习中的正则化&quot;&gt;&lt;/a&gt;深度学习中的正则化&lt;/h1&gt;&lt;p&gt;先来看一个python实现的最简单的单参数线性回归模型。&lt;/p&gt;
-&lt;h2
-        
-      
-    
-    </summary>
-    
-      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="数学" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
