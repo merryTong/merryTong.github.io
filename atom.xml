@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/merryTong/merryTong.github.io/"/>
-  <updated>2024-04-20T06:01:55.525Z</updated>
+  <updated>2024-11-21T15:01:21.291Z</updated>
   <id>https://github.com/merryTong/merryTong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>详解扩散模型DDIM</title>
+    <link href="https://github.com/merryTong/merryTong.github.io/2024/10/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddim/"/>
+    <id>https://github.com/merryTong/merryTong.github.io/2024/10/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddim/</id>
+    <published>2024-10-18T09:30:31.000Z</published>
+    <updated>2024-11-21T15:01:21.291Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;扩散模型DDIM&quot;&gt;&lt;a href=&quot;#扩散模型DDIM&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="深度学习" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>C++手撕GPT2|交叉熵损失</title>
@@ -107,7 +135,7 @@
     <link href="https://github.com/merryTong/merryTong.github.io/2024/02/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddpm/"/>
     <id>https://github.com/merryTong/merryTong.github.io/2024/02/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddpm/</id>
     <published>2024-02-18T09:30:31.000Z</published>
-    <updated>2024-04-12T00:01:57.112Z</updated>
+    <updated>2024-11-09T10:43:58.288Z</updated>
     
     <summary type="html">
     
@@ -540,34 +568,6 @@
       <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
       <category term="Pytorch" scheme="https://github.com/merryTong/merryTong.github.io/tags/Pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vim命令的基本使用</title>
-    <link href="https://github.com/merryTong/merryTong.github.io/2023/08/19/ji-suan-ji-ji-chu/vim-shi-yong-jian-yi-jiao-cheng/"/>
-    <id>https://github.com/merryTong/merryTong.github.io/2023/08/19/ji-suan-ji-ji-chu/vim-shi-yong-jian-yi-jiao-cheng/</id>
-    <published>2023-08-19T09:30:31.000Z</published>
-    <updated>2023-10-28T01:17:53.419Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;vim命令的基本使用&quot;&gt;&lt;a href=&quot;#vim命令的基本使用&quot; class=&quot;headerlink&quot; title=&quot;vim命令的基本使用&quot;&gt;&lt;/a&gt;vim命令的基本使用&lt;/h1&gt;&lt;p&gt;vim 是一个全屏幕纯文本编辑器，是 vi
-        
-      
-    
-    </summary>
-    
-      <category term="计算机基础" scheme="https://github.com/merryTong/merryTong.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="基础知识" scheme="https://github.com/merryTong/merryTong.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="vim" scheme="https://github.com/merryTong/merryTong.github.io/tags/vim/"/>
     
   </entry>
   

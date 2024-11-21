@@ -410,7 +410,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-12
+                    2024-11-09
                 </div>
                 
 
@@ -445,7 +445,7 @@
 </ol>
 <p>无论是前向过程还是反向过程都是一个<strong>参数化的马尔可夫链（Markov chain）</strong>。</p>
 <p><img src="/images/ddpm%E8%BF%87%E7%A8%8B2.png"></p>
-<h3 id="前向扩散过程"><a href="#前向扩散过程" class="headerlink" title="前向扩散过程"></a>前向扩散过程</h3><p>扩散过程是指对数据逐渐增加高斯噪音直至数据变成随机噪音的过程。给定真实图片样本$x_0 \sim q(x)$，扩散模型的前向过程通过$T$次<strong>累积</strong>对其添加高斯噪声，得到$x_1,x_2,…,x_T$，如下图所示。该过程的每一步都是对上一步得到的数据$x_{t-1}$增加高斯噪声，每一步要添加的噪声大小由一系列高斯分布方差${\beta_t }_{t&#x3D;1}^T$来控制，由于前向过程的每个时刻$t$只与$t-1$时刻有关，因此该过程也可看作是马尔科夫过程。</p>
+<h3 id="前向扩散过程的解析式"><a href="#前向扩散过程的解析式" class="headerlink" title="前向扩散过程的解析式"></a>前向扩散过程的解析式</h3><p>扩散过程是指对数据逐渐增加高斯噪音直至数据变成随机噪音的过程。给定真实图片样本$x_0 \sim q(x)$，扩散模型的前向过程通过$T$次<strong>累积</strong>对其添加高斯噪声，得到$x_1,x_2,…,x_T$，如下图所示。该过程的每一步都是对上一步得到的数据$x_{t-1}$增加高斯噪声，每一步要添加的噪声大小由一系列高斯分布方差${\beta_t }_{t&#x3D;1}^T$来控制，由于前向过程的每个时刻$t$只与$t-1$时刻有关，因此该过程也可看作是马尔科夫过程。</p>
 <p>$$\begin{aligned} q(x_t|x_{t-1}) &amp;&#x3D; N(x_t; \sqrt{1- \beta_t}x_{t-1}, \beta_t I) \\ q(x_{1:T}|x_0) &amp;&#x3D; \prod_{t&#x3D;1}^T q(x_t|x_{t-1}) \end{aligned}$$</p>
 <p>其中${\beta_t \in (0,1)}_{t&#x3D;1}^T$表示每一步添加高斯噪声的方差，介于0～1之间，它是预先设定的超参数，称为<strong>Noise schedule</strong>或<strong>Variance schedule</strong>。通常情况下，$\beta_t$是随着时间步$t$增大的，即满足$\beta_1 \lt \beta_2 \lt … \lt \beta_T$。如果扩散步数$T$足够大，那么最终得到的$x_T$就完全丢失了原始数据而变成了一个随机噪音。DDPM中的$\beta_t$参数采用一个线性的序列，是由0.0001到0.02（时间步T为1000）线性插值形成一个序列。</p>
 <p><img src="/images/ddpm%E5%89%8D%E5%90%91%E8%BF%87%E7%A8%8B.jpg"></p>
@@ -460,7 +460,7 @@
 <p>此时任意时刻的$x_t$满足：</p>
 <p>$$q(x_t|x_0) &#x3D; N(x_t; \sqrt{\bar \alpha_t}x_0, (1- \bar \alpha_t)I)$$</p>
 <p>首先，我们可以看到$x_t$其实可以看成是原始数据$x_0$和随机噪音$\bar \epsilon$的线性组合，其中$\sqrt{\bar \alpha_t}$和$\sqrt{1- \bar\alpha_t}$为组合系数，它们的平方和等于1；更近一步地，我们可以基于$\bar \alpha_t$而不是$\beta_t$来定义<strong>noise schedule</strong>，因为这样处理更直接，比如我们直接将$\bar \alpha_T$设定为一个接近0的值，那么就可以保证最终得到的$x_T$近似为一个随机噪音。</p>
-<h3 id="反向生成过程"><a href="#反向生成过程" class="headerlink" title="反向生成过程"></a>反向生成过程</h3><p>反向生成过程就是数据去噪过程，它首先是从标准高斯分布中采样得到一个噪声样本，再一步步地迭代去噪，最后得到数据分布中的一个样本。如果我们知道反向过程的每一步的真实分布$q(x_{t-1}|x_t)$，那么从一个高斯噪声$x_T \sim N(0,I)$开始，逐渐去噪就能生成一个真实的样本，还原出原图分布$x_0 \sim q(x)$，所以反向过程也就是<strong>生成数据的过程</strong>。</p>
+<h3 id="反向生成过程的解析式"><a href="#反向生成过程的解析式" class="headerlink" title="反向生成过程的解析式"></a>反向生成过程的解析式</h3><p>反向生成过程就是数据去噪过程，它首先是从标准高斯分布中采样得到一个噪声样本，再一步步地迭代去噪，最后得到数据分布中的一个样本。如果我们知道反向过程的每一步的真实分布$q(x_{t-1}|x_t)$，那么从一个高斯噪声$x_T \sim N(0,I)$开始，逐渐去噪就能生成一个真实的样本，还原出原图分布$x_0 \sim q(x)$，所以反向过程也就是<strong>生成数据的过程</strong>。</p>
 <blockquote>
 <p>已经有人证明了如果$q(x_t|x_{t-1})$满足高斯分布且$\beta_t$足够小，$q(x_{t-1}|x_t)$ 仍然是一个高斯分布。</p>
 </blockquote>
@@ -476,7 +476,7 @@
 <p>其中，$p(x_T)&#x3D;N(x_t;0,I)$，$p_{\theta}(x_{t-1}|x_t)$为参数化的高斯分布，均值和方差由训练的网络给出。虽然真实的条件分布$q(x_{t-1}|x_t)$无法直接求解，但是如果知道$x_0$，后验分布$q(x_{t-1}|x_t,x_0)$是可求解的。</p>
 <p>$$q(x_{t-1}|x_t,x_0) &#x3D; N(x_{t-1}; \tilde \mu(x_t,x_0), \tilde \beta_t I)$$</p>
 <p>根据贝叶斯公式，$q(x_{t-1}|x_t, x_0)$就可以直接写出</p>
-<p>$$\begin{aligned}q(x_{t-1}|x_t,x_0) &amp;&#x3D; \frac{q(x_t,x_0,x_{t-1})}{q(x_t,x_0)} \\ &amp;&#x3D; \frac{q(x_0)q(x_{t-1}|x_0)q(x_t|x_0,x_{t-1})}{q(x_0)q(x_t|x_0)} \\ &amp;&#x3D; q(x_t|x_0,x_{t-1}) \frac{q(x_{t-1}|x_0)}{q(x_0)q(x_t|x_0)} \end{aligned}$$</p>
+<p>$$\begin{aligned}q(x_{t-1}|x_t,x_0) &amp;&#x3D; \frac{q(x_t,x_0,x_{t-1})}{q(x_t,x_0)} \\ &amp;&#x3D; \frac{q(x_0)q(x_{t-1}|x_0)q(x_t|x_0,x_{t-1})}{q(x_0)q(x_t|x_0)} \\ &amp;&#x3D; q(x_t|x_0,x_{t-1}) \frac{q(x_{t-1}|x_0)}{q(x_t|x_0)} \end{aligned}$$</p>
 <p>从上面公式可以看出，后验分布$q(x_{t-1}|x_t,x_0)$的计算只依赖前向扩散过程。由于扩散过程的马尔卡夫链特性（在马尔可夫链中，下一状态的条件概率仅取决于当前状态，而不考虑之前的历史状态），则可以得到分布</p>
 <p>$$q(x_t|x_0,x_{t-1})&#x3D; q(x_t|x_{t-1}) &#x3D; N(x_t;\sqrt{1-\beta_t}x_{t-1}, \beta_tI)$$</p>
 <p>由前面得到的扩散过程的结论，以及一维高斯分布的定义：</p>
@@ -485,13 +485,20 @@
 <p>$$\begin{aligned}q(x_{t-1}|x_t,x_0) &amp;&#x3D; q(x_t|x_{t-1})\frac{q(x_{t-1}|x_0)}{q(x_0)q(x_t|x_0)} \\ &amp;\propto \exp(-\frac{1}{2}(\frac{(x_t - \sqrt{\alpha_t}x_{t-1})^2}{\beta_t} + \frac{(x_{t-1} - \sqrt{\bar\alpha_{t-1}}x_{0})^2}{1-\bar \alpha_{t-1}} - \frac{(x_t - \sqrt{\bar\alpha_t}x_{0})^2}{1-\bar \alpha_t})) \\ &amp;&#x3D; \exp(-\frac{1}{2}(\frac{x_t^2 -2\sqrt{\alpha_t}x_{t-1}x_t + \alpha_tx_{t-1}^2}{\beta_t} + \frac{x_{t-1}^2 - 2\sqrt{\bar\alpha_{t-1}}x_{t-1}x_0 + \bar\alpha_{t-1}x_0^2}{1-\bar \alpha_{t-1}} - \frac{x_t^2 -2\sqrt{\bar\alpha_t}x_0x_t + \bar\alpha_tx_0^2}{1-\bar \alpha_t})) \\ &amp;&#x3D; \exp(-\frac{1}{2}((\frac{\alpha_t}{\beta_t}+\frac{1}{1-\bar \alpha_{t-1}})x_{t-1}^2-(\frac{2 \sqrt{\alpha_t}}{\beta_t}x_t + \frac{2\sqrt{\bar \alpha_{t-1}}}{1-\bar \alpha_{t-1}}x_0 )x_{t-1}+C(x_t,x_0)))\end{aligned}$$</p>
 <p>这里只关注与$x_{t-1}$有关的部分，将其凑成正态分布指数的形式。方便起见可以简化上式为：</p>
 <p>$$\begin{aligned}\exp(-\frac{1}{2}(Ax_{t-1}^2-Bx_{t-1}+C)) &amp;&#x3D; \exp(-\frac{A}{2}(x_{t-1}^2-\frac{B}{A}x_{t-1}) - \frac{C}{2}) \\ &amp;&#x3D; \exp(-\frac{A}{2}(x_{t-1}-\frac{B}{2A})^2 - \frac{C}{2}+\frac{B^2}{8A})\end{aligned}$$</p>
-<p>我们可以得到后验分布$q(x_t|x_0,x_{t-1})$的方差和均值：</p>
+<p>我们可以得到后验分布$q(x_{t-1}|x_t,x_0)$的方差和均值：</p>
 <p>$$\begin{aligned} \bar \beta_t &#x3D; \frac{1}{A} &#x3D; 1&#x2F;(\frac{\alpha_t-\bar \alpha_t+ \beta_t}{\beta_t(1-\bar\alpha_{t-1})}) &#x3D; \frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t \end{aligned}$$</p>
-<p>$$\begin{aligned} \bar \mu &#x3D; \frac{B}{2A} &amp;&#x3D; (\frac{\sqrt{\alpha_t}}{\beta_t}x_t + \frac{\sqrt{\bar \alpha_{t-1}}}{1-\bar \alpha_{t-1}}x_0 ) &#x2F;(\frac{\alpha_t-\bar \alpha_t+ \beta_t}{\beta_t(1-\bar\alpha_{t-1})}) \\ &amp;&#x3D; (\frac{\sqrt{\alpha_t}}{\beta_t}x_t + \frac{\sqrt{\bar \alpha_{t-1}}}{1-\bar \alpha_{t-1}}x_0 ) \frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t \\ &amp;&#x3D; \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t + \frac{\sqrt{\bar \alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0 \end{aligned}$$</p>
+<p>$$\begin{aligned} \bar \mu_t &#x3D; \frac{B}{2A} &amp;&#x3D; (\frac{\sqrt{\alpha_t}}{\beta_t}x_t + \frac{\sqrt{\bar \alpha_{t-1}}}{1-\bar \alpha_{t-1}}x_0 ) &#x2F;(\frac{\alpha_t-\bar \alpha_t+ \beta_t}{\beta_t(1-\bar\alpha_{t-1})}) \\ &amp;&#x3D; (\frac{\sqrt{\alpha_t}}{\beta_t}x_t + \frac{\sqrt{\bar \alpha_{t-1}}}{1-\bar \alpha_{t-1}}x_0 ) \frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t \\ &amp;&#x3D; \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t + \frac{\sqrt{\bar \alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0 \end{aligned}$$</p>
 <p>由前向扩散过程的推导公式可得，$x_0 &#x3D; (x_t - \sqrt{1-\bar \alpha_t}\bar\epsilon_t)&#x2F;\sqrt{\bar \alpha_t}$，将其代入上式可得：</p>
-<p>$$\begin{aligned} \bar \mu &#x3D; \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar \alpha_t}}\bar \epsilon_t) \end{aligned}$$</p>
+<p>$$\begin{aligned} \bar \mu_t &#x3D; \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar \alpha_t}}\bar \epsilon_t) \end{aligned}$$</p>
 <p>可以看出，在给定$x_0$的条件下，<strong>后验条件高斯分布的均值只和超参数$\alpha$、$x_t$、$\epsilon_t$ 有关，方差只与超参数$\alpha$有关。</strong>通过以上的方差和均值，我们就得到了$q(x_{t-1}|x_t, x_0)$的<strong>解析形式</strong>。</p>
-<p>综上所述，在训练阶段，由于样本**$x_0$ **是已知的，所以可以通过后验分布$q(x_{t-1}|x_t,x_0) $来近似条件分布$q(x_{t-1}|x_t) $ 。神经网络$p_{\theta}(x_{t-1}|x_t)$通过学习后验分布$q(x_{t-1}|x_t, x_0)$进行训练，训练完毕后，推理时直接使用$p_{\theta}(x_{t-1}|x_t)$进行采样。</p>
+<p>综上所述，在训练阶段，由于样本**$x_0$ **是已知的，所以可以通过后验分布$q(x_{t-1}|x_t,x_0) $来近似条件分布$q(x_{t-1}|x_t)$ 。神经网络$p_{\theta}(x_{t-1}|x_t)$通过学习后验分布$q(x_{t-1}|x_t, x_0)$进行训练，训练完毕后，推理时直接使用$p_{\theta}(x_{t-1}|x_t)$进行采样。</p>
+<p>通过上述一系列推导，我们已经得到了反向生成过程的分布，该分布仍然是一个高斯分布，且得到了分布的均值和方差，则我们可以得到反向生成过程中每一时间步的采样公式：</p>
+<p>$$\begin{aligned} q(x_{t-1}|x_t) &amp;&#x3D; N(x_{t-1}; \bar\mu_t, \bar\beta_tI) \\ x_{t-1}&amp;&#x3D;\frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar \alpha_t}}\bar \epsilon_t) + \sqrt{\bar\beta_t}\epsilon \end{aligned}$$</p>
+<p>这里依然使用了一个重参数化技巧：从分布$N(\mu, \sigma^2)$中采样可以实现为从$N(0,1)$采样出一个样本$\epsilon$，再计算$\mu+\sigma\epsilon$得到。通过重参数化即可实现从上述的$q(x_{t-1}|x_t) $高斯分布中采样出$x_{t-1}$。</p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>训练过程的伪代码如下：</p>
+<p><img src="/images/DDPM_traincode.jpg"></p>
+<h3 id="采样过程"><a href="#采样过程" class="headerlink" title="采样过程"></a>采样过程</h3><p>采样生成过程的伪代码如下：</p>
+<p><img src="/images/DDPM_infercode.jpg"></p>
 <h2 id="模型部分"><a href="#模型部分" class="headerlink" title="模型部分"></a>模型部分</h2><p>前面介绍了扩散模型的原理以及优化目标，那么扩散模型的核心就在于训练噪音预测模型，由于噪音和原始数据是同维度的，所以可以选择采用<strong>AutoEncoder架构</strong>来作为噪音预测模型。DDPM所采用的模型是一个基于residual block和attention block的<strong>U-Net模型</strong>。整体算法的训练过程如下图所示：</p>
 <p><img src="/images/diffusion%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B.jpg"></p>
 <p>U-Net属于encoder-decoder架构，在decoder模块中还引入了<strong>skip connection</strong>，即concat了encoder中间得到的同维度特征，这有利于网络优化。DDPM所采用的U-Net部分stage还加入了<strong>self-attention模块</strong>增加网络的全局建模能力。 另外，扩散模型其实需要的是$T$个噪音预测模型，实际处理时，需要增加一个<strong>time embedding</strong>（类似transformer中的position embedding）来将timestep信息编码到网络中，从而只需要训练一个共享的U-Net模型。具体地，DDPM在各个residual block都引入了<strong>time embedding</strong>，如上图所示。</p>
