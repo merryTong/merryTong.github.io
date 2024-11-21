@@ -410,7 +410,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-11-09
+                    2024-11-21
                 </div>
                 
 
@@ -491,7 +491,7 @@
 <p>由前向扩散过程的推导公式可得，$x_0 &#x3D; (x_t - \sqrt{1-\bar \alpha_t}\bar\epsilon_t)&#x2F;\sqrt{\bar \alpha_t}$，将其代入上式可得：</p>
 <p>$$\begin{aligned} \bar \mu_t &#x3D; \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar \alpha_t}}\bar \epsilon_t) \end{aligned}$$</p>
 <p>可以看出，在给定$x_0$的条件下，<strong>后验条件高斯分布的均值只和超参数$\alpha$、$x_t$、$\epsilon_t$ 有关，方差只与超参数$\alpha$有关。</strong>通过以上的方差和均值，我们就得到了$q(x_{t-1}|x_t, x_0)$的<strong>解析形式</strong>。</p>
-<p>综上所述，在训练阶段，由于样本**$x_0$ **是已知的，所以可以通过后验分布$q(x_{t-1}|x_t,x_0) $来近似条件分布$q(x_{t-1}|x_t)$ 。神经网络$p_{\theta}(x_{t-1}|x_t)$通过学习后验分布$q(x_{t-1}|x_t, x_0)$进行训练，训练完毕后，推理时直接使用$p_{\theta}(x_{t-1}|x_t)$进行采样。</p>
+<p>综上所述，在训练阶段，由于样本$x_0$ 是已知的，所以可以通过后验分布$q(x_{t-1}|x_t,x_0) $来近似条件分布$q(x_{t-1}|x_t)$ 。神经网络$p_{\theta}(x_{t-1}|x_t)$通过学习后验分布$q(x_{t-1}|x_t, x_0)$进行训练，训练完毕后，推理时直接使用$p_{\theta}(x_{t-1}|x_t)$进行采样。</p>
 <p>通过上述一系列推导，我们已经得到了反向生成过程的分布，该分布仍然是一个高斯分布，且得到了分布的均值和方差，则我们可以得到反向生成过程中每一时间步的采样公式：</p>
 <p>$$\begin{aligned} q(x_{t-1}|x_t) &amp;&#x3D; N(x_{t-1}; \bar\mu_t, \bar\beta_tI) \\ x_{t-1}&amp;&#x3D;\frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar \alpha_t}}\bar \epsilon_t) + \sqrt{\bar\beta_t}\epsilon \end{aligned}$$</p>
 <p>这里依然使用了一个重参数化技巧：从分布$N(\mu, \sigma^2)$中采样可以实现为从$N(0,1)$采样出一个样本$\epsilon$，再计算$\mu+\sigma\epsilon$得到。通过重参数化即可实现从上述的$q(x_{t-1}|x_t) $高斯分布中采样出$x_{t-1}$。</p>
