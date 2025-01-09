@@ -5,7 +5,9 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的argparse模块, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="Python中的argparse模块argparse 模块是 Python 内置的用于命令项选项与参数解析的模块，argparse 模块可以让人轻松编写用户友好的命令行接口，能够帮助程序员为模型定义参数。本质上是用sys.argv从命令行语">
+    <meta name="description" content=" Python中的argparse模块
+argparse 模块是 Python 内置的用于命令项选项与参数解析的模块，argparse 模块可以让人轻松编写用户友好的命令行接口，能够帮助程序员为模型定义参数。
+本质上是用sys.argv从命">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -436,168 +438,180 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Python中的argparse模块"><a href="#Python中的argparse模块" class="headerlink" title="Python中的argparse模块"></a>Python中的argparse模块</h1><p>argparse 模块是 Python 内置的用于命令项选项与参数解析的模块，argparse 模块可以让人轻松编写用户友好的命令行接口，能够帮助程序员为模型定义参数。<br>本质上是用sys.argv从命令行语句中解析出命令行参数，然后自动生成帮助和使用信息。<br>argparse定义四个步骤</p>
+                <h1 id="python中的argparse模块"><a class="markdownIt-Anchor" href="#python中的argparse模块"></a> Python中的argparse模块</h1>
+<p>argparse 模块是 Python 内置的用于命令项选项与参数解析的模块，argparse 模块可以让人轻松编写用户友好的命令行接口，能够帮助程序员为模型定义参数。<br>
+本质上是用sys.argv从命令行语句中解析出命令行参数，然后自动生成帮助和使用信息。<br>
+argparse定义四个步骤</p>
 <ul>
 <li>导入argparse包 ——import argparse</li>
 <li>创建一个命令行解析器对象 ——创建 ArgumentParser() 对象</li>
 <li>给解析器添加命令行参数 ——调用add_argument() 方法添加参数</li>
 <li>解析命令行的参数 ——使用 parse_args() 解析添加的参数</li>
 </ul>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>argparse的使用非常简单，代码示例如下。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 导入库</span>
-<span class="token keyword">import</span> argparse
+<h2 id="基本用法"><a class="markdownIt-Anchor" href="#基本用法"></a> 基本用法</h2>
+<p>argparse的使用非常简单，代码示例如下。</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 导入库</span>
+<span class="hljs-keyword">import</span> argparse
  
-<span class="token comment" spellcheck="true"># 1. 定义命令行解析器对象</span>
-parser <span class="token operator">=</span> argparse<span class="token punctuation">.</span>ArgumentParser<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">'Demo of argparse'</span><span class="token punctuation">)</span>
+<span class="hljs-comment"># 1. 定义命令行解析器对象</span>
+parser = argparse.ArgumentParser(description=<span class="hljs-string">&#x27;Demo of argparse&#x27;</span>)
  
-<span class="token comment" spellcheck="true"># 2. 添加命令行参数</span>
-parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--epochs'</span><span class="token punctuation">,</span> type<span class="token operator">=</span>int<span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">)</span>
-parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--batch'</span><span class="token punctuation">,</span> type<span class="token operator">=</span>int<span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="hljs-comment"># 2. 添加命令行参数</span>
+parser.add_argument(<span class="hljs-string">&#x27;--epochs&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">30</span>)
+parser.add_argument(<span class="hljs-string">&#x27;--batch&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">4</span>)
  
-<span class="token comment" spellcheck="true"># 3. 从命令行中结构化解析参数</span>
-args <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span>
-epochs <span class="token operator">=</span> args<span class="token punctuation">.</span>epochs
-batch <span class="token operator">=</span> args<span class="token punctuation">.</span>batch
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'show {}  {}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>epochs<span class="token punctuation">,</span> batch<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><h3 id="add-argument-方法"><a href="#add-argument-方法" class="headerlink" title="add_argument() 方法"></a>add_argument() 方法</h3><p>添加命令行参数。给一个 ArgumentParser 对象添加程序参数信息，是通过调用 add_argument() 方法完成的。通常，这些调用指定 ArgumentParser 对象获取命令行字符串并将其转换为对象。这些信息在 parse_args() 调用时被存储在ArgumentParser实例化对象中，以供后续使用。</p>
-<h3 id="parse-args-方法"><a href="#parse-args-方法" class="headerlink" title="parse_args()方法"></a>parse_args()方法</h3><p>ArgumentParser对象通过 parse_args() 方法解析命令行的参数。它将检查命令行中每个参数，转换为适当的数据类型，然后调用相应的操作，并把参数结构化后存放在对象args中。</p>
-<pre class="line-numbers language-python"><code class="language-python">args <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="hljs-comment"># 3. 从命令行中结构化解析参数</span>
+args = parser.parse_args()
+<span class="hljs-built_in">print</span>(args)
+epochs = args.epochs
+batch = args.batch
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;show {}  {}&#x27;</span>.<span class="hljs-built_in">format</span>(epochs, batch))
+</code></pre>
+<h2 id="参数详解"><a class="markdownIt-Anchor" href="#参数详解"></a> 参数详解</h2>
+<h3 id="add_argument-方法"><a class="markdownIt-Anchor" href="#add_argument-方法"></a> add_argument() 方法</h3>
+<p>添加命令行参数。给一个 ArgumentParser 对象添加程序参数信息，是通过调用 add_argument() 方法完成的。通常，这些调用指定 ArgumentParser 对象获取命令行字符串并将其转换为对象。这些信息在 parse_args() 调用时被存储在ArgumentParser实例化对象中，以供后续使用。</p>
+<h3 id="parse_args方法"><a class="markdownIt-Anchor" href="#parse_args方法"></a> parse_args()方法</h3>
+<p>ArgumentParser对象通过 parse_args() 方法解析命令行的参数。它将检查命令行中每个参数，转换为适当的数据类型，然后调用相应的操作，并把参数结构化后存放在对象args中。</p>
+<pre class="highlight"><code class="python">args = parser.parse_args()
+</code></pre>
 <p>在脚本中，通常 parse_args() 会被不带参数调用，而 ArgumentParser 将自动从 sys.argv 中确定命令行参数。</p>
-<h2 id="add-argument-参数解析"><a href="#add-argument-参数解析" class="headerlink" title="add_argument() 参数解析"></a>add_argument() 参数解析</h2><p>每个参数解释如下:</p>
+<h2 id="add_argument-参数解析"><a class="markdownIt-Anchor" href="#add_argument-参数解析"></a> add_argument() 参数解析</h2>
+<p>每个参数解释如下:</p>
 <ul>
-<li><strong>name or flags: <strong>一个命名或者一个选项字符串的列表。可以传</strong>位置参数名</strong>或者<strong>可选参数标识符</strong>，它必须作为add_argument()方法的第一个参数。例如 epochs 或者 -e, –epochs。当<code>parse_args()</code>被调用，选项会以<code>-</code>前缀识别，剩下的参数则会被假定为位置参数。</li>
+<li><strong>name or flags: <strong>一个命名或者一个选项字符串的列表。可以传</strong>位置参数名</strong>或者<strong>可选参数标识符</strong>，它必须作为add_argument()方法的第一个参数。例如 epochs 或者 -e, --epochs。当<code>parse_args()</code>被调用，选项会以<code>-</code>前缀识别，剩下的参数则会被假定为位置参数。</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 可选参数</span>
-parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'-f'</span><span class="token punctuation">,</span> <span class="token string">'--foo'</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 位置参数</span>
-parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 可选参数</span>
+parser.add_argument(<span class="hljs-string">&#x27;-f&#x27;</span>, <span class="hljs-string">&#x27;--foo&#x27;</span>)
+<span class="hljs-comment"># 位置参数</span>
+parser.add_argument(<span class="hljs-string">&#x27;bar&#x27;</span>)
+</code></pre>
 <ul>
-<li><p><strong>action:</strong> 命令行遇到flags参数（可选参数）时的动作。有两个常见的动作：</p>
-<blockquote>
-<p>store_true：设定flag参数为true；<br>store_false：设定flag参数为False。<br>注意：如果直接运行程序，默认不读取该变量，要使用必须要进行传参，例如：python try.py –epochs</p>
-</blockquote>
-</li>
-<li><p>nargs: 应该读取的命令行参数个数，</p>
-<blockquote>
-<p>可以是具体的数字，<br>或者是 ? 号，当不指定值时对于 位置参数 使用 default，对于 可选参数 使用 const；<br>或者是 * 号，表示 0 或多个参数；<br>或者是 + 号，表示 1 或多个参数。</p>
-</blockquote>
-</li>
-<li><p><strong>default:</strong> 不指定参数时该参数的默认值。</p>
-</li>
-<li><p><strong>type:</strong> 命令行参数应该被转换成的数据类型。</p>
-</li>
-<li><p>required: 是否为必选参数或可选参数。</p>
-</li>
-<li><p><strong>help:</strong> 参数的帮助信息。</p>
-</li>
-<li><p>metavar： 在 usage 说明中的参数名称，对于必选参数，默认就是参数名称，对于可选参数默认是全大写的参数名称。</p>
-</li>
-<li><p>dest： 解析后的参数名称，默认情况下，对于可选参数选取最长的名称，中划线转换为下划线。</p>
-</li>
-<li><p>choices： 参数可允许的值的一个容器。</p>
-</li>
-<li><p>const： action 和 nargs 所需要的常量值。</p>
-</li>
-<li><p>store_const：表示赋值为const；</p>
-</li>
-<li><p>append：将遇到的值存储成列表，也就是如果参数重复则会保存多个值;</p>
-</li>
-<li><p>append_const：将参数规范中定义的一个值保存到一个列表；</p>
-</li>
-<li><p>count：存储遇到的次数；此外，也可以继承 argparse.Action 自定义参数解析；</p>
-</li>
+<li><strong>action:</strong> 命令行遇到flags参数（可选参数）时的动作。有两个常见的动作：</li>
 </ul>
-<h2 id="参数示例说明"><a href="#参数示例说明" class="headerlink" title="参数示例说明"></a>参数示例说明</h2><h3 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h3><p>位置参数是<code>XXX</code>。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> argparse
+<blockquote>
+<p>store_true：设定flag参数为true；<br>
+store_false：设定flag参数为False。<br>
+注意：如果直接运行程序，默认不读取该变量，要使用必须要进行传参，例如：python <a href="http://try.py" target="_blank" rel="noopener">try.py</a> --epochs</p>
+</blockquote>
+<ul>
+<li>nargs: 应该读取的命令行参数个数，</li>
+</ul>
+<blockquote>
+<p>可以是具体的数字，<br>
+或者是 ? 号，当不指定值时对于 位置参数 使用 default，对于 可选参数 使用 const；<br>
+或者是 * 号，表示 0 或多个参数；<br>
+或者是 + 号，表示 1 或多个参数。</p>
+</blockquote>
+<ul>
+<li><strong>default:</strong> 不指定参数时该参数的默认值。</li>
+<li><strong>type:</strong> 命令行参数应该被转换成的数据类型。</li>
+<li>required: 是否为必选参数或可选参数。</li>
+<li><strong>help:</strong> 参数的帮助信息。</li>
+<li>metavar： 在 usage 说明中的参数名称，对于必选参数，默认就是参数名称，对于可选参数默认是全大写的参数名称。</li>
+<li>dest： 解析后的参数名称，默认情况下，对于可选参数选取最长的名称，中划线转换为下划线。</li>
+<li>choices： 参数可允许的值的一个容器。</li>
+<li>const： action 和 nargs 所需要的常量值。</li>
+<li>store_const：表示赋值为const；</li>
+<li>append：将遇到的值存储成列表，也就是如果参数重复则会保存多个值;</li>
+<li>append_const：将参数规范中定义的一个值保存到一个列表；</li>
+<li>count：存储遇到的次数；此外，也可以继承 argparse.Action 自定义参数解析；</li>
+</ul>
+<h2 id="参数示例说明"><a class="markdownIt-Anchor" href="#参数示例说明"></a> 参数示例说明</h2>
+<h3 id="位置参数"><a class="markdownIt-Anchor" href="#位置参数"></a> 位置参数</h3>
+<p>位置参数是<code>XXX</code>。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> argparse
 
-parse <span class="token operator">=</span> argparse<span class="token punctuation">.</span>ArgumentParser<span class="token punctuation">(</span><span class="token string">'This script is for argparse learning'</span><span class="token punctuation">)</span>
+parse = argparse.ArgumentParser(<span class="hljs-string">&#x27;This script is for argparse learning&#x27;</span>)
 
-parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'echo'</span><span class="token punctuation">,</span>help<span class="token operator">=</span><span class="token string">'this option where return what you input'</span><span class="token punctuation">)</span>
-opt <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token keyword">print</span><span class="token punctuation">(</span>opt<span class="token punctuation">.</span>echo<span class="token punctuation">)</span>
+parse.add_argument(<span class="hljs-string">&#x27;echo&#x27;</span>,<span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;this option where return what you input&#x27;</span>)
+opt = parser.parse_args() 
+<span class="hljs-built_in">print</span>(opt.echo)
 
-python opt<span class="token punctuation">.</span>py hello
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+python opt.py hello
+&gt;&gt;&gt;Output:
 hello
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>type参数用来指定输入该参数的类型</p>
-<pre class="line-numbers language-python"><code class="language-python">parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'echo'</span><span class="token punctuation">,</span>help<span class="token operator">=</span><span class="token string">'this option where return what you input'</span><span class="token punctuation">,</span>
-                   type<span class="token operator">=</span>int<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h3><h4 id="指定参数"><a href="#指定参数" class="headerlink" title="指定参数"></a>指定参数</h4><p>使用<code>--XXX</code>或<code>-XXX</code>来指定可选参数，参数类型可以由type指定，如果使用可选参数则必须有一个参数，如下错误</p>
-<pre class="line-numbers language-python"><code class="language-python">parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--input'</span><span class="token punctuation">,</span>help<span class="token operator">=</span><span class="token string">'this will return what you input'</span><span class="token punctuation">,</span>type <span class="token operator">=</span> int<span class="token punctuation">)</span>
-arg <span class="token operator">=</span> parse<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span>input<span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">parse.add_argument(<span class="hljs-string">&#x27;echo&#x27;</span>,<span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;this option where return what you input&#x27;</span>,
+                   <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>)
+</code></pre>
+<h3 id="可选参数"><a class="markdownIt-Anchor" href="#可选参数"></a> 可选参数</h3>
+<h4 id="指定参数"><a class="markdownIt-Anchor" href="#指定参数"></a> 指定参数</h4>
+<p>使用<code>--XXX</code>或<code>-XXX</code>来指定可选参数，参数类型可以由type指定，如果使用可选参数则必须有一个参数，如下错误</p>
+<pre class="highlight"><code class="python">parse.add_argument(<span class="hljs-string">&#x27;--input&#x27;</span>,<span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;this will return what you input&#x27;</span>,<span class="hljs-built_in">type</span> = <span class="hljs-built_in">int</span>)
+arg = parse.parse_args()
+<span class="hljs-built_in">print</span>(arg.<span class="hljs-built_in">input</span>)
 
-python opt<span class="token punctuation">.</span>py <span class="token operator">-</span><span class="token operator">-</span>input
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-usage<span class="token punctuation">:</span> This script <span class="token keyword">is</span> <span class="token keyword">for</span> argparse learning <span class="token punctuation">[</span><span class="token operator">-</span>h<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token operator">-</span>input INPUT<span class="token punctuation">]</span>
-This script <span class="token keyword">is</span> <span class="token keyword">for</span> argparse learning<span class="token punctuation">:</span> error<span class="token punctuation">:</span> argument <span class="token operator">-</span><span class="token operator">-</span>input<span class="token punctuation">:</span> expected one argument
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="标值参数"><a href="#标值参数" class="headerlink" title="标值参数"></a>标值参数</h4><p><code>action = &#39;store_true&#39;</code>或者<code>action=&#39;store_false&#39;</code></p>
-<pre class="line-numbers language-python"><code class="language-python">parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--flag'</span><span class="token punctuation">,</span>help<span class="token operator">=</span><span class="token string">'this is test for flag'</span><span class="token punctuation">,</span>action<span class="token operator">=</span><span class="token string">'store_true'</span><span class="token punctuation">)</span>
-arg <span class="token operator">=</span> parse<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span>input<span class="token punctuation">)</span>
+python opt.py --<span class="hljs-built_in">input</span>
+&gt;&gt;&gt;Output:
+usage: This script <span class="hljs-keyword">is</span> <span class="hljs-keyword">for</span> argparse learning [-h] [--<span class="hljs-built_in">input</span> INPUT]
+This script <span class="hljs-keyword">is</span> <span class="hljs-keyword">for</span> argparse learning: error: argument --<span class="hljs-built_in">input</span>: expected one argument
+</code></pre>
+<h4 id="标值参数"><a class="markdownIt-Anchor" href="#标值参数"></a> 标值参数</h4>
+<p><code>action = 'store_true'</code>或者<code>action='store_false'</code></p>
+<pre class="highlight"><code class="python">parse.add_argument(<span class="hljs-string">&#x27;--flag&#x27;</span>,<span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;this is test for flag&#x27;</span>,action=<span class="hljs-string">&#x27;store_true&#x27;</span>)
+arg = parse.parse_args()
+<span class="hljs-built_in">print</span>(arg.<span class="hljs-built_in">input</span>)
 
-python opt<span class="token punctuation">.</span>py  <span class="token operator">-</span><span class="token operator">-</span>flag
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-<span class="token boolean">True</span>
+python opt.py  --flag
+&gt;&gt;&gt;Output:
+<span class="hljs-literal">True</span>
 
-python opt<span class="token punctuation">.</span>py
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-<span class="token boolean">False</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>当你为其指定一个值的时候，也会报错，说明这个标志只有存在和不存在的区别，不可以对其赋值。<br>也可以使用<code>action=&#39;store_const&#39;</code>来指定一个const参数。</p>
-<pre class="line-numbers language-python"><code class="language-python">parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--store_con'</span><span class="token punctuation">,</span>action<span class="token operator">=</span><span class="token string">'store_const'</span><span class="token punctuation">,</span>const<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">)</span>
-arg <span class="token operator">=</span> parse<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span>store_con<span class="token punctuation">)</span>
+python opt.py
+&gt;&gt;&gt;Output:
+<span class="hljs-literal">False</span>
+</code></pre>
+<p>当你为其指定一个值的时候，也会报错，说明这个标志只有存在和不存在的区别，不可以对其赋值。<br>
+也可以使用<code>action='store_const'</code>来指定一个const参数。</p>
+<pre class="highlight"><code class="python">parse.add_argument(<span class="hljs-string">&#x27;--store_con&#x27;</span>,action=<span class="hljs-string">&#x27;store_const&#x27;</span>,const=<span class="hljs-number">12</span>)
+arg = parse.parse_args()
+<span class="hljs-built_in">print</span>(arg.store_con)
 
-python opt<span class="token punctuation">.</span>py <span class="token operator">-</span><span class="token operator">-</span>store_con
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-<span class="token number">12</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="限制参数的选项"><a href="#限制参数的选项" class="headerlink" title="限制参数的选项"></a>限制参数的选项</h4><p>使用choices来限制参数的选项</p>
-<pre class="line-numbers language-python"><code class="language-python">parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--choice'</span><span class="token punctuation">,</span>choices<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>type<span class="token operator">=</span>int<span class="token punctuation">,</span>
-                   help<span class="token operator">=</span><span class="token string">'the choice only can be used in [1,2,3]'</span><span class="token punctuation">)</span>
-arg <span class="token operator">=</span> parse<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span>choice<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+python opt.py --store_con
+&gt;&gt;&gt;Output:
+<span class="hljs-number">12</span>
+</code></pre>
+<h4 id="限制参数的选项"><a class="markdownIt-Anchor" href="#限制参数的选项"></a> 限制参数的选项</h4>
+<p>使用choices来限制参数的选项</p>
+<pre class="highlight"><code class="python">parse.add_argument(<span class="hljs-string">&#x27;--choice&#x27;</span>,choices=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>,
+                   <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;the choice only can be used in [1,2,3]&#x27;</span>)
+arg = parse.parse_args()
+<span class="hljs-built_in">print</span>(arg.choice)
+</code></pre>
 <p>使用不在choices中的参数会报错</p>
-<h4 id="计数某一可选参数出现次数"><a href="#计数某一可选参数出现次数" class="headerlink" title="计数某一可选参数出现次数"></a>计数某一可选参数出现次数</h4><p>使用count动作来计数某一可选参数出现的次数</p>
-<pre class="line-numbers language-python"><code class="language-python">parse<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--num'</span><span class="token punctuation">,</span><span class="token string">'-n'</span><span class="token punctuation">,</span>action<span class="token operator">=</span><span class="token string">'count'</span><span class="token punctuation">,</span>help<span class="token operator">=</span><span class="token string">'this option is used for count'</span><span class="token punctuation">)</span>
-arg <span class="token operator">=</span> parse<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">if</span> arg<span class="token punctuation">.</span>num <span class="token operator">==</span> None<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'count is 0'</span><span class="token punctuation">)</span>
-<span class="token keyword">if</span> arg<span class="token punctuation">.</span>num <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'count is 1'</span><span class="token punctuation">)</span>
-<span class="token keyword">if</span> arg<span class="token punctuation">.</span>num <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'count is 2'</span><span class="token punctuation">)</span>
+<h4 id="计数某一可选参数出现次数"><a class="markdownIt-Anchor" href="#计数某一可选参数出现次数"></a> 计数某一可选参数出现次数</h4>
+<p>使用count动作来计数某一可选参数出现的次数</p>
+<pre class="highlight"><code class="python">parse.add_argument(<span class="hljs-string">&#x27;--num&#x27;</span>,<span class="hljs-string">&#x27;-n&#x27;</span>,action=<span class="hljs-string">&#x27;count&#x27;</span>,<span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;this option is used for count&#x27;</span>)
+arg = parse.parse_args()
+<span class="hljs-keyword">if</span> arg.num == <span class="hljs-literal">None</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;count is 0&#x27;</span>)
+<span class="hljs-keyword">if</span> arg.num == <span class="hljs-number">1</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;count is 1&#x27;</span>)
+<span class="hljs-keyword">if</span> arg.num == <span class="hljs-number">2</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;count is 2&#x27;</span>)
 
-python opt<span class="token punctuation">.</span>py  <span class="token operator">-</span>n
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-count <span class="token keyword">is</span> <span class="token number">1</span>
+python opt.py  -n
+&gt;&gt;&gt;Output:
+count <span class="hljs-keyword">is</span> <span class="hljs-number">1</span>
 ————————————————————————————————
-python opt<span class="token punctuation">.</span>py  <span class="token operator">-</span>nn
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-count <span class="token keyword">is</span> <span class="token number">2</span>
+python opt.py  -nn
+&gt;&gt;&gt;Output:
+count <span class="hljs-keyword">is</span> <span class="hljs-number">2</span>
 ————————————————————————————————
-python opt<span class="token punctuation">.</span>py  <span class="token operator">-</span>n <span class="token operator">-</span>n
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-count <span class="token keyword">is</span> <span class="token number">2</span>
+python opt.py  -n -n
+&gt;&gt;&gt;Output:
+count <span class="hljs-keyword">is</span> <span class="hljs-number">2</span>
 ————————————————————————————————
-python opt<span class="token punctuation">.</span>py  <span class="token operator">-</span>n <span class="token operator">-</span><span class="token operator">-</span>num
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-count <span class="token keyword">is</span> <span class="token number">2</span>
+python opt.py  -n --num
+&gt;&gt;&gt;Output:
+count <span class="hljs-keyword">is</span> <span class="hljs-number">2</span>
 ————————————————————————————————
-python opt<span class="token punctuation">.</span>py
-<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
-count <span class="token keyword">is</span> <span class="token number">0</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="使用default指定默认参数"><a href="#使用default指定默认参数" class="headerlink" title="使用default指定默认参数"></a>使用default指定默认参数</h4><p>可以在添加参数的时候使用default来指定默认的参数</p>
+python opt.py
+&gt;&gt;&gt;Output:
+count <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+</code></pre>
+<h4 id="使用default指定默认参数"><a class="markdownIt-Anchor" href="#使用default指定默认参数"></a> 使用default指定默认参数</h4>
+<p>可以在添加参数的时候使用default来指定默认的参数</p>
 
                 
             </div>

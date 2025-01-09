@@ -5,8 +5,10 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="C++|C++中的多态和虚函数, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="C++中的多态和虚函数多态多态（Polymorphism）按字面的意思就是某个事物有多种形态，当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。
-C++ 中，多态是面向对象编程的重要特性之一。多态允许使用基类指针或引用来调用子">
+    <meta name="description" content=" C++中的多态和虚函数
+ 多态
+多态（Polymorphism）按字面的意思就是某个事物有多种形态，当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。
+C++ 中，多态是面向对象编程的重要特性之一。多态允许使用基类指针或引用">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -433,90 +435,94 @@ C++ 中，多态是面向对象编程的重要特性之一。多态允许使用�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="C-中的多态和虚函数"><a href="#C-中的多态和虚函数" class="headerlink" title="C++中的多态和虚函数"></a>C++中的多态和虚函数</h1><h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p><strong>多态</strong>（Polymorphism）按字面的意思就是某个事物有多种形态，当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。</p>
+                <h1 id="c中的多态和虚函数"><a class="markdownIt-Anchor" href="#c中的多态和虚函数"></a> C++中的多态和虚函数</h1>
+<h2 id="多态"><a class="markdownIt-Anchor" href="#多态"></a> 多态</h2>
+<p><strong>多态</strong>（Polymorphism）按字面的意思就是某个事物有多种形态，当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。</p>
 <p>C++ 中，多态是面向对象编程的重要特性之一。<strong>多态允许使用基类指针或引用来调用子类的重写方法</strong>，从而使得同一接口可以表现不同的行为。多态使得代码更加灵活和通用，程序可以通过基类指针或引用来操作不同类型的对象，而不需要显式区分对象类型。这样可以使代码更具扩展性，在增加新的形状类时不需要修改主程序。</p>
 <p>我们编写如下代码，这是一个普通的关于继承的代码，类Player继承了类Entity，且类Player重写了父类Entity的GetName()方法。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
-<span class="token keyword">private</span><span class="token operator">:</span>
-    std<span class="token operator">::</span>string m_Name<span class="token punctuation">;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>    
-<span class="token punctuation">}</span>；
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span>{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function">std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Entity&quot;</span>;
+    }
+};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Player</span>: <span class="hljs-keyword">public</span> Entity{
+<span class="hljs-keyword">private</span>:
+    std::string m_Name;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Player</span>(<span class="hljs-type">const</span> std::string&amp; name){
+        m_Name = name;
+    }
+    <span class="hljs-function">std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> m_Name;
+    }    
+}；
+</code></pre>
 <p>使用如下方式调用，输出分别为“Entity”和“Cherno”，这是我们期望的正常结果。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
-    Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Entity* e = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Entity</span>();
+    std::cout &lt;&lt; e-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Entity</span>
+    Player* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">&quot;Cherno&quot;</span>);
+    std::cout &lt;&lt; p-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Cherno</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
 <p>如果我们使用多态的方式调用，即当父类Entity的指针指向了子类Player时，就会遇到问题：最后的输出为“Entity”。这不是我们期望的，我们希望是由Player调用GetName()，即使是父类Entity的指针，但实际上它是指向Player实例对象。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
-    Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
-    <span class="token comment" spellcheck="true">// 多态</span>
-    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> p<span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> entity<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Entity* e = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Entity</span>();
+    std::cout &lt;&lt; e-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Entity</span>
+    Player* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">&quot;Cherno&quot;</span>);
+    std::cout &lt;&lt; p-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Cherno</span>
+    <span class="hljs-comment">// 多态</span>
+    Entity* entity = p;
+    std::cout &lt;&lt; entity-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Entity</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
 <p>为什么会出现这种情况？这是因为使用了父类Entity的指针，当调用GetName()时，它会先去Entity找这个函数。但是我们希望C++ 能够意识到，虽然使用了父类Entity的指针，但我们实际使用的是Player对象，所以应该调用Player的GetName()。</p>
 <p>这就引出了虚函数。</p>
-<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>虚函数是指加了<code>virtual</code>修饰符的类的成员函数，<code>virtual</code>关键字只能出现在类内部的函数声明中，不能用于类外部的函数定义。如下所示：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">virtual</span> std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//标记为virtual</span>
-        <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="虚函数"><a class="markdownIt-Anchor" href="#虚函数"></a> 虚函数</h2>
+<p>虚函数是指加了<code>virtual</code>修饰符的类的成员函数，<code>virtual</code>关键字只能出现在类内部的函数声明中，不能用于类外部的函数定义。如下所示：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span>{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span></span>{ <span class="hljs-comment">//标记为virtual</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Entity&quot;</span>;
+    }
+};
+</code></pre>
 <p>虽然只加了一个关键词<code>virtual</code>，但此时使用前文多态的方式调用，即可得到我们期望的结果：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
-    Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
-    <span class="token comment" spellcheck="true">// 多态</span>
-    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> p<span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> entity<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Entity* e = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Entity</span>();
+    std::cout &lt;&lt; e-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Entity</span>
+    Player* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">&quot;Cherno&quot;</span>);
+    std::cout &lt;&lt; p-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Cherno</span>
+    <span class="hljs-comment">// 多态</span>
+    Entity* entity = p;
+    std::cout &lt;&lt; entity-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl; <span class="hljs-comment">// Cherno</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
 <p>在C++11之后，可以将被重写的子类方法标记为<code>override</code>，但这不是必需的：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">virtual</span> std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
-<span class="token keyword">private</span><span class="token operator">:</span>
-    std<span class="token operator">::</span>string m_Name<span class="token punctuation">;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 标记为override</span>
-        <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>    
-<span class="token punctuation">}</span>；
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="多态的实现机制"><a href="#多态的实现机制" class="headerlink" title="多态的实现机制"></a>多态的实现机制</h3><ul>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span>{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Entity&quot;</span>;
+    }
+};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Player</span>: <span class="hljs-keyword">public</span> Entity{
+<span class="hljs-keyword">private</span>:
+    std::string m_Name;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Player</span>(<span class="hljs-type">const</span> std::string&amp; name){
+        m_Name = name;
+    }
+    <span class="hljs-function">std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-comment">// 标记为override</span>
+        <span class="hljs-keyword">return</span> m_Name;
+    }    
+}；
+</code></pre>
+<h3 id="多态的实现机制"><a class="markdownIt-Anchor" href="#多态的实现机制"></a> 多态的实现机制</h3>
+<ul>
 <li>虚函数表（V-Table）：C++运行时使用虚函数表来实现多态。每个包含虚函数的类都有一个虚函数表，表中存储了指向类中所有虚函数的指针。</li>
 <li>虚函数指针（V-Ptr）：对象中包含一个指向该类的虚函数表的指针。</li>
 </ul>
@@ -527,73 +533,75 @@ C++ 中，多态是面向对象编程的重要特性之一。多态允许使用�
 <li>只有通过基类的指针或引用调用虚函数时，才会发生多态。</li>
 <li>如果直接使用派生类的对象调用函数，那么调用的是派生类中的版本，而不是基类中的版本。（如多态一节的代码结果）</li>
 </ul>
-<h2 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h2><p>纯虚函数是一种特殊的虚函数，其与Java中的抽象方法或接口类似。纯虚函数允许在基类中定义一个没有实现的函数，然后强制子类去实现该函数。</p>
+<h2 id="纯虚函数"><a class="markdownIt-Anchor" href="#纯虚函数"></a> 纯虚函数</h2>
+<p>纯虚函数是一种特殊的虚函数，其与Java中的抽象方法或接口类似。纯虚函数允许在基类中定义一个没有实现的函数，然后强制子类去实现该函数。</p>
 <p>纯虚函数没有函数体，声明时使用<code>函数名() = 0</code>。一个包含纯虚函数的类被称为抽象类（Abstract Class），因为类内方法没有实现，所以它<strong>不可能被直接实例化</strong>。必须要重写基类的纯虚函数。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 抽象类</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">virtual</span> std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 纯虚函数</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
-<span class="token keyword">private</span><span class="token operator">:</span>
-    std<span class="token operator">::</span>string m_Name<span class="token punctuation">;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 标记为override</span>
-        <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>    
-<span class="token punctuation">}</span>；
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span>{ <span class="hljs-comment">// 抽象类</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">// 纯虚函数</span>
+};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Player</span>: <span class="hljs-keyword">public</span> Entity{
+<span class="hljs-keyword">private</span>:
+    std::string m_Name;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Player</span>(<span class="hljs-type">const</span> std::string&amp; name){
+        m_Name = name;
+    }
+    <span class="hljs-function">std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-comment">// 标记为override</span>
+        <span class="hljs-keyword">return</span> m_Name;
+    }    
+}；
+</code></pre>
 <p>我们通过如下方式调用：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span>Entity<span class="token operator">*</span> obj<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> obj<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">Print</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h2><p>析构函数是在对象销毁时运行，当对象生命周期结束被销毁时，将调用析构函数。该函数主要用于清理内存，同时适用于栈内存和堆内存。而虚析构函数，顾名思义是虚函数和析构函数的组合。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Print</span><span class="hljs-params">(Entity* obj)</span></span>{
+    std::cout &lt;&lt; obj-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{ 
+    Entity* entity = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">&quot;Cherno&quot;</span>);
+    <span class="hljs-built_in">Print</span>(entity); <span class="hljs-comment">// Cherno</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="虚析构函数"><a class="markdownIt-Anchor" href="#虚析构函数"></a> 虚析构函数</h2>
+<p>析构函数是在对象销毁时运行，当对象生命周期结束被销毁时，将调用析构函数。该函数主要用于清理内存，同时适用于栈内存和堆内存。而虚析构函数，顾名思义是虚函数和析构函数的组合。</p>
 <p>虚析构函数是用于处理多态为问题的，如下面的代码，当执行<code>delete entity</code>，调用了基类Entity的析构函数，只是销毁Entity指针（在栈上）；而子类Player对象（在堆上）还没有释放，这就会导致内存泄露。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//多态</span>
-    <span class="token keyword">delete</span> entity<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这里销毁Entity指针，但是没有释放Player对象</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{ 
+    Entity* entity = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">&quot;Cherno&quot;</span>); <span class="hljs-comment">//多态</span>
+    <span class="hljs-keyword">delete</span> entity; <span class="hljs-comment">// 这里销毁Entity指针，但是没有释放Player对象</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
 <p>这时需要虚析构函数。</p>
 <p>虚析构函数即在析构函数前加<code>virtual</code>关键字，但是它和普通虚函数不同，<strong>不是去覆写析构函数，而是再加上一个析构函数</strong>。即，如果基类的析构函数改为虚函数，实际会调用两个析构函数，先调用子类的，再调用基类的。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Entity constructed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Entity destroyed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Player constructed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token operator">~</span><span class="token function">Player</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Player destroyed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>；
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
-    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//多态</span>
-    <span class="token keyword">delete</span> entity<span class="token punctuation">;</span> 
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">// 输出</span>
-<span class="token comment" spellcheck="true">// Entity constructed</span>
-<span class="token comment" spellcheck="true">// Player constructed</span>
-<span class="token comment" spellcheck="true">// Player destroyed</span>
-<span class="token comment" spellcheck="true">// Entity destroyed</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span>{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Entity</span>(){
+        std::cout &lt;&lt; <span class="hljs-string">&quot;Entity constructed&quot;</span> &lt;&lt; std::endl;
+    }
+    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Entity</span>(){
+        std::cout &lt;&lt; <span class="hljs-string">&quot;Entity destroyed&quot;</span> &lt;&lt; std::endl;
+    }
+};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Player</span>: <span class="hljs-keyword">public</span> Entity{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">Player</span>(){
+        std::cout &lt;&lt; <span class="hljs-string">&quot;Player constructed&quot;</span> &lt;&lt; std::endl;
+    }
+    ~<span class="hljs-built_in">Player</span>(){
+        std::cout &lt;&lt; <span class="hljs-string">&quot;Player destroyed&quot;</span> &lt;&lt; std::endl;
+    }
+}；
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{ 
+    Entity* entity = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">&quot;Cherno&quot;</span>); <span class="hljs-comment">//多态</span>
+    <span class="hljs-keyword">delete</span> entity; 
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">// 输出</span>
+<span class="hljs-comment">// Entity constructed</span>
+<span class="hljs-comment">// Player constructed</span>
+<span class="hljs-comment">// Player destroyed</span>
+<span class="hljs-comment">// Entity destroyed</span>
+</code></pre>
 
                 
             </div>

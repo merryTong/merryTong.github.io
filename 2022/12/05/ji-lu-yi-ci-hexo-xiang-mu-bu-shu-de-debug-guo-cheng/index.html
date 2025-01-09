@@ -9,8 +9,8 @@
 关注公众号【惜学塔】，每日知识干货马上就来！
 
 
-正常部署方式当github仓库、git、Hexo准备就绪，想把自己的内容推送到Github上时，通过GitHub网址 ，可见jlcxxzj,就可以愉快的访问时，一切都是那么简单，只需要：
-">
+ 正常部署方式
+当github仓库、git、Hexo准备就绪，想把自己的内容推送到Github上时，通过GitHub网址 ，可见jlcxxzj,就可以愉快的访问时，一切都是那么简单，只需要">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -444,55 +444,74 @@
                 <blockquote>
 <p>关注公众号【惜学塔】，每日知识干货马上就来！</p>
 </blockquote>
-<p><img src="/medias/contact.jpg"></p>
-<h1 id="正常部署方式"><a href="#正常部署方式" class="headerlink" title="正常部署方式"></a>正常部署方式</h1><p>当github仓库、git、Hexo准备就绪，想把自己的内容推送到Github上时，通过GitHub网址 ，<a href="https://jlcxxzj.github.io/" target="_blank" rel="noopener">可见jlcxxzj</a>,就可以愉快的访问时，一切都是那么简单，只需要：</p>
-<h2 id="一、建立本地项目和Github的连接"><a href="#一、建立本地项目和Github的连接" class="headerlink" title="一、建立本地项目和Github的连接"></a>一、建立本地项目和Github的连接</h2><ol>
-<li>打开Hexo项目根目录，右键打开git bash，然后输入自己的github账号信息命令：<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"jlcxxzj"</span>
-<span class="token function">git</span> config --global user.email <span class="token string">"2541597473@qq.com"</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/medias/contact.jpg" alt></p>
+<h1 id="正常部署方式"><a class="markdownIt-Anchor" href="#正常部署方式"></a> 正常部署方式</h1>
+<p>当github仓库、git、Hexo准备就绪，想把自己的内容推送到Github上时，通过GitHub网址 ，<a href="https://jlcxxzj.github.io/" target="_blank" rel="noopener">可见jlcxxzj</a>,就可以愉快的访问时，一切都是那么简单，只需要：</p>
+<h2 id="一-建立本地项目和github的连接"><a class="markdownIt-Anchor" href="#一-建立本地项目和github的连接"></a> 一、建立本地项目和Github的连接</h2>
+<ol>
+<li>打开Hexo项目根目录，右键打开git bash，然后输入自己的github账号信息命令：<pre class="highlight"><code class="bash">git config --global user.name <span class="hljs-string">&quot;jlcxxzj&quot;</span>
+git config --global user.email <span class="hljs-string">&quot;2541597473@qq.com&quot;</span>
+</code></pre>
 </li>
-<li>没有报错就说明用户信息是正确的，如果报错去Github设置看看自己的用户名和邮箱；接下来生成密钥SSH key，首先是确定要生成密钥的账户：<pre class="line-numbers language-bash"><code class="language-bash">ssh-keygen -t rsa -C <span class="token string">"2541597473@qq.com"</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
- 继续输入下面命令，会产生一个密钥，也可在本地的用户根目录下**.ssh**文件夹找到产生的密钥：<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> ~/.ssh/id_rsa.pub
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>没有报错就说明用户信息是正确的，如果报错去Github设置看看自己的用户名和邮箱；接下来生成密钥SSH key，首先是确定要生成密钥的账户：<pre class="highlight"><code class="bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;2541597473@qq.com&quot;</span>
+</code></pre>
+继续输入下面命令，会产生一个密钥，也可在本地的用户根目录下**.ssh**文件夹找到产生的密钥：<pre class="highlight"><code class="bash"><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub
+</code></pre>
 </li>
 <li>生成密钥成功以后，打开<a href="https://github.com/jlcxxzj">github</a>，在右上角头像下面点击<code>settings</code>，再点击<code>SSH and GPG keys</code>，新建一个SSH，名字任意，可按项目名称来，将第2步产生的密钥复制到框中，点击确定保存。</li>
 <li>在第1步右键打开的git bash下输入<code>ssh -T git@github.com</code>，如果没有报错，出现你的用户名，那就成功了。</li>
 </ol>
-<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>由于本机属于内网，互联网是没有办法直接访问的，因此需要使用内网穿透来使得其他设备可以访问到<br><a href="https://cloud.tencent.com/developer/article/2126247" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/2126247</a><br>主机IP可通过CMD输入ipconfig或者ipconfig&#x2F;all来查看<br>选择https方式</p>
-<h2 id="二、将自己的Hexo博客上传到github页面，不用搭服务器或者内网穿透就能远程访问"><a href="#二、将自己的Hexo博客上传到github页面，不用搭服务器或者内网穿透就能远程访问" class="headerlink" title="二、将自己的Hexo博客上传到github页面，不用搭服务器或者内网穿透就能远程访问"></a>二、将自己的Hexo博客上传到github页面，不用搭服务器或者内网穿透就能远程访问</h2><ol>
-<li>首先修改一下Hexo博客更目录下的_config.yml配置文件(注意，不是主题下面的_config.yml),修改一下部署的配置信息，repository修改为自己的github项目地址：<pre class="line-numbers language-bash"><code class="language-bash">deploy:  
-  type: <span class="token function">git</span>  
+<h1 id="内网穿透"><a class="markdownIt-Anchor" href="#内网穿透"></a> 内网穿透</h1>
+<p>由于本机属于内网，互联网是没有办法直接访问的，因此需要使用内网穿透来使得其他设备可以访问到<br>
+<a href="https://cloud.tencent.com/developer/article/2126247" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/2126247</a><br>
+主机IP可通过CMD输入ipconfig或者ipconfig/all来查看<br>
+选择https方式</p>
+<h2 id="二-将自己的hexo博客上传到github页面不用搭服务器或者内网穿透就能远程访问"><a class="markdownIt-Anchor" href="#二-将自己的hexo博客上传到github页面不用搭服务器或者内网穿透就能远程访问"></a> 二、将自己的Hexo博客上传到github页面，不用搭服务器或者内网穿透就能远程访问</h2>
+<ol>
+<li>首先修改一下Hexo博客更目录下的_config.yml配置文件(注意，不是主题下面的_config.yml),修改一下部署的配置信息，repository修改为自己的github项目地址：<pre class="highlight"><code class="bash">deploy:  
+  <span class="hljs-built_in">type</span>: git  
   repository: https://github.com/jlcxxzj/jlcxxzj.github.io.git  
   branch: master
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 </li>
 <li>正常情况下以下3步就可以部署到github页面访问1. <code>hexo clean</code>、<code>hexo g</code>、<code>hexo d</code></li>
 <li>github访问地址 <a href="https://github.com/jlcxxzj/jlcxxzj.github.io.git%EF%BC%8C%E5%9C%A8%E5%85%B7%E4%BD%93%E7%9A%84%E9%A1%B9%E7%9B%AE%E8%AE%BE%E7%BD%AE%E4%B8%AD%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%A0%B9%E6%9C%AC%E6%9B%B4%E6%94%B9%E9%BB%98%E8%AE%A4%E5%88%86%E6%94%AF%EF%BC%8C%E8%AE%BF%E9%97%AE%E7%9A%84%E8%AF%9D%E4%B9%9F%E6%98%AF%E8%AE%BF%E9%97%AE%E9%BB%98%E8%AE%A4%E7%9A%84%E5%88%86%E6%94%AF">https://github.com/jlcxxzj/jlcxxzj.github.io.git，在具体的项目设置中，可以根本更改默认分支，访问的话也是访问默认的分支</a></li>
-<li>也可以本地访问， <code>hexo clean</code>、<code>hexo g</code>、<code>hexo s</code>，默认4000端口可访问，<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000</a></li>
+<li>也可以本地访问， <code>hexo clean</code>、<code>hexo g</code>、<code>hexo s</code>，默认4000端口可访问，<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></li>
 </ol>
-<h1 id="各种意外情况"><a href="#各种意外情况" class="headerlink" title="各种意外情况"></a>各种意外情况</h1><h2 id="部署出现错误err-Error-Spawn-failed"><a href="#部署出现错误err-Error-Spawn-failed" class="headerlink" title="部署出现错误err: Error: Spawn failed"></a>部署出现错误err: Error: Spawn failed</h2><pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">##进入站点根目录</span>
-<span class="token function">cd</span> /usr/local/src/hexo/hanyubolg/
+<h1 id="各种意外情况"><a class="markdownIt-Anchor" href="#各种意外情况"></a> 各种意外情况</h1>
+<h2 id="部署出现错误err-error-spawn-failed"><a class="markdownIt-Anchor" href="#部署出现错误err-error-spawn-failed"></a> 部署出现错误err: Error: Spawn failed</h2>
+<pre class="highlight"><code class="bash"><span class="hljs-comment">##进入站点根目录</span>
+<span class="hljs-built_in">cd</span> /usr/local/src/hexo/hanyubolg/
 
-<span class="token comment" spellcheck="true">##删除git提交内容文件夹</span>
-<span class="token function">rm</span> -rf .deploy_git/
+<span class="hljs-comment">##删除git提交内容文件夹</span>
+<span class="hljs-built_in">rm</span> -rf .deploy_git/
 
-<span class="token comment" spellcheck="true">##执行</span>
-<span class="token function">git</span> config --global core.autocrlf <span class="token boolean">false</span>
+<span class="hljs-comment">##执行</span>
+git config --global core.autocrlf <span class="hljs-literal">false</span>
 
-<span class="token comment" spellcheck="true">##最后</span>
-hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="token operator">&amp;&amp;</span> hexo d
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="Git出错：error-RPC-failed-curl-56-OpenSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#Git出错：error-RPC-failed-curl-56-OpenSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="Git出错：error: RPC failed; curl 56 OpenSSL SSL_read: Connection was reset, errno 10054"></a>Git出错：error: RPC failed; curl 56 OpenSSL SSL_read: Connection was reset, errno 10054</h2><p>出现这种原因的可能有好几种</p>
-<h3 id="fatal-The-remote-end-hung-up-unexpectedly"><a href="#fatal-The-remote-end-hung-up-unexpectedly" class="headerlink" title="fatal: The remote end hung up unexpectedly"></a>fatal: The remote end hung up unexpectedly</h3><p><img src="https://upload-images.jianshu.io/upload_images/20074990-37e315ab227b135e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/566/format/webp"></p>
+<span class="hljs-comment">##最后</span>
+hexo clean &amp;&amp; hexo g &amp;&amp; hexo d
+</code></pre>
+<h2 id="git出错error-rpc-failed-curl-56-openssl-ssl_read-connection-was-reset-errno-10054"><a class="markdownIt-Anchor" href="#git出错error-rpc-failed-curl-56-openssl-ssl_read-connection-was-reset-errno-10054"></a> Git出错：error: RPC failed; curl 56 OpenSSL SSL_read: Connection was reset, errno 10054</h2>
+<p>出现这种原因的可能有好几种</p>
+<h3 id="fatal-the-remote-end-hung-up-unexpectedly"><a class="markdownIt-Anchor" href="#fatal-the-remote-end-hung-up-unexpectedly"></a> fatal: The remote end hung up unexpectedly</h3>
+<p><img src="https://upload-images.jianshu.io/upload_images/20074990-37e315ab227b135e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/566/format/webp" alt></p>
 <ol>
-<li>整体文件太大，修改文件大小的上限：<br><code>git config --global http.postBuffer 524288000</code><br>也可在项目中的.git文件夹，直接修改；通过下面命令查看是否修改成功：<br><code>git config --list</code></li>
+<li>整体文件太大，修改文件大小的上限：<br>
+<code>git config --global http.postBuffer 524288000</code><br>
+也可在项目中的.git文件夹，直接修改；通过下面命令查看是否修改成功：<br>
+<code>git config --list</code></li>
 <li>单个文件<strong>超过100M</strong>是不能上传的，部署的时候需要注意</li>
 </ol>
-<h3 id="error-failed-to-push-some-refs-to-git"><a href="#error-failed-to-push-some-refs-to-git" class="headerlink" title="error: failed to push some refs to *.git"></a>error: failed to push some refs to *.git</h3><p>之前这种操作属于常规操作，没想到这次出了问题，感觉问题应该出在了工程创建方式上。我在 git 后台创建工程时勾选了自动添加 README.md 文件，可能导致了后续一系列问题。</p>
-<h2 id="部署的时候一直卡着不动的原因"><a href="#部署的时候一直卡着不动的原因" class="headerlink" title="部署的时候一直卡着不动的原因"></a>部署的时候一直卡着不动的原因</h2><p><a href="https://blog.csdn.net/qq_25333681/article/details/80879500" target="_blank" rel="noopener">https://blog.csdn.net/qq_25333681/article/details/80879500</a></p>
-<h2 id="需要修改展示的branch分支页面时"><a href="#需要修改展示的branch分支页面时" class="headerlink" title="需要修改展示的branch分支页面时"></a>需要修改展示的branch分支页面时</h2><p>点击settings，在Pages的 <strong>Build and deployment</strong>修改<strong>Branch</strong>，需要等一会重新输入<a href="https://jlcxxzj.github.io/" target="_blank" rel="noopener">项目地址</a>，就能访问分支下的页面了。<br><img src="/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1hexo%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84Debug%E8%BF%87%E7%A8%8B_md_files/00d68c60-745b-11ed-aa4d-fdeb71e777c3.jpeg?v=1&type=image"></p>
-<h2 id="Debug链接"><a href="#Debug链接" class="headerlink" title="Debug链接"></a>Debug链接</h2><p><a href="https://blog.csdn.net/u013250071/article/details/81203900" target="_blank" rel="noopener">修改.git文件夹</a></p>
+<h3 id="error-failed-to-push-some-refs-to-git"><a class="markdownIt-Anchor" href="#error-failed-to-push-some-refs-to-git"></a> error: failed to push some refs to *.git</h3>
+<p>之前这种操作属于常规操作，没想到这次出了问题，感觉问题应该出在了工程创建方式上。我在 git 后台创建工程时勾选了自动添加 <a href="http://README.md" target="_blank" rel="noopener">README.md</a> 文件，可能导致了后续一系列问题。</p>
+<h2 id="部署的时候一直卡着不动的原因"><a class="markdownIt-Anchor" href="#部署的时候一直卡着不动的原因"></a> 部署的时候一直卡着不动的原因</h2>
+<p><a href="https://blog.csdn.net/qq_25333681/article/details/80879500" target="_blank" rel="noopener">https://blog.csdn.net/qq_25333681/article/details/80879500</a></p>
+<h2 id="需要修改展示的branch分支页面时"><a class="markdownIt-Anchor" href="#需要修改展示的branch分支页面时"></a> 需要修改展示的branch分支页面时</h2>
+<p>点击settings，在Pages的 <strong>Build and deployment</strong>修改<strong>Branch</strong>，需要等一会重新输入<a href="https://jlcxxzj.github.io/" target="_blank" rel="noopener">项目地址</a>，就能访问分支下的页面了。<br>
+<img src="%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1hexo%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84Debug%E8%BF%87%E7%A8%8B_md_files/00d68c60-745b-11ed-aa4d-fdeb71e777c3.jpeg?v=1&amp;type=image" alt></p>
+<h2 id="debug链接"><a class="markdownIt-Anchor" href="#debug链接"></a> Debug链接</h2>
+<p><a href="https://blog.csdn.net/u013250071/article/details/81203900" target="_blank" rel="noopener">修改.git文件夹</a></p>
 
                 
             </div>
@@ -683,12 +702,12 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
                         <span class="chip bg-color">基础知识</span>
                     </a>
                     
-                    <a href="/tags/优化算法/">
-                        <span class="chip bg-color">优化算法</span>
-                    </a>
-                    
                     <a href="/tags/数学/">
                         <span class="chip bg-color">数学</span>
+                    </a>
+                    
+                    <a href="/tags/优化算法/">
+                        <span class="chip bg-color">优化算法</span>
                     </a>
                     
                 </div>

@@ -5,9 +5,11 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="深度学习中的图像操作, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="深度学习中的图像操作计算机视觉中图像增强是很实用的trick，下面介绍一下深度学习中常用的图像增强操作。
-图像读取和保存在Python中常用的图像处理的库有OpenCV和PIL，这里简单介绍一下这两个库的最基本用法。
-opencvcv2.i">
+    <meta name="description" content=" 深度学习中的图像操作
+计算机视觉中图像增强是很实用的trick，下面介绍一下深度学习中常用的图像增强操作。
+ 图像读取和保存
+在Python中常用的图像处理的库有OpenCV和PIL，这里简单介绍一下这两个库的最基本用法。
+ opencv">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -438,122 +440,138 @@ opencvcv2.i">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="深度学习中的图像操作"><a href="#深度学习中的图像操作" class="headerlink" title="深度学习中的图像操作"></a>深度学习中的图像操作</h1><p>计算机视觉中图像增强是很实用的trick，下面介绍一下深度学习中常用的图像增强操作。</p>
-<h2 id="图像读取和保存"><a href="#图像读取和保存" class="headerlink" title="图像读取和保存"></a>图像读取和保存</h2><p>在Python中常用的图像处理的库有OpenCV和PIL，这里简单介绍一下这两个库的最基本用法。</p>
-<h3 id="opencv"><a href="#opencv" class="headerlink" title="opencv"></a>opencv</h3><p><code>cv2.imread()</code>读取图像的代码示例如下，该方法返回得到的img数据类型是<code>np.ndarray</code>类型，使用<code>img.shape</code>可读取数组的维度，该维度的物理含义为<code>(Height, Width, Channel)</code>。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> cv2
-img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"xxxxx.jpg"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># flags是可选的读入模式，如灰度图等，默认为None</span>
-img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"xxxxx.jpg"</span><span class="token punctuation">,</span> flages<span class="token operator">=</span>cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>     
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                <h1 id="深度学习中的图像操作"><a class="markdownIt-Anchor" href="#深度学习中的图像操作"></a> 深度学习中的图像操作</h1>
+<p>计算机视觉中图像增强是很实用的trick，下面介绍一下深度学习中常用的图像增强操作。</p>
+<h2 id="图像读取和保存"><a class="markdownIt-Anchor" href="#图像读取和保存"></a> 图像读取和保存</h2>
+<p>在Python中常用的图像处理的库有OpenCV和PIL，这里简单介绍一下这两个库的最基本用法。</p>
+<h3 id="opencv"><a class="markdownIt-Anchor" href="#opencv"></a> opencv</h3>
+<p><code>cv2.imread()</code>读取图像的代码示例如下，该方法返回得到的img数据类型是<code>np.ndarray</code>类型，使用<code>img.shape</code>可读取数组的维度，该维度的物理含义为<code>(Height, Width, Channel)</code>。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> cv2
+img = cv2.imread(<span class="hljs-string">&quot;xxxxx.jpg&quot;</span>)
+<span class="hljs-comment"># flags是可选的读入模式，如灰度图等，默认为None</span>
+img = cv2.imread(<span class="hljs-string">&quot;xxxxx.jpg&quot;</span>, flages=cv2.IMREAD_GRAYSCALE)     
+</code></pre>
 <p><code>img = cv2.imread(&quot;xxxxx.jpg&quot;)</code>读取图像的通道顺序为BGR，即使图片是RGBA四通道，<code>cv2.imread()</code>方法仍然读取的是BGR三通道。可以通过使用<code>cv2.split(img)</code>分别得到图像img的BGR通道值。</p>
-<pre class="line-numbers language-python"><code class="language-python">b<span class="token punctuation">,</span>g<span class="token punctuation">,</span>r <span class="token operator">=</span> cv2<span class="token punctuation">.</span>split<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="python">b,g,r = cv2.split(img)
+</code></pre>
 <p>如果图像路径中存在中文、或是图像文件名含有中文，有时使用<code>cv2.imread()</code>是无法正常读取图像的，因此可以使用下面的方式读取和写入。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> cv2
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token comment" spellcheck="true"># 读取图像</span>
-img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imdecode<span class="token punctuation">(</span>np<span class="token punctuation">.</span>fromfile<span class="token punctuation">(</span>img_path<span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_COLOR<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 保存图像</span>
-cv2<span class="token punctuation">.</span>imencode<span class="token punctuation">(</span><span class="token string">".jpg"</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>tofile<span class="token punctuation">(</span>img_path<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="PIL"><a href="#PIL" class="headerlink" title="PIL"></a>PIL</h3><p>使用PIL读取图像的代码示例如下，<code>Image.open()</code>返回的img数据类型是<code>PIL.Image</code>对象，不是普通的数组。使用<code>img.size</code>可读取图像的维度大小，该维度的物理含义为<code>(Width, Height)</code>，注意没有通道维度的大小。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
-<span class="token comment" spellcheck="true"># 读取图像</span>
-img <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">"xxx.jpg"</span><span class="token punctuation">)</span>
-img <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">"xxx.jpg"</span><span class="token punctuation">,</span> mode<span class="token operator">=</span>‘r’ <span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># mode只能且默认是‘r’</span>
-<span class="token comment" spellcheck="true"># 保存图像</span>
-img<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"xxx.jpg"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-comment"># 读取图像</span>
+img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), cv2.IMREAD_COLOR)
+<span class="hljs-comment"># 保存图像</span>
+cv2.imencode(<span class="hljs-string">&quot;.jpg&quot;</span>, img)[<span class="hljs-number">1</span>].tofile(img_path)
+</code></pre>
+<h3 id="pil"><a class="markdownIt-Anchor" href="#pil"></a> PIL</h3>
+<p>使用PIL读取图像的代码示例如下，<code>Image.open()</code>返回的img数据类型是<code>PIL.Image</code>对象，不是普通的数组。使用<code>img.size</code>可读取图像的维度大小，该维度的物理含义为<code>(Width, Height)</code>，注意没有通道维度的大小。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<span class="hljs-comment"># 读取图像</span>
+img = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;xxx.jpg&quot;</span>)
+img = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;xxx.jpg&quot;</span>, mode=‘r’ ) <span class="hljs-comment"># mode只能且默认是‘r’</span>
+<span class="hljs-comment"># 保存图像</span>
+img.save(<span class="hljs-string">&quot;xxx.jpg&quot;</span>)
+</code></pre>
 <p><code>Image.open()</code>方法只是保持了图像被读取的状态，但是图像的真实数据并未被读取，因此如果需要操作图像每个元素，如输出某个像素的RGB值等，需要执行对象的load()方法读取数据。具体如下：</p>
-<pre class="line-numbers language-python"><code class="language-python">img <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">"xxx.jpg"</span><span class="token punctuation">)</span>
-img <span class="token operator">=</span> img<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># result：(255, 201, 166)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python">img = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;xxx.jpg&quot;</span>)
+img = img.load()
+<span class="hljs-built_in">print</span>(img[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>])
+<span class="hljs-comment"># result：(255, 201, 166)</span>
+</code></pre>
 <p><code>Image.open()</code>方法返回的默认彩色图像读取通道顺序为RGB，同时当图像格式为RGBA时，<code>Image.open(‘xxx.jpg’)</code>读取的格式为RGBA（其中A表示图像的alpha通道，即RGBA共四个通道），可以使用<code>convert()</code>函数转换为RGB</p>
-<pre class="line-numbers language-python"><code class="language-python">Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>convert<span class="token punctuation">(</span><span class="token string">'RGB'</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="opencv和PIL的格式转换"><a href="#opencv和PIL的格式转换" class="headerlink" title="opencv和PIL的格式转换"></a>opencv和PIL的格式转换</h3><p><code>np.ndarray</code>格式转换为<code>PIL.Image</code>格式</p>
-<pre class="line-numbers language-python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
-img_Image <span class="token operator">=</span> Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>np<span class="token punctuation">.</span>uint8<span class="token punctuation">(</span>img<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python">Image.<span class="hljs-built_in">open</span>(x).convert(<span class="hljs-string">&#x27;RGB&#x27;</span>)
+</code></pre>
+<h3 id="opencv和pil的格式转换"><a class="markdownIt-Anchor" href="#opencv和pil的格式转换"></a> opencv和PIL的格式转换</h3>
+<p><code>np.ndarray</code>格式转换为<code>PIL.Image</code>格式</p>
+<pre class="highlight"><code class="python">img = cv2.imread(path)
+img_Image = Image.fromarray(np.uint8(img))
+</code></pre>
 <p><code>PIL.Image</code>格式转换为<code>np.ndarray</code>格式</p>
-<pre class="line-numbers language-python"><code class="language-python">img <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
-img_array <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="torchvision中的图像预处理"><a href="#torchvision中的图像预处理" class="headerlink" title="torchvision中的图像预处理"></a>torchvision中的图像预处理</h2><p>torchvision是一个计算机视觉工具包，包含了常用的模型、数据集和图像预处理方法：</p>
+<pre class="highlight"><code class="python">img = Image.<span class="hljs-built_in">open</span>(path)
+img_array = np.array(img)
+</code></pre>
+<h2 id="torchvision中的图像预处理"><a class="markdownIt-Anchor" href="#torchvision中的图像预处理"></a> torchvision中的图像预处理</h2>
+<p>torchvision是一个计算机视觉工具包，包含了常用的模型、数据集和图像预处理方法：</p>
 <ul>
 <li><code>torchvision.transforms</code> ：常用的图像预处理方法</li>
 <li><code>torchvision.datasets</code>：常用数据集的dataset实现，如MNIST，CIFAR-10等</li>
 <li><code>torchvision.model</code>：常用的模型预训练，AlexNet，VGG， ResNet等</li>
 </ul>
-<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p>图像预处理的基本操作如下：</p>
+<h3 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h3>
+<p>图像预处理的基本操作如下：</p>
 <ol>
-<li><p><code>transforms.Tensor()</code>：将PIL图像或<code>np.ndarray</code>转换为<code>torch.Tensor</code>，并进行数值缩放。首先在数据格式上形如$H<em>W</em>C$的PIL图像和numpy数组转换为$C<em>H</em>W$，并将$[0,255]$的数值缩放到$[0,1]$，最后返回<code>torch.FloatTensor</code>的张量。</p>
+<li>
+<p><code>transforms.Tensor()</code>：将PIL图像或<code>np.ndarray</code>转换为<code>torch.Tensor</code>，并进行数值缩放。首先在数据格式上形如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>∗</mo><mi>W</mi><mo>∗</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">H*W*C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>的PIL图像和numpy数组转换为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>∗</mo><mi>H</mi><mo>∗</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">C*H*W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>，并将<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>255</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,255]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">5</span><span class="mclose">]</span></span></span></span>的数值缩放到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>，最后返回<code>torch.FloatTensor</code>的张量。</p>
 </li>
-<li><p><code>transforms.Normalize()</code>：对图像逐通道进行标准化操作，传入的参数有<code>mean</code>、<code>std</code>，分别表示均值和方差。输入是<code>torch.Tensor</code>，不支持直接对PIL图像进行操作。</p>
+<li>
+<p><code>transforms.Normalize()</code>：对图像逐通道进行标准化操作，传入的参数有<code>mean</code>、<code>std</code>，分别表示均值和方差。输入是<code>torch.Tensor</code>，不支持直接对PIL图像进行操作。</p>
 </li>
-<li><p><code>transforms.PILToTensor()</code>：将PIL图像（$H<em>W</em>C$）转换为<code>torch.Tensor</code>（$C<em>H</em>W$），该操作不会进行数值缩放。</p>
+<li>
+<p><code>transforms.PILToTensor()</code>：将PIL图像（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>∗</mo><mi>W</mi><mo>∗</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">H*W*C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>）转换为<code>torch.Tensor</code>（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>∗</mo><mi>H</mi><mo>∗</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">C*H*W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>），该操作不会进行数值缩放。</p>
 </li>
-<li><p><code>transforms.ToPILImage()</code>：将<code>torch.Tensor</code>形如（$C<em>H</em>W$）或<code>np.ndarray</code>形如（$H<em>W</em>C$）转换为PIL图像。该方法常用作张量的可视化。</p>
+<li>
+<p><code>transforms.ToPILImage()</code>：将<code>torch.Tensor</code>形如（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>∗</mo><mi>H</mi><mo>∗</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">C*H*W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span>）或<code>np.ndarray</code>形如（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>∗</mo><mi>W</mi><mo>∗</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">H*W*C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>）转换为PIL图像。该方法常用作张量的可视化。</p>
 </li>
 </ol>
-<h3 id="裁剪"><a href="#裁剪" class="headerlink" title="裁剪"></a>裁剪</h3><pre class="line-numbers language-python"><code class="language-python">path <span class="token operator">=</span> <span class="token string">"lena_example/lena.jpg"</span>
-image <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># (474, 474)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="裁剪"><a class="markdownIt-Anchor" href="#裁剪"></a> 裁剪</h3>
+<pre class="highlight"><code class="python">path = <span class="hljs-string">&quot;lena_example/lena.jpg&quot;</span>
+image = Image.<span class="hljs-built_in">open</span>(path)
+<span class="hljs-built_in">print</span>(image.size) <span class="hljs-comment"># (474, 474)</span>
+</code></pre>
 <p><code>transforms.CenterCrop()</code>：将PIL图像或是<code>torch.Tensor</code>进行中心裁剪。传入参数<code>size</code>是int整数或序列，表示裁剪的图像大小；如果输入数据的维度小于裁剪图像的大小，则会进行补0操作。</p>
-<pre class="line-numbers language-python"><code class="language-python">crop1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>CenterCrop<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>CenterCrop<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">474</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop1<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop2<span class="token punctuation">)</span>crop1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>CenterCrop<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>CenterCrop<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">474</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/centercrop.png"></p>
+<pre class="highlight"><code class="python">crop1 = transforms.CenterCrop(<span class="hljs-number">224</span>)(image)
+crop2 = transforms.CenterCrop((<span class="hljs-number">474</span>,<span class="hljs-number">500</span>))(image)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+plt.imshow(crop1)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
+plt.imshow(crop2)crop1 = transforms.CenterCrop(<span class="hljs-number">224</span>)(image)
+crop2 = transforms.CenterCrop((<span class="hljs-number">474</span>,<span class="hljs-number">500</span>))(image)
+</code></pre>
+<p><img src="/images/centercrop.png" alt></p>
 <p><code>transforms.RandomCrop()</code>：将PIL图像或是<code>torch.Tensor</code>进行随机位置裁剪。传入参数<code>size</code>是int整数或序列，表示裁剪的图像大小；该方法的其余参数都是填充相关的，如下：</p>
 <ul>
 <li><code>padding</code>参数表示填充大小，当输入为a时表示上下左右均填充a个像素；当输入为(a, b)时，上下填充b个像素，左右填充a个像素；当输入为(a, b, c, d)时，表示左，上，右，下分别填充a, b, c, d个像素</li>
 <li><code>pad_if_need</code>参数表示如果裁剪图像小于<code>size</code>则进行填充。</li>
-<li><code>padding_mode</code>参数表示填充模式：”constant”、”edge”、”reflect”、”symmetric”，区别见下文<code>Pad()</code>。</li>
+<li><code>padding_mode</code>参数表示填充模式：“constant”、“edge”、“reflect”、“symmetric”，区别见下文<code>Pad()</code>。</li>
 <li><code>fill</code>参数表示填充的元素（当填充模式是constant时）</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">crop1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomCrop<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomCrop<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">474</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop3 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomCrop<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">474</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pad_if_needed<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> padding_mode<span class="token operator">=</span><span class="token string">"edge"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop1<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"random"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop2<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"padding"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop3<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"padding_mode"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/randomcrop.png"></p>
-<p><code>transforms.RandomResizedCrop()</code>：将PIL图像或是<code>torch.Tensor</code>进行随机大小、长宽比的裁剪，并进行指定尺寸的缩放。第一个参数<code>size</code>表示裁剪图像的大小，第二个参数<code>scale</code>表示随机裁剪的面积比例，默认值是(0.08, 1.0)；第三个参数<code>ratio</code>表示长宽比，默认值是(3&#x2F;4, 4&#x2F;3)，第四个参数<code>interpolation</code>表示插值算法。</p>
-<pre class="line-numbers language-python"><code class="language-python">crop1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomResizedCrop<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomResizedCrop<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">474</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop1<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop2<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/randomresizecrop.png"></p>
+<pre class="highlight"><code class="python">crop1 = transforms.RandomCrop(<span class="hljs-number">224</span>)(image)
+crop2 = transforms.RandomCrop((<span class="hljs-number">474</span>,<span class="hljs-number">500</span>), padding=<span class="hljs-number">50</span>)(image)
+crop3 = transforms.RandomCrop((<span class="hljs-number">474</span>,<span class="hljs-number">500</span>), pad_if_needed=<span class="hljs-literal">True</span>, padding_mode=<span class="hljs-string">&quot;edge&quot;</span>)(image)
+fig = plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)
+plt.imshow(crop1) 
+plt.title(<span class="hljs-string">&quot;random&quot;</span>)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>)
+plt.imshow(crop2)
+plt.title(<span class="hljs-string">&quot;padding&quot;</span>)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)
+plt.imshow(crop3)
+plt.title(<span class="hljs-string">&quot;padding_mode&quot;</span>)
+</code></pre>
+<p><img src="/images/randomcrop.png" alt></p>
+<p><code>transforms.RandomResizedCrop()</code>：将PIL图像或是<code>torch.Tensor</code>进行随机大小、长宽比的裁剪，并进行指定尺寸的缩放。第一个参数<code>size</code>表示裁剪图像的大小，第二个参数<code>scale</code>表示随机裁剪的面积比例，默认值是(0.08, 1.0)；第三个参数<code>ratio</code>表示长宽比，默认值是(3/4, 4/3)，第四个参数<code>interpolation</code>表示插值算法。</p>
+<pre class="highlight"><code class="python">crop1 = transforms.RandomResizedCrop(<span class="hljs-number">224</span>)(image)
+crop2 = transforms.RandomResizedCrop((<span class="hljs-number">474</span>,<span class="hljs-number">500</span>))(image)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+plt.imshow(crop1) 
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
+plt.imshow(crop2)
+</code></pre>
+<p><img src="/images/randomresizecrop.png" alt></p>
 <p><code>transforms.FiveCrop()</code>：图像的上下左右以及中心裁剪出尺寸为size的5张图片。返回值是一个元组，包含5张图像。</p>
 <p><code>transforms.FiveCrop()</code>：图像的上下左右以及中心裁剪出尺寸为size的5张图片，对这5张图片进行水平或者垂直镜像获得10张图片。返回值是一个元组，包含10张图像。</p>
-<h3 id="翻转"><a href="#翻转" class="headerlink" title="翻转"></a>翻转</h3><p><code>transforms.RandomHorizontalFlip()</code>：依概率水平（左右）翻转图片，传入参数<code>p</code>表示概率。</p>
+<h3 id="翻转"><a class="markdownIt-Anchor" href="#翻转"></a> 翻转</h3>
+<p><code>transforms.RandomHorizontalFlip()</code>：依概率水平（左右）翻转图片，传入参数<code>p</code>表示概率。</p>
 <p><code>transforms.RandomVerticalFlip()</code>：依概率垂直（上下）翻转图片，传入参数<code>p</code>表示概率。</p>
 <p><code>transforms.RandomRotation()</code>：随机旋转图片，传入参数<code>degrees</code>表示旋转角度范围，当为a时，在（-a，a）之间选择旋转角度，当为(a, b)时，在(a, b)之间选择旋转角度。</p>
-<h3 id="图像变换"><a href="#图像变换" class="headerlink" title="图像变换"></a>图像变换</h3><p><code>transforms.Pad()</code>：对图片边缘进行填充。</p>
+<h3 id="图像变换"><a class="markdownIt-Anchor" href="#图像变换"></a> 图像变换</h3>
+<p><code>transforms.Pad()</code>：对图片边缘进行填充。</p>
 <ul>
-<li><p>参数<code>padding</code>表示设置填充大小，当为a时，上下左右均填充a个像素，当为(a, b)时，上下填充b个像素，左右填充a个像素，当为(a, b, c, d)时，左，上，右，下分别填充a, b, c, d个像素。</p>
+<li>
+<p>参数<code>padding</code>表示设置填充大小，当为a时，上下左右均填充a个像素，当为(a, b)时，上下填充b个像素，左右填充a个像素，当为(a, b, c, d)时，左，上，右，下分别填充a, b, c, d个像素。</p>
 </li>
-<li><p>参数<code>padding_mode</code>：填充模式，有4种模式</p>
+<li>
+<p>参数<code>padding_mode</code>：填充模式，有4种模式</p>
 <ul>
 <li>constant：填充的像素值由<code>fill</code>参数设定</li>
 <li>edge：像素值由图像边缘像素决定</li>
@@ -561,50 +579,51 @@ plt<span class="token punctuation">.</span>imshow<span class="token punctuation"
 <li>symmetric：镜像填充，最后一个像素也会镜像，例如[1,2,3,4] → [2,1,1,2,3,4,4,3]</li>
 </ul>
 </li>
-<li><p>参数<code>fill</code>：设置填充的像素值。</p>
+<li>
+<p>参数<code>fill</code>：设置填充的像素值。</p>
 </li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">crop1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Pad<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Pad<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> padding_mode<span class="token operator">=</span><span class="token string">"edge"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-crop3 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Pad<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> padding_mode<span class="token operator">=</span><span class="token string">"reflect"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop1<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"pure"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop2<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"edge"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>crop3<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"reflect"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/Pad.png"></p>
+<pre class="highlight"><code class="python">crop1 = transforms.Pad(<span class="hljs-number">100</span>)(image)
+crop2 = transforms.Pad(<span class="hljs-number">100</span>, padding_mode=<span class="hljs-string">&quot;edge&quot;</span>)(image)
+crop3 = transforms.Pad(<span class="hljs-number">100</span>, padding_mode=<span class="hljs-string">&quot;reflect&quot;</span>)(image)
+fig = plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)
+plt.imshow(crop1) 
+plt.title(<span class="hljs-string">&quot;pure&quot;</span>)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>)
+plt.imshow(crop2)
+plt.title(<span class="hljs-string">&quot;edge&quot;</span>)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)
+plt.imshow(crop3)
+plt.title(<span class="hljs-string">&quot;reflect&quot;</span>)
+</code></pre>
+<p><img src="/images/Pad.png" alt></p>
 <p><code>transforms.ColorJitter()</code>：调整图像的亮度、对比度、饱和度和色相</p>
 <ul>
 <li><code>brightness</code>参数：亮度调整因子当为a时，从[max(0, 1-a), 1+a]中随机选择；当为(a, b)时，从[a, b]中随机选择。</li>
 <li><code>contrast</code>参数：对比度参数，同brightness</li>
 <li><code>saturation</code>参数：饱和度参数，同brightness</li>
-<li><code>hue</code>参数：色相参数，当为a时，从[-a, a]中选择参数，注： 0&lt;&#x3D; a &lt;&#x3D; 0.5；当为(a, b)时，从[a, b]中选择参数，注：-0.5 &lt;&#x3D; a &lt;&#x3D; b &lt;&#x3D; 0.5</li>
+<li><code>hue</code>参数：色相参数，当为a时，从[-a, a]中选择参数，注： 0&lt;= a &lt;= 0.5；当为(a, b)时，从[a, b]中选择参数，注：-0.5 &lt;= a &lt;= b &lt;= 0.5</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">img1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>ColorJitter<span class="token punctuation">(</span>brightness<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span> contrast<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> saturation<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> hue<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>ColorJitter<span class="token punctuation">(</span>brightness<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> contrast<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span> saturation<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> hue<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img3 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>ColorJitter<span class="token punctuation">(</span>brightness<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> contrast<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> saturation<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span> hue<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img4 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>ColorJitter<span class="token punctuation">(</span>brightness<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> contrast<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> saturation<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> hue<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img1<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"brightness"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img2<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"contrast"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img3<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"saturation"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img4<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"hue"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/color_jitter.png"></p>
+<pre class="highlight"><code class="python">img1 = transforms.ColorJitter(brightness=<span class="hljs-number">0.5</span>, contrast=<span class="hljs-number">0</span>, saturation=<span class="hljs-number">0</span>, hue=<span class="hljs-number">0</span>)(image)
+img2 = transforms.ColorJitter(brightness=<span class="hljs-number">0</span>, contrast=<span class="hljs-number">0.5</span>, saturation=<span class="hljs-number">0</span>, hue=<span class="hljs-number">0</span>)(image)
+img3 = transforms.ColorJitter(brightness=<span class="hljs-number">0</span>, contrast=<span class="hljs-number">0</span>, saturation=<span class="hljs-number">0.5</span>, hue=<span class="hljs-number">0</span>)(image)
+img4 = transforms.ColorJitter(brightness=<span class="hljs-number">0</span>, contrast=<span class="hljs-number">0</span>, saturation=<span class="hljs-number">0</span>, hue=<span class="hljs-number">0.5</span>)(image)
+fig = plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>))
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+plt.imshow(img1) 
+plt.title(<span class="hljs-string">&quot;brightness&quot;</span>)
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
+plt.imshow(img2)
+plt.title(<span class="hljs-string">&quot;contrast&quot;</span>)
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+plt.imshow(img3) 
+plt.title(<span class="hljs-string">&quot;saturation&quot;</span>)
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>)
+plt.imshow(img4)
+plt.title(<span class="hljs-string">&quot;hue&quot;</span>)
+</code></pre>
+<p><img src="/images/color_jitter.png" alt></p>
 <p><code>transforms.Grayscale()</code>：灰度化图像，传入参数<code>num_output_channels</code>表示输出图像的通道数，只能为1或3。</p>
 <p><code>transforms.RandomGrayscale()</code>：随机灰度化图像，传入参数<code>num_output_channels</code>表示输出图像的通道数，只能为1或3，参数<code>p</code>表示转换为灰度图的概率。</p>
 <p><code>transforms.RandomAffine()</code>：对图像进行仿射变换，仿射变换是二维的线性变换，由五种基本原子变换构成，分别是旋转、平移、缩放、错切和翻转。该方法有如下参数，</p>
@@ -615,61 +634,63 @@ plt<span class="token punctuation">.</span>title<span class="token punctuation">
 <li><code>shear</code>表示图像错切</li>
 <li><code>fill_color</code>表示填充颜色设置</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">img1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomAffine<span class="token punctuation">(</span>degrees<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomAffine<span class="token punctuation">(</span>degrees<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">)</span><span class="token punctuation">,</span> translate<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">,</span><span class="token number">0.8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img3 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomAffine<span class="token punctuation">(</span>degrees<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">)</span><span class="token punctuation">,</span>scale<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img4 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomAffine<span class="token punctuation">(</span>degrees<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">)</span><span class="token punctuation">,</span>shear<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img1<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"rotate"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img2<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"translate"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img3<span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"scale"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img4<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"shear"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/randomAffine.png"></p>
+<pre class="highlight"><code class="python">img1 = transforms.RandomAffine(degrees=(-<span class="hljs-number">45</span>,<span class="hljs-number">45</span>))(image)
+img2 = transforms.RandomAffine(degrees=(-<span class="hljs-number">45</span>,<span class="hljs-number">45</span>), translate=(<span class="hljs-number">0.3</span>,<span class="hljs-number">0.8</span>))(image)
+img3 = transforms.RandomAffine(degrees=(-<span class="hljs-number">45</span>,<span class="hljs-number">45</span>),scale=(<span class="hljs-number">0.5</span>,<span class="hljs-number">1</span>))(image)
+img4 = transforms.RandomAffine(degrees=(-<span class="hljs-number">45</span>,<span class="hljs-number">45</span>),shear=(-<span class="hljs-number">45</span>,<span class="hljs-number">45</span>))(image)
+fig = plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>))
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+plt.imshow(img1) 
+plt.title(<span class="hljs-string">&quot;rotate&quot;</span>)
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
+plt.imshow(img2)
+plt.title(<span class="hljs-string">&quot;translate&quot;</span>)
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+plt.imshow(img3) 
+plt.title(<span class="hljs-string">&quot;scale&quot;</span>)
+plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>)
+plt.imshow(img4)
+plt.title(<span class="hljs-string">&quot;shear&quot;</span>)
+</code></pre>
+<p><img src="/images/randomAffine.png" alt></p>
 <p><code>transforms.RandomErasing()</code>：对图像进行随机擦除。参数<code>p</code>表示概率值，执行随机擦除的概率；参数<code>scale</code>表示擦除区域的面积；参数<code>ratio</code>表示擦除区域的长宽比；参数<code>value</code>表示设置遮挡区域的像素值(R, G, B)或(Gray)。<strong>该操作不支持PIL图像</strong>。</p>
-<pre class="line-numbers language-python"><code class="language-python">image_tensor <span class="token operator">=</span> transforms<span class="token punctuation">.</span>PILToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>
-img1 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomErasing<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image_tensor<span class="token punctuation">)</span>
-img2 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomErasing<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">127</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image_tensor<span class="token punctuation">)</span>
-img3 <span class="token operator">=</span> transforms<span class="token punctuation">.</span>RandomErasing<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>image_tensor<span class="token punctuation">)</span>
-fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>transforms<span class="token punctuation">.</span>ToPILImage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>img1<span class="token punctuation">)</span><span class="token punctuation">)</span> 
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"pure"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>transforms<span class="token punctuation">.</span>ToPILImage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>img2<span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"value=127"</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>transforms<span class="token punctuation">.</span>ToPILImage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>img3<span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"rgb"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/randomerase.png"></p>
-<h3 id="transforms的操作"><a href="#transforms的操作" class="headerlink" title="transforms的操作"></a>transforms的操作</h3><p><code>transforms.Compose()</code>：把一系列transforms方法集成到一起，并顺序执行transforms方法。</p>
-<pre class="line-numbers language-python"><code class="language-python">transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>transforms1<span class="token punctuation">,</span> transforms2<span class="token punctuation">,</span> transforms3<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="python">image_tensor = transforms.PILToTensor()(image)
+img1 = transforms.RandomErasing(p=<span class="hljs-number">1.0</span>)(image_tensor)
+img2 = transforms.RandomErasing(p=<span class="hljs-number">1.0</span>, value=<span class="hljs-number">127</span>)(image_tensor)
+img3 = transforms.RandomErasing(p=<span class="hljs-number">1.0</span>, value=(<span class="hljs-number">255</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>))(image_tensor)
+fig = plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)
+plt.imshow(transforms.ToPILImage()(img1)) 
+plt.title(<span class="hljs-string">&quot;pure&quot;</span>)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>)
+plt.imshow(transforms.ToPILImage()(img2))
+plt.title(<span class="hljs-string">&quot;value=127&quot;</span>)
+plt.subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)
+plt.imshow(transforms.ToPILImage()(img3))
+plt.title(<span class="hljs-string">&quot;rgb&quot;</span>)
+</code></pre>
+<p><img src="/images/randomerase.png" alt></p>
+<h3 id="transforms的操作"><a class="markdownIt-Anchor" href="#transforms的操作"></a> transforms的操作</h3>
+<p><code>transforms.Compose()</code>：把一系列transforms方法集成到一起，并顺序执行transforms方法。</p>
+<pre class="highlight"><code class="python">transforms.Compose([transforms1, transforms2, transforms3])
+</code></pre>
 <p><code>transforms.RandomChoice()</code>：从一系列transforms方法中随机挑选一个。</p>
-<pre class="line-numbers language-python"><code class="language-python">transforms<span class="token punctuation">.</span>RandomChoice<span class="token punctuation">(</span><span class="token punctuation">[</span>transforms1<span class="token punctuation">,</span> transforms2<span class="token punctuation">,</span> transforms3<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="python">transforms.RandomChoice([transforms1, transforms2, transforms3])
+</code></pre>
 <p><code>transforms.RandomApply()</code>：依据概率执行一组transforms方法。</p>
-<pre class="line-numbers language-python"><code class="language-python">transforms<span class="token punctuation">.</span>RandomApply<span class="token punctuation">(</span><span class="token punctuation">[</span>transforms1<span class="token punctuation">,</span> transforms2<span class="token punctuation">,</span> transforms3<span class="token punctuation">]</span><span class="token punctuation">,</span> p<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="python">transforms.RandomApply([transforms1, transforms2, transforms3], p=<span class="hljs-number">0.5</span>)
+</code></pre>
 <p><code>transforms.RandomOrder()</code>：将一组transforms方法的操作顺序打乱。</p>
-<pre class="line-numbers language-python"><code class="language-python">transforms<span class="token punctuation">.</span>RandomOrder<span class="token punctuation">(</span><span class="token punctuation">[</span>transforms1<span class="token punctuation">,</span> transforms2<span class="token punctuation">,</span> transforms3<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="python">transforms.RandomOrder([transforms1, transforms2, transforms3])
+</code></pre>
 <p><code>transforms.Lambda()</code>：用户自定义transforms方法，传入参数<code>lambda</code>是一个匿名函数。比如<code>FiveCrop()</code>返回的元组数据，和GT可能不匹配时，可以如下操作。</p>
-<pre class="line-numbers language-python"><code class="language-python">trans <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
-    transforms<span class="token punctuation">.</span>FiveCrop<span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">,</span>
-    transforms<span class="token punctuation">.</span>Lambda<span class="token punctuation">(</span><span class="token keyword">lambda</span> crops<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>stack<span class="token punctuation">(</span><span class="token punctuation">[</span>PILToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>crop<span class="token punctuation">)</span> <span class="token keyword">for</span> crop <span class="token keyword">in</span> crops<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上述就是深度学习中常用的图像操作，这里并没有介绍完torchvision中包含的所有图像增强方法，但是基本常用的都能涵盖，其他方法就在实践中探索吧。</p>
+<pre class="highlight"><code class="python">trans = transforms.Compose([
+    transforms.FiveCrop(size),
+    transforms.Lambda(<span class="hljs-keyword">lambda</span> crops: torch.stack([PILToTensor()(crop) <span class="hljs-keyword">for</span> crop <span class="hljs-keyword">in</span> crops]))
+])
+</code></pre>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>上述就是深度学习中常用的图像操作，这里并没有介绍完torchvision中包含的所有图像增强方法，但是基本常用的都能涵盖，其他方法就在实践中探索吧。</p>
 
                 
             </div>
