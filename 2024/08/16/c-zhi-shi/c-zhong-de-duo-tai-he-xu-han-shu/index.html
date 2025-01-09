@@ -4,10 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="C++|C++中的static, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="C++中的staticC++中的static有两种用法：一种是在类或结构体外部使用static关键字；第二种是在类或结构体内部使用static关键字。
-
-类或结构体外部使用：声明为static的符号，只是在编译单元内部进行链接，即只对定义该">
+    <meta name="keywords" content="C++|C++中的多态和虚函数, AI, 算法, 深度学习, 机器学习，编程">
+    <meta name="description" content="C++中的多态和虚函数多态多态（Polymorphism）按字面的意思就是某个事物有多种形态，当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。
+C++ 中，多态是面向对象编程的重要特性之一。多态允许使用基类指针或引用来调用子">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C++|C++中的static | Merry的博客</title>
+    <title>C++|C++中的多态和虚函数 | Merry的博客</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
     
     <style>
@@ -346,12 +345,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/architect/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">C++|C++中的static</h1>
+                    <h1 class="description center-align post-title">C++|C++中的多态和虚函数</h1>
                 </div>
             </div>
         </div>
@@ -400,14 +399,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-08-06
+                    2024-08-16
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-01-08
+                    2025-01-09
                 </div>
                 
 
@@ -434,128 +433,167 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="C-中的static"><a href="#C-中的static" class="headerlink" title="C++中的static"></a>C++中的static</h1><p>C++中的static有两种用法：一种是在类或结构体<strong>外部</strong>使用static关键字；第二种是在类或结构体<strong>内部</strong>使用static关键字。</p>
-<ol>
-<li>类或结构体<strong>外部</strong>使用：声明为static的符号，只是在编译单元内部进行链接，即只对定义该符号的编译单元可见。</li>
-<li>类或结构体<strong>内部</strong>使用：声明为static的符号，将被该类的所有实例对象共享内存</li>
-</ol>
-<h2 id="外部使用的static"><a href="#外部使用的static" class="headerlink" title="外部使用的static"></a>外部使用的static</h2><h3 id="问题起源"><a href="#问题起源" class="headerlink" title="问题起源"></a>问题起源</h3><p>如果我们在main.cpp中定义一个变量<code>s_var</code>，同时在另一个a.cpp中定义同名变量（值得注意的是，这是一个全局声明的变量），如下所示：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// main.cpp</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
-<span class="token keyword">int</span> s_var <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> s_var <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// a.cpp</span>
-<span class="token keyword">int</span> s_var <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>此时编译并链接main.cpp和a.cpp，则会报一个链接错误：s_var已经在main.cpp中被定义了。编译器告诉我们不能有两个同名的全局变量，所以编译器报错了。</p>
-<h3 id="static全局使用"><a href="#static全局使用" class="headerlink" title="static全局使用"></a>static全局使用</h3><p>但是如果我们在a.cpp中把<code>s_var</code>声明为static变量，则可以编译通过，程序输出为10 ，这意味着<code>s_var</code>变量只在a.cpp中进行链接，</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// a.cpp</span>
-<span class="token keyword">static</span> <span class="token keyword">int</span> s_var <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>这种方式类似于在类中声明一个私有变量，其他所有翻译单元都不能看到<code>s_var</code>这个变量。这里以变量举例，实际上声明函数为static，也有相似的效果。</p>
-<p>总结：全局情况下，如果声明的变量或函数没有被static修饰，则链接器会跨编译单元进行链接，而static修饰的变量或函数则只会在被定义的编译单元内链接。</p>
-<h3 id="static局部使用"><a href="#static局部使用" class="headerlink" title="static局部使用"></a>static局部使用</h3><p>静态局部变量允许我们声明一个变量，它的<strong>生命周期是整个程序的生命周期，但是其作用域被限制在局部范围内</strong>。</p>
-<p>如下代码所示，在函数func内部定义了变量i，当第一次调用函数func()时，变量i会被初始化为0，后续函数调用时，则不会创建新的变量，而是直接使用。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
-
-<span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">static</span> <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    i<span class="token operator">++</span><span class="token punctuation">;</span>
-    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 1</span>
-    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 2</span>
-    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 3</span>
-    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 4</span>
-    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 5</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以通过静态局部变量这种方式，实现一个单例模式：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Singleton</span><span class="token punctuation">{</span>
+                <h1 id="C-中的多态和虚函数"><a href="#C-中的多态和虚函数" class="headerlink" title="C++中的多态和虚函数"></a>C++中的多态和虚函数</h1><h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p><strong>多态</strong>（Polymorphism）按字面的意思就是某个事物有多种形态，当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。</p>
+<p>C++ 中，多态是面向对象编程的重要特性之一。<strong>多态允许使用基类指针或引用来调用子类的重写方法</strong>，从而使得同一接口可以表现不同的行为。多态使得代码更加灵活和通用，程序可以通过基类指针或引用来操作不同类型的对象，而不需要显式区分对象类型。这样可以使代码更具扩展性，在增加新的形状类时不需要修改主程序。</p>
+<p>我们编写如下代码，这是一个普通的关于继承的代码，类Player继承了类Entity，且类Player重写了父类Entity的GetName()方法。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">static</span> Singleton<span class="token operator">&amp;</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">static</span> Singleton instance<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Singleton<span class="token operator">::</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="类和结构体中的static"><a href="#类和结构体中的static" class="headerlink" title="类和结构体中的static"></a>类和结构体中的static</h2><p>在类或结构体内声明为static的变量，将被该类的所有实例对象共享该变量，即该类的所有实例对象中，该变量只有一个，是内存共享的。类内声明为static的方法也是类似。</p>
-<p>故通过类的实例对象引用static变量或方法是无意义的，可以通过类来引用，如下代码<code>Entity::var</code>或<code>Entity::func()</code>。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
-
-<span class="token keyword">struct</span> Entity<span class="token punctuation">{</span>
-    <span class="token keyword">static</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>  
-    <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> Entity<span class="token operator">::</span>x<span class="token punctuation">;</span>
-<span class="token keyword">int</span> Entity<span class="token operator">::</span>y<span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Entity e<span class="token punctuation">;</span>
-    e<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//等价于Entity::x</span>
-    e<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//等价于Entity::y</span>
-    Entity e1<span class="token punctuation">;</span>
-    e1<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
-    e1<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>   
-    e<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//输出 5,8</span>
-    e1<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 5,8</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到，程序输出两次都是“5,8”，对应我们上面所述：类的<strong>所有实例对象共享静态变量（static修饰）</strong>，上面代码是将同一个静态变量x和y输出了两次。实例对象e将静态变量x和y设置为2和3，但是e1又将x和y设置为5和8，因此最终两次输出均为5和8。</p>
-<p>当类内的方法被static修饰，<strong>静态方法是不能访问非静态变量的</strong>，如下代码。这是因为静态方法没有类实例对象，这里涉及类的运行原理：类中每个非静态方法被调用时，会获得当前类的一个实例对象作为参数。因此静态方法没有实例对象作为参数，就找不到该对象的非静态变量的位置，自然无法访问。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
-
-<span class="token keyword">struct</span> Entity<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>  
-    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 编译报错</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Entity e<span class="token punctuation">;</span>
-    e<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> 
-    e<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span> 
-    Entity e1<span class="token punctuation">;</span>
-    e1<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
-    e1<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>   
-    Entity<span class="token operator">::</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-    Entity<span class="token operator">::</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>类内部的静态变量，通过这种方式可以实现一个单例模式：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Singleton</span><span class="token punctuation">{</span>
+<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
 <span class="token keyword">private</span><span class="token operator">:</span>
-    <span class="token keyword">static</span> Singleton<span class="token operator">*</span> instance<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string m_Name<span class="token punctuation">;</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">static</span> Singleton<span class="token operator">&amp;</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token operator">*</span>instance<span class="token punctuation">;</span>
+    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-Singleton<span class="token operator">*</span> Singleton<span class="token operator">::</span>instance <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    Singleton<span class="token operator">::</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>；
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用如下方式调用，输出分别为“Entity”和“Cherno”，这是我们期望的正常结果。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
+    Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果我们使用多态的方式调用，即当父类Entity的指针指向了子类Player时，就会遇到问题：最后的输出为“Entity”。这不是我们期望的，我们希望是由Player调用GetName()，即使是父类Entity的指针，但实际上它是指向Player实例对象。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
+    Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
+    <span class="token comment" spellcheck="true">// 多态</span>
+    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> p<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> entity<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>为什么会出现这种情况？这是因为使用了父类Entity的指针，当调用GetName()时，它会先去Entity找这个函数。但是我们希望C++ 能够意识到，虽然使用了父类Entity的指针，但我们实际使用的是Player对象，所以应该调用Player的GetName()。</p>
+<p>这就引出了虚函数。</p>
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>虚函数是指加了<code>virtual</code>修饰符的类的成员函数，<code>virtual</code>关键字只能出现在类内部的函数声明中，不能用于类外部的函数定义。如下所示：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//标记为virtual</span>
+        <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>虽然只加了一个关键词<code>virtual</code>，但此时使用前文多态的方式调用，即可得到我们期望的结果：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Entity</span>
+    Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
+    <span class="token comment" spellcheck="true">// 多态</span>
+    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> p<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> entity<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在C++11之后，可以将被重写的子类方法标记为<code>override</code>，但这不是必需的：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>string m_Name<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 标记为override</span>
+        <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>；
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="多态的实现机制"><a href="#多态的实现机制" class="headerlink" title="多态的实现机制"></a>多态的实现机制</h3><ul>
+<li>虚函数表（V-Table）：C++运行时使用虚函数表来实现多态。每个包含虚函数的类都有一个虚函数表，表中存储了指向类中所有虚函数的指针。</li>
+<li>虚函数指针（V-Ptr）：对象中包含一个指向该类的虚函数表的指针。</li>
+</ul>
+<p>虚函数表使得我们在运行时，可以找到正确的重写函数，实现多态。即如果要重写子类的方法，需要将父类的函数标记为虚函数，</p>
+<p>虚函数允许我们在子类中重写方法，但是这是有额外开销的：首先，需要额外的内存来存储虚函数表和虚函数指针；其次，每次调用虚函数时，需要遍历虚函数表方便找到正确的函数。</p>
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>只有通过基类的指针或引用调用虚函数时，才会发生多态。</li>
+<li>如果直接使用派生类的对象调用函数，那么调用的是派生类中的版本，而不是基类中的版本。（如多态一节的代码结果）</li>
+</ul>
+<h2 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h2><p>纯虚函数是一种特殊的虚函数，其与Java中的抽象方法或接口类似。纯虚函数允许在基类中定义一个没有实现的函数，然后强制子类去实现该函数。</p>
+<p>纯虚函数没有函数体，声明时使用<code>函数名() = 0</code>。一个包含纯虚函数的类被称为抽象类（Abstract Class），因为类内方法没有实现，所以它<strong>不可能被直接实例化</strong>。必须要重写基类的纯虚函数。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 抽象类</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 纯虚函数</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>string m_Name<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    std<span class="token operator">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 标记为override</span>
+        <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>；
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们通过如下方式调用：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span>Entity<span class="token operator">*</span> obj<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> obj<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Print</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Cherno</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h2><p>析构函数是在对象销毁时运行，当对象生命周期结束被销毁时，将调用析构函数。该函数主要用于清理内存，同时适用于栈内存和堆内存。而虚析构函数，顾名思义是虚函数和析构函数的组合。</p>
+<p>虚析构函数是用于处理多态为问题的，如下面的代码，当执行<code>delete entity</code>，调用了基类Entity的析构函数，只是销毁Entity指针（在栈上）；而子类Player对象（在堆上）还没有释放，这就会导致内存泄露。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//多态</span>
+    <span class="token keyword">delete</span> entity<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这里销毁Entity指针，但是没有释放Player对象</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这时需要虚析构函数。</p>
+<p>虚析构函数即在析构函数前加<code>virtual</code>关键字，但是它和普通虚函数不同，<strong>不是去覆写析构函数，而是再加上一个析构函数</strong>。即，如果基类的析构函数改为虚函数，实际会调用两个析构函数，先调用子类的，再调用基类的。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Entity</span><span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Entity constructed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Entity destroyed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">Player</span><span class="token operator">:</span> <span class="token keyword">public</span> Entity<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Player</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Player constructed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">~</span><span class="token function">Player</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Player destroyed"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>；
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    Entity<span class="token operator">*</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"Cherno"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//多态</span>
+    <span class="token keyword">delete</span> entity<span class="token punctuation">;</span> 
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 输出</span>
+<span class="token comment" spellcheck="true">// Entity constructed</span>
+<span class="token comment" spellcheck="true">// Player constructed</span>
+<span class="token comment" spellcheck="true">// Player destroyed</span>
+<span class="token comment" spellcheck="true">// Entity destroyed</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -582,7 +620,7 @@ Singleton<span class="token operator">*</span> Singleton<span class="token opera
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/merryTong/merryTong.github.io/2024/08/06/c-zhi-shi/static-yong-fa/">https://github.com/merryTong/merryTong.github.io/2024/08/06/c-zhi-shi/static-yong-fa/</a>
+                    <a href="https://github.com/merryTong/merryTong.github.io/2024/08/16/c-zhi-shi/c-zhong-de-duo-tai-he-xu-han-shu/">https://github.com/merryTong/merryTong.github.io/2024/08/16/c-zhi-shi/c-zhong-de-duo-tai-he-xu-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -704,13 +742,13 @@ Singleton<span class="token operator">*</span> Singleton<span class="token opera
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/08/16/c-zhi-shi/c-zhong-de-duo-tai-he-xu-han-shu/">
+                <a href="/2024/10/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddim/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="C++|C++中的多态和虚函数">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="详解扩散模型DDIM">
                         
-                        <span class="card-title">C++|C++中的多态和虚函数</span>
+                        <span class="card-title">详解扩散模型DDIM</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -721,8 +759,61 @@ Singleton<span class="token operator">*</span> Singleton<span class="token opera
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-08-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-10-18
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/算法/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/深度学习/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/算法知识/">
+                        <span class="chip bg-color">算法知识</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/08/06/c-zhi-shi/static-yong-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/architect/23.jpg" class="responsive-img" alt="C++|C++中的static">
+                        
+                        <span class="card-title">C++|C++中的static</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -740,59 +831,6 @@ Singleton<span class="token operator">*</span> Singleton<span class="token opera
                     
                     <a href="/tags/C/">
                         <span class="chip bg-color">C++</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2024/07/11/python-zhi-shi/python-duo-jin-cheng-de-zhu-yi-shi-xiang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/architect/21.jpg" class="responsive-img" alt="Python多进程的注意事项">
-                        
-                        <span class="card-title">Python多进程的注意事项</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-11
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/编程语言/" class="post-category">
-                                    编程语言
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/基础知识/">
-                        <span class="chip bg-color">基础知识</span>
-                    </a>
-                    
-                    <a href="/tags/进程和线程/">
-                        <span class="chip bg-color">进程和线程</span>
                     </a>
                     
                 </div>
