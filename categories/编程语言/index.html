@@ -394,11 +394,11 @@
                 </a>
                 
                 
-                <a href="/categories/编程语言/" title="编程语言: 13">
+                <a href="/categories/编程语言/" title="编程语言: 16">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
                             style="background-color: #F5EEF8;">编程语言
-                        <span class="tag-length">13</span>
+                        <span class="tag-length">16</span>
                     </span>
                 </a>
                 
@@ -421,20 +421,20 @@
                 </a>
                 
                 
-                <a href="/categories/论文/" title="论文: 2">
+                <a href="/categories/数学/" title="数学: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #FEF9E7;">论文
-                        <span class="tag-length">2</span>
+                            style="background-color: #FEF9E7;">数学
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/数学/" title="数学: 1">
+                <a href="/categories/论文/" title="论文: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">数学
-                        <span class="tag-length">1</span>
+                            style="background-color: #F8F9F9;">论文
+                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
@@ -449,6 +449,165 @@
 
     <article id="articles" class="container articles">
         <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/11/18/cuda-zhi-shi/gpu-de-nei-cun-jie-gou/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/animal/23.jpg" class="responsive-img" alt="CUDA|GPU的内存结构">
+                            
+                            <span class="card-title">CUDA|GPU的内存结构</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                GPU的内存结构内存的本地化原则：
+
+时间本地化：内存地址在某个时间被访问，该内存地址有较大概率在短时间内再次被访问，此概率随时间间隔增加而逐渐减小。
+空间本地化：某个内存地址被访问，该内存附近的内存有较大概率被访问
+
+内存分类：
+
+非可编
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/编程语言/" class="post-category">
+                                    编程语言
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/深度学习/">
+                            <span class="chip bg-color">深度学习</span>
+                        </a>
+                        
+                        <a href="/tags/CUDA/">
+                            <span class="chip bg-color">CUDA</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/08/06/c-zhi-shi/static-yong-fa/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/architect/23.jpg" class="responsive-img" alt="C++|C++中的static">
+                            
+                            <span class="card-title">C++|C++中的static</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                C++中的staticC++中的static有两种用法：一种是在类或结构体外部使用static关键字；第二种是在类或结构体内部使用static关键字。
+
+类或结构体外部使用：声明为static的符号，只是在编译单元内部进行链接，即只对定义该
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/编程语言/" class="post-category">
+                                    编程语言
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/C/">
+                            <span class="chip bg-color">C++</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/07/11/python-zhi-shi/python-duo-jin-cheng-de-zhu-yi-shi-xiang/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/architect/21.jpg" class="responsive-img" alt="Python多进程的注意事项">
+                            
+                            <span class="card-title">Python多进程的注意事项</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Python多进程注意事项主进程函数最好写在程序入口内看下面的例子
+from multiprocessing import Process
+# 这里是子进程调用的函数
+def function1(id):  
+    print(f'id 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/编程语言/" class="post-category">
+                                    编程语言
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/基础知识/">
+                            <span class="chip bg-color">基础知识</span>
+                        </a>
+                        
+                        <a href="/tags/进程和线程/">
+                            <span class="chip bg-color">进程和线程</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -910,166 +1069,6 @@ MRO是对于每
                 </div>
             </div>
             
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/05/03/c-zhi-shi/c-jie-gou-ti/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/animal/23.jpg" class="responsive-img" alt="C++结构体">
-                            
-                            <span class="card-title">C++结构体</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                结构体1. 结构体的定义和使用语法：struct 结构体名 { 结构体成员列表 };
-创建结构体变量时，可以省略struct关键字
-三种创建结构体变量的方式：
-struct Student{
-    string name;
-    int
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/编程语言/" class="post-category">
-                                    编程语言
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/C/">
-                            <span class="chip bg-color">C++</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/04/14/python-zhi-shi/python-da-bao-fen-fa-gong-ju/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Python打包分发工具：setuptools">
-                            
-                            <span class="card-title">Python打包分发工具：setuptools</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Python打包工具setuptools介绍setuptools库的前身是distutils（一个python标准库），setuptools本身不是标准库，所以需要自行安装。setuptools提供的主要的功能有：
-
-python库的打包分
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-14
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/编程语言/" class="post-category">
-                                    编程语言
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Python/">
-                            <span class="chip bg-color">Python</span>
-                        </a>
-                        
-                        <a href="/tags/工具/">
-                            <span class="chip bg-color">工具</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/architect/19.jpg" class="responsive-img" alt="Python的装饰器">
-                            
-                            <span class="card-title">Python的装饰器</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Python的装饰器装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。装饰器的使用场景：
-
-增强被装饰函数的行为
-提高代码复用
-
-一个良好的装饰器必须要遵守两个原则：
-
-不
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/编程语言/" class="post-category">
-                                    编程语言
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/基础知识/">
-                            <span class="chip bg-color">基础知识</span>
-                        </a>
-                        
-                        <a href="/tags/Python/">
-                            <span class="chip bg-color">Python</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 </main>
@@ -1163,7 +1162,7 @@ python库的打包分
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2023-2024</span>
+                <span id="year">2023-2025</span>
             
             <a href="/about" target="_blank">MerryTong</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

@@ -1,4 +1,7 @@
+https://github.com/merryTong/merryTong.github.io/2024/11/18/cuda-zhi-shi/gpu-de-nei-cun-jie-gou/
 https://github.com/merryTong/merryTong.github.io/2024/10/18/suan-fa/xiang-jie-kuo-san-mo-xing-ddim/
+https://github.com/merryTong/merryTong.github.io/2024/08/06/c-zhi-shi/static-yong-fa/
+https://github.com/merryTong/merryTong.github.io/2024/07/11/python-zhi-shi/python-duo-jin-cheng-de-zhu-yi-shi-xiang/
 https://github.com/merryTong/merryTong.github.io/2024/04/18/suan-fa/c-shou-si-gpt2-jiao-cha-shang-sun-shi/
 https://github.com/merryTong/merryTong.github.io/2024/03/20/suan-fa/rnn-he-lstm/
 https://github.com/merryTong/merryTong.github.io/2024/03/11/lun-wen-yue-du/clip-mo-xing-xiang-jie/
