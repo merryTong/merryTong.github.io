@@ -5,14 +5,12 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|多卡并行训练, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" 多卡并行训练
- 并行训练
-使用并行的方式训练模型，主要有两点原因：
+    <meta name="description" content="多卡并行训练并行训练使用并行的方式训练模型，主要有两点原因：
 
 模型在一块GPU上放不下，两块或多块GPU上就能运行完整的模型（如早期的AlexNet）。
 多块GPU并行计算可以减少训练时间，达到加速训练的效果。
 
-基于上述两点原因">
+基于上述两点原因，则出现">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -443,283 +441,260 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="多卡并行训练"><a class="markdownIt-Anchor" href="#多卡并行训练"></a> 多卡并行训练</h1>
-<h2 id="并行训练"><a class="markdownIt-Anchor" href="#并行训练"></a> 并行训练</h2>
-<p>使用并行的方式训练模型，主要有两点原因：</p>
+                <h1 id="多卡并行训练"><a href="#多卡并行训练" class="headerlink" title="多卡并行训练"></a>多卡并行训练</h1><h2 id="并行训练"><a href="#并行训练" class="headerlink" title="并行训练"></a>并行训练</h2><p>使用并行的方式训练模型，主要有两点原因：</p>
 <ol>
 <li>模型在一块GPU上放不下，两块或多块GPU上就能运行完整的模型（如早期的AlexNet）。</li>
 <li>多块GPU并行计算可以减少训练时间，达到加速训练的效果。</li>
 </ol>
 <p>基于上述两点原因，则出现了两种多GPU训练的方法：</p>
 <ol>
-<li>**模型并行方式：**如果模型特别大，GPU显存不够，无法将一个显存放在GPU上，需要把网络的不同模块放在不同GPU上，这样可以训练比较大的网络。</li>
-<li>**数据并行方式：**将整个模型放在一块GPU里，再复制到每一块GPU上，每块GPU跑不同的数据，同时进行正向传播和反向误差传播。相当于加大了batch_size。</li>
+<li><strong>模型并行方式：</strong>如果模型特别大，GPU显存不够，无法将一个显存放在GPU上，需要把网络的不同模块放在不同GPU上，这样可以训练比较大的网络。</li>
+<li><strong>数据并行方式：</strong>将整个模型放在一块GPU里，再复制到每一块GPU上，每块GPU跑不同的数据，同时进行正向传播和反向误差传播。相当于加大了batch_size。</li>
 </ol>
-<h3 id="并行训练的一些概念"><a class="markdownIt-Anchor" href="#并行训练的一些概念"></a> 并行训练的一些概念</h3>
-<ul>
-<li>
-<p>node：表示一个物理节点，通俗来说就是一台机器。节点内部可以有多个GPU（一台机器有多张卡）。</p>
+<h3 id="并行训练的一些概念"><a href="#并行训练的一些概念" class="headerlink" title="并行训练的一些概念"></a>并行训练的一些概念</h3><ul>
+<li><p>node：表示一个物理节点，通俗来说就是一台机器。节点内部可以有多个GPU（一台机器有多张卡）。</p>
 </li>
-<li>
-<p>rank和local_rank：表示进程的序号，用于在进程间通信。每个进程对应一个rank。</p>
+<li><p>rank和local_rank：表示进程的序号，用于在进程间通信。每个进程对应一个rank。</p>
 <ul>
 <li>rank：全局rank，是指在整个分布式任务中进程的序号，例如机器一有8个GPU，机器二也有8个GPU，则rank为0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15。</li>
 <li>local_rank：本地rank，是指在一个节点上（机器）进程的相对序号，例如机器一上local_rank有0,1,2,3,4,5,6,7，机器二上local_rank也有0,1,2,3,4,5,6,7。</li>
 <li>local_rank在node之间相互独立。单机多卡时，rank就等于local_rank。</li>
 </ul>
 </li>
-<li>
-<p>nnodes：表示物理节点数量（机器数量）。</p>
+<li><p>nnodes：表示物理节点数量（机器数量）。</p>
 </li>
-<li>
-<p>node_rank：表示物理节点（机器）的ID序号，0号机器ID为1，1号机器ID为1。</p>
+<li><p>node_rank：表示物理节点（机器）的ID序号，0号机器ID为1，1号机器ID为1。</p>
 </li>
-<li>
-<p>nproc_per_node：表示每个物理节点上面进程的数量。</p>
+<li><p>nproc_per_node：表示每个物理节点上面进程的数量。</p>
 </li>
-<li>
-<p>group：进程组，默认只有一个组</p>
+<li><p>group：进程组，默认只有一个组</p>
 </li>
-<li>
-<p>world_size：表示进程总数，即全局（一个分布式任务）中rank的数量。M为机器数，N为每台机器使用的GPU数，则world_size为M*N。</p>
+<li><p>world_size：表示进程总数，即全局（一个分布式任务）中rank的数量。M为机器数，N为每台机器使用的GPU数，则world_size为M*N。</p>
 </li>
 </ul>
-<h3 id="pytorch中的两种并行方式"><a class="markdownIt-Anchor" href="#pytorch中的两种并行方式"></a> Pytorch中的两种并行方式</h3>
-<p>Pytorch提供了两种GPU并行训练的手段，DP（<strong>DataParallel</strong>）和DDP（<strong>DistributedDataParallel</strong>），但是DP只会开一个进程去管理，计算资源分配不均，DDP上我们倾向于一张卡开一个进程，使得我们的计算资源能够最大化的利用。</p>
+<h3 id="Pytorch中的两种并行方式"><a href="#Pytorch中的两种并行方式" class="headerlink" title="Pytorch中的两种并行方式"></a>Pytorch中的两种并行方式</h3><p>Pytorch提供了两种GPU并行训练的手段，DP（<strong>DataParallel</strong>）和DDP（<strong>DistributedDataParallel</strong>），但是DP只会开一个进程去管理，计算资源分配不均，DDP上我们倾向于一张卡开一个进程，使得我们的计算资源能够最大化的利用。</p>
 <ol>
 <li>DataParallel是一种单进程多线程的方式，每个GPU是一个线程，仅仅能工作在单机中；</li>
 <li>DistributedDataParallel是多进程的方式，每个GPU是一个进程，可以工作在单机或多机器中</li>
 <li>DataParallel通常会慢于DistributedDataParallel。官方推荐使用的方法是DistributedDataParallel。</li>
 </ol>
-<h2 id="pytoch的ddp训练"><a class="markdownIt-Anchor" href="#pytoch的ddp训练"></a> Pytoch的DDP训练</h2>
-<h3 id="ddp的两种启动方式"><a class="markdownIt-Anchor" href="#ddp的两种启动方式"></a> DDP的两种启动方式</h3>
-<h4 id="distributedlaunch"><a class="markdownIt-Anchor" href="#distributedlaunch"></a> distributed.launch</h4>
-<p>较老版本的PyTorch应使用下面这条命令：</p>
-<pre class="highlight"><code class="shell">export CUDA_VISIBLE_DEVICES=2,3
+<h2 id="Pytoch的DDP训练"><a href="#Pytoch的DDP训练" class="headerlink" title="Pytoch的DDP训练"></a>Pytoch的DDP训练</h2><h3 id="DDP的两种启动方式"><a href="#DDP的两种启动方式" class="headerlink" title="DDP的两种启动方式"></a>DDP的两种启动方式</h3><h4 id="distributed-launch"><a href="#distributed-launch" class="headerlink" title="distributed.launch"></a>distributed.launch</h4><p>较老版本的PyTorch应使用下面这条命令：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">export CUDA_VISIBLE_DEVICES=2,3
 python -m torch.distributed.launch --nproc_per_node = 4 train.py --batch_size 64
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>torch v1.10 以上可以使用如下的命令：</p>
-<pre class="highlight"><code class="shell">export CUDA_VISIBLE_DEVICES=2,3
+<pre class="line-numbers language-shell"><code class="language-shell">export CUDA_VISIBLE_DEVICES=2,3
 torchrun --nproc_per_node=4 train.py --batch_size 64
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>注：distributed.launch方法如果开始训练后，手动终止程序，有小概率进程没kill的情况，会占用GPU显存资源。</p>
-<h4 id="multiprocessing"><a class="markdownIt-Anchor" href="#multiprocessing"></a> multiprocessing</h4>
-<p>除了使用<code>torch.distributed.launch</code>，也可以手动使用 <code>torch.multiprocessing</code>进行多进程控制，而避免<code>torch.distributed.launch</code>自动控制开启和退出进程的一些小毛病。</p>
-<pre class="highlight"><code class="shell">python train.py
-</code></pre>
+<h4 id="multiprocessing"><a href="#multiprocessing" class="headerlink" title="multiprocessing"></a>multiprocessing</h4><p>除了使用<code>torch.distributed.launch</code>，也可以手动使用 <code>torch.multiprocessing</code>进行多进程控制，而避免<code>torch.distributed.launch</code>自动控制开启和退出进程的一些小毛病。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">python train.py
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可参考MoCo代码。</p>
-<h3 id="ddp训练代码详解launch"><a class="markdownIt-Anchor" href="#ddp训练代码详解launch"></a> DDP训练代码详解(launch)</h3>
-<h4 id="初始化过程"><a class="markdownIt-Anchor" href="#初始化过程"></a> 初始化过程</h4>
-<p>首先要初始化多进程环境，nvidia显卡推荐各个进程间（显卡）通信使用NCCL协议。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> distributed <span class="hljs-keyword">as</span> dist
+<h3 id="DDP训练代码详解-launch"><a href="#DDP训练代码详解-launch" class="headerlink" title="DDP训练代码详解(launch)"></a>DDP训练代码详解(launch)</h3><h4 id="初始化过程"><a href="#初始化过程" class="headerlink" title="初始化过程"></a>初始化过程</h4><p>首先要初始化多进程环境，nvidia显卡推荐各个进程间（显卡）通信使用NCCL协议。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> torch <span class="token keyword">import</span> distributed <span class="token keyword">as</span> dist
 
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">init_distributed_mode</span>(<span class="hljs-params">args</span>):
+<span class="token keyword">def</span> <span class="token function">init_distributed_mode</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-    <span class="hljs-keyword">if</span><span class="hljs-string">&#x27;RANK&#x27;</span><span class="hljs-keyword">in</span> os.environ <span class="hljs-keyword">and</span><span class="hljs-string">&#x27;WORLD_SIZE&#x27;</span><span class="hljs-keyword">in</span> os.environ:
-        args.rank = <span class="hljs-built_in">int</span>(os.environ[<span class="hljs-string">&quot;RANK&quot;</span>])
-        args.world_size = <span class="hljs-built_in">int</span>(os.environ[<span class="hljs-string">&#x27;WORLD_SIZE&#x27;</span>])
-        args.gpu = <span class="hljs-built_in">int</span>(os.environ[<span class="hljs-string">&#x27;LOCAL_RANK&#x27;</span>]) <span class="hljs-comment"># LOCAL_RANK代表某个机器上第几块GPU</span>
-    <span class="hljs-keyword">else</span>:
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Not using distributed mode&#x27;</span>)
-        args.distributed = <span class="hljs-literal">False</span>
-        <span class="hljs-keyword">return</span>
+    <span class="token keyword">if</span><span class="token string">'RANK'</span><span class="token keyword">in</span> os<span class="token punctuation">.</span>environ <span class="token operator">and</span><span class="token string">'WORLD_SIZE'</span><span class="token keyword">in</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">:</span>
+        args<span class="token punctuation">.</span>rank <span class="token operator">=</span> int<span class="token punctuation">(</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"RANK"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        args<span class="token punctuation">.</span>world_size <span class="token operator">=</span> int<span class="token punctuation">(</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'WORLD_SIZE'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        args<span class="token punctuation">.</span>gpu <span class="token operator">=</span> int<span class="token punctuation">(</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'LOCAL_RANK'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># LOCAL_RANK代表某个机器上第几块GPU</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Not using distributed mode'</span><span class="token punctuation">)</span>
+        args<span class="token punctuation">.</span>distributed <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token keyword">return</span>
 
-    args.distributed = <span class="hljs-literal">True</span>
-    <span class="hljs-built_in">print</span>(torch.cuda.device_count())  <span class="hljs-comment"># 打印gpu数量</span>
-    torch.cuda.set_device(args.gpu)  <span class="hljs-comment"># 对当前进程指定使用的GPU</span>
-    dist.init_process_group(backend=<span class="hljs-string">&#x27;nccl&#x27;</span>) <span class="hljs-comment"># 通信后端，nvidia GPU推荐使用NCCL</span>
-    dist.barrier()  <span class="hljs-comment"># 等待每个GPU都运行完这个地方以后再继续</span>
-</code></pre>
+    args<span class="token punctuation">.</span>distributed <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>device_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 打印gpu数量</span>
+    torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>set_device<span class="token punctuation">(</span>args<span class="token punctuation">.</span>gpu<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 对当前进程指定使用的GPU</span>
+    dist<span class="token punctuation">.</span>init_process_group<span class="token punctuation">(</span>backend<span class="token operator">=</span><span class="token string">'nccl'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 通信后端，nvidia GPU推荐使用NCCL</span>
+    dist<span class="token punctuation">.</span>barrier<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 等待每个GPU都运行完这个地方以后再继续</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在训练之前需要注意的是，学习率需要根据batch_size增加（多卡扩增了batch_size），可以使用简单的线性倍增方法。</p>
-<pre class="highlight"><code class="python">args.lr *= args.world_size
-</code></pre>
-<h4 id="数据构造"><a class="markdownIt-Anchor" href="#数据构造"></a> 数据构造</h4>
-<p>构造数据集可以使用与单卡相同的方法，但在样本采样时和单机不同，需要使用<code>DistributedSampler</code>和<code>BatchSampler</code>。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> Dataset, DataLoader, BatchSampler
-<span class="hljs-keyword">from</span> torch.utils.data.distributed <span class="hljs-keyword">import</span> DistributedSampler
+<pre class="line-numbers language-python"><code class="language-python">args<span class="token punctuation">.</span>lr <span class="token operator">*=</span> args<span class="token punctuation">.</span>world_size
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="数据构造"><a href="#数据构造" class="headerlink" title="数据构造"></a>数据构造</h4><p>构造数据集可以使用与单卡相同的方法，但在样本采样时和单机不同，需要使用<code>DistributedSampler</code>和<code>BatchSampler</code>。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> Dataset<span class="token punctuation">,</span> DataLoader<span class="token punctuation">,</span> BatchSampler
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>distributed <span class="token keyword">import</span> DistributedSampler
 
-<span class="hljs-comment"># 给每个rank对应的进程分配训练的样本索引</span>
-train_sampler = DistributedSampler(train_data_set)
-<span class="hljs-comment"># 将样本索引每batch_size个元素组成一个list</span>
-train_batch_sampler = BatchSampler(train_sampler, batch_size, drop_last=<span class="hljs-literal">True</span>)
-train_loader = DataLoader(train_data_set, batch_sampler=train_batch_sampler,
-				pin_memory=<span class="hljs-literal">True</span>,num_workers=nw,collate_fn=train_data_set.collate_fn)
-</code></pre>
-<p><code>DistributedSampler</code>原理如图所示：假设当前数据集有0~10共11个样本，使用2块GPU计算。首先打乱数据顺序，然后用 11/2 =6（向上取整），然后6乘以GPU个数2 = 12，因为只有11个数据，所以再把第一个数据（索引为6的数据）补到末尾，现在就有12个数据可以均匀分到每块GPU。然后分配数据：间隔将数据分配到不同的GPU中。</p>
-<p><img src="/images/DistributedSampler.png" alt></p>
-<p><code>BatchSampler</code>原理：<code>DistributedSmpler</code>将数据分配到两个GPU上，以第一个GPU为例，分到的数据是6，9，10，1，8，7，假设batch_size=2，就按顺序把数据两两一组，在训练时，每次获取一个batch的数据，就从组织好的一个个batch中取到。注意：只对训练集处理，验证集不使用BatchSampler。</p>
-<p><img src="/images/BatchSampler.png" alt></p>
+<span class="token comment" spellcheck="true"># 给每个rank对应的进程分配训练的样本索引</span>
+train_sampler <span class="token operator">=</span> DistributedSampler<span class="token punctuation">(</span>train_data_set<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 将样本索引每batch_size个元素组成一个list</span>
+train_batch_sampler <span class="token operator">=</span> BatchSampler<span class="token punctuation">(</span>train_sampler<span class="token punctuation">,</span> batch_size<span class="token punctuation">,</span> drop_last<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_data_set<span class="token punctuation">,</span> batch_sampler<span class="token operator">=</span>train_batch_sampler<span class="token punctuation">,</span>
+                pin_memory<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>num_workers<span class="token operator">=</span>nw<span class="token punctuation">,</span>collate_fn<span class="token operator">=</span>train_data_set<span class="token punctuation">.</span>collate_fn<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>DistributedSampler</code>原理如图所示：假设当前数据集有0~10共11个样本，使用2块GPU计算。首先打乱数据顺序，然后用 11&#x2F;2 &#x3D;6（向上取整），然后6乘以GPU个数2 &#x3D; 12，因为只有11个数据，所以再把第一个数据（索引为6的数据）补到末尾，现在就有12个数据可以均匀分到每块GPU。然后分配数据：间隔将数据分配到不同的GPU中。</p>
+<p><img src="/images/DistributedSampler.png"></p>
+<p><code>BatchSampler</code>原理：<code>DistributedSmpler</code>将数据分配到两个GPU上，以第一个GPU为例，分到的数据是6，9，10，1，8，7，假设batch_size&#x3D;2，就按顺序把数据两两一组，在训练时，每次获取一个batch的数据，就从组织好的一个个batch中取到。注意：只对训练集处理，验证集不使用BatchSampler。</p>
+<p><img src="/images/BatchSampler.png"></p>
 <p>当然，也可以只使用<code>DistributedSampler</code>，<code>Dataloader</code>内部会做好数据按batch_size分块处理的操作。注意shuffle与sampler是冲突的，并行训练需要设置sampler，此时务必要把shuffle设为False，数据乱序的方式交给sampler来控制。</p>
-<pre class="highlight"><code class="python">dataset = MyDataset()
-train_sampler = DistributedSampler(dataset)
-dataloader = DataLoader(dataset, batch_size=<span class="hljs-number">2</span>, sampler=train_sampler)
-</code></pre>
-<h4 id="模型并行"><a class="markdownIt-Anchor" href="#模型并行"></a> 模型并行</h4>
-<p>在这种并行训练方式下，每个模型使用完全相同的参数。在训练时，各个进程并行；在梯度下降时，各个进程会同步一次，保证每个进程的模型都更新相同的梯度，PyTorch又帮我们封装好了这些细节。我们只需要在现有模型上套一层<code>DistributedDataParallel</code>，就可以让模型在后续<code>backward</code>的时候自动同步梯度了。</p>
-<pre class="highlight"><code class="python">model = MyModel().to(args.gpu)
-model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model) <span class="hljs-comment"># model中有BN层</span>
-ddp_model = DistributedDataParallel(model, device_ids=[args.gpu])
-loss_fn = nn.MSELoss()
-optimizer = optim.SGD(ddp_model.parameters(), lr=<span class="hljs-number">0.001</span>)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">dataset <span class="token operator">=</span> MyDataset<span class="token punctuation">(</span><span class="token punctuation">)</span>
+train_sampler <span class="token operator">=</span> DistributedSampler<span class="token punctuation">(</span>dataset<span class="token punctuation">)</span>
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> sampler<span class="token operator">=</span>train_sampler<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="模型并行"><a href="#模型并行" class="headerlink" title="模型并行"></a>模型并行</h4><p>在这种并行训练方式下，每个模型使用完全相同的参数。在训练时，各个进程并行；在梯度下降时，各个进程会同步一次，保证每个进程的模型都更新相同的梯度，PyTorch又帮我们封装好了这些细节。我们只需要在现有模型上套一层<code>DistributedDataParallel</code>，就可以让模型在后续<code>backward</code>的时候自动同步梯度了。</p>
+<pre class="line-numbers language-python"><code class="language-python">model <span class="token operator">=</span> MyModel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>gpu<span class="token punctuation">)</span>
+model <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>SyncBatchNorm<span class="token punctuation">.</span>convert_sync_batchnorm<span class="token punctuation">(</span>model<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># model中有BN层</span>
+ddp_model <span class="token operator">=</span> DistributedDataParallel<span class="token punctuation">(</span>model<span class="token punctuation">,</span> device_ids<span class="token operator">=</span><span class="token punctuation">[</span>args<span class="token punctuation">.</span>gpu<span class="token punctuation">]</span><span class="token punctuation">)</span>
+loss_fn <span class="token operator">=</span> nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>ddp_model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意，如果模型中使用了BN层，则需要使用<code>SyncBatchNorm</code>对<strong>多个GPU的BN层进行同步</strong>。BN的特性是batch_size越大，均值和方差越接近与整个数据集的均值和方差，效果越好，所以多GPU训练时模型中使用BN则需要在多个GPU上进行BN的同步计算。但是由于需要对多个GPU上的批量数据进行聚合并计算整体的均值和方差，这里涉及多进程的通信，所以如果模型中有较多BN层，则<code>SyncBatchNorm</code>会降低模型训练速度。</p>
-<p><img src="/images/%E5%90%8C%E6%AD%A5BN.png" alt></p>
-<h4 id="训练过程"><a class="markdownIt-Anchor" href="#训练过程"></a> 训练过程</h4>
-<p>准备好了一切后，就可以开始训练模型了。在每个新epoch中，要用<code>train_sampler.set_epoch(epoch)</code>更新<code>sampler</code>，根据epoch参数设置不同的随机种子，改变打乱数据的顺序，可以让不同GPU每个epoch拿到的数据不同。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epoch_num):
-    train_sampler.set_epoch(epoch)
-    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataloader:
-        x = x.to(args.gpu)
-        y = ddp_model(x)
-        optimizer.zero_grad()
-        loss = loss_fn(x, y)
-        loss.backward()
-        optimizer.step()
-</code></pre>
-<p><img src="/images/set_epoch.png" alt></p>
+<p><img src="/images/%E5%90%8C%E6%AD%A5BN.png"></p>
+<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p>准备好了一切后，就可以开始训练模型了。在每个新epoch中，要用<code>train_sampler.set_epoch(epoch)</code>更新<code>sampler</code>，根据epoch参数设置不同的随机种子，改变打乱数据的顺序，可以让不同GPU每个epoch拿到的数据不同。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>epoch_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    train_sampler<span class="token punctuation">.</span>set_epoch<span class="token punctuation">(</span>epoch<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> x <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+        x <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>args<span class="token punctuation">.</span>gpu<span class="token punctuation">)</span>
+        y <span class="token operator">=</span> ddp_model<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        loss <span class="token operator">=</span> loss_fn<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+        loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/set_epoch.png"></p>
 <p>训练完模型后，应该保存模型。由于每个进程的模型都是一样的，我们只需要让主进程来保存模型即可。注意，在保存模型时，其他进程不要去修改模型参数。这里最好加上一行<code>dist.barrier()</code>，它可以用来同步进程的运行状态，即只有0号GPU的进程存完了模型，所有GPU再进行下一步操作。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">if</span> args.rank == <span class="hljs-number">0</span>:
-    torch.save(ddp_model.state_dict(), ckpt_path)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">if</span> args<span class="token punctuation">.</span>rank <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+    torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>ddp_model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ckpt_path<span class="token punctuation">)</span>
 
-dist.barrier()
-</code></pre>
+dist<span class="token punctuation">.</span>barrier<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最后还需要撤销进程组，释放资源</p>
-<pre class="highlight"><code class="python">dist.destroy_process_group()  <span class="hljs-comment"># 撤销进程组</span>
-</code></pre>
-<h4 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h4>
-<p>读取模型时需要注意一下。模型存储参数时会保存参数所在设备。由于我们只用了0号GPU的进程存模型，所有参数的<code>device</code>都是<code>cuda:0</code>。而读取模型时，每个设备上的模型都要去读一次模型，参数的位置要做一个调整。</p>
-<pre class="highlight"><code class="python">map_location = {<span class="hljs-string">&#x27;cuda:0&#x27;</span>: <span class="hljs-string">f&#x27;cuda:<span class="hljs-subst">{args.gpu}</span>&#x27;</span>}
-state_dict = torch.load(ckpt_path, map_location=map_location)
-ddp_model.load_state_dict(state_dict)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">dist<span class="token punctuation">.</span>destroy_process_group<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 撤销进程组</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>读取模型时需要注意一下。模型存储参数时会保存参数所在设备。由于我们只用了0号GPU的进程存模型，所有参数的<code>device</code>都是<code>cuda:0</code>。而读取模型时，每个设备上的模型都要去读一次模型，参数的位置要做一个调整。</p>
+<pre class="line-numbers language-python"><code class="language-python">map_location <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'cuda:0'</span><span class="token punctuation">:</span> f<span class="token string">'cuda:{args.gpu}'</span><span class="token punctuation">}</span>
+state_dict <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>ckpt_path<span class="token punctuation">,</span> map_location<span class="token operator">=</span>map_location<span class="token punctuation">)</span>
+ddp_model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>state_dict<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>这里还有一个重要的细节。使用<code>DistributedDataParallel</code>把<code>model</code>封装成<code>ddp_model</code>后，模型的参数名里多了一个<code>module</code>。这是因为原来的模型<code>model</code>被保存到了<code>ddp_model.module</code>这个成员变量中（<code>ddp_model.module = model</code>）。在混用单GPU和多GPU的训练代码时，要注意这个参数名不兼容的问题。最好的写法是每次存取<code>ddp_model.module</code>，这样单GPU和多GPU的checkpoint可以轻松兼容。</p>
 <p><strong>注意</strong>：如果从头开始训练，<strong>为了保证各个进程的模型参数完全相同，会先以主进程生成一个初始权重，以临时文件的形式保存，其他进程读取该模型权重进行初始化</strong>。下面是一个简单的并行训练代码示例。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.distributed <span class="hljs-keyword">as</span> dist
-<span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn
-<span class="hljs-keyword">import</span> torch.optim <span class="hljs-keyword">as</span> optim
-<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> Dataset, DataLoader
-<span class="hljs-keyword">from</span> torch.utils.data.distributed <span class="hljs-keyword">import</span> DistributedSampler
-<span class="hljs-keyword">from</span> torch.nn.parallel <span class="hljs-keyword">import</span> DistributedDataParallel
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>distributed <span class="token keyword">as</span> dist
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>optim <span class="token keyword">as</span> optim
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> Dataset<span class="token punctuation">,</span> DataLoader
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>distributed <span class="token keyword">import</span> DistributedSampler
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>parallel <span class="token keyword">import</span> DistributedDataParallel
 
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">setup</span>():
-    dist.init_process_group(<span class="hljs-string">&#x27;nccl&#x27;</span>)
+<span class="token keyword">def</span> <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dist<span class="token punctuation">.</span>init_process_group<span class="token punctuation">(</span><span class="token string">'nccl'</span><span class="token punctuation">)</span>
 
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">cleanup</span>():
-    dist.destroy_process_group()
+<span class="token keyword">def</span> <span class="token function">cleanup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dist<span class="token punctuation">.</span>destroy_process_group<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-ckpt_path = <span class="hljs-string">&#x27;tmp.pth&#x27;</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
-    setup()
-    rank = dist.get_rank()
-    pid = os.getpid()
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;current pid: <span class="hljs-subst">{pid}</span>&#x27;</span>)
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;Current rank <span class="hljs-subst">{rank}</span>&#x27;</span>)
-    device_id = rank % torch.cuda.device_count()
+ckpt_path <span class="token operator">=</span> <span class="token string">'tmp.pth'</span>
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    setup<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    rank <span class="token operator">=</span> dist<span class="token punctuation">.</span>get_rank<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    pid <span class="token operator">=</span> os<span class="token punctuation">.</span>getpid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'current pid: {pid}'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'Current rank {rank}'</span><span class="token punctuation">)</span>
+    device_id <span class="token operator">=</span> rank <span class="token operator">%</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>device_count<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    dataset = MyDataset()
-    sampler = DistributedSampler(dataset)
-    dataloader = DataLoader(dataset, batch_size=<span class="hljs-number">2</span>, sampler=sampler)
+    dataset <span class="token operator">=</span> MyDataset<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    sampler <span class="token operator">=</span> DistributedSampler<span class="token punctuation">(</span>dataset<span class="token punctuation">)</span>
+    dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> sampler<span class="token operator">=</span>sampler<span class="token punctuation">)</span>
 
-    model = ToyModel().to(device_id)
-    ddp_model = DistributedDataParallel(model, device_ids=[device_id])
-    loss_fn = nn.MSELoss()
-    optimizer = optim.SGD(ddp_model.parameters(), lr=<span class="hljs-number">0.001</span>)
+    model <span class="token operator">=</span> ToyModel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device_id<span class="token punctuation">)</span>
+    ddp_model <span class="token operator">=</span> DistributedDataParallel<span class="token punctuation">(</span>model<span class="token punctuation">,</span> device_ids<span class="token operator">=</span><span class="token punctuation">[</span>device_id<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    loss_fn <span class="token operator">=</span> nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>ddp_model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">)</span>
 
-    <span class="hljs-keyword">if</span> rank == <span class="hljs-number">0</span>: <span class="hljs-comment"># 临时保存初始化权重</span>
-        torch.save(ddp_model.state_dict(), ckpt_path)
+    <span class="token keyword">if</span> rank <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 临时保存初始化权重</span>
+        torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>ddp_model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ckpt_path<span class="token punctuation">)</span>
 
-    dist.barrier()
+    dist<span class="token punctuation">.</span>barrier<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    map_location = {<span class="hljs-string">&#x27;cuda:0&#x27;</span>: <span class="hljs-string">f&#x27;cuda:<span class="hljs-subst">{device_id}</span>&#x27;</span>}
-    state_dict = torch.load(ckpt_path, map_location=map_location) <span class="hljs-comment"># 保证各进程参数权重完全相同</span>
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;rank <span class="hljs-subst">{rank}</span>: <span class="hljs-subst">{state_dict}</span>&#x27;</span>)
-    ddp_model.load_state_dict(state_dict)
+    map_location <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'cuda:0'</span><span class="token punctuation">:</span> f<span class="token string">'cuda:{device_id}'</span><span class="token punctuation">}</span>
+    state_dict <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>ckpt_path<span class="token punctuation">,</span> map_location<span class="token operator">=</span>map_location<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 保证各进程参数权重完全相同</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'rank {rank}: {state_dict}'</span><span class="token punctuation">)</span>
+    ddp_model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>state_dict<span class="token punctuation">)</span>
 
-    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>):
-        sampler.set_epoch(epoch)
-        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataloader:
-            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;epoch <span class="hljs-subst">{epoch}</span>, rank <span class="hljs-subst">{rank}</span> data: <span class="hljs-subst">{x}</span>&#x27;</span>)
-            x = x.to(device_id)
-            y = ddp_model(x)
-            optimizer.zero_grad()
-            loss = loss_fn(x, y)
-            loss.backward()
-            optimizer.step()
-    cleanup()
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        sampler<span class="token punctuation">.</span>set_epoch<span class="token punctuation">(</span>epoch<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> x <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'epoch {epoch}, rank {rank} data: {x}'</span><span class="token punctuation">)</span>
+            x <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device_id<span class="token punctuation">)</span>
+            y <span class="token operator">=</span> ddp_model<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            loss <span class="token operator">=</span> loss_fn<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+            loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    cleanup<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()
-</code></pre>
-<h3 id="初学者容易踩的坑"><a class="markdownIt-Anchor" href="#初学者容易踩的坑"></a> 初学者容易踩的坑</h3>
-<p>我们在看很多大佬写的代码时候，特别是涉及到<strong>分布式训练</strong>的时候会发现在 argsparse 中添加了这样一个参数“–loacl_rank”，比如下面的代码</p>
-<pre class="highlight"><code class="python">parser.add_argument(<span class="hljs-string">&#x27;--local_rank&#x27;</span>, default=-<span class="hljs-number">1</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>)  
-args = parser.parse_args()
-torch.cuda.set_device(args.local_rank)
-</code></pre>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="初学者容易踩的坑"><a href="#初学者容易踩的坑" class="headerlink" title="初学者容易踩的坑"></a>初学者容易踩的坑</h3><p>我们在看很多大佬写的代码时候，特别是涉及到<strong>分布式训练</strong>的时候会发现在 argsparse 中添加了这样一个参数“–loacl_rank”，比如下面的代码</p>
+<pre class="line-numbers language-python"><code class="language-python">parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--local_rank'</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> type<span class="token operator">=</span>int<span class="token punctuation">)</span>  
+args <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>set_device<span class="token punctuation">(</span>args<span class="token punctuation">.</span>local_rank<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>首先，这个命令行参数“–loacl_rank”是必须声明的，但<strong>它不是由用户填写的，而是由pytorch的<code>distributed.launch</code>模块为用户填写</strong>，也就是说这个值是会被自动赋值为当前进程在本机上的rank。</p>
 <p>但是，还有很多大佬的代码在分布式训练中并没有声明命令行参数“–loacl_rank”，但程序同样可以运行，这是为什么呢？这和代码的启动命令有关，当使用下面的启动命令时，则可以不使用命令行参数“–loacl_rank”。</p>
-<pre class="highlight"><code class="shell">python -m torch.distributed.launch --nproc_per_node=3 --use_env train.py
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">python -m torch.distributed.launch --nproc_per_node=3 --use_env train.py
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>对于“–use_env”官方是这样解释的：</p>
-<p><img src="/images/use_env.png" alt></p>
+<p><img src="/images/use_env.png"></p>
 <p>大意是说，声明“–use_env”后，pytorch会将当前进程在本机上的rank添加到<strong>环境变量</strong>“LOCAL_RANK”中，而不再添加到<strong>命令行参数</strong><code>args.local_rank</code>中。该方式正如上文<em><strong>初始化过程</strong></em>小节中的<code>init_distributed_mode</code>函数所写。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">import</span> argparse
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args</span>):
-    local_rank = args.local_rank
-    <span class="hljs-built_in">print</span>(local_rank, os.environ[<span class="hljs-string">&#x27;LOCAL_RANK&#x27;</span>]) <span class="hljs-comment"># None 0</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">import</span> argparse
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    local_rank <span class="token operator">=</span> args<span class="token punctuation">.</span>local_rank
+    <span class="token keyword">print</span><span class="token punctuation">(</span>local_rank<span class="token punctuation">,</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'LOCAL_RANK'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># None 0</span>
 
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(<span class="hljs-string">&quot;--local_rank&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>)
-    args = parser.parse_args()
-    main(args)
-</code></pre>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    parser <span class="token operator">=</span> argparse<span class="token punctuation">.</span>ArgumentParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">"--local_rank"</span><span class="token punctuation">,</span> type<span class="token operator">=</span>int<span class="token punctuation">)</span>
+    args <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    main<span class="token punctuation">(</span>args<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>官方现在已经建议废弃使用<code>torch.distributed.launch</code>，转而使用<code>torchrun</code>，而这个<code>torchrun</code>已经把“–use_env”这个参数废弃了，<strong>而强制要求用户从环境变量LOACL_RANK里获取当前进程在本机上的rank</strong>。</p>
 <p>然而，即使我们不使用命令行参数“–loacl_rank”和“–use_env”，我们依然可以通过代码找到当前进程在本机的rank。正如前文所述的一份简单的并行训练代码示例，通过<code>torch.distributed.get_rank()</code>可以找到当前进程的rank，以此设置数据和模型拷贝到对应GPU位置。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> torch.distributed <span class="hljs-keyword">as</span> dist
-rank = dist.get_rank()
-torch.cuda.set_device(rank)
-</code></pre>
-<h3 id="ddp训练代码详解multiprocessing"><a class="markdownIt-Anchor" href="#ddp训练代码详解multiprocessing"></a> DDP训练代码详解(multiprocessing)</h3>
-<p><code>torch.multiprocessing</code>使用较为简单，只需要调用<code>torch.multiprocessing.spawn</code>，<code>torch.multiprocessing</code>会帮助我们自动创建进程。如下面的代码所示，spawn 开启了4 个进程，每个进程执行 <code>main_worker()</code>并向其中传入local_rank（当前进程【GPU】索引）、ngpus_per_node和 args（即 myargs）作为参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> torch.multiprocessing <span class="hljs-keyword">as</span> mp
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>distributed <span class="token keyword">as</span> dist
+rank <span class="token operator">=</span> dist<span class="token punctuation">.</span>get_rank<span class="token punctuation">(</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>set_device<span class="token punctuation">(</span>rank<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="DDP训练代码详解-multiprocessing"><a href="#DDP训练代码详解-multiprocessing" class="headerlink" title="DDP训练代码详解(multiprocessing)"></a>DDP训练代码详解(multiprocessing)</h3><p><code>torch.multiprocessing</code>使用较为简单，只需要调用<code>torch.multiprocessing.spawn</code>，<code>torch.multiprocessing</code>会帮助我们自动创建进程。如下面的代码所示，spawn 开启了4 个进程，每个进程执行 <code>main_worker()</code>并向其中传入local_rank（当前进程【GPU】索引）、ngpus_per_node和 args（即 myargs）作为参数：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>multiprocessing <span class="token keyword">as</span> mp
 
-parser.add_argument(<span class="hljs-string">&#x27;--local_rank&#x27;</span>, default=-<span class="hljs-number">1</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>)  
-myargs = parser.parse_args()
-mp.spawn(main_worker, nprocs=<span class="hljs-number">4</span>, args=(<span class="hljs-number">4</span>, myargs))
-</code></pre>
+parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--local_rank'</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> type<span class="token operator">=</span>int<span class="token punctuation">)</span>  
+myargs <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
+mp<span class="token punctuation">.</span>spawn<span class="token punctuation">(</span>main_worker<span class="token punctuation">,</span> nprocs<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> myargs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里直接将原本需要<code>torch.distributed.launch</code>管理的执行内容，封装进<code>main_worker()</code>函数中，其中  proc 对应 local_rank（当前进程索引），ngpus_per_node 对应4， args 对应 myargs。值得注意的是，由于没有 <code>torch.distributed.launch</code>读取的默认环境变量作为配置，我们需要手动为<code>init_process_group()</code>指定参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">main_worker</span>(<span class="hljs-params">gpu, ngpus_per_node, args</span>):
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">main_worker</span><span class="token punctuation">(</span>gpu<span class="token punctuation">,</span> ngpus_per_node<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-   dist.init_process_group(backend=<span class="hljs-string">&#x27;nccl&#x27;</span>, init_method=<span class="hljs-string">&#x27;tcp://127.0.0.1:23456&#x27;</span>, world_size=<span class="hljs-number">4</span>, rank=gpu)
-   torch.cuda.set_device(args.local_rank)
+   dist<span class="token punctuation">.</span>init_process_group<span class="token punctuation">(</span>backend<span class="token operator">=</span><span class="token string">'nccl'</span><span class="token punctuation">,</span> init_method<span class="token operator">=</span><span class="token string">'tcp://127.0.0.1:23456'</span><span class="token punctuation">,</span> world_size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> rank<span class="token operator">=</span>gpu<span class="token punctuation">)</span>
+   torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>set_device<span class="token punctuation">(</span>args<span class="token punctuation">.</span>local_rank<span class="token punctuation">)</span>
 
-   train_dataset = ...
-   train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
+   train_dataset <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+   train_sampler <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>distributed<span class="token punctuation">.</span>DistributedSampler<span class="token punctuation">(</span>train_dataset<span class="token punctuation">)</span>
 
-   train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=..., sampler=train_sampler)
+   train_loader <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>train_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> sampler<span class="token operator">=</span>train_sampler<span class="token punctuation">)</span>
 
-   model = ...
-   model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.local_rank])
+   model <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+   model <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>parallel<span class="token punctuation">.</span>DistributedDataParallel<span class="token punctuation">(</span>model<span class="token punctuation">,</span> device_ids<span class="token operator">=</span><span class="token punctuation">[</span>args<span class="token punctuation">.</span>local_rank<span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-   optimizer = optim.SGD(model.parameters())
+   optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-   <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>):
-    train_sampler.set_epoch(epoch)
-      <span class="hljs-keyword">for</span> batch_idx, (data, target) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_loader):
-          images = images.cuda(non_blocking=<span class="hljs-literal">True</span>)
-          target = target.cuda(non_blocking=<span class="hljs-literal">True</span>)
-          ...
-          output = model(images)
-          loss = criterion(output, target)
-          ...
-          optimizer.zero_grad()
-          loss.backward()
-          optimizer.step()
-</code></pre>
+   <span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    train_sampler<span class="token punctuation">.</span>set_epoch<span class="token punctuation">(</span>epoch<span class="token punctuation">)</span>
+      <span class="token keyword">for</span> batch_idx<span class="token punctuation">,</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> target<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          images <span class="token operator">=</span> images<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span>non_blocking<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+          target <span class="token operator">=</span> target<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span>non_blocking<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+          output <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+          loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>output<span class="token punctuation">,</span> target<span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+          optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+          loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+          optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

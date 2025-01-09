@@ -500,12 +500,11 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     Pytorch构建模型的方式
-可以使用以下3种方式构建模型：
+                                    Pytorch构建模型的方式可以使用以下3种方式构建模型：
 
 继承nn.Module基类构建自定义模型。
 使用nn.Sequential按层顺序构建模型。
-继承nn.Module基类构建模型，并辅助应用模型容器(nn.Sequentia
+继承nn.Module基类构建模型，并辅助应用模型容器(nn.Sequential,
                                 
                             </div>
                             <div class="publish-info">
@@ -566,13 +565,11 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     张量
-张量是基于向量和矩阵的推广，其本质就是多维数组。
- 创建张量
- 常规方式创建
-常见的初始化有torch.tensor和torch.Tensor，其中的区别是
+                                    张量张量是基于向量和矩阵的推广，其本质就是多维数组。
+创建张量常规方式创建常见的初始化有torch.tensor和torch.Tensor，其中的区别是
 
-tensor()：接收现有数据，通过numpy 或 list 的现有数据
+tensor()：接收现有数据，通过numpy 或 list 的现有数据初始化
+Te
                                 
                             </div>
                             <div class="publish-info">
@@ -638,14 +635,13 @@ tensor()：接收现有数据，通过numpy 或 list 的现有数据
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     Pytorch训练代码模板
-从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，本文总结了一套较为直观的代码模板。目录如下：
+                                    Pytorch训练代码模板从参数定义，到网络模型定义，再到训练步骤，验证步骤，测试步骤，本文总结了一套较为直观的代码模板。目录如下：
 
 导入包以及设置随机种子
 以类的方式定义超参数
 定义自己的模型
 定义早停类(此步骤可以省略)
-定义自己
+定义自己的数
                                 
                             </div>
                             <div class="publish-info">
@@ -706,10 +702,9 @@ tensor()：接收现有数据，通过numpy 或 list 的现有数据
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     Pytorch模型保存和加载
-Pytorch保存和加载模型需要掌握3个重要的函数：
+                                    Pytorch模型保存和加载Pytorch保存和加载模型需要掌握3个重要的函数：
 
-torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Python 的 pickle 工具进行序列化。用这个函数可以保存模型 (model
+torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Python 的 pickle 工具进行序列化。用这个函数可以保存模型 (model)、
                                 
                             </div>
                             <div class="publish-info">
@@ -775,9 +770,7 @@ torch.save： 将一个序列化的对象保存到磁盘。这个函数使用 Py
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     学习率衰减原理
-在梯度下降算法中，学习率用来控制权重更新的步幅。学习率越大，则权重更新的步子迈得大一些，学习率越小，则权重更新的步子迈得小一些。
-w=w−α∗∂Loss∂ww=w- \alpha * \frac{\partial Loss
+                                    学习率衰减原理在梯度下降算法中，学习率用来控制权重更新的步幅。学习率越大，则权重更新的步子迈得大一些，学习率越小，则权重更新的步子迈得小一些。$w&#x3D;w- \alpha * \frac{\partial Loss}{\partial
                                 
                             </div>
                             <div class="publish-info">
@@ -826,26 +819,19 @@ w=w−α∗∂Loss∂ww=w- \alpha * \frac{\partial Loss
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/">
+                        <a href="/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/">
                             <div class="card-image">
                                 
                                 
-                                <img src="/medias/featureimages/architect/19.jpg" class="responsive-img" alt="Python的装饰器">
+                                <img src="/medias/featureimages/architect/14.jpg" class="responsive-img" alt="Python的@staticmethod和@classmethod">
                                 
-                                <span class="card-title">Python的装饰器</span>
+                                <span class="card-title">Python的@staticmethod和@classmethod</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     Python的装饰器
-装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。
-装饰器的使用场景：
-
-增强被装饰函数的行为
-提高代码复用
-
-一个良好的装饰器必须要遵守两个原则：
+                                    Python中的类方法和静态方法一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。Python面向对象编程中，类中定义的
                                 
                             </div>
                             <div class="publish-info">
@@ -894,21 +880,26 @@ w=w−α∗∂Loss∂ww=w- \alpha * \frac{\partial Loss
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/02/17/python-zhi-shi/python-zhong-staticmethod-classmethod-fang-fa/">
+                        <a href="/2023/02/17/python-zhi-shi/python-zhuang-shi-qi/">
                             <div class="card-image">
                                 
                                 
-                                <img src="/medias/featureimages/architect/14.jpg" class="responsive-img" alt="Python的@staticmethod和@classmethod">
+                                <img src="/medias/featureimages/architect/19.jpg" class="responsive-img" alt="Python的装饰器">
                                 
-                                <span class="card-title">Python的@staticmethod和@classmethod</span>
+                                <span class="card-title">Python的装饰器</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     Python中的类方法和静态方法
-一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。
-Python面向对象编程中，类中
+                                    Python的装饰器装饰器是Python语法糖，装饰器是可调用的对象，可以像常规的可调用对象那样调用，特殊的地方是装饰器的参数是一个函数。装饰器的使用场景：
+
+增强被装饰函数的行为
+提高代码复用
+
+一个良好的装饰器必须要遵守两个原则：
+
+不
                                 
                             </div>
                             <div class="publish-info">
@@ -969,8 +960,8 @@ Python面向对象编程中，类中
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                     深度学习的优化算法
-炼丹师的日常：拿来药材（数据），架起八卦炉（模型），点着六味真火（优化算法），就摇着蒲扇等着丹药出炉了。不过，同样的食材，同样的菜谱，但火候不一样了，这出来的口味可是千差万别。火小了夹生，火大了易糊，火不匀则半生半糊。
+                                    深度学习的优化算法炼丹师的日常：拿来药材（数据），架起八卦炉（模型），点着六味真火（优化算法），就摇着蒲扇等着丹药出炉了。不过，同样的食材，同样的菜谱，但火候不一样了，这出来的口味可是千差万别。火小了夹生，火大了易糊，火不匀则半生半糊。
+简
                                 
                             </div>
                             <div class="publish-info">
@@ -995,9 +986,9 @@ Python面向对象编程中，类中
                             
                             <a href="/tags/基础知识/"><span class="chip bg-color">基础知识</span></a>
                             
-                            <a href="/tags/数学/"><span class="chip bg-color">数学</span></a>
-                            
                             <a href="/tags/优化算法/"><span class="chip bg-color">优化算法</span></a>
+                            
+                            <a href="/tags/数学/"><span class="chip bg-color">数学</span></a>
                             
                         </div>
                         
@@ -1047,8 +1038,8 @@ Python面向对象编程中，类中
 关注公众号【惜学塔】，每日知识干货马上就来！
 
 
- 正常部署方式
-当github仓库、git、Hexo准备就绪，想把自己的内容推送到Github上时，通过GitHub网址 ，可见jlcxxzj,就可以愉快的访问时，一切都是那么简单，只需要
+正常部署方式当github仓库、git、Hexo准备就绪，想把自己的内容推送到Github上时，通过GitHub网址 ，可见jlcxxzj,就可以愉快的访问时，一切都是那么简单，只需要：
+
                                 
                             </div>
                             <div class="publish-info">

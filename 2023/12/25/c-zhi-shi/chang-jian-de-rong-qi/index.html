@@ -5,11 +5,8 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="C++|STL中常用容器, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" STL中常用容器
-本文简要介绍C++的STL中常用容器及其用法。
- string容器
- string容器初识
-string是C++风格的字符串，本质上是一个类的形式。C风格的字符串char*是一个指针，而string是一个类，类内部封装了">
+    <meta name="description" content="STL中常用容器本文简要介绍C++的STL中常用容器及其用法。
+string容器string容器初识string是C++风格的字符串，本质上是一个类的形式。C风格的字符串char*是一个指针，而string是一个类，类内部封装了char*来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -440,35 +437,30 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="stl中常用容器"><a class="markdownIt-Anchor" href="#stl中常用容器"></a> STL中常用容器</h1>
-<p>本文简要介绍C++的STL中常用容器及其用法。</p>
-<h2 id="string容器"><a class="markdownIt-Anchor" href="#string容器"></a> string容器</h2>
-<h3 id="string容器初识"><a class="markdownIt-Anchor" href="#string容器初识"></a> string容器初识</h3>
-<p><code>string</code>是C++风格的字符串，本质上是一个类的形式。C风格的字符串<code>char*</code>是一个指针，而<code>string</code>是一个类，类内部封装了<code>char*</code>来管理这个字符串，是一个<code>char*</code>型的容器。<code>string</code>管理<code>char*</code>所分配的内存，不用担心复制越界和取值越界等问题，这些均由类内部进行负责。</p>
-<h3 id="string的构造函数"><a class="markdownIt-Anchor" href="#string的构造函数"></a> string的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+                <h1 id="STL中常用容器"><a href="#STL中常用容器" class="headerlink" title="STL中常用容器"></a>STL中常用容器</h1><p>本文简要介绍C++的STL中常用容器及其用法。</p>
+<h2 id="string容器"><a href="#string容器" class="headerlink" title="string容器"></a>string容器</h2><h3 id="string容器初识"><a href="#string容器初识" class="headerlink" title="string容器初识"></a>string容器初识</h3><p><code>string</code>是C++风格的字符串，本质上是一个类的形式。C风格的字符串<code>char*</code>是一个指针，而<code>string</code>是一个类，类内部封装了<code>char*</code>来管理这个字符串，是一个<code>char*</code>型的容器。<code>string</code>管理<code>char*</code>所分配的内存，不用担心复制越界和取值越界等问题，这些均由类内部进行负责。</p>
+<h3 id="string的构造函数"><a href="#string的构造函数" class="headerlink" title="string的构造函数"></a>string的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>string()</code>：创建一个空的字符串，例如: <code>string str;</code></li>
 <li><code>string(const char* s)</code>：使用C风格的字符串<code>s</code>初始化</li>
 <li><code>string(const string&amp; str)</code>：拷贝构造函数，使用一个string对象初始化另一个string对象</li>
 <li><code>string(int n, char c)</code>：使用n个字符<code>c</code>初始化字符串</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	string s1; <span class="hljs-comment">//创建空字符串，调用无参构造函数</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    string s1<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//创建空字符串，调用无参构造函数</span>
 
-	<span class="hljs-type">const</span> <span class="hljs-type">char</span>* str = <span class="hljs-string">&quot;hello world&quot;</span>;
-	<span class="hljs-function">string <span class="hljs-title">s2</span><span class="hljs-params">(str)</span></span>; <span class="hljs-comment">//把C风格字符串转换成string</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> str <span class="token operator">=</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+    string <span class="token function">s2</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//把C风格字符串转换成string</span>
 
-	<span class="hljs-function">string <span class="hljs-title">s3</span><span class="hljs-params">(s2)</span></span>; <span class="hljs-comment">//调用拷贝构造函数</span>
+    string <span class="token function">s3</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//调用拷贝构造函数</span>
 
-	<span class="hljs-function">string <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;a&#x27;</span>)</span></span>;
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="赋值操作"><a class="markdownIt-Anchor" href="#赋值操作"></a> 赋值操作</h3>
-<p><strong>函数原型：</strong></p>
+    string <span class="token function">s4</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="赋值操作"><a href="#赋值操作" class="headerlink" title="赋值操作"></a>赋值操作</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>string&amp; operator=(const char* s)</code>：运算符重载，将C风格字符串赋值给当前的字符串</li>
 <li><code>string&amp; operator=(const string &amp;s)</code>：运算符重载，把字符串s赋给当前的字符串</li>
@@ -478,34 +470,33 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>string&amp; assign(const string &amp;s)</code>：把字符串s赋给当前字符串</li>
 <li><code>string&amp; assign(int n, char c)</code>：用n个字符c赋给当前字符串</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	string str1;
-	str1 = <span class="hljs-string">&quot;hello world&quot;</span>;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    string str1<span class="token punctuation">;</span>
+    str1 <span class="token operator">=</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
 
-	string str2;
-	str2 = str1;
+    string str2<span class="token punctuation">;</span>
+    str2 <span class="token operator">=</span> str1<span class="token punctuation">;</span>
 
-	string str3;
-	str3 = <span class="hljs-string">&#x27;a&#x27;</span>;
+    string str3<span class="token punctuation">;</span>
+    str3 <span class="token operator">=</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
 
-	string str4;
-	str4.<span class="hljs-built_in">assign</span>(<span class="hljs-string">&quot;hello c++&quot;</span>);
+    string str4<span class="token punctuation">;</span>
+    str4<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token string">"hello c++"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	string str5;
-	str5.<span class="hljs-built_in">assign</span>(<span class="hljs-string">&quot;hello c++&quot;</span>,<span class="hljs-number">5</span>);
+    string str5<span class="token punctuation">;</span>
+    str5<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token string">"hello c++"</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	string str6;
-	str6.<span class="hljs-built_in">assign</span>(str5);
+    string str6<span class="token punctuation">;</span>
+    str6<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>str5<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	string str7;
-	str7.<span class="hljs-built_in">assign</span>(<span class="hljs-number">5</span>, <span class="hljs-string">&#x27;x&#x27;</span>);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="拼接-查找和替换"><a class="markdownIt-Anchor" href="#拼接-查找和替换"></a> 拼接、查找和替换</h3>
-<p><strong>拼接操作的函数原型：</strong></p>
+    string str7<span class="token punctuation">;</span>
+    str7<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'x'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="拼接、查找和替换"><a href="#拼接、查找和替换" class="headerlink" title="拼接、查找和替换"></a>拼接、查找和替换</h3><p><strong>拼接操作的函数原型：</strong></p>
 <ul>
 <li><code>string&amp; operator+=(const char* str)</code>：重载<code>+=</code>操作符</li>
 <li><code>string&amp; operator+=(const char c)</code>：重载<code>+=</code>操作符</li>
@@ -528,49 +519,35 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>string&amp; replace(int pos, int n, const string&amp; str)</code>：替换从pos开始的n个字符为字符串str。</li>
 <li><code>string&amp; replace(int pos, int n,const char* s)</code>：替换从pos开始的n个字符为字符串s。</li>
 </ul>
-<h3 id="比较和存取"><a class="markdownIt-Anchor" href="#比较和存取"></a> 比较和存取</h3>
-<p>字符串比较是按字符的ASCII码进行对比，如果所有字符相等则返回0，字符串<code>A&gt;B</code>返回1，字符串<code>A&lt;B</code>返回-1。</p>
+<h3 id="比较和存取"><a href="#比较和存取" class="headerlink" title="比较和存取"></a>比较和存取</h3><p>字符串比较是按字符的ASCII码进行对比，如果所有字符相等则返回0，字符串<code>A&gt;B</code>返回1，字符串<code>A&lt;B</code>返回-1。</p>
 <p><strong>函数原型：</strong></p>
 <ul>
-<li>
-<p><code>int compare(const string &amp;s) const</code>：与字符串s比较</p>
+<li><p><code>int compare(const string &amp;s) const</code>：与字符串s比较</p>
 </li>
-<li>
-<p><code>int compare(const char *s) const</code>：与C风格字符串s比较</p>
+<li><p><code>int compare(const char *s) const</code>：与C风格字符串s比较</p>
 </li>
-<li>
-<p><code>char&amp; operator[](int n)</code>：重载<code>[]</code>运算符，通过<code>[]</code>方式取字符</p>
+<li><p><code>char&amp; operator[](int n)</code>：重载<code>[]</code>运算符，通过<code>[]</code>方式取字符</p>
 </li>
-<li>
-<p><code>char&amp; at(int idx)</code>：通过at方法获取字符，返回索引idx所指的字符。</p>
+<li><p><code>char&amp; at(int idx)</code>：通过at方法获取字符，返回索引idx所指的字符。</p>
 </li>
 </ul>
-<h3 id="插入-删除和子串"><a class="markdownIt-Anchor" href="#插入-删除和子串"></a> 插入、删除和子串</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="插入、删除和子串"><a href="#插入、删除和子串" class="headerlink" title="插入、删除和子串"></a>插入、删除和子串</h3><p><strong>函数原型：</strong></p>
 <ul>
-<li>
-<p><code>string&amp; insert(int pos, const char* s)</code>：在位置pos插入字符串</p>
+<li><p><code>string&amp; insert(int pos, const char* s)</code>：在位置pos插入字符串</p>
 </li>
-<li>
-<p><code>string&amp; insert(int pos, const string&amp; str)</code>：插入字符串</p>
+<li><p><code>string&amp; insert(int pos, const string&amp; str)</code>：插入字符串</p>
 </li>
-<li>
-<p><code>string&amp; insert(int pos, int n, char c)</code>：在指定位置插入n个字符c</p>
+<li><p><code>string&amp; insert(int pos, int n, char c)</code>：在指定位置插入n个字符c</p>
 </li>
-<li>
-<p><code>string&amp; erase(int pos, int n = npos)</code>：删除从位置pos开始的n个字符</p>
+<li><p><code>string&amp; erase(int pos, int n = npos)</code>：删除从位置pos开始的n个字符</p>
 </li>
-<li>
-<p><code>string substr(int pos = 0, int n = npos) const</code>：返回由pos开始的n个字符组成的子字符串</p>
+<li><p><code>string substr(int pos = 0, int n = npos) const</code>：返回由pos开始的n个字符组成的子字符串</p>
 </li>
 </ul>
-<h2 id="vector容器"><a class="markdownIt-Anchor" href="#vector容器"></a> vector容器</h2>
-<h3 id="vector容器初识"><a class="markdownIt-Anchor" href="#vector容器初识"></a> vector容器初识</h3>
-<p>vector数据结构和<strong>数组非常相似</strong>，也称为<strong>单端数组</strong>；与普通数组的不同之处在于，数组是静态空间，而vector可以<strong>动态扩展</strong>，动态扩展并不是在原空间之后续接新空间，而是找更大的内存空间，然后将原数据拷贝新空间，释放原空间。</p>
+<h2 id="vector容器"><a href="#vector容器" class="headerlink" title="vector容器"></a>vector容器</h2><h3 id="vector容器初识"><a href="#vector容器初识" class="headerlink" title="vector容器初识"></a>vector容器初识</h3><p>vector数据结构和<strong>数组非常相似</strong>，也称为<strong>单端数组</strong>；与普通数组的不同之处在于，数组是静态空间，而vector可以<strong>动态扩展</strong>，动态扩展并不是在原空间之后续接新空间，而是找更大的内存空间，然后将原数据拷贝新空间，释放原空间。</p>
 <p>vector容器的迭代器是支持随机访问的迭代器。</p>
-<p><img src="/images/vector.jpg" alt></p>
-<h3 id="vector的构造函数"><a class="markdownIt-Anchor" href="#vector的构造函数"></a> vector的构造函数</h3>
-<p>用以创建vector容器。</p>
+<p><img src="/images/vector.jpg"></p>
+<h3 id="vector的构造函数"><a href="#vector的构造函数" class="headerlink" title="vector的构造函数"></a>vector的构造函数</h3><p>用以创建vector容器。</p>
 <p><strong>函数原型：</strong></p>
 <ul>
 <li><code>vector&lt;T&gt; v </code>：采用模板实现类实现，默认构造函数，创建一个空的vector容器。</li>
@@ -578,44 +555,42 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>vector(n, elem)</code>： 构造函数将n个元素<code>elem</code>拷贝给将要创建的vector本身。</li>
 <li><code>vector(const vector&amp; vec)</code> ：拷贝构造函数，使用一个<code>vce</code>初始化本身</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-    vector&lt;<span class="hljs-type">int</span>&gt; v1; <span class="hljs-comment">//无参构造</span>
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
-		v1.<span class="hljs-built_in">push_back</span>(i);
-	}
-    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v2</span><span class="hljs-params">(v1.begin(), v1.end())</span></span>; <span class="hljs-comment">// 将v1元素拷贝给v2</span>
-    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v3</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">100</span>)</span></span>; <span class="hljs-comment">// 指定vector大小并填充指定元素</span>
-    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v4</span><span class="hljs-params">(v3)</span></span>; <span class="hljs-comment">// 拷贝构造函数</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="赋值操作-2"><a class="markdownIt-Anchor" href="#赋值操作-2"></a> 赋值操作</h3>
-<p><strong>函数原型：</strong></p>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v1<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//无参构造</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        v1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">v2</span><span class="token punctuation">(</span>v1<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 将v1元素拷贝给v2</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">v3</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 指定vector大小并填充指定元素</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">v4</span><span class="token punctuation">(</span>v3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 拷贝构造函数</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="赋值操作-1"><a href="#赋值操作-1" class="headerlink" title="赋值操作"></a>赋值操作</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>vector&amp; operator=(const vector &amp;vec)</code>：重载等号操作符</li>
 <li><code>assign(beg, end)</code>：将<code>v[begin(), end()]</code>区间（<strong>左取右不取</strong>）中的数据赋值给vector容器本身。</li>
 <li><code>assign(n, elem)</code>：将n个元素<code>elem</code>拷贝赋值给vector容器本身。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-    vector&lt;<span class="hljs-type">int</span>&gt; v1; 
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
-		v1.<span class="hljs-built_in">push_back</span>(i);
-	}
-    vector&lt;<span class="hljs-type">int</span>&gt; v2;
-	v2 = v1; <span class="hljs-comment">// =运算符重载</span>
-    vector&lt;<span class="hljs-type">int</span>&gt; v3;
-	v3.<span class="hljs-built_in">assign</span>(v1.<span class="hljs-built_in">begin</span>(), v1.<span class="hljs-built_in">end</span>()); <span class="hljs-comment">// 区间赋值</span>
-	vector&lt;<span class="hljs-type">int</span>&gt; v4;
-	v4.<span class="hljs-built_in">assign</span>(<span class="hljs-number">10</span>, <span class="hljs-number">100</span>); <span class="hljs-comment">// 指定元素赋值</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="vector容量和大小"><a class="markdownIt-Anchor" href="#vector容量和大小"></a> vector容量和大小</h3>
-<p><strong>函数原型：</strong></p>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v1<span class="token punctuation">;</span> 
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        v1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v2<span class="token punctuation">;</span>
+    v2 <span class="token operator">=</span> v1<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// =运算符重载</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v3<span class="token punctuation">;</span>
+    v3<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>v1<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 区间赋值</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v4<span class="token punctuation">;</span>
+    v4<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 指定元素赋值</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="vector容量和大小"><a href="#vector容量和大小" class="headerlink" title="vector容量和大小"></a>vector容量和大小</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>empty() </code>：判断容器是否为空</li>
 <li><code>capacity()</code>：容器的容量</li>
@@ -623,8 +598,7 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>resize(int num)</code>：重新指定容器的长度为<code>num</code>，若容器变长，则以默认值填充新位置；如果容器变短，则末尾超出容器长度的元素被删除。</li>
 <li><code>resize(int num, elem)</code>：重新指定容器的长度为<code>num</code>，若容器变长，则以指定元素值填充新位置；如果容器变短，则末尾超出容器长度的元素被删除。</li>
 </ul>
-<h3 id="插入和删除"><a class="markdownIt-Anchor" href="#插入和删除"></a> 插入和删除</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="插入和删除"><a href="#插入和删除" class="headerlink" title="插入和删除"></a>插入和删除</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>push_back(ele)</code>：尾部插入指定元素<code>ele</code></li>
 <li><code>pop_back()</code>：删除最后一个元素</li>
@@ -634,117 +608,107 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>erase(const_iterator start, const_iterator end)</code>：删除迭代器从start到end之间的元素</li>
 <li><code>clear()</code>：删除容器中所有元素</li>
 </ul>
-<h3 id="数据存取"><a class="markdownIt-Anchor" href="#数据存取"></a> 数据存取</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>at(int idx) </code>：返回索引idx所指的数据</li>
 <li><code>operator[] </code>：运算符<code>[]</code>重载，返回索引idx所指的数据</li>
 <li><code>front() </code>：返回容器中第一个数据元素</li>
 <li><code>back()</code>：返回容器中最后一个数据元素</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
-<span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-    vector&lt;<span class="hljs-type">int</span>&gt; v1; 
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
-		v1.<span class="hljs-built_in">push_back</span>(i);
-	}
-    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i &lt; v1.<span class="hljs-built_in">size</span>(); i++){
-        std::cout &lt;&lt; v1[i] &lt;&lt; std::endl;
-        std::cout &lt;&lt; v1.<span class="hljs-built_in">at</span>(i) &lt;&lt; std::endl;
-    }
-	<span class="hljs-keyword">for</span> (vector&lt;<span class="hljs-type">int</span>&gt;::iterator it = v.<span class="hljs-built_in">begin</span>(); it != v.<span class="hljs-built_in">end</span>(); it++) {
-		std::cout &lt;&lt; *it &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
-	}    
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="互换容器和预留空间"><a class="markdownIt-Anchor" href="#互换容器和预留空间"></a> 互换容器和预留空间</h3>
-<p><strong>函数原型：</strong></p>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v1<span class="token punctuation">;</span> 
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        v1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> v1<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v1<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>iterator it <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> v<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>it <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="互换容器和预留空间"><a href="#互换容器和预留空间" class="headerlink" title="互换容器和预留空间"></a>互换容器和预留空间</h3><p><strong>函数原型：</strong></p>
 <ul>
-<li>
-<p><code>swap(vec)</code>：实现两个容器内元素进行互换，将vec与本身的元素进行互换。</p>
+<li><p><code>swap(vec)</code>：实现两个容器内元素进行互换，将vec与本身的元素进行互换。</p>
 </li>
-<li>
-<p><code>reserve(int len)</code>：减少vector在动态扩展容量时的扩展次数，该方法可以给容器预留<code>len</code>个元素长度，预留位置不初始化，元素不可访问。</p>
+<li><p><code>reserve(int len)</code>：减少vector在动态扩展容量时的扩展次数，该方法可以给容器预留<code>len</code>个元素长度，预留位置不初始化，元素不可访问。</p>
 </li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
-<span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	std::vector&lt;<span class="hljs-type">int</span>&gt; v;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">;</span>
 
-	v.<span class="hljs-built_in">reserve</span>(<span class="hljs-number">100000</span>);<span class="hljs-comment">//预留空间</span>
+    v<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//预留空间</span>
 
-	<span class="hljs-type">int</span> num = <span class="hljs-number">0</span>;
-	<span class="hljs-type">int</span>* p = <span class="hljs-literal">NULL</span>;
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; i++) {
-		v.<span class="hljs-built_in">push_back</span>(i);
-		<span class="hljs-keyword">if</span> (p != &amp;v[<span class="hljs-number">0</span>]) {
-			p = &amp;v[<span class="hljs-number">0</span>];
-			num++;
-		}
-	}
-	std::cout &lt;&lt; <span class="hljs-string">&quot;num:&quot;</span> &lt;&lt; num &lt;&lt; std::endl; <span class="hljs-comment">// num:1</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h2 id="deque容器"><a class="markdownIt-Anchor" href="#deque容器"></a> deque容器</h2>
-<h3 id="deque容器初识"><a class="markdownIt-Anchor" href="#deque容器初识"></a> deque容器初识</h3>
-<p>deque与vector很相似，deque被称为双端数组，可以对头端进行插入删除操作。</p>
+    <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token operator">&amp;</span>v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            p <span class="token operator">=</span> <span class="token operator">&amp;</span>v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            num<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"num:"</span> <span class="token operator">&lt;&lt;</span> num <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// num:1</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="deque容器"><a href="#deque容器" class="headerlink" title="deque容器"></a>deque容器</h2><h3 id="deque容器初识"><a href="#deque容器初识" class="headerlink" title="deque容器初识"></a>deque容器初识</h3><p>deque与vector很相似，deque被称为双端数组，可以对头端进行插入删除操作。</p>
 <p><strong>deque与vector区别：</strong></p>
 <ul>
 <li>vector对于头部的插入删除效率低，数据量越大，效率越低</li>
 <li>deque相对而言，对头部的插入删除速度比vector快</li>
 <li>vector访问元素时的速度会比deque快，这和两者内部实现有关</li>
 </ul>
-<p><img src="/images/deque.jpg" alt></p>
+<p><img src="/images/deque.jpg"></p>
 <p>deque内部工作原理：deque内部有个<strong>中控器</strong>，维护每段缓冲区中的内容，缓冲区中存放真实数据；中控器维护的是每个缓冲区的地址，使得使用deque时像一片连续的内存空间。</p>
 <p>deque容器的迭代器也是支持随机访问的。</p>
-<p><img src="/images/deque%E4%B8%AD%E6%8E%A7%E5%99%A8.jpg" alt></p>
-<h3 id="deque的构造函数"><a class="markdownIt-Anchor" href="#deque的构造函数"></a> deque的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+<p><img src="/images/deque%E4%B8%AD%E6%8E%A7%E5%99%A8.jpg"></p>
+<h3 id="deque的构造函数"><a href="#deque的构造函数" class="headerlink" title="deque的构造函数"></a>deque的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>deque&lt;T&gt; deq</code>：默认构造函数，创建一个空的deque容器。</li>
 <li><code>deque(beg, end)</code>：构造函数将<code>[beg, end)</code>区间中的元素拷贝给deque本身。</li>
 <li><code>deque(n, elem)</code>：构造函数将n个元素elem拷贝给deque本身。</li>
 <li><code>deque(const deque&amp; deq)</code>：拷贝构造函数，使用一个<code>deq</code>初始化本身</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;deque&gt;</span></span>
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># <span class="token directive keyword">include</span> <span class="token string">&lt;deque></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-	deque&lt;<span class="hljs-type">int</span>&gt; d1; <span class="hljs-comment">//无参构造函数</span>
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)
-	{
-		d1.<span class="hljs-built_in">push_back</span>(i);
-	}
-	<span class="hljs-function">deque&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">d2</span><span class="hljs-params">(d1.begin(),d1.end())</span></span>;
+    deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> d1<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//无参构造函数</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        d1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">d2</span><span class="token punctuation">(</span>d1<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>d1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-function">deque&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">d3</span><span class="hljs-params">(<span class="hljs-number">10</span>,<span class="hljs-number">100</span>)</span></span>;
+    deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">d3</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-function">deque&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">d4</span><span class="hljs-params">(d3)</span></span>;
-}
-</code></pre>
-<h3 id="赋值操作-3"><a class="markdownIt-Anchor" href="#赋值操作-3"></a> 赋值操作</h3>
-<p>赋值操作和vector相同</p>
+    deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">d4</span><span class="token punctuation">(</span>d3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="赋值操作-2"><a href="#赋值操作-2" class="headerlink" title="赋值操作"></a>赋值操作</h3><p>赋值操作和vector相同</p>
 <p><strong>函数原型：</strong></p>
 <ul>
 <li><code>deque&amp; operator=(const deque &amp;deq)</code>：重载等号操作符</li>
 <li><code>assign(beg, end)</code>：将<code>[beg, end)</code>区间中的数据拷贝赋值给本身。</li>
 <li><code>assign(n, elem)</code>：将n个元素elem拷贝赋值给deque本身。</li>
 </ul>
-<h3 id="deque容量和大小"><a class="markdownIt-Anchor" href="#deque容量和大小"></a> deque容量和大小</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="deque容量和大小"><a href="#deque容量和大小" class="headerlink" title="deque容量和大小"></a>deque容量和大小</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>deque.empty()</code>：判断容器是否为空</li>
 <li><code>deque.size()</code>：返回容器中元素的个数</li>
 <li><code>deque.resize(num)</code>：重新指定容器的长度为num，若容器变长，则以默认值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除。</li>
 <li><code>deque.resize(num, elem)</code>：重新指定容器的长度为num，若容器变长，则以elem值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除。</li>
 </ul>
-<h3 id="插入和删除-2"><a class="markdownIt-Anchor" href="#插入和删除-2"></a> 插入和删除</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="插入和删除-1"><a href="#插入和删除-1" class="headerlink" title="插入和删除"></a>插入和删除</h3><p><strong>函数原型：</strong></p>
 <p>两端插入删除操作：</p>
 <ul>
 <li><code>push_back(elem)</code>：在容器尾部添加一个数据</li>
@@ -761,8 +725,7 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>erase(beg,end)</code>：删除<code>[beg,end)</code>区间的数据，返回下一个数据的位置。</li>
 <li><code>erase(pos)</code>：删除pos位置的数据，返回下一个数据的位置。</li>
 </ul>
-<h3 id="数据存取-2"><a class="markdownIt-Anchor" href="#数据存取-2"></a> 数据存取</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="数据存取-1"><a href="#数据存取-1" class="headerlink" title="数据存取"></a>数据存取</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>at(int idx)</code>：返回索引<code>idx</code>所指的数据</li>
 <li><code>operator[]</code>：运算符重载，返回索引<code>idx</code>所指的数据</li>
@@ -770,163 +733,148 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>back()</code>：返回容器中最后一个数据元素</li>
 <li><code>deque&lt;T&gt;::iterator</code>：迭代器</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;deque&gt;</span></span>
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;deque></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 
-	deque&lt;<span class="hljs-type">int</span>&gt; d;
-	d.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">10</span>);
-	d.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">20</span>);
-	d.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">100</span>);
-	d.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">200</span>);
+    deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> d<span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_front</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_front</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; d.<span class="hljs-built_in">size</span>(); i++) {
-		cout &lt;&lt; d[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
-	}
-	cout &lt;&lt; endl;
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> d<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> d<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; d.<span class="hljs-built_in">size</span>(); i++) {
-		cout &lt;&lt; d.<span class="hljs-built_in">at</span>(i) &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
-	}
-	cout &lt;&lt; endl;
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> d<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> d<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-	cout &lt;&lt; <span class="hljs-string">&quot;front:&quot;</span> &lt;&lt; d.<span class="hljs-built_in">front</span>() &lt;&lt; endl;
-	cout &lt;&lt; <span class="hljs-string">&quot;back:&quot;</span> &lt;&lt; d.<span class="hljs-built_in">back</span>() &lt;&lt; endl;
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"front:"</span> <span class="token operator">&lt;&lt;</span> d<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"back:"</span> <span class="token operator">&lt;&lt;</span> d<span class="token punctuation">.</span><span class="token function">back</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
     
-	<span class="hljs-keyword">for</span> (deque&lt;<span class="hljs-type">int</span>&gt;::const_iterator it = d.<span class="hljs-built_in">begin</span>(); it != d.<span class="hljs-built_in">end</span>(); it++) {
-		cout &lt;&lt; *it &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
-	}
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h3>
-<p>利用算法实现对deque容器进行排序。</p>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>const_iterator it <span class="token operator">=</span> d<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> d<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>it <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>利用算法实现对deque容器进行排序。</p>
 <p><strong>算法：</strong></p>
 <ul>
 <li><code>sort(iterator beg, iterator end)</code>：对beg和end区间内的元素进行排序，对容器进行原地操作。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;deque&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;deque></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 
-	deque&lt;<span class="hljs-type">int</span>&gt; d;
-	d.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">10</span>);
-	d.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">20</span>);
-	d.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">100</span>);
-	d.<span class="hljs-built_in">push_front</span>(<span class="hljs-number">200</span>);
+    deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> d<span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_front</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">push_front</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-built_in">sort</span>(d.<span class="hljs-built_in">begin</span>(), d.<span class="hljs-built_in">end</span>());
-}
-</code></pre>
-<h2 id="stack容器"><a class="markdownIt-Anchor" href="#stack容器"></a> stack容器</h2>
-<h3 id="stack容器初识"><a class="markdownIt-Anchor" href="#stack容器初识"></a> stack容器初识</h3>
-<p>stack（栈）是一种<strong>先进后出</strong>(First In Last Out, FILO)的数据结构，它只有一个出口。栈中只有顶端的元素才可以被外界使用，因此<strong>栈不允许有遍历行为</strong>：栈中进入数据称为 — <strong>入栈</strong> <code>push</code>；栈中弹出数据称为 — <strong>出栈</strong> <code>pop</code>。</p>
-<p><img src="/images/stack.jpg" alt></p>
-<h3 id="stack的构造函数"><a class="markdownIt-Anchor" href="#stack的构造函数"></a> stack的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+    <span class="token function">sort</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="stack容器"><a href="#stack容器" class="headerlink" title="stack容器"></a>stack容器</h2><h3 id="stack容器初识"><a href="#stack容器初识" class="headerlink" title="stack容器初识"></a>stack容器初识</h3><p>stack（栈）是一种<strong>先进后出</strong>(First In Last Out, FILO)的数据结构，它只有一个出口。栈中只有顶端的元素才可以被外界使用，因此<strong>栈不允许有遍历行为</strong>：栈中进入数据称为 — <strong>入栈</strong> <code>push</code>；栈中弹出数据称为 — <strong>出栈</strong> <code>pop</code>。</p>
+<p><img src="/images/stack.jpg"></p>
+<h3 id="stack的构造函数"><a href="#stack的构造函数" class="headerlink" title="stack的构造函数"></a>stack的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>stack&lt;T&gt; stk</code>：stack采用模板类实现， stack对象的默认构造形式</li>
 <li><code>stack(const stack&amp; stk)</code>：拷贝构造函数</li>
 </ul>
-<h3 id="赋值操作-4"><a class="markdownIt-Anchor" href="#赋值操作-4"></a> 赋值操作</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="赋值操作-3"><a href="#赋值操作-3" class="headerlink" title="赋值操作"></a>赋值操作</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>stack&amp; operator=(const stack &amp;stk)</code>：重载等号<code>=</code>操作符</li>
 </ul>
-<h3 id="大小操作"><a class="markdownIt-Anchor" href="#大小操作"></a> 大小操作</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="大小操作"><a href="#大小操作" class="headerlink" title="大小操作"></a>大小操作</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>empty()</code>：判断堆栈是否为空</li>
 <li><code>size()</code>：返回栈的大小</li>
 </ul>
-<h3 id="数据存取-3"><a class="markdownIt-Anchor" href="#数据存取-3"></a> 数据存取</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="数据存取-2"><a href="#数据存取-2" class="headerlink" title="数据存取"></a>数据存取</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>push(elem)</code>：向栈顶添加元素</li>
 <li><code>pop()</code>：从栈顶移除第一个元素</li>
 <li><code>top()</code>：返回栈顶元素</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stack></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	<span class="hljs-comment">//创建栈容器 栈容器必须符合先进后出</span>
-	stack&lt;<span class="hljs-type">int</span>&gt; s;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//创建栈容器 栈容器必须符合先进后出</span>
+    stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//向栈中添加元素</span>
-	s.<span class="hljs-built_in">push</span>(<span class="hljs-number">10</span>);
-	s.<span class="hljs-built_in">push</span>(<span class="hljs-number">20</span>);
-	s.<span class="hljs-built_in">push</span>(<span class="hljs-number">30</span>);
+    <span class="token comment" spellcheck="true">//向栈中添加元素</span>
+    s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-	cout &lt;&lt; <span class="hljs-string">&quot;栈的大小为：&quot;</span> &lt;&lt; s.<span class="hljs-built_in">size</span>() &lt;&lt; endl;
-	<span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>()) {
-		<span class="hljs-comment">//输出栈顶元素</span>
-		cout &lt;&lt; <span class="hljs-string">&quot;栈顶元素为： &quot;</span> &lt;&lt; s.<span class="hljs-built_in">top</span>() &lt;&lt; endl;
-		<span class="hljs-comment">//弹出栈顶元素</span>
-		s.<span class="hljs-built_in">pop</span>();
-	}
-	cout &lt;&lt; <span class="hljs-string">&quot;栈的大小为：&quot;</span> &lt;&lt; s.<span class="hljs-built_in">size</span>() &lt;&lt; endl;
-}
-</code></pre>
-<h2 id="queue容器"><a class="markdownIt-Anchor" href="#queue容器"></a> queue容器</h2>
-<h3 id="queue容器初识"><a class="markdownIt-Anchor" href="#queue容器初识"></a> queue容器初识</h3>
-<p>queue（队列）是一种<strong>先进先出</strong>(First In First Out, FIFO)的数据结构，它有两个出口。队列容器允许从一端新增元素，从另一端移除元素，队列中只有队头和队尾才可以被外界使用，因此<strong>队列不允许有遍历行为</strong>：队列中进数据称为 — <strong>入队</strong> <code>push</code>；队列中出数据称为 — <strong>出队</strong> <code>pop</code>。</p>
-<p><img src="/images/queue.jpg" alt></p>
-<h3 id="queue的构造函数"><a class="markdownIt-Anchor" href="#queue的构造函数"></a> queue的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"栈的大小为："</span> <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//输出栈顶元素</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"栈顶元素为： "</span> <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//弹出栈顶元素</span>
+        s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"栈的大小为："</span> <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="queue容器"><a href="#queue容器" class="headerlink" title="queue容器"></a>queue容器</h2><h3 id="queue容器初识"><a href="#queue容器初识" class="headerlink" title="queue容器初识"></a>queue容器初识</h3><p>queue（队列）是一种<strong>先进先出</strong>(First In First Out, FIFO)的数据结构，它有两个出口。队列容器允许从一端新增元素，从另一端移除元素，队列中只有队头和队尾才可以被外界使用，因此<strong>队列不允许有遍历行为</strong>：队列中进数据称为 — <strong>入队</strong> <code>push</code>；队列中出数据称为 — <strong>出队</strong> <code>pop</code>。</p>
+<p><img src="/images/queue.jpg"></p>
+<h3 id="queue的构造函数"><a href="#queue的构造函数" class="headerlink" title="queue的构造函数"></a>queue的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>queue&lt;T&gt; que</code>：queue采用模板类实现，queue对象的默认构造形式</li>
 <li><code>queue(const queue&amp; que)</code>：拷贝构造函数</li>
 </ul>
-<h3 id="赋值操作-5"><a class="markdownIt-Anchor" href="#赋值操作-5"></a> 赋值操作</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="赋值操作-4"><a href="#赋值操作-4" class="headerlink" title="赋值操作"></a>赋值操作</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>queue&amp; operator=(const queue &amp;que)</code>：重载等号<code>=</code>操作符</li>
 </ul>
-<h3 id="大小操作-2"><a class="markdownIt-Anchor" href="#大小操作-2"></a> 大小操作</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="大小操作-1"><a href="#大小操作-1" class="headerlink" title="大小操作"></a>大小操作</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>empty()</code>：判断队列是否为空</li>
 <li><code>size()</code>：返回队列的大小</li>
 </ul>
-<h3 id="数据存取-4"><a class="markdownIt-Anchor" href="#数据存取-4"></a> 数据存取</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="数据存取-3"><a href="#数据存取-3" class="headerlink" title="数据存取"></a>数据存取</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>push(elem)</code>：往队尾添加元素</li>
 <li><code>pop()</code>：从队头移除第一个元素</li>
 <li><code>back()</code>：返回队列最后一个元素</li>
 <li><code>front()</code>：返回队列第一个元素</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-	<span class="hljs-comment">//创建队列</span>
-	queue&lt;<span class="hljs-type">int</span>&gt; q;
+    <span class="token comment" spellcheck="true">//创建队列</span>
+    queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//向队列中添加元素，入队操作</span>
-	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">10</span>);
-	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">20</span>);
-	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">30</span>);
-	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">40</span>);
+    <span class="token comment" spellcheck="true">//向队列中添加元素，入队操作</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    cout &lt;&lt; <span class="hljs-string">&quot;队列大小为：&quot;</span> &lt;&lt; q.<span class="hljs-built_in">size</span>() &lt;&lt; endl;
-	<span class="hljs-comment">//队列不提供迭代器，更不支持随机访问</span>
-	<span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) {
-		<span class="hljs-comment">//输出队头元素</span>
-		cout &lt;&lt; <span class="hljs-string">&quot;队头元素&quot;</span> &lt;&lt; q.<span class="hljs-built_in">front</span>() &lt;&lt; endl;
-		cout &lt;&lt; <span class="hljs-string">&quot;队尾元素&quot;</span> &lt;&lt; q.<span class="hljs-built_in">back</span>() &lt;&lt; endl;
-		<span class="hljs-comment">//弹出队头元素</span>
-		q.<span class="hljs-built_in">pop</span>();
-	}
-	cout &lt;&lt; <span class="hljs-string">&quot;队列大小为：&quot;</span> &lt;&lt; q.<span class="hljs-built_in">size</span>() &lt;&lt; endl;
-}
-</code></pre>
-<h2 id="list容器"><a class="markdownIt-Anchor" href="#list容器"></a> list容器</h2>
-<h3 id="list容器初识"><a class="markdownIt-Anchor" href="#list容器初识"></a> list容器初识</h3>
-<p>list是一种物理存储单元上非连续的存储结构，其本质是一种数据结构 链表，数据元素的逻辑顺序是通过链表中的指针链接实现的。</p>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"队列大小为："</span> <span class="token operator">&lt;&lt;</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//队列不提供迭代器，更不支持随机访问</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//输出队头元素</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"队头元素"</span> <span class="token operator">&lt;&lt;</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"队尾元素"</span> <span class="token operator">&lt;&lt;</span> q<span class="token punctuation">.</span><span class="token function">back</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//弹出队头元素</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"队列大小为："</span> <span class="token operator">&lt;&lt;</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="list容器"><a href="#list容器" class="headerlink" title="list容器"></a>list容器</h2><h3 id="list容器初识"><a href="#list容器初识" class="headerlink" title="list容器初识"></a>list容器初识</h3><p>list是一种物理存储单元上非连续的存储结构，其本质是一种数据结构 链表，数据元素的逻辑顺序是通过链表中的指针链接实现的。</p>
 <p>链表的组成：链表由一系列<strong>结点</strong>组成，结点的组成一是存储数据元素的<strong>数据域</strong>，另一个是存储下一个结点地址的<strong>指针域</strong></p>
 <p>STL中的链表是一个双向循环链表</p>
-<p><img src="/images/list.jpg" alt></p>
+<p><img src="/images/list.jpg"></p>
 <p>由于链表的存储方式并不是连续的内存空间，因此链表list中的迭代器只支持前移和后移，属于<strong>双向迭代器</strong>，不支持随机访问。</p>
 <p>list的优点：</p>
 <ul>
@@ -938,56 +886,48 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li>链表灵活，但是空间(指针域) 和 时间（遍历）额外耗费较大</li>
 </ul>
 <p>List有一个重要的性质，插入操作和删除操作都不会造成原有list迭代器的失效，这在vector是不成立的。</p>
-<h3 id="list的构造函数"><a class="markdownIt-Anchor" href="#list的构造函数"></a> list的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="list的构造函数"><a href="#list的构造函数" class="headerlink" title="list的构造函数"></a>list的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>list&lt;T&gt; lst</code>：list采用采用模板类实现，对象的默认构造形式。</li>
 <li><code>list(beg,end)</code>：构造函数将<code>[beg, end)</code>区间中的元素拷贝给list容器本身。</li>
 <li><code>list(n,elem)</code>：构造函数将<code>n</code>个元素elem拷贝给本身。</li>
 <li><code>list(const list&amp; lst)</code>：拷贝构造函数。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;list&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;list></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	list&lt;<span class="hljs-type">int</span>&gt; L1; <span class="hljs-comment">//无参构造</span>
-	L1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">10</span>);
-	L1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">20</span>);
-	L1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">30</span>);
-	L1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">40</span>);
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> L1<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//无参构造</span>
+    L1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-function">list&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">L2</span><span class="hljs-params">(L1.begin(),L1.end())</span></span>; <span class="hljs-comment">// 将L1元素拷贝并构造L2</span>
+    list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">L2</span><span class="token punctuation">(</span>L1<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>L1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 将L1元素拷贝并构造L2</span>
 
-	<span class="hljs-function">list&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">L3</span><span class="hljs-params">(L2)</span></span>; <span class="hljs-comment">// 拷贝构造</span>
+    list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">L3</span><span class="token punctuation">(</span>L2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 拷贝构造</span>
 
-	list&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">L4</span>(<span class="hljs-number">10</span>, <span class="hljs-number">1000</span>); <span class="hljs-comment">// 指定大小和初始值构造</span>
-}
-</code></pre>
-<h3 id="赋值和交换"><a class="markdownIt-Anchor" href="#赋值和交换"></a> 赋值和交换</h3>
-<p><strong>函数原型：</strong></p>
+    list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token function">L4</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 指定大小和初始值构造</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="赋值和交换"><a href="#赋值和交换" class="headerlink" title="赋值和交换"></a>赋值和交换</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>assign(beg, end)</code>：将<code>[beg, end)</code>区间中的数据拷贝赋值给本身。</li>
 <li><code>assign(n, elem)</code>：将n个指定元素elem拷贝赋值给本身。</li>
 <li><code>list&amp; operator=(const list&amp; lst)</code>：重载等号<code>=</code>操作符</li>
 <li><code>swap(lst)</code>：将lst与本身的元素互换。</li>
 </ul>
-<h3 id="大小和容量"><a class="markdownIt-Anchor" href="#大小和容量"></a> 大小和容量</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="大小和容量"><a href="#大小和容量" class="headerlink" title="大小和容量"></a>大小和容量</h3><p><strong>函数原型：</strong></p>
 <ul>
-<li>
-<p><code>size()</code>：返回容器中元素的个数</p>
+<li><p><code>size()</code>：返回容器中元素的个数</p>
 </li>
-<li>
-<p><code>empty()</code>：判断容器是否为空</p>
+<li><p><code>empty()</code>：判断容器是否为空</p>
 </li>
-<li>
-<p><code>resize(num)</code>：重新指定容器的长度为num，若容器变长，则以默认值填充新位置；如果容器变短，则末尾超出容器长度的元素被删除。</p>
+<li><p><code>resize(num)</code>：重新指定容器的长度为num，若容器变长，则以默认值填充新位置；如果容器变短，则末尾超出容器长度的元素被删除。</p>
 </li>
-<li>
-<p><code>resize(num, elem)</code>：重新指定容器的长度为num，若容器变长，则以elem值填充新位置；如果容器变短，则末尾超出容器长度的元素被删除。</p>
+<li><p><code>resize(num, elem)</code>：重新指定容器的长度为num，若容器变长，则以elem值填充新位置；如果容器变短，则末尾超出容器长度的元素被删除。</p>
 </li>
 </ul>
-<h3 id="插入和删除-3"><a class="markdownIt-Anchor" href="#插入和删除-3"></a> 插入和删除</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="插入和删除-2"><a href="#插入和删除-2" class="headerlink" title="插入和删除"></a>插入和删除</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>push_back(elem)</code>：在容器尾部加入一个元素</li>
 <li><code>pop_back()</code>：删除容器中最后一个元素</li>
@@ -1001,44 +941,40 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>erase(pos)</code>：删除pos位置的数据，返回下一个数据的位置。</li>
 <li><code>remove(elem)</code>：删除容器中所有与elem值匹配的元素。</li>
 </ul>
-<h3 id="数据存取-5"><a class="markdownIt-Anchor" href="#数据存取-5"></a> 数据存取</h3>
-<p>list容器中不可以通过<code>[]</code>或者<code>at()</code>方式访问数据。</p>
+<h3 id="数据存取-4"><a href="#数据存取-4" class="headerlink" title="数据存取"></a>数据存取</h3><p>list容器中不可以通过<code>[]</code>或者<code>at()</code>方式访问数据。</p>
 <p><strong>函数原型：</strong></p>
 <ul>
 <li><code>front()</code>：返回第一个元素。</li>
 <li><code>back()</code>：返回最后一个元素。</li>
 </ul>
-<h3 id="反转和排序"><a class="markdownIt-Anchor" href="#反转和排序"></a> 反转和排序</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="反转和排序"><a href="#反转和排序" class="headerlink" title="反转和排序"></a>反转和排序</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>reverse()</code>：反转链表</li>
 <li><code>sort()</code>：链表排序，默认的排序规则是从小到大</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;list&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;list></span></span>
 
-<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">myCompare</span><span class="hljs-params">(<span class="hljs-type">int</span> val1 , <span class="hljs-type">int</span> val2)</span></span>{
-	<span class="hljs-keyword">return</span> val1 &gt; val2;
-}
+<span class="token keyword">bool</span> <span class="token function">myCompare</span><span class="token punctuation">(</span><span class="token keyword">int</span> val1 <span class="token punctuation">,</span> <span class="token keyword">int</span> val2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> val1 <span class="token operator">></span> val2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
-</span>{
-	list&lt;<span class="hljs-type">int</span>&gt; L;
-	L.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">90</span>);
-	L.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">30</span>);
-	L.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">20</span>);
-	L.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">70</span>);
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> L<span class="token punctuation">;</span>
+    L<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">70</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//反转容器的元素</span>
-	L.<span class="hljs-built_in">reverse</span>();
+    <span class="token comment" spellcheck="true">//反转容器的元素</span>
+    L<span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//排序</span>
-	L.<span class="hljs-built_in">sort</span>(); <span class="hljs-comment">//默认的排序规则 从小到大</span>
-	L.<span class="hljs-built_in">sort</span>(myCompare); <span class="hljs-comment">//指定规则，从大到小</span>
-}
-</code></pre>
-<h2 id="map容器"><a class="markdownIt-Anchor" href="#map容器"></a> map容器</h2>
-<h3 id="map容器初识"><a class="markdownIt-Anchor" href="#map容器初识"></a> map容器初识</h3>
-<p><strong>简介：</strong></p>
+    <span class="token comment" spellcheck="true">//排序</span>
+    L<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//默认的排序规则 从小到大</span>
+    L<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>myCompare<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//指定规则，从大到小</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="map容器"><a href="#map容器" class="headerlink" title="map容器"></a>map容器</h2><h3 id="map容器初识"><a href="#map容器初识" class="headerlink" title="map容器初识"></a>map容器初识</h3><p><strong>简介：</strong></p>
 <ul>
 <li>map中所有元素都是pair。</li>
 <li>pair中第一个元素为key（键值），起到索引作用，第二个元素为value（实值）。</li>
@@ -1048,55 +984,47 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <ul>
 <li>可以根据key值快速找到value值</li>
 </ul>
-<p>map/multimap属于<strong>关联式容器</strong>，底层结构是用二叉树实现。map和multimap<strong>区别</strong>：</p>
+<p>map&#x2F;multimap属于<strong>关联式容器</strong>，底层结构是用二叉树实现。map和multimap<strong>区别</strong>：</p>
 <ul>
 <li>map不允许容器中有重复key值元素</li>
 <li>multimap允许容器中有重复key值元素</li>
 </ul>
-<h3 id="map的构造函数"><a class="markdownIt-Anchor" href="#map的构造函数"></a> map的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="map的构造函数"><a href="#map的构造函数" class="headerlink" title="map的构造函数"></a>map的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>map&lt;T1, T2&gt; mp</code>：map默认构造函数。</li>
 <li><code>map(const map &amp;mp)</code>：拷贝构造函数。</li>
 </ul>
-<h3 id="赋值-大小和交换"><a class="markdownIt-Anchor" href="#赋值-大小和交换"></a> 赋值、大小和交换</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="赋值、大小和交换"><a href="#赋值、大小和交换" class="headerlink" title="赋值、大小和交换"></a>赋值、大小和交换</h3><p><strong>函数原型：</strong></p>
 <ul>
-<li>
-<p><code>map&amp; operator=(const map &amp;mp)</code>：重载等号<code>=</code>操作符。</p>
+<li><p><code>map&amp; operator=(const map &amp;mp)</code>：重载等号<code>=</code>操作符。</p>
 </li>
-<li>
-<p><code>size()</code>：返回容器中元素的数目</p>
+<li><p><code>size()</code>：返回容器中元素的数目</p>
 </li>
-<li>
-<p><code>empty()</code>：判断容器是否为空</p>
+<li><p><code>empty()</code>：判断容器是否为空</p>
 </li>
-<li>
-<p><code>swap(st)</code>：交换两个集合容器</p>
+<li><p><code>swap(st)</code>：交换两个集合容器</p>
 </li>
 </ul>
-<h3 id="pair对组创建"><a class="markdownIt-Anchor" href="#pair对组创建"></a> pair对组创建</h3>
-<p>成对出现的数据，利用对组可以一次性返回两个数据。</p>
+<h3 id="pair对组创建"><a href="#pair对组创建" class="headerlink" title="pair对组创建"></a>pair对组创建</h3><p>成对出现的数据，利用对组可以一次性返回两个数据。</p>
 <p><strong>两种创建方式：</strong></p>
 <ul>
 <li><code>pair&lt;T, T&gt; p ( value1, value2 );</code></li>
 <li><code>pair&lt;T, T&gt; p = make_pair( value1, value2 );</code></li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
 
-<span class="hljs-comment">//对组创建</span>
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	<span class="hljs-function">pair&lt;string, <span class="hljs-type">int</span>&gt; <span class="hljs-title">p</span><span class="hljs-params">(string(<span class="hljs-string">&quot;Tom&quot;</span>), <span class="hljs-number">20</span>)</span></span>;
-	cout &lt;&lt; <span class="hljs-string">&quot;姓名： &quot;</span> &lt;&lt;  p.first &lt;&lt; <span class="hljs-string">&quot; 年龄： &quot;</span> &lt;&lt; p.second &lt;&lt; endl;
+<span class="token comment" spellcheck="true">//对组创建</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token function">p</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token string">"Tom"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"姓名： "</span> <span class="token operator">&lt;&lt;</span>  p<span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" 年龄： "</span> <span class="token operator">&lt;&lt;</span> p<span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-	pair&lt;string, <span class="hljs-type">int</span>&gt; p2 = <span class="hljs-built_in">make_pair</span>(<span class="hljs-string">&quot;Jerry&quot;</span>, <span class="hljs-number">10</span>);
-	cout &lt;&lt; <span class="hljs-string">&quot;姓名： &quot;</span> &lt;&lt; p2.first &lt;&lt; <span class="hljs-string">&quot; 年龄： &quot;</span> &lt;&lt; p2.second &lt;&lt; endl;
+    pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> p2 <span class="token operator">=</span> <span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token string">"Jerry"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"姓名： "</span> <span class="token operator">&lt;&lt;</span> p2<span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" 年龄： "</span> <span class="token operator">&lt;&lt;</span> p2<span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
     
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="插入和删除-4"><a class="markdownIt-Anchor" href="#插入和删除-4"></a> 插入和删除</h3>
-<p><strong>函数原型：</strong></p>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="插入和删除-3"><a href="#插入和删除-3" class="headerlink" title="插入和删除"></a>插入和删除</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>insert(elem)</code>：在容器中插入元素。</li>
 <li><code>clear()</code>：清除所有元素</li>
@@ -1104,111 +1032,105 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>erase(beg, end)</code>：删除区间<code>[beg,end)</code>的所有元素 ，返回下一个元素的迭代器。</li>
 <li><code>erase(key)</code>：删除容器中值为key的元素。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span>
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	<span class="hljs-comment">//插入</span>
-	map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; m;
-	<span class="hljs-comment">//第一种插入方式</span>
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">pair</span>&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));
-	<span class="hljs-comment">//第二种插入方式</span>
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>));
-	<span class="hljs-comment">//第三种插入方式</span>
-	m.<span class="hljs-built_in">insert</span>(map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;::<span class="hljs-built_in">value_type</span>(<span class="hljs-number">3</span>, <span class="hljs-number">30</span>));
-	<span class="hljs-comment">//第四种插入方式</span>
-	m[<span class="hljs-number">4</span>] = <span class="hljs-number">40</span>; 
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//插入</span>
+    map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> m<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//第一种插入方式</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//第二种插入方式</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//第三种插入方式</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span><span class="token function">value_type</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//第四种插入方式</span>
+    m<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">;</span> 
 
-	<span class="hljs-comment">//删除</span>
-	m.<span class="hljs-built_in">erase</span>(m.<span class="hljs-built_in">begin</span>());
-	m.<span class="hljs-built_in">erase</span>(<span class="hljs-number">3</span>);
+    <span class="token comment" spellcheck="true">//删除</span>
+    m<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//清空</span>
-	m.<span class="hljs-built_in">erase</span>(m.<span class="hljs-built_in">begin</span>(),m.<span class="hljs-built_in">end</span>());
-	m.<span class="hljs-built_in">clear</span>();
+    <span class="token comment" spellcheck="true">//清空</span>
+    m<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>m<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="查找-统计和遍历"><a class="markdownIt-Anchor" href="#查找-统计和遍历"></a> 查找、统计和遍历</h3>
-<p><strong>函数原型：</strong></p>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查找、统计和遍历"><a href="#查找、统计和遍历" class="headerlink" title="查找、统计和遍历"></a>查找、统计和遍历</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>find(key)</code>：查找key是否存在，若存在，返回该键的元素的迭代器；若不存在，返回<code>map.end()</code>。</li>
 <li><code>count(key)</code>：统计key的元素个数</li>
 <li><code>map&lt;T, T&gt;::iterator</code>：迭代器。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printMap</span><span class="hljs-params">(map&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&amp;m)</span>
-</span>{
-    <span class="hljs-comment">// 遍历</span>
-	<span class="hljs-keyword">for</span> (map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;::iterator it = m.<span class="hljs-built_in">begin</span>(); it != m.<span class="hljs-built_in">end</span>(); it++)
-	{
-		cout &lt;&lt; <span class="hljs-string">&quot;key = &quot;</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="hljs-string">&quot; value = &quot;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;
-	}
-	cout &lt;&lt; endl;
-}
+<span class="token keyword">void</span> <span class="token function">printMap</span><span class="token punctuation">(</span>map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span>m<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 遍历</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>iterator it <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> m<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"key = "</span> <span class="token operator">&lt;&lt;</span> it<span class="token operator">-</span><span class="token operator">></span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" value = "</span> <span class="token operator">&lt;&lt;</span> it<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; m;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> m<span class="token punctuation">;</span>
 
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">pair</span>&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">pair</span>&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>));
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">pair</span>&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;(<span class="hljs-number">3</span>, <span class="hljs-number">30</span>));    
-	m[<span class="hljs-number">4</span>] = <span class="hljs-number">40</span>; 
-	<span class="hljs-built_in">printMap</span>(m);
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    m<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">;</span> 
+    <span class="token function">printMap</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
  
-    <span class="hljs-comment">//查找</span>
-	map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;::iterator pos = m.<span class="hljs-built_in">find</span>(<span class="hljs-number">3</span>);
-	<span class="hljs-keyword">if</span> (pos != m.<span class="hljs-built_in">end</span>()){
-		cout &lt;&lt; <span class="hljs-string">&quot;找到了元素 key = &quot;</span> &lt;&lt; (*pos).first &lt;&lt; <span class="hljs-string">&quot; value = &quot;</span> &lt;&lt; (*pos).second &lt;&lt; endl;
-	}
-	<span class="hljs-keyword">else</span>{
-		cout &lt;&lt; <span class="hljs-string">&quot;未找到元素&quot;</span> &lt;&lt; endl;
-	}
+    <span class="token comment" spellcheck="true">//查找</span>
+    map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>iterator pos <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">!=</span> m<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"找到了元素 key = "</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token operator">*</span>pos<span class="token punctuation">)</span><span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" value = "</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token operator">*</span>pos<span class="token punctuation">)</span><span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"未找到元素"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-	<span class="hljs-comment">//统计</span>
-	<span class="hljs-type">int</span> num = m.<span class="hljs-built_in">count</span>(<span class="hljs-number">3</span>);
-	cout &lt;&lt; <span class="hljs-string">&quot;num = &quot;</span> &lt;&lt; num &lt;&lt; endl;    
+    <span class="token comment" spellcheck="true">//统计</span>
+    <span class="token keyword">int</span> num <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"num = "</span> <span class="token operator">&lt;&lt;</span> num <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    
     
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="map排序"><a class="markdownIt-Anchor" href="#map排序"></a> map排序</h3>
-<p>map容器默认排序规则为：按照key值进行<strong>从小到大</strong>排序，可以自定义改变排序规则。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="map排序"><a href="#map排序" class="headerlink" title="map排序"></a>map排序</h3><p>map容器默认排序规则为：按照key值进行<strong>从小到大</strong>排序，可以自定义改变排序规则。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCompare</span> {
-<span class="hljs-keyword">public</span>:
-	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">int</span> v1, <span class="hljs-type">int</span> v2)</span> </span>{
-        <span class="hljs-comment">// 降序：从大到小</span>
-		<span class="hljs-keyword">return</span> v1 &gt; v2;
-	}
-};
+<span class="token keyword">class</span> <span class="token class-name">MyCompare</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> v1<span class="token punctuation">,</span> <span class="token keyword">int</span> v2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 降序：从大到小</span>
+        <span class="token keyword">return</span> v1 <span class="token operator">></span> v2<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> 
-</span>{
-	<span class="hljs-comment">//默认从小到大排序, 利用仿函数实现从大到小排序</span>
-	map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>, MyCompare&gt; m;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//默认从小到大排序, 利用仿函数实现从大到小排序</span>
+    map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">,</span> MyCompare<span class="token operator">></span> m<span class="token punctuation">;</span>
 
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>));
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-number">3</span>, <span class="hljs-number">30</span>));
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-number">4</span>, <span class="hljs-number">40</span>));
-	m.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-number">5</span>, <span class="hljs-number">50</span>));
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-keyword">for</span> (map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>, MyCompare&gt;::iterator it = m.<span class="hljs-built_in">begin</span>(); it != m.<span class="hljs-built_in">end</span>(); it++) {
-		cout &lt;&lt; <span class="hljs-string">&quot;key:&quot;</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="hljs-string">&quot; value:&quot;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;
-	}
-}
-</code></pre>
-<h2 id="set容器"><a class="markdownIt-Anchor" href="#set容器"></a> set容器</h2>
-<h3 id="set容器初识"><a class="markdownIt-Anchor" href="#set容器初识"></a> set容器初识</h3>
-<p><strong>简介：</strong></p>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">,</span> MyCompare<span class="token operator">></span><span class="token operator">::</span>iterator it <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> m<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"key:"</span> <span class="token operator">&lt;&lt;</span> it<span class="token operator">-</span><span class="token operator">></span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" value:"</span> <span class="token operator">&lt;&lt;</span> it<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="set容器"><a href="#set容器" class="headerlink" title="set容器"></a>set容器</h2><h3 id="set容器初识"><a href="#set容器初识" class="headerlink" title="set容器初识"></a>set容器初识</h3><p><strong>简介：</strong></p>
 <ul>
-<li>
-<p><strong>所有元素都会在插入时自动被排序。</strong></p>
+<li><p><strong>所有元素都会在插入时自动被排序。</strong></p>
 </li>
-<li>
-<p>set/multiset属于<strong>关联式容器</strong>，底层结构是用<strong>二叉树</strong>实现。</p>
+<li><p>set&#x2F;multiset属于<strong>关联式容器</strong>，底层结构是用<strong>二叉树</strong>实现。</p>
 </li>
 </ul>
 <p><strong>set和multiset区别</strong>：</p>
@@ -1216,30 +1138,23 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li>set不允许容器中有重复的元素</li>
 <li>multiset允许容器中有重复的元素</li>
 </ul>
-<h3 id="set的构造函数"><a class="markdownIt-Anchor" href="#set的构造函数"></a> set的构造函数</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="set的构造函数"><a href="#set的构造函数" class="headerlink" title="set的构造函数"></a>set的构造函数</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>set&lt;T&gt; st</code>：默认构造函数</li>
 <li><code>set(const set&amp; st)</code>：拷贝构造函数</li>
 </ul>
-<h3 id="赋值-大小和交换-2"><a class="markdownIt-Anchor" href="#赋值-大小和交换-2"></a> 赋值、大小和交换</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="赋值、大小和交换-1"><a href="#赋值、大小和交换-1" class="headerlink" title="赋值、大小和交换"></a>赋值、大小和交换</h3><p><strong>函数原型：</strong></p>
 <ul>
-<li>
-<p><code>set&amp; operator=(const set&amp; st)</code>：重载等号操作符</p>
+<li><p><code>set&amp; operator=(const set&amp; st)</code>：重载等号操作符</p>
 </li>
-<li>
-<p><code>size()</code>：返回容器中元素的数目</p>
+<li><p><code>size()</code>：返回容器中元素的数目</p>
 </li>
-<li>
-<p><code>empty()</code>：判断容器是否为空</p>
+<li><p><code>empty()</code>：判断容器是否为空</p>
 </li>
-<li>
-<p><code>swap(st)</code>：交换两个集合容器</p>
+<li><p><code>swap(st)</code>：交换两个集合容器</p>
 </li>
 </ul>
-<h3 id="插入和删除-5"><a class="markdownIt-Anchor" href="#插入和删除-5"></a> 插入和删除</h3>
-<p><strong>函数原型：</strong></p>
+<h3 id="插入和删除-4"><a href="#插入和删除-4" class="headerlink" title="插入和删除"></a>插入和删除</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>insert(elem)</code>：在容器中插入元素。</li>
 <li><code>clear()</code>：清除所有元素</li>
@@ -1247,96 +1162,94 @@ string是C++风格的字符串，本质上是一个类的形式。C风格的字�
 <li><code>erase(beg, end)</code>：删除区间<code>[beg,end)</code>的所有元素 ，返回下一个元素的迭代器。</li>
 <li><code>erase(elem)</code>：删除容器中值为elem的元素。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;set&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;set></span></span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	set&lt;<span class="hljs-type">int</span>&gt; s1;
-	<span class="hljs-comment">//插入</span>
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">10</span>);
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">30</span>);
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">20</span>);
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">40</span>);
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s1<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//插入</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//删除</span>
-	s1.<span class="hljs-built_in">erase</span>(s1.<span class="hljs-built_in">begin</span>());
-	s1.<span class="hljs-built_in">erase</span>(<span class="hljs-number">30</span>);
+    <span class="token comment" spellcheck="true">//删除</span>
+    s1<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//清空</span>
-	s1.<span class="hljs-built_in">erase</span>(s1.<span class="hljs-built_in">begin</span>(), s1.<span class="hljs-built_in">end</span>());
-	s1.<span class="hljs-built_in">clear</span>();
-	
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="查找-统计和遍历-2"><a class="markdownIt-Anchor" href="#查找-统计和遍历-2"></a> 查找、统计和遍历</h3>
-<p><strong>函数原型：</strong></p>
+    <span class="token comment" spellcheck="true">//清空</span>
+    s1<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> s1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查找、统计和遍历-1"><a href="#查找、统计和遍历-1" class="headerlink" title="查找、统计和遍历"></a>查找、统计和遍历</h3><p><strong>函数原型：</strong></p>
 <ul>
 <li><code>find(elem)</code>：查找元素elem是否存在，若存在，返回该键的元素的迭代器；若不存在，返回<code>set.end()</code>。</li>
 <li><code>count(elem)</code>：统计元素elem的元素个数。</li>
 <li><code>set&lt;T, T&gt;::iterator</code>：迭代器。</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;set&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;set></span></span>
 
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printSet</span><span class="hljs-params">(set&lt;<span class="hljs-type">int</span>&gt; &amp; s)</span>
-</span>{
-	<span class="hljs-keyword">for</span> (set&lt;<span class="hljs-type">int</span>&gt;::iterator it = s.<span class="hljs-built_in">begin</span>(); it != s.<span class="hljs-built_in">end</span>(); it++)
-	{
-		cout &lt;&lt; *it &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
-	}
-	cout &lt;&lt; endl;
-}
+<span class="token keyword">void</span> <span class="token function">printSet</span><span class="token punctuation">(</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span> s<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>iterator it <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> s<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>it <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	set&lt;<span class="hljs-type">int</span>&gt; s1;
-	<span class="hljs-comment">//插入</span>
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">10</span>);
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">30</span>);
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">20</span>);
-	s1.<span class="hljs-built_in">insert</span>(<span class="hljs-number">40</span>);
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s1<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//插入</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
-    <span class="hljs-built_in">printSet</span>(s1);
+    <span class="token function">printSet</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-comment">//查找</span>
-	set&lt;<span class="hljs-type">int</span>&gt;::iterator pos = s1.<span class="hljs-built_in">find</span>(<span class="hljs-number">30</span>);
-	<span class="hljs-keyword">if</span> (pos != s1.<span class="hljs-built_in">end</span>()){
-		cout &lt;&lt; <span class="hljs-string">&quot;找到了元素 ： &quot;</span> &lt;&lt; *pos &lt;&lt; endl;
-	}
-	<span class="hljs-keyword">else</span>{
-		cout &lt;&lt; <span class="hljs-string">&quot;未找到元素&quot;</span> &lt;&lt; endl;
-	}
+    <span class="token comment" spellcheck="true">//查找</span>
+    set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>iterator pos <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">!=</span> s1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"找到了元素 ： "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>pos <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"未找到元素"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-	<span class="hljs-comment">//统计</span>
-	<span class="hljs-type">int</span> num = s1.<span class="hljs-built_in">count</span>(<span class="hljs-number">30</span>);
-	cout &lt;&lt; <span class="hljs-string">&quot;num = &quot;</span> &lt;&lt; num &lt;&lt; endl;
-}
-</code></pre>
-<h3 id="set排序"><a class="markdownIt-Anchor" href="#set排序"></a> set排序</h3>
-<p>set容器默认排序规则为从小到大，可以自定义改变排序规则。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;set&gt;</span></span>
+    <span class="token comment" spellcheck="true">//统计</span>
+    <span class="token keyword">int</span> num <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"num = "</span> <span class="token operator">&lt;&lt;</span> num <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="set排序"><a href="#set排序" class="headerlink" title="set排序"></a>set排序</h3><p>set容器默认排序规则为从小到大，可以自定义改变排序规则。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;set></span></span>
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCompare</span> {
-<span class="hljs-keyword">public</span>:
-	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">int</span> v1, <span class="hljs-type">int</span> v2)</span> </span>{
-        <span class="hljs-comment">// 降序：从大到小</span>
-		<span class="hljs-keyword">return</span> v1 &gt; v2;
-	}
-};
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{  
+<span class="token keyword">class</span> <span class="token class-name">MyCompare</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> v1<span class="token punctuation">,</span> <span class="token keyword">int</span> v2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 降序：从大到小</span>
+        <span class="token keyword">return</span> v1 <span class="token operator">></span> v2<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
 
-	<span class="hljs-comment">//指定排序规则</span>
-	set&lt;<span class="hljs-type">int</span>,MyCompare&gt; s2;
-	s2.<span class="hljs-built_in">insert</span>(<span class="hljs-number">10</span>);
-	s2.<span class="hljs-built_in">insert</span>(<span class="hljs-number">40</span>);
-	s2.<span class="hljs-built_in">insert</span>(<span class="hljs-number">20</span>);
-	s2.<span class="hljs-built_in">insert</span>(<span class="hljs-number">30</span>);
-	s2.<span class="hljs-built_in">insert</span>(<span class="hljs-number">50</span>);
+    <span class="token comment" spellcheck="true">//指定排序规则</span>
+    set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span>MyCompare<span class="token operator">></span> s2<span class="token punctuation">;</span>
+    s2<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s2<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s2<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s2<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s2<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="hljs-keyword">for</span> (set&lt;<span class="hljs-type">int</span>, MyCompare&gt;::iterator it = s2.<span class="hljs-built_in">begin</span>(); it != s2.<span class="hljs-built_in">end</span>(); it++) {
-		cout &lt;&lt; *it &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
-	}
-	cout &lt;&lt; endl;
-}
-</code></pre>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> MyCompare<span class="token operator">></span><span class="token operator">::</span>iterator it <span class="token operator">=</span> s2<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> s2<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>it <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

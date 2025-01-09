@@ -5,10 +5,9 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="C++|C++中的static, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" C++中的static
-C++中的static有两种用法：一种是在类或结构体外部使用static关键字；第二种是在类或结构体内部使用static关键字。
+    <meta name="description" content="C++中的staticC++中的static有两种用法：一种是在类或结构体外部使用static关键字；第二种是在类或结构体内部使用static关键字。
 
-类或结构体外部使用：声明为static的符号，只是在编译单元内部进行链接，即只对定">
+类或结构体外部使用：声明为static的符号，只是在编译单元内部进行链接，即只对定义该">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -435,134 +434,128 @@ C++中的static有两种用法：一种是在类或结构体外部使用static�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="c中的static"><a class="markdownIt-Anchor" href="#c中的static"></a> C++中的static</h1>
-<p>C++中的static有两种用法：一种是在类或结构体<strong>外部</strong>使用static关键字；第二种是在类或结构体<strong>内部</strong>使用static关键字。</p>
+                <h1 id="C-中的static"><a href="#C-中的static" class="headerlink" title="C++中的static"></a>C++中的static</h1><p>C++中的static有两种用法：一种是在类或结构体<strong>外部</strong>使用static关键字；第二种是在类或结构体<strong>内部</strong>使用static关键字。</p>
 <ol>
 <li>类或结构体<strong>外部</strong>使用：声明为static的符号，只是在编译单元内部进行链接，即只对定义该符号的编译单元可见。</li>
 <li>类或结构体<strong>内部</strong>使用：声明为static的符号，将被该类的所有实例对象共享内存</li>
 </ol>
-<h2 id="外部使用的static"><a class="markdownIt-Anchor" href="#外部使用的static"></a> 外部使用的static</h2>
-<h3 id="问题起源"><a class="markdownIt-Anchor" href="#问题起源"></a> 问题起源</h3>
-<p>如果我们在main.cpp中定义一个变量<code>s_var</code>，同时在另一个a.cpp中定义同名变量（值得注意的是，这是一个全局声明的变量），如下所示：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-comment">// main.cpp</span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
-<span class="hljs-type">int</span> s_var = <span class="hljs-number">10</span>;
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	std::cout &lt;&lt; s_var &lt;&lt; std::endl;
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
+<h2 id="外部使用的static"><a href="#外部使用的static" class="headerlink" title="外部使用的static"></a>外部使用的static</h2><h3 id="问题起源"><a href="#问题起源" class="headerlink" title="问题起源"></a>问题起源</h3><p>如果我们在main.cpp中定义一个变量<code>s_var</code>，同时在另一个a.cpp中定义同名变量（值得注意的是，这是一个全局声明的变量），如下所示：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// main.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">int</span> s_var <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> s_var <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="hljs-comment">// a.cpp</span>
-<span class="hljs-type">int</span> s_var = <span class="hljs-number">10</span>;
-</code></pre>
+<span class="token comment" spellcheck="true">// a.cpp</span>
+<span class="token keyword">int</span> s_var <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此时编译并链接main.cpp和a.cpp，则会报一个链接错误：s_var已经在main.cpp中被定义了。编译器告诉我们不能有两个同名的全局变量，所以编译器报错了。</p>
-<h3 id="static全局使用"><a class="markdownIt-Anchor" href="#static全局使用"></a> static全局使用</h3>
-<p>但是如果我们在a.cpp中把<code>s_var</code>声明为static变量，则可以编译通过，程序输出为10 ，这意味着<code>s_var</code>变量只在a.cpp中进行链接，</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-comment">// a.cpp</span>
-<span class="hljs-type">static</span> <span class="hljs-type">int</span> s_var = <span class="hljs-number">5</span>;
-</code></pre>
+<h3 id="static全局使用"><a href="#static全局使用" class="headerlink" title="static全局使用"></a>static全局使用</h3><p>但是如果我们在a.cpp中把<code>s_var</code>声明为static变量，则可以编译通过，程序输出为10 ，这意味着<code>s_var</code>变量只在a.cpp中进行链接，</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// a.cpp</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> s_var <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>这种方式类似于在类中声明一个私有变量，其他所有翻译单元都不能看到<code>s_var</code>这个变量。这里以变量举例，实际上声明函数为static，也有相似的效果。</p>
 <p>总结：全局情况下，如果声明的变量或函数没有被static修饰，则链接器会跨编译单元进行链接，而static修饰的变量或函数则只会在被定义的编译单元内链接。</p>
-<h3 id="static局部使用"><a class="markdownIt-Anchor" href="#static局部使用"></a> static局部使用</h3>
-<p>静态局部变量允许我们声明一个变量，它的<strong>生命周期是整个程序的生命周期，但是其作用域被限制在局部范围内</strong>。</p>
+<h3 id="static局部使用"><a href="#static局部使用" class="headerlink" title="static局部使用"></a>static局部使用</h3><p>静态局部变量允许我们声明一个变量，它的<strong>生命周期是整个程序的生命周期，但是其作用域被限制在局部范围内</strong>。</p>
 <p>如下代码所示，在函数func内部定义了变量i，当第一次调用函数func()时，变量i会被初始化为0，后续函数调用时，则不会创建新的变量，而是直接使用。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span>{
-    <span class="hljs-type">static</span> <span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;
-    i++;
-    std::cout &lt;&lt; i &lt;&lt; std::endl;
-}
+<span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    i<span class="token operator">++</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	<span class="hljs-built_in">func</span>();<span class="hljs-comment">//输出 1</span>
-    <span class="hljs-built_in">func</span>();<span class="hljs-comment">//输出 2</span>
-    <span class="hljs-built_in">func</span>();<span class="hljs-comment">//输出 3</span>
-    <span class="hljs-built_in">func</span>();<span class="hljs-comment">//输出 4</span>
-    <span class="hljs-built_in">func</span>();<span class="hljs-comment">//输出 5</span>
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 1</span>
+    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 2</span>
+    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 3</span>
+    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 4</span>
+    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 5</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以通过静态局部变量这种方式，实现一个单例模式：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span>{
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-type">static</span> Singleton&amp; <span class="hljs-title">Get</span><span class="hljs-params">()</span></span>{
-        <span class="hljs-type">static</span> Singleton instance;
-        <span class="hljs-keyword">return</span> instance;
-    }
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Hello</span><span class="hljs-params">()</span></span>{}
-};
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Singleton</span><span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> Singleton<span class="token operator">&amp;</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">static</span> Singleton instance<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-    Singleton::<span class="hljs-built_in">Get</span>().<span class="hljs-built_in">Hello</span>();
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h2 id="类和结构体中的static"><a class="markdownIt-Anchor" href="#类和结构体中的static"></a> 类和结构体中的static</h2>
-<p>在类或结构体内声明为static的变量，将被该类的所有实例对象共享该变量，即该类的所有实例对象中，该变量只有一个，是内存共享的。类内声明为static的方法也是类似。</p>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Singleton<span class="token operator">::</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="类和结构体中的static"><a href="#类和结构体中的static" class="headerlink" title="类和结构体中的static"></a>类和结构体中的static</h2><p>在类或结构体内声明为static的变量，将被该类的所有实例对象共享该变量，即该类的所有实例对象中，该变量只有一个，是内存共享的。类内声明为static的方法也是类似。</p>
 <p>故通过类的实例对象引用static变量或方法是无意义的，可以通过类来引用，如下代码<code>Entity::var</code>或<code>Entity::func()</code>。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Entity</span>{
-    <span class="hljs-type">static</span> <span class="hljs-type">int</span> x,y;  
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Print</span><span class="hljs-params">()</span></span>{
-        std::cout &lt;&lt; x &lt;&lt; <span class="hljs-string">&quot;,&quot;</span> &lt;&lt; y &lt;&lt; std::endl;
-    }
-};
-<span class="hljs-type">int</span> Entity::x;
-<span class="hljs-type">int</span> Entity::y;
+<span class="token keyword">struct</span> Entity<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>  
+    <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> Entity<span class="token operator">::</span>x<span class="token punctuation">;</span>
+<span class="token keyword">int</span> Entity<span class="token operator">::</span>y<span class="token punctuation">;</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	Entity e;
-    e.x=<span class="hljs-number">2</span>; <span class="hljs-comment">//等价于Entity::x</span>
-    e.y=<span class="hljs-number">3</span>; <span class="hljs-comment">//等价于Entity::y</span>
-	Entity e1;
-    e1.x=<span class="hljs-number">5</span>;
-    e1.y=<span class="hljs-number">8</span>;   
-    e.<span class="hljs-built_in">Print</span>(); <span class="hljs-comment">//输出 5,8</span>
-    e1.<span class="hljs-built_in">Print</span>();<span class="hljs-comment">//输出 5,8</span>
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Entity e<span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//等价于Entity::x</span>
+    e<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//等价于Entity::y</span>
+    Entity e1<span class="token punctuation">;</span>
+    e1<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+    e1<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>   
+    e<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//输出 5,8</span>
+    e1<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出 5,8</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到，程序输出两次都是“5,8”，对应我们上面所述：类的<strong>所有实例对象共享静态变量（static修饰）</strong>，上面代码是将同一个静态变量x和y输出了两次。实例对象e将静态变量x和y设置为2和3，但是e1又将x和y设置为5和8，因此最终两次输出均为5和8。</p>
 <p>当类内的方法被static修饰，<strong>静态方法是不能访问非静态变量的</strong>，如下代码。这是因为静态方法没有类实例对象，这里涉及类的运行原理：类中每个非静态方法被调用时，会获得当前类的一个实例对象作为参数。因此静态方法没有实例对象作为参数，就找不到该对象的非静态变量的位置，自然无法访问。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Entity</span>{
-    <span class="hljs-type">int</span> x,y;  
-    <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">Print</span><span class="hljs-params">()</span></span>{
-        std::cout &lt;&lt; x &lt;&lt; <span class="hljs-string">&quot;,&quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="hljs-comment">// 编译报错</span>
-    }
-};
+<span class="token keyword">struct</span> Entity<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>  
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 编译报错</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-	Entity e;
-    e.x=<span class="hljs-number">2</span>; 
-    e.y=<span class="hljs-number">3</span>; 
-	Entity e1;
-    e1.x=<span class="hljs-number">5</span>;
-    e1.y=<span class="hljs-number">8</span>;   
-    Entity::<span class="hljs-built_in">Print</span>(); 
-    Entity::<span class="hljs-built_in">Print</span>();
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Entity e<span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> 
+    e<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span> 
+    Entity e1<span class="token punctuation">;</span>
+    e1<span class="token punctuation">.</span>x<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+    e1<span class="token punctuation">.</span>y<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>   
+    Entity<span class="token operator">::</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    Entity<span class="token operator">::</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>类内部的静态变量，通过这种方式可以实现一个单例模式：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span>{
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-type">static</span> Singleton* instance;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-type">static</span> Singleton&amp; <span class="hljs-title">Get</span><span class="hljs-params">()</span></span>{
-        <span class="hljs-keyword">return</span> *instance;
-    }
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Hello</span><span class="hljs-params">()</span></span>{}
-};
-Singleton* Singleton::instance = <span class="hljs-literal">nullptr</span>;
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-    Singleton::<span class="hljs-built_in">Get</span>().<span class="hljs-built_in">Hello</span>();
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Singleton</span><span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> Singleton<span class="token operator">*</span> instance<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> Singleton<span class="token operator">&amp;</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span>instance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+Singleton<span class="token operator">*</span> Singleton<span class="token operator">::</span>instance <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Singleton<span class="token operator">::</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
