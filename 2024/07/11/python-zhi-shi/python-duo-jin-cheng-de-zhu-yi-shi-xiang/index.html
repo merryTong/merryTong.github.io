@@ -5,13 +5,11 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python多进程的注意事项, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Python多进程注意事项
- 主进程函数最好写在程序入口内
-看下面的例子
+    <meta name="description" content="Python多进程注意事项主进程函数最好写在程序入口内看下面的例子
 from multiprocessing import Process
 # 这里是子进程调用的函数
 def function1(id):  
-    print(f">
+    print(f&#39;id ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -442,47 +440,44 @@ def function1(id):
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="python多进程注意事项"><a class="markdownIt-Anchor" href="#python多进程注意事项"></a> Python多进程注意事项</h1>
-<h2 id="主进程函数最好写在程序入口内"><a class="markdownIt-Anchor" href="#主进程函数最好写在程序入口内"></a> 主进程函数最好写在程序入口内</h2>
-<p>看下面的例子</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process
-<span class="hljs-comment"># 这里是子进程调用的函数</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">function1</span>(<span class="hljs-params"><span class="hljs-built_in">id</span></span>):  
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;id <span class="hljs-subst">{<span class="hljs-built_in">id</span>}</span>&#x27;</span>)
+                <h1 id="Python多进程注意事项"><a href="#Python多进程注意事项" class="headerlink" title="Python多进程注意事项"></a>Python多进程注意事项</h1><h2 id="主进程函数最好写在程序入口内"><a href="#主进程函数最好写在程序入口内" class="headerlink" title="主进程函数最好写在程序入口内"></a>主进程函数最好写在程序入口内</h2><p>看下面的例子</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> Process
+<span class="token comment" spellcheck="true"># 这里是子进程调用的函数</span>
+<span class="token keyword">def</span> <span class="token function">function1</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'id {id}'</span><span class="token punctuation">)</span>
 
-<span class="hljs-comment"># 这里是主进程调用函数</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">run__process</span>():  
-    process = [mp.Process(target=function1, args=(<span class="hljs-number">1</span>,)),
-               mp.Process(target=function1, args=(<span class="hljs-number">2</span>,)), ]
-    <span class="hljs-comment"># 开启了两个进程</span>
-    [p.start() <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> process]
-    <span class="hljs-comment"># 等待两个进程依次结束</span>
-    [p.join() <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> process]   
+<span class="token comment" spellcheck="true"># 这里是主进程调用函数</span>
+<span class="token keyword">def</span> <span class="token function">run__process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    process <span class="token operator">=</span> <span class="token punctuation">[</span>mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>function1<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+               mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>function1<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true"># 开启了两个进程</span>
+    <span class="token punctuation">[</span>p<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> p <span class="token keyword">in</span> process<span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true"># 等待两个进程依次结束</span>
+    <span class="token punctuation">[</span>p<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> p <span class="token keyword">in</span> process<span class="token punctuation">]</span>   
 
-<span class="hljs-comment"># 主进程函数调用不建议写在if外部。当然你强行这么做可能不会报错</span>
-<span class="hljs-comment"># run__process()  </span>
+<span class="token comment" spellcheck="true"># 主进程函数调用不建议写在if外部。当然你强行这么做可能不会报错</span>
+<span class="token comment" spellcheck="true"># run__process()  </span>
 
-<span class="hljs-keyword">if</span> __name__ ==<span class="hljs-string">&#x27;__main__&#x27;</span>:
-    <span class="hljs-comment"># 正确做法：写在if内部</span>
-    run__process()  
-</code></pre>
-<p>在这个简单的例子里，把主进程函数<code>run__process()</code>写在程序入口外部可能不会报错，但是最好还是按照正确写法去做。因为<code>multiprocessing</code>模块通过主进程创建多个新的Python子进程来运行，如果没有写在<code>if __name__ =='__main__':</code>里，则该段程序会进入一个永无止境的创建新进程的循环：</p>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 正确做法：写在if内部</span>
+    run__process<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个简单的例子里，把主进程函数<code>run__process()</code>写在程序入口外部可能不会报错，但是最好还是按照正确写法去做。因为<code>multiprocessing</code>模块通过主进程创建多个新的Python子进程来运行，如果没有写在<code>if __name__ ==&#39;__main__&#39;:</code>里，则该段程序会进入一个永无止境的创建新进程的循环：</p>
 <blockquote>
 <p>主进程运行run__process()生成 2 个子进程。</p>
 <p>这2个子进程依次导入模块，并在导入过程中运行run__process()，导致多进程产生4个新进程。</p>
 <p>这4个新进程依次导入模块，并在导入过程中运行run__process()，从而导致启动8个新进程。</p>
-<p>…</p>
+<p>……</p>
 </blockquote>
-<p>而写在程序入口内部则不会有这种问题。因为<code>if __name__ =='__main__':</code>是一种保护机制，即当该Python文件被其他进程调用时，不会执行入口<code>if __name__ =='__main__':</code>内的代码，而不在入口内部的代码则会被执行。正如上面的代码，在多进程中主进程创建子进程时，本质是自己在调用自己，子进程会导入该Python文件（即导入自身），由于有程序入口<code>if __name__ =='__main__':</code>，创建的子进程不会执行入口内的<code>run__process</code>，避免陷入创建进程的死循环。</p>
-<h2 id="两种创建进程的方式"><a class="markdownIt-Anchor" href="#两种创建进程的方式"></a> 两种创建进程的方式</h2>
-<p>Python的两种创建进程的方式</p>
+<p>而写在程序入口内部则不会有这种问题。因为<code>if __name__ ==&#39;__main__&#39;:</code>是一种保护机制，即当该Python文件被其他进程调用时，不会执行入口<code>if __name__ ==&#39;__main__&#39;:</code>内的代码，而不在入口内部的代码则会被执行。正如上面的代码，在多进程中主进程创建子进程时，本质是自己在调用自己，子进程会导入该Python文件（即导入自身），由于有程序入口<code>if __name__ ==&#39;__main__&#39;:</code>，创建的子进程不会执行入口内的<code>run__process</code>，避免陷入创建进程的死循环。</p>
+<h2 id="两种创建进程的方式"><a href="#两种创建进程的方式" class="headerlink" title="两种创建进程的方式"></a>两种创建进程的方式</h2><p>Python的两种创建进程的方式</p>
 <ul>
 <li><strong>fork</strong>：会直接复制一份自己给子进程运行，并把自己所有资源的handle都让子进程继承，因而创建速度很快，但更占用内存资源。</li>
 <li><strong>spawn</strong>：只会把必要的资源的handle交给子进程，因此创建速度稍慢。</li>
 </ul>
-<pre class="highlight"><code class="python">multiprocessing.set_start_method(<span class="hljs-string">&#x27;spawn&#x27;</span>)  <span class="hljs-comment"># default on WinOS or MacOS</span>
-multiprocessing.set_start_method(<span class="hljs-string">&#x27;fork&#x27;</span>)   <span class="hljs-comment"># default on Linux (UnixOS)</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">multiprocessing<span class="token punctuation">.</span>set_start_method<span class="token punctuation">(</span><span class="token string">'spawn'</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># default on WinOS or MacOS</span>
+multiprocessing<span class="token punctuation">.</span>set_start_method<span class="token punctuation">(</span><span class="token string">'fork'</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true"># default on Linux (UnixOS)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>使用<code>fork()</code> 生成新进程，这样做有两个<strong>好处</strong>：</p>
 <ol>
 <li>子进程可以看到主程序中的所有数据结构。它们实际上是把主程序的数据复制了一份，在数据<strong>副本</strong>上工作。</li>

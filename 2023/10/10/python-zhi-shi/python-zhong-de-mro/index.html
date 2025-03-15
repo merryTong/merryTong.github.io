@@ -5,9 +5,8 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python中的MRO, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Python中的MRO
-面向对象的编程语言有三大特性：封装、继承和多态，在继承中不仅涉及到数据变量，还有方法的继承，因此关于继承的方法的执行顺序问题，称为MRO(Method Resolution Order)，方法解析顺序。
-MRO是对">
+    <meta name="description" content="Python中的MRO面向对象的编程语言有三大特性：封装、继承和多态，在继承中不仅涉及到数据变量，还有方法的继承，因此关于继承的方法的执行顺序问题，称为MRO(Method Resolution Order)，方法解析顺序。
+MRO是对于每">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -438,143 +437,138 @@ MRO是对">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="python中的mro"><a class="markdownIt-Anchor" href="#python中的mro"></a> Python中的MRO</h1>
-<p>面向对象的编程语言有三大特性：封装、继承和多态，在继承中不仅涉及到数据变量，还有方法的继承，因此关于继承的方法的执行顺序问题，称为MRO(Method Resolution Order)，方法解析顺序。</p>
+                <h1 id="Python中的MRO"><a href="#Python中的MRO" class="headerlink" title="Python中的MRO"></a>Python中的MRO</h1><p>面向对象的编程语言有三大特性：封装、继承和多态，在继承中不仅涉及到数据变量，还有方法的继承，因此关于继承的方法的执行顺序问题，称为MRO(Method Resolution Order)，方法解析顺序。</p>
 <p>MRO是对于每个类，会把它的所有父类和自己做一个线性序列化，即把它所有继承的类和它自己做一个优先级的排序，当它想要调用某个方法时，会从这个优先级序列中去找。</p>
 <p>Python从2.3版本开始，使用C3算法来求解MRO，C3算法可以满足三个性质：扩展优先图、局部优先、单调性。</p>
-<h2 id="一个继承的简单例子"><a class="markdownIt-Anchor" href="#一个继承的简单例子"></a> 一个继承的简单例子</h2>
-<p>如下面的代码，类B继承了类A，因此在实例化类B的一个对象后，可以调用类A的<code>say()</code>方法，即使类B没有定义<code>say()</code>方法。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">pass</span>
+<h2 id="一个继承的简单例子"><a href="#一个继承的简单例子" class="headerlink" title="一个继承的简单例子"></a>一个继承的简单例子</h2><p>如下面的代码，类B继承了类A，因此在实例化类B的一个对象后，可以调用类A的<code>say()</code>方法，即使类B没有定义<code>say()</code>方法。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-b = B()
-b.say() <span class="hljs-comment"># AAA</span>
-</code></pre>
+b <span class="token operator">=</span> B<span class="token punctuation">(</span><span class="token punctuation">)</span>
+b<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># AAA</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但是在一般项目中，类之间的继承关系不可能这么简单，比如下面的两段代码，区别仅仅是类B是否继承了类A，代码的执行结果就出现了变化。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;BBB&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>(C,B):
-    <span class="hljs-keyword">pass</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"BBB"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-d = D()
-d.say() <span class="hljs-comment">### AAA</span>
-</code></pre>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;BBB&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>(C,B):
-    <span class="hljs-keyword">pass</span>
+d <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">### AAA</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"BBB"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-d = D()
-d.say() <span class="hljs-comment">### BBB</span>
-</code></pre>
+d <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">### BBB</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Python提供了两种方式供我们查看类的MRO，即类的继承的优先级顺序，在上面的代码中，使用<code>D.__mro__</code>或者<code>D.mro()</code>会返回类D的MRO。</p>
-<h2 id="局部优先顺序"><a class="markdownIt-Anchor" href="#局部优先顺序"></a> 局部优先顺序</h2>
-<p>局部优先顺序：顾名思义，局部优先。当一个类继承了多个类的时候，它会优先使用你写在前面的类的方法。如下面的代码所示</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;BBB&quot;</span>)
+<h2 id="局部优先顺序"><a href="#局部优先顺序" class="headerlink" title="局部优先顺序"></a>局部优先顺序</h2><p>局部优先顺序：顾名思义，局部优先。当一个类继承了多个类的时候，它会优先使用你写在前面的类的方法。如下面的代码所示</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"BBB"</span><span class="token punctuation">)</span>
         
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(A,B):
-    <span class="hljs-keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-built_in">print</span>(C.mro()) 
-<span class="hljs-comment"># [&lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span>
-c = C()
-c.say() <span class="hljs-comment"># AAA</span>
-</code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span>C<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true"># [&lt;class '__main__.C'>, &lt;class '__main__.A'>, &lt;class '__main__.B'>, &lt;class 'object'>]</span>
+c <span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># AAA</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>局部优先的特性，不仅仅针对类C，也针对C的所有子类，即如果有任何类继承了类C，则该类也满足局部优先的特性。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;BBB&quot;</span>)  
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(A,B):
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>(<span class="hljs-title class_ inherited__">C</span>):
-    <span class="hljs-keyword">pass</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"BBB"</span><span class="token punctuation">)</span>  
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>C<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-<span class="hljs-built_in">print</span>(D.mro()) 
-<span class="hljs-comment"># [&lt;class &#x27;__main__.D&#x27;&gt;, &lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span>
-</code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span>D<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true"># [&lt;class '__main__.D'>, &lt;class '__main__.C'>, &lt;class '__main__.A'>, &lt;class '__main__.B'>, &lt;class 'object'>]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>局部优先特性更专业的表述是：MRO里任意两个类的相对顺序和继承图里所有直接继承自这两个类的类在程序中声明的相对顺序一致。</p>
-<h2 id="单调性"><a class="markdownIt-Anchor" href="#单调性"></a> 单调性</h2>
-<p>单调性：是指任何一个类，所使用的方法需要来自于它的直接父类。</p>
+<h2 id="单调性"><a href="#单调性" class="headerlink" title="单调性"></a>单调性</h2><p>单调性：是指任何一个类，所使用的方法需要来自于它的直接父类。</p>
 <p>我们回到最开始的“简单”例子，如下面的代码，D的对象调用<code>say()</code>方法执行的是类B的方法，根据单调性的含义，类D执行的方法<code>say()</code>来自于它的直接父类C或B，根据局部优先原则现在C里面找，找不到接着去B里找，找到之后开始执行。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;BBB&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>(C,B):
-    <span class="hljs-keyword">pass</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"BBB"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-d = D()
-d.say() <span class="hljs-comment"># BBB </span>
-<span class="hljs-built_in">print</span>(D.mro())
-<span class="hljs-comment"># [&lt;class &#x27;__main__.D&#x27;&gt;, &lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span>
-</code></pre>
+d <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># BBB </span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>D<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># [&lt;class '__main__.D'>, &lt;class '__main__.C'>, &lt;class '__main__.B'>, &lt;class '__main__.A'>, &lt;class 'object'>]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>更专业的表述是：MRO里任意两个类的相对顺序和自己所有父类的MRO里这两个类的相对顺序一致。</p>
 <p>观察上面的代码，类C和类B都继承了类A，类D又同时继承了C和B，因此根据局部优先原则，在类D的MRO中C的优先级高于B，根据单调性原则，类D的MRO中任意两个类的顺序和自己所有父类（C和B）的MRO中这两个类的顺序一致，C的MRO中C优先于A，B的MRO中B优先于A，又已知C优先于B，因此D的MRO中优先级是C、B、A。</p>
-<pre class="highlight"><code class="python"><span class="hljs-built_in">print</span>(C.mro())
-<span class="hljs-built_in">print</span>(B.mro())
-<span class="hljs-comment"># [&lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span>
-<span class="hljs-comment"># [&lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span>
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>C<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>B<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># [&lt;class '__main__.C'>, &lt;class '__main__.A'>, &lt;class 'object'>]</span>
+<span class="token comment" spellcheck="true"># [&lt;class '__main__.B'>, &lt;class '__main__.A'>, &lt;class 'object'>]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当类B中没有<code>say()</code>方法会怎么样呢？如下面的代码，此时D的直接父类C和B均没有<code>say()</code>方法，但是看到结果执行了类A的方法，因此上文的单调性含义“调用直接父类”不是必须的，找不到就沿着优先级序列继续往上找。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">see</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;see&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>(C,B):
-    <span class="hljs-keyword">pass</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">see</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"see"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-d = D()
-d.say() <span class="hljs-comment"># AAA</span>
-</code></pre>
-<h2 id="扩展优先图"><a class="markdownIt-Anchor" href="#扩展优先图"></a> 扩展优先图</h2>
-<p>扩展优先图：如果两个类不具有直接的继承关系，那么找到两个类的最小公共子类，这个最小公共子类的多继承顺序靠前的分支上的类具有高优先级。</p>
+d <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># AAA</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="扩展优先图"><a href="#扩展优先图" class="headerlink" title="扩展优先图"></a>扩展优先图</h2><p>扩展优先图：如果两个类不具有直接的继承关系，那么找到两个类的最小公共子类，这个最小公共子类的多继承顺序靠前的分支上的类具有高优先级。</p>
 <p>继续再来看开头的“简单”例子。如下面的代码，类C继承了类A，类D又同时继承了C和B，此时类D的对象调用<code>say()</code>方法会执行A中的方法。在D的mro中因为局部优先原则，C的优先级高于B，但是A和B的顺序关系还没有确定。此时我们应用扩展优先图的原则，A和B不具有直接的继承关系，且最小公共子类是D，则在D的继承中靠前的分支是类C，具有高优先级，此分支上还有类A，所以类A的优先级高于B。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;AAA&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">say</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;BBB&quot;</span>)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span>(<span class="hljs-title class_ inherited__">A</span>):
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span>(C,B):
-    <span class="hljs-keyword">pass</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AAA"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">say</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"BBB"</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
 
-d = D()
-d.say() 
-<span class="hljs-built_in">print</span>(D.mro())
-</code></pre>
+d <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d<span class="token punctuation">.</span>say<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token keyword">print</span><span class="token punctuation">(</span>D<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

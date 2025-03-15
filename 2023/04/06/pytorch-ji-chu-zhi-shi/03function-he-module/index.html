@@ -5,9 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Pytorch|模型和参数, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" Pytorch中的Module和function
-这里的function和Module是指nn.functional和nn.Module。
-Pytorch和神经网络相关的功能组件大多都封装在torch.nn模块下。这些功能组件的绝大部分既">
+    <meta name="description" content="Pytorch中的Module和function这里的function和Module是指nn.functional和nn.Module。Pytorch和神经网络相关的功能组件大多都封装在torch.nn模块下。这些功能组件的绝大部分既有函数">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -438,10 +436,7 @@ Pytorch和神经网络相关的功能组件大多都封装在torch.nn模块下�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="pytorch中的module和function"><a class="markdownIt-Anchor" href="#pytorch中的module和function"></a> Pytorch中的Module和function</h1>
-<p>这里的function和Module是指<code>nn.functional</code>和<code>nn.Module</code>。<br>
-Pytorch和神经网络相关的功能组件大多都封装在<code>torch.nn</code>模块下。这些功能组件的绝大部分既有<strong>函数形式</strong>实现，也有<strong>类形式</strong>实现。<br>
-其中<code>nn.functional</code>(一般引入后改名为F)有各种功能组件的<strong>函数实现</strong>。为了便于对参数进行管理，一般通过继承<code>nn.Module</code>转换成为<strong>类的实现形式</strong>，并直接封装在 nn 模块下。例如：</p>
+                <h1 id="Pytorch中的Module和function"><a href="#Pytorch中的Module和function" class="headerlink" title="Pytorch中的Module和function"></a>Pytorch中的Module和function</h1><p>这里的function和Module是指<code>nn.functional</code>和<code>nn.Module</code>。<br>Pytorch和神经网络相关的功能组件大多都封装在<code>torch.nn</code>模块下。这些功能组件的绝大部分既有<strong>函数形式</strong>实现，也有<strong>类形式</strong>实现。<br>其中<code>nn.functional</code>(一般引入后改名为F)有各种功能组件的<strong>函数实现</strong>。为了便于对参数进行管理，一般通过继承<code>nn.Module</code>转换成为<strong>类的实现形式</strong>，并直接封装在 nn 模块下。例如：</p>
 <table>
 <thead>
 <tr>
@@ -450,8 +445,7 @@ Pytorch和神经网络相关的功能组件大多都封装在<code>torch.nn</cod
 <th><code>nn.Module</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>激活函数</td>
 <td>F.relu</td>
 <td>nn.ReLU</td>
@@ -486,146 +480,136 @@ Pytorch和神经网络相关的功能组件大多都封装在<code>torch.nn</cod
 <td>F.cross_entropy</td>
 <td>nn.CrossEntropyLoss</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>实际上<code>nn.Module</code>除了可以管理其引用的各种参数，还可以管理其引用的子模块，功能十分强大。</p>
-<h2 id="使用nnmodule来管理参数"><a class="markdownIt-Anchor" href="#使用nnmodule来管理参数"></a> 使用nn.Module来管理参数</h2>
-<p>在Pytorch中，模型的参数是需要被优化器训练的，因此，通常要设置其参数为<code>requires_grad = True</code>的张量。同时，在一个模型中，往往有许多的参数，要手动管理这些参数并不是一件容易的事情。<br>
-Pytorch一般将参数用<code>nn.Parameter</code>来表示，并且用<code>nn.Module</code>来管理其结构下的所有参数。<br>
-�<code>nn.Parameter</code>具有<code>requires_grad = True</code>属性。</p>
-<pre class="highlight"><code class="python">w = nn.Parameter(torch.randn(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>))
-<span class="hljs-built_in">print</span>(w)
-<span class="hljs-built_in">print</span>(w.requires_grad)
+<h2 id="使用nn-Module来管理参数"><a href="#使用nn-Module来管理参数" class="headerlink" title="使用nn.Module来管理参数"></a>使用nn.Module来管理参数</h2><p>在Pytorch中，模型的参数是需要被优化器训练的，因此，通常要设置其参数为<code>requires_grad = True</code>的张量。同时，在一个模型中，往往有许多的参数，要手动管理这些参数并不是一件容易的事情。<br>Pytorch一般将参数用<code>nn.Parameter</code>来表示，并且用<code>nn.Module</code>来管理其结构下的所有参数。<br> <code>nn.Parameter</code>具有<code>requires_grad = True</code>属性。</p>
+<pre class="line-numbers language-python"><code class="language-python">w <span class="token operator">=</span> nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>w<span class="token punctuation">.</span>requires_grad<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-Parameter containing:
-tensor([[ <span class="hljs-number">0.3544</span>, -<span class="hljs-number">1.1643</span>],
-        [ <span class="hljs-number">1.2302</span>,  <span class="hljs-number">1.3952</span>]], requires_grad=<span class="hljs-literal">True</span>)
-<span class="hljs-literal">True</span>
-</code></pre>
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">0.3544</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.1643</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">1.2302</span><span class="token punctuation">,</span>  <span class="token number">1.3952</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token boolean">True</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>nn.ParameterList</code>可以将多个nn.Parameter组成一个列表。</p>
-<pre class="highlight"><code class="python">params_list = nn.ParameterList([
-    nn.Parameter(torch.rand(<span class="hljs-number">8</span>,i)) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)
-	])
-<span class="hljs-built_in">print</span>(params_list)
-<span class="hljs-built_in">print</span>(params_list[<span class="hljs-number">0</span>].requires_grad)
+<pre class="line-numbers language-python"><code class="language-python">params_list <span class="token operator">=</span> nn<span class="token punctuation">.</span>ParameterList<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>params_list<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>params_list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>requires_grad<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-ParameterList(
-    (<span class="hljs-number">0</span>): Parameter containing: [torch.FloatTensor of size 8x1]
-    (<span class="hljs-number">1</span>): Parameter containing: [torch.FloatTensor of size 8x2]
-)
-<span class="hljs-literal">True</span>
-</code></pre>
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+ParameterList<span class="token punctuation">(</span>
+    <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Parameter containing<span class="token punctuation">:</span> <span class="token punctuation">[</span>torch<span class="token punctuation">.</span>FloatTensor of size 8x1<span class="token punctuation">]</span>
+    <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Parameter containing<span class="token punctuation">:</span> <span class="token punctuation">[</span>torch<span class="token punctuation">.</span>FloatTensor of size 8x2<span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+<span class="token boolean">True</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>nn.ParameterDict</code>可以将多个nn.Parameter组成一个字典。</p>
-<pre class="highlight"><code class="python">params_dict = nn.ParameterDict({<span class="hljs-string">&quot;a&quot;</span>:nn.Parameter(torch.rand(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)),
-                               <span class="hljs-string">&quot;b&quot;</span>:nn.Parameter(torch.zeros(<span class="hljs-number">2</span>))})
-<span class="hljs-built_in">print</span>(params_dict)
-<span class="hljs-built_in">print</span>(params_dict[<span class="hljs-string">&quot;a&quot;</span>].requires_grad)
+<pre class="line-numbers language-python"><code class="language-python">params_dict <span class="token operator">=</span> nn<span class="token punctuation">.</span>ParameterDict<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span>nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                               <span class="token string">"b"</span><span class="token punctuation">:</span>nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>params_dict<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>params_dict<span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>requires_grad<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-ParameterDict(
-    (a): Parameter containing: [torch.FloatTensor of size 2x2]
-    (b): Parameter containing: [torch.FloatTensor of size <span class="hljs-number">2</span>]
-)
-<span class="hljs-literal">True</span>
-</code></pre>
-<p>可以用Module将它们管理起来。<br>
-<code>module.parameters()</code>返回一个生成器，包括其结构下的所有Parameter 。</p>
-<pre class="highlight"><code class="python">module = nn.Module()
-module.w = w
-module.params_list = params_list
-module.params_dict = params_dict
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+ParameterDict<span class="token punctuation">(</span>
+    <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">:</span> Parameter containing<span class="token punctuation">:</span> <span class="token punctuation">[</span>torch<span class="token punctuation">.</span>FloatTensor of size 2x2<span class="token punctuation">]</span>
+    <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span> Parameter containing<span class="token punctuation">:</span> <span class="token punctuation">[</span>torch<span class="token punctuation">.</span>FloatTensor of size <span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+<span class="token boolean">True</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以用Module将它们管理起来。<br><code>module.parameters()</code>返回一个生成器，包括其结构下的所有Parameter 。</p>
+<pre class="line-numbers language-python"><code class="language-python">module <span class="token operator">=</span> nn<span class="token punctuation">.</span>Module<span class="token punctuation">(</span><span class="token punctuation">)</span>
+module<span class="token punctuation">.</span>w <span class="token operator">=</span> w
+module<span class="token punctuation">.</span>params_list <span class="token operator">=</span> params_list
+module<span class="token punctuation">.</span>params_dict <span class="token operator">=</span> params_dict
 
-num_param = <span class="hljs-number">0</span>
-<span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> module.parameters():
-    <span class="hljs-built_in">print</span>(param,<span class="hljs-string">&quot;\n&quot;</span>)
-    num_param = num_param + <span class="hljs-number">1</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;number of Parameters =&quot;</span>,num_param)
+num_param <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> param <span class="token keyword">in</span> module<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">,</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
+    num_param <span class="token operator">=</span> num_param <span class="token operator">+</span> <span class="token number">1</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"number of Parameters ="</span><span class="token punctuation">,</span>num_param<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-Parameter containing:
-tensor([[ <span class="hljs-number">0.3544</span>, -<span class="hljs-number">1.1643</span>],
-        [ <span class="hljs-number">1.2302</span>,  <span class="hljs-number">1.3952</span>]], requires_grad=<span class="hljs-literal">True</span>) 
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">0.3544</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.1643</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">1.2302</span><span class="token punctuation">,</span>  <span class="token number">1.3952</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> 
 
-Parameter containing:
-tensor([[<span class="hljs-number">0.9391</span>],
-        [<span class="hljs-number">0.7590</span>],
-        [<span class="hljs-number">0.6899</span>],
-        [<span class="hljs-number">0.4786</span>],
-        [<span class="hljs-number">0.2392</span>],
-        [<span class="hljs-number">0.9645</span>],
-        [<span class="hljs-number">0.1968</span>],
-        [<span class="hljs-number">0.1353</span>]], requires_grad=<span class="hljs-literal">True</span>) 
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.9391</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.7590</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.6899</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.4786</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.2392</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.9645</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.1968</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.1353</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> 
 
-Parameter containing:
-tensor([[<span class="hljs-number">0.8012</span>, <span class="hljs-number">0.9587</span>],
-        [<span class="hljs-number">0.0276</span>, <span class="hljs-number">0.5995</span>],
-        [<span class="hljs-number">0.7338</span>, <span class="hljs-number">0.5559</span>],
-        [<span class="hljs-number">0.1704</span>, <span class="hljs-number">0.5814</span>],
-        [<span class="hljs-number">0.7626</span>, <span class="hljs-number">0.1179</span>],
-        [<span class="hljs-number">0.4945</span>, <span class="hljs-number">0.2408</span>],
-        [<span class="hljs-number">0.7179</span>, <span class="hljs-number">0.0575</span>],
-        [<span class="hljs-number">0.3418</span>, <span class="hljs-number">0.7291</span>]], requires_grad=<span class="hljs-literal">True</span>) 
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.8012</span><span class="token punctuation">,</span> <span class="token number">0.9587</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.0276</span><span class="token punctuation">,</span> <span class="token number">0.5995</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.7338</span><span class="token punctuation">,</span> <span class="token number">0.5559</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.1704</span><span class="token punctuation">,</span> <span class="token number">0.5814</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.7626</span><span class="token punctuation">,</span> <span class="token number">0.1179</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.4945</span><span class="token punctuation">,</span> <span class="token number">0.2408</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.7179</span><span class="token punctuation">,</span> <span class="token number">0.0575</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.3418</span><span class="token punctuation">,</span> <span class="token number">0.7291</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> 
 
-Parameter containing:
-tensor([[<span class="hljs-number">0.7729</span>, <span class="hljs-number">0.2383</span>],
-        [<span class="hljs-number">0.7054</span>, <span class="hljs-number">0.9937</span>]], requires_grad=<span class="hljs-literal">True</span>) 
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.7729</span><span class="token punctuation">,</span> <span class="token number">0.2383</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">0.7054</span><span class="token punctuation">,</span> <span class="token number">0.9937</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> 
 
-Parameter containing:
-tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>], requires_grad=<span class="hljs-literal">True</span>) 
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> 
 
-number of Parameters = <span class="hljs-number">5</span>
-</code></pre>
+number of Parameters <span class="token operator">=</span> <span class="token number">5</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>下面以nn.Linear观察其参数。</p>
-<pre class="highlight"><code class="python">linear = nn.Linear(<span class="hljs-number">20</span>,<span class="hljs-number">2</span>)
+<pre class="line-numbers language-python"><code class="language-python">linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 
-<span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> linear.parameters():
-    <span class="hljs-built_in">print</span>(param)
-    <span class="hljs-built_in">print</span>(param.size(), param.shape)
-    <span class="hljs-built_in">print</span>(param.requires_grad)
-    <span class="hljs-built_in">print</span>(param.numel())
+<span class="token keyword">for</span> param <span class="token keyword">in</span> linear<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> param<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span>requires_grad<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span>numel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-Parameter containing:
-tensor([[-<span class="hljs-number">0.2206</span>, -<span class="hljs-number">0.0732</span>,  <span class="hljs-number">0.2090</span>,  <span class="hljs-number">0.0789</span>,  <span class="hljs-number">0.0329</span>, -<span class="hljs-number">0.1918</span>,  <span class="hljs-number">0.1738</span>,  <span class="hljs-number">0.1015</span>,
-          <span class="hljs-number">0.1667</span>,  <span class="hljs-number">0.0078</span>, -<span class="hljs-number">0.1058</span>, -<span class="hljs-number">0.1306</span>,  <span class="hljs-number">0.0223</span>, -<span class="hljs-number">0.0715</span>, -<span class="hljs-number">0.0484</span>, -<span class="hljs-number">0.0651</span>,
-          <span class="hljs-number">0.1581</span>, -<span class="hljs-number">0.0084</span>,  <span class="hljs-number">0.0357</span>,  <span class="hljs-number">0.1935</span>],
-        [-<span class="hljs-number">0.0515</span>,  <span class="hljs-number">0.2016</span>,  <span class="hljs-number">0.2110</span>, -<span class="hljs-number">0.1053</span>, -<span class="hljs-number">0.0663</span>,  <span class="hljs-number">0.1520</span>, -<span class="hljs-number">0.0612</span>, -<span class="hljs-number">0.1197</span>,
-          <span class="hljs-number">0.0597</span>, -<span class="hljs-number">0.0840</span>,  <span class="hljs-number">0.1601</span>,  <span class="hljs-number">0.0842</span>,  <span class="hljs-number">0.0731</span>, -<span class="hljs-number">0.1282</span>,  <span class="hljs-number">0.0515</span>,  <span class="hljs-number">0.0054</span>,
-          <span class="hljs-number">0.0433</span>, -<span class="hljs-number">0.1549</span>,  <span class="hljs-number">0.1223</span>,  <span class="hljs-number">0.0270</span>]], requires_grad=<span class="hljs-literal">True</span>)
-torch.Size([<span class="hljs-number">2</span>, <span class="hljs-number">20</span>]) torch.Size([<span class="hljs-number">2</span>, <span class="hljs-number">20</span>])
-<span class="hljs-literal">True</span>
-<span class="hljs-number">40</span>
-Parameter containing:
-tensor([<span class="hljs-number">0.2008</span>, <span class="hljs-number">0.2086</span>], requires_grad=<span class="hljs-literal">True</span>)
-torch.Size([<span class="hljs-number">2</span>]) torch.Size([<span class="hljs-number">2</span>])
-<span class="hljs-literal">True</span>
-<span class="hljs-number">2</span>
-</code></pre>
-<p>实践当中，一般通过继承<code>nn.Module</code>来构建模块类，并将所有含有需要学习的参数的部分放在构造函数中。<br>
-以下范例为Pytorch中<code>nn.Linear</code>的源码的简化版本。可以看到它将需要学习的参数放在了<code>__init__</code>构造函数中，并在forward中调用F.linear函数来实现计算逻辑。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Linear</span>(nn.Module):
-    __constants__ = [<span class="hljs-string">&#x27;in_features&#x27;</span>, <span class="hljs-string">&#x27;out_features&#x27;</span>]
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.2206</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0732</span><span class="token punctuation">,</span>  <span class="token number">0.2090</span><span class="token punctuation">,</span>  <span class="token number">0.0789</span><span class="token punctuation">,</span>  <span class="token number">0.0329</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1918</span><span class="token punctuation">,</span>  <span class="token number">0.1738</span><span class="token punctuation">,</span>  <span class="token number">0.1015</span><span class="token punctuation">,</span>
+          <span class="token number">0.1667</span><span class="token punctuation">,</span>  <span class="token number">0.0078</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1058</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1306</span><span class="token punctuation">,</span>  <span class="token number">0.0223</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0715</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0484</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0651</span><span class="token punctuation">,</span>
+          <span class="token number">0.1581</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0084</span><span class="token punctuation">,</span>  <span class="token number">0.0357</span><span class="token punctuation">,</span>  <span class="token number">0.1935</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.0515</span><span class="token punctuation">,</span>  <span class="token number">0.2016</span><span class="token punctuation">,</span>  <span class="token number">0.2110</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1053</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0663</span><span class="token punctuation">,</span>  <span class="token number">0.1520</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0612</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1197</span><span class="token punctuation">,</span>
+          <span class="token number">0.0597</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0840</span><span class="token punctuation">,</span>  <span class="token number">0.1601</span><span class="token punctuation">,</span>  <span class="token number">0.0842</span><span class="token punctuation">,</span>  <span class="token number">0.0731</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1282</span><span class="token punctuation">,</span>  <span class="token number">0.0515</span><span class="token punctuation">,</span>  <span class="token number">0.0054</span><span class="token punctuation">,</span>
+          <span class="token number">0.0433</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1549</span><span class="token punctuation">,</span>  <span class="token number">0.1223</span><span class="token punctuation">,</span>  <span class="token number">0.0270</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">)</span> torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token boolean">True</span>
+<span class="token number">40</span>
+Parameter containing<span class="token punctuation">:</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.2008</span><span class="token punctuation">,</span> <span class="token number">0.2086</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token boolean">True</span>
+<span class="token number">2</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实践当中，一般通过继承<code>nn.Module</code>来构建模块类，并将所有含有需要学习的参数的部分放在构造函数中。<br>以下范例为Pytorch中<code>nn.Linear</code>的源码的简化版本。可以看到它将需要学习的参数放在了<code>__init__</code>构造函数中，并在forward中调用F.linear函数来实现计算逻辑。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Linear</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    __constants__ <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'in_features'</span><span class="token punctuation">,</span> <span class="token string">'out_features'</span><span class="token punctuation">]</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, in_features, out_features, bias=<span class="hljs-literal">True</span></span>):
-        <span class="hljs-built_in">super</span>(Linear, self).__init__()
-        self.in_features = in_features
-        self.out_features = out_features
-        self.weight = nn.Parameter(torch.Tensor(out_features, in_features))
-        <span class="hljs-keyword">if</span> bias:
-            self.bias = nn.Parameter(torch.Tensor(out_features))
-        <span class="hljs-keyword">else</span>:
-            self.register_parameter(<span class="hljs-string">&#x27;bias&#x27;</span>, <span class="hljs-literal">None</span>)
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_features<span class="token punctuation">,</span> out_features<span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>Linear<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>in_features <span class="token operator">=</span> in_features
+        self<span class="token punctuation">.</span>out_features <span class="token operator">=</span> out_features
+        self<span class="token punctuation">.</span>weight <span class="token operator">=</span> nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">(</span>out_features<span class="token punctuation">,</span> in_features<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> bias<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>bias <span class="token operator">=</span> nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">(</span>out_features<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>register_parameter<span class="token punctuation">(</span><span class="token string">'bias'</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, <span class="hljs-built_in">input</span></span>):
-        <span class="hljs-keyword">return</span> F.linear(<span class="hljs-built_in">input</span>, self.weight, self.bias)
-
-</code></pre>
-<h2 id="使用nnmodule来管理子模块"><a class="markdownIt-Anchor" href="#使用nnmodule来管理子模块"></a> 使用nn.Module来管理子模块</h2>
-<p>一般情况下，我们都很少直接使用<code>nn.Parameter</code>来定义参数构建模型，而是通过拼装一些常用的模型层来构造模型。<br>
-这些模型层也是继承自nn.Module的对象，本身也包括参数，属于我们要定义的模块的子模块。<br>
-nn.Module提供了一些方法可以管理这些子模块。</p>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> input<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> F<span class="token punctuation">.</span>linear<span class="token punctuation">(</span>input<span class="token punctuation">,</span> self<span class="token punctuation">.</span>weight<span class="token punctuation">,</span> self<span class="token punctuation">.</span>bias<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用nn-Module来管理子模块"><a href="#使用nn-Module来管理子模块" class="headerlink" title="使用nn.Module来管理子模块"></a>使用nn.Module来管理子模块</h2><p>一般情况下，我们都很少直接使用<code>nn.Parameter</code>来定义参数构建模型，而是通过拼装一些常用的模型层来构造模型。<br>这些模型层也是继承自nn.Module的对象，本身也包括参数，属于我们要定义的模块的子模块。<br>nn.Module提供了一些方法可以管理这些子模块。</p>
 <ul>
 <li><code>children()</code>方法：返回一个生成器，包括模块下的所有子模块。</li>
 <li><code>named_children()</code>方法：返回一个生成器，包括模块下的所有子模块，以及它们的名字。</li>
@@ -633,165 +617,165 @@ nn.Module提供了一些方法可以管理这些子模块。</p>
 <li><code>named_modules()</code>方法：返回一个生成器，递归地找到模块下的所有各个层级的模块以及它们的名字，包括模块本身。</li>
 </ul>
 <p>其中<code>chidren()</code>方法和<code>named_children()</code>方法较多使用。<code>modules()</code>方法和<code>named_modules()</code>方法较少使用，其功能可以通过多个<code>named_children()</code>的嵌套使用实现。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Net</span>(nn.Module):
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>(Net, self).__init__()
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>Net<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        self.embedding = nn.Embedding(num_embeddings = <span class="hljs-number">10000</span>,embedding_dim = <span class="hljs-number">3</span>,padding_idx = <span class="hljs-number">1</span>)
+        self<span class="token punctuation">.</span>embedding <span class="token operator">=</span> nn<span class="token punctuation">.</span>Embedding<span class="token punctuation">(</span>num_embeddings <span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">,</span>embedding_dim <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span>padding_idx <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span>
         
-        self.conv = nn.Sequential()
-        self.conv.add_module(<span class="hljs-string">&quot;conv_1&quot;</span>,nn.Conv1d(in_channels = <span class="hljs-number">3</span>,out_channels = <span class="hljs-number">16</span>,kernel_size = <span class="hljs-number">5</span>))
-        self.conv.add_module(<span class="hljs-string">&quot;pool_1&quot;</span>,nn.MaxPool1d(kernel_size = <span class="hljs-number">2</span>))
-        self.conv.add_module(<span class="hljs-string">&quot;relu_1&quot;</span>,nn.ReLU())
-        self.conv.add_module(<span class="hljs-string">&quot;conv_2&quot;</span>,nn.Conv1d(in_channels = <span class="hljs-number">16</span>,out_channels = <span class="hljs-number">128</span>,kernel_size = <span class="hljs-number">2</span>))
-        self.conv.add_module(<span class="hljs-string">&quot;pool_2&quot;</span>,nn.MaxPool1d(kernel_size = <span class="hljs-number">2</span>))
-        self.conv.add_module(<span class="hljs-string">&quot;relu_2&quot;</span>,nn.ReLU())
+        self<span class="token punctuation">.</span>conv <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"conv_1"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>Conv1d<span class="token punctuation">(</span>in_channels <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span>out_channels <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">,</span>kernel_size <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"pool_1"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>MaxPool1d<span class="token punctuation">(</span>kernel_size <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"relu_1"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"conv_2"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>Conv1d<span class="token punctuation">(</span>in_channels <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">,</span>out_channels <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">,</span>kernel_size <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"pool_2"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>MaxPool1d<span class="token punctuation">(</span>kernel_size <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"relu_2"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-        self.dense = nn.Sequential()
-        self.dense.add_module(<span class="hljs-string">&quot;flatten&quot;</span>,nn.Flatten())
-        self.dense.add_module(<span class="hljs-string">&quot;linear&quot;</span>,nn.Linear(<span class="hljs-number">6144</span>,<span class="hljs-number">1</span>))
-        self.dense.add_module(<span class="hljs-string">&quot;sigmoid&quot;</span>,nn.Sigmoid())
+        self<span class="token punctuation">.</span>dense <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>dense<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"flatten"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>dense<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"linear"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">6144</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>dense<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">"sigmoid"</span><span class="token punctuation">,</span>nn<span class="token punctuation">.</span>Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self,x</span>):
-        x = self.embedding(x).transpose(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)
-        x = self.conv(x)
-        y = self.dense(x)
-        <span class="hljs-keyword">return</span> y
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>embedding<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>transpose<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> y
 
-net = Net()
-</code></pre>
-<pre class="highlight"><code class="python">i = <span class="hljs-number">0</span>
-<span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> net.children():
-    i+=<span class="hljs-number">1</span>
-    <span class="hljs-built_in">print</span>(child,<span class="hljs-string">&quot;\n&quot;</span>)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;child number&quot;</span>,i)
+net <span class="token operator">=</span> Net<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">i <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> child <span class="token keyword">in</span> net<span class="token punctuation">.</span>children<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    i<span class="token operator">+=</span><span class="token number">1</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"child number"</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-Embedding(<span class="hljs-number">10000</span>, <span class="hljs-number">3</span>, padding_idx=<span class="hljs-number">1</span>) 
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+Embedding<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding_idx<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> 
 
-Sequential(
-  (conv_1): Conv1d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">5</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_1): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_1): ReLU()
-  (conv_2): Conv1d(<span class="hljs-number">16</span>, <span class="hljs-number">128</span>, kernel_size=(<span class="hljs-number">2</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_2): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_2): ReLU()
-) 
+Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>conv_1<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_1<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_1<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>conv_2<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_2<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_2<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span> 
 
-Sequential(
-  (flatten): Flatten()
-  (linear): Linear(in_features=<span class="hljs-number">6144</span>, out_features=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">True</span>)
-  (sigmoid): Sigmoid()
-) 
+Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>flatten<span class="token punctuation">)</span><span class="token punctuation">:</span> Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>linear<span class="token punctuation">)</span><span class="token punctuation">:</span> Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">6144</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>sigmoid<span class="token punctuation">)</span><span class="token punctuation">:</span> Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span> 
 
-child number <span class="hljs-number">3</span>
-</code></pre>
-<pre class="highlight"><code class="python">i = <span class="hljs-number">0</span>
-<span class="hljs-keyword">for</span> name,child <span class="hljs-keyword">in</span> net.named_children():
-    i+=<span class="hljs-number">1</span>
-    <span class="hljs-built_in">print</span>(name,<span class="hljs-string">&quot;:&quot;</span>,child,<span class="hljs-string">&quot;\n&quot;</span>)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;child number&quot;</span>,i)
+child number <span class="token number">3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">i <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> name<span class="token punctuation">,</span>child <span class="token keyword">in</span> net<span class="token punctuation">.</span>named_children<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    i<span class="token operator">+=</span><span class="token number">1</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span><span class="token string">":"</span><span class="token punctuation">,</span>child<span class="token punctuation">,</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"child number"</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-embedding : Embedding(<span class="hljs-number">10000</span>, <span class="hljs-number">3</span>, padding_idx=<span class="hljs-number">1</span>) 
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+embedding <span class="token punctuation">:</span> Embedding<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding_idx<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> 
 
-conv : Sequential(
-  (conv_1): Conv1d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">5</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_1): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_1): ReLU()
-  (conv_2): Conv1d(<span class="hljs-number">16</span>, <span class="hljs-number">128</span>, kernel_size=(<span class="hljs-number">2</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_2): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_2): ReLU()
-) 
+conv <span class="token punctuation">:</span> Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>conv_1<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_1<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_1<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>conv_2<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_2<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_2<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span> 
 
-dense : Sequential(
-  (flatten): Flatten(start_dim=<span class="hljs-number">1</span>, end_dim=-<span class="hljs-number">1</span>)
-  (linear): Linear(in_features=<span class="hljs-number">6144</span>, out_features=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">True</span>)
-  (sigmoid): Sigmoid()
-) 
+dense <span class="token punctuation">:</span> Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>flatten<span class="token punctuation">)</span><span class="token punctuation">:</span> Flatten<span class="token punctuation">(</span>start_dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> end_dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>linear<span class="token punctuation">)</span><span class="token punctuation">:</span> Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">6144</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>sigmoid<span class="token punctuation">)</span><span class="token punctuation">:</span> Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span> 
 
-child number <span class="hljs-number">3</span>
-</code></pre>
-<pre class="highlight"><code class="python">i = <span class="hljs-number">0</span>
-<span class="hljs-keyword">for</span> module <span class="hljs-keyword">in</span> net.modules():
-    i+=<span class="hljs-number">1</span>
-    <span class="hljs-built_in">print</span>(module)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;module number:&quot;</span>,i)
+child number <span class="token number">3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">i <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> module <span class="token keyword">in</span> net<span class="token punctuation">.</span>modules<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    i<span class="token operator">+=</span><span class="token number">1</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"module number:"</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-Net(
-  (embedding): Embedding(<span class="hljs-number">10000</span>, <span class="hljs-number">3</span>, padding_idx=<span class="hljs-number">1</span>)
-  (conv): Sequential(
-    (conv_1): Conv1d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">5</span>,), stride=(<span class="hljs-number">1</span>,))
-    (pool_1): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-    (relu_1): ReLU()
-    (conv_2): Conv1d(<span class="hljs-number">16</span>, <span class="hljs-number">128</span>, kernel_size=(<span class="hljs-number">2</span>,), stride=(<span class="hljs-number">1</span>,))
-    (pool_2): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-    (relu_2): ReLU()
-  )
-  (dense): Sequential(
-    (flatten): Flatten(start_dim=<span class="hljs-number">1</span>, end_dim=-<span class="hljs-number">1</span>)
-    (linear): Linear(in_features=<span class="hljs-number">6144</span>, out_features=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">True</span>)
-    (sigmoid): Sigmoid()
-  )
-)
-Embedding(<span class="hljs-number">10000</span>, <span class="hljs-number">3</span>, padding_idx=<span class="hljs-number">1</span>)
-Sequential(
-  (conv_1): Conv1d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">5</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_1): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_1): ReLU()
-  (conv_2): Conv1d(<span class="hljs-number">16</span>, <span class="hljs-number">128</span>, kernel_size=(<span class="hljs-number">2</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_2): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_2): ReLU()
-)
-Conv1d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">5</span>,), stride=(<span class="hljs-number">1</span>,))
-MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-ReLU()
-Conv1d(<span class="hljs-number">16</span>, <span class="hljs-number">128</span>, kernel_size=(<span class="hljs-number">2</span>,), stride=(<span class="hljs-number">1</span>,))
-MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-ReLU()
-Sequential(
-  (flatten): Flatten(start_dim=<span class="hljs-number">1</span>, end_dim=-<span class="hljs-number">1</span>)
-  (linear): Linear(in_features=<span class="hljs-number">6144</span>, out_features=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">True</span>)
-  (sigmoid): Sigmoid()
-)
-Flatten(start_dim=<span class="hljs-number">1</span>, end_dim=-<span class="hljs-number">1</span>)
-Linear(in_features=<span class="hljs-number">6144</span>, out_features=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">True</span>)
-Sigmoid()
-module number: <span class="hljs-number">13</span>
-</code></pre>
-<p>下面我们通过<code>named_children()</code>方法找到embedding层，并将其参数设置为不可训练(相当于冻结embedding层)。�</p>
-<pre class="highlight"><code class="python">children_dict = {name:module <span class="hljs-keyword">for</span> name,module <span class="hljs-keyword">in</span> net.named_children()}
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+Net<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>embedding<span class="token punctuation">)</span><span class="token punctuation">:</span> Embedding<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding_idx<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>conv<span class="token punctuation">)</span><span class="token punctuation">:</span> Sequential<span class="token punctuation">(</span>
+    <span class="token punctuation">(</span>conv_1<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>pool_1<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>relu_1<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>conv_2<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>pool_2<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>relu_2<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>dense<span class="token punctuation">)</span><span class="token punctuation">:</span> Sequential<span class="token punctuation">(</span>
+    <span class="token punctuation">(</span>flatten<span class="token punctuation">)</span><span class="token punctuation">:</span> Flatten<span class="token punctuation">(</span>start_dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> end_dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>linear<span class="token punctuation">)</span><span class="token punctuation">:</span> Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">6144</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span>sigmoid<span class="token punctuation">)</span><span class="token punctuation">:</span> Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+Embedding<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding_idx<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>conv_1<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_1<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_1<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>conv_2<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_2<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_2<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+Conv1d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Conv1d<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>flatten<span class="token punctuation">)</span><span class="token punctuation">:</span> Flatten<span class="token punctuation">(</span>start_dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> end_dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>linear<span class="token punctuation">)</span><span class="token punctuation">:</span> Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">6144</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>sigmoid<span class="token punctuation">)</span><span class="token punctuation">:</span> Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+Flatten<span class="token punctuation">(</span>start_dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> end_dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">6144</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+module number<span class="token punctuation">:</span> <span class="token number">13</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>下面我们通过<code>named_children()</code>方法找到embedding层，并将其参数设置为不可训练(相当于冻结embedding层)。 </p>
+<pre class="line-numbers language-python"><code class="language-python">children_dict <span class="token operator">=</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span>module <span class="token keyword">for</span> name<span class="token punctuation">,</span>module <span class="token keyword">in</span> net<span class="token punctuation">.</span>named_children<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
 
-<span class="hljs-built_in">print</span>(children_dict)
-embedding = children_dict[<span class="hljs-string">&quot;embedding&quot;</span>]
-embedding.requires_grad_(<span class="hljs-literal">False</span>) <span class="hljs-comment">#冻结其参数</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>children_dict<span class="token punctuation">)</span>
+embedding <span class="token operator">=</span> children_dict<span class="token punctuation">[</span><span class="token string">"embedding"</span><span class="token punctuation">]</span>
+embedding<span class="token punctuation">.</span>requires_grad_<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#冻结其参数</span>
 
-&gt;&gt;&gt;Output:
-{<span class="hljs-string">&#x27;embedding&#x27;</span>: Embedding(<span class="hljs-number">10000</span>, <span class="hljs-number">3</span>, padding_idx=<span class="hljs-number">1</span>), 
- <span class="hljs-string">&#x27;conv&#x27;</span>: Sequential(
-  (conv_1): Conv1d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">5</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_1): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_1): ReLU()
-  (conv_2): Conv1d(<span class="hljs-number">16</span>, <span class="hljs-number">128</span>, kernel_size=(<span class="hljs-number">2</span>,), stride=(<span class="hljs-number">1</span>,))
-  (pool_2): MaxPool1d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">0</span>, dilation=<span class="hljs-number">1</span>, ceil_mode=<span class="hljs-literal">False</span>)
-  (relu_2): ReLU()
-), 
-  <span class="hljs-string">&#x27;dense&#x27;</span>: Sequential(
-  (flatten): Flatten()
-  (linear): Linear(in_features=<span class="hljs-number">6144</span>, out_features=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">True</span>)
-  (sigmoid): Sigmoid()
-)}
-</code></pre>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> embedding.parameters():
-    <span class="hljs-built_in">print</span>(param.requires_grad)
-    <span class="hljs-built_in">print</span>(param.numel())
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+<span class="token punctuation">{</span><span class="token string">'embedding'</span><span class="token punctuation">:</span> Embedding<span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding_idx<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+ <span class="token string">'conv'</span><span class="token punctuation">:</span> Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>conv_1<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_1<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_1<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>conv_2<span class="token punctuation">)</span><span class="token punctuation">:</span> Conv1d<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>pool_2<span class="token punctuation">)</span><span class="token punctuation">:</span> MaxPool1d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dilation<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>relu_2<span class="token punctuation">)</span><span class="token punctuation">:</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+  <span class="token string">'dense'</span><span class="token punctuation">:</span> Sequential<span class="token punctuation">(</span>
+  <span class="token punctuation">(</span>flatten<span class="token punctuation">)</span><span class="token punctuation">:</span> Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>linear<span class="token punctuation">)</span><span class="token punctuation">:</span> Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">6144</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>sigmoid<span class="token punctuation">)</span><span class="token punctuation">:</span> Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> param <span class="token keyword">in</span> embedding<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span>requires_grad<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span>numel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-&gt;&gt;&gt;Output:
-<span class="hljs-literal">False</span>
-<span class="hljs-number">30000</span>
-</code></pre>
+<span class="token operator">>></span><span class="token operator">></span>Output<span class="token punctuation">:</span>
+<span class="token boolean">False</span>
+<span class="token number">30000</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

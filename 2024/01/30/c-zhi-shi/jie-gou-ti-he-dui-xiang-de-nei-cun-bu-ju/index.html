@@ -5,15 +5,13 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="C++|结构体和对象的内存布局, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content=" 结构体和对象的内存布局
-结构体和C对象由一个一个的成员变量组成，C和C语言规范没有明确规定某个类型的变量必须是几个字节，不同的编译器定义的大小不同，可以通过C语言中的sizeof()进行查看。
+    <meta name="description" content="结构体和对象的内存布局结构体和C++对象由一个一个的成员变量组成，C和C++语言规范没有明确规定某个类型的变量必须是几个字节，不同的编译器定义的大小不同，可以通过C语言中的sizeof()进行查看。
 
 
 
 基础变量大小
 32位系统
-64位系统
-">
+64位系">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -440,8 +438,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="结构体和对象的内存布局"><a class="markdownIt-Anchor" href="#结构体和对象的内存布局"></a> 结构体和对象的内存布局</h1>
-<p>结构体和C<ins>对象由一个一个的成员变量组成，C和C</ins>语言规范没有明确规定某个类型的变量必须是几个字节，不同的编译器定义的大小不同，可以通过C语言中的<code>sizeof()</code>进行查看。</p>
+                <h1 id="结构体和对象的内存布局"><a href="#结构体和对象的内存布局" class="headerlink" title="结构体和对象的内存布局"></a>结构体和对象的内存布局</h1><p>结构体和C++对象由一个一个的成员变量组成，C和C++语言规范没有明确规定某个类型的变量必须是几个字节，不同的编译器定义的大小不同，可以通过C语言中的<code>sizeof()</code>进行查看。</p>
 <table>
 <thead>
 <tr>
@@ -450,8 +447,7 @@
 <th>64位系统</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>sizeof(char)</td>
 <td>1</td>
 <td>1</td>
@@ -476,72 +472,67 @@
 <td>4</td>
 <td>8</td>
 </tr>
-</tbody>
-</table>
-<h2 id="c对象的大小"><a class="markdownIt-Anchor" href="#c对象的大小"></a> C++对象的大小</h2>
-<p>首先看一个最简单的对象，该对象只有一个<code>int</code>型的成员变量，此时一个对象的大小就是<code>int</code>型变量的大小，<code>sizeof(Child)</code>大小即为4。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{
-    <span class="hljs-type">int</span> age;
-};
-</code></pre>
-<p>把情况稍微变复杂一下，再加入一个<code>char</code>型的成员变量，此时的对象大小是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">4+1=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>个字节吗？此时使用<code>sizeof(Child)</code>查看会输出结果为8。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{
-    <span class="hljs-type">int</span> age;
-    <span class="hljs-type">char</span> sex;
-};
-</code></pre>
+</tbody></table>
+<h2 id="C-对象的大小"><a href="#C-对象的大小" class="headerlink" title="C++对象的大小"></a>C++对象的大小</h2><p>首先看一个最简单的对象，该对象只有一个<code>int</code>型的成员变量，此时一个对象的大小就是<code>int</code>型变量的大小，<code>sizeof(Child)</code>大小即为4。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>把情况稍微变复杂一下，再加入一个<code>char</code>型的成员变量，此时的对象大小是$4+1&#x3D;5$个字节吗？此时使用<code>sizeof(Child)</code>查看会输出结果为8。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> sex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为什么会这样呢，这里涉及到一个知识点<strong>内存对齐</strong>。内存对齐是指数据在内存中存储时，按照一定规则对齐的过程，内存对齐的<strong>目的是为了提高数据访问的效率</strong>。当数据按照对齐方式进行存储时，CPU可以更快地读取和写入数据。</p>
-<p><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90.png" alt></p>
-<h2 id="内存对齐"><a class="markdownIt-Anchor" href="#内存对齐"></a> 内存对齐</h2>
-<h3 id="内存对齐的规则"><a class="markdownIt-Anchor" href="#内存对齐的规则"></a> 内存对齐的规则</h3>
-<p>内存对齐的两个规则：</p>
+<p><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90.png"></p>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><h3 id="内存对齐的规则"><a href="#内存对齐的规则" class="headerlink" title="内存对齐的规则"></a>内存对齐的规则</h3><p>内存对齐的两个规则：</p>
 <ol>
 <li>数据的起始地址必须是其自身大小的整数倍。比如一个<code>int</code>型数据，在内存中的起始地址必须是4的倍数。</li>
 <li>结构体和对象的对齐值是其成员中占用内存最大的数据类型的大小。比如一个对象包含了一个<code>int</code>和一个<code>char</code>型，则其对齐值就是4，即起始地址必须是4的整数倍。</li>
 </ol>
 <p>基于上述规则，在32位系统上来看一个例子</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{
-    <span class="hljs-type">int</span> age;
-    <span class="hljs-type">char</span> sex;
-    <span class="hljs-type">short</span> height;
-};
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{
-    <span class="hljs-type">int</span> age;
-    <span class="hljs-type">char</span> sex;
-    <span class="hljs-type">char</span>* name;
-};
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> sex<span class="token punctuation">;</span>
+    <span class="token keyword">short</span> height<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> sex<span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对于上述的第一个对象，由于<code>short</code>型占2个字节，所以数据的起始地址必须是2的整数倍（第一条规则），所以变量<code>sex</code>和<code>height</code>进行填充以对齐内存，整个对象的大小是8个字节。</p>
 <p>对于上述的第二个对象，由于<code>char*</code>占4个字节（32bit系统），所以起始地址必须是4的整数倍，而不能紧跟在<code>char</code>变量的地址后面，中间空出来的地址进行填充，整个对象的大小是12个字节。</p>
-<p><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%902.png" alt><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%903.png" alt></p>
+<p><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%902.png"><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%903.png"></p>
 <p>让我们把情况变得更复杂一点，假设类里面有一个虚函数，此时的对象大小是多少呢，内存又是怎么布局的呢？</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{    
-    <span class="hljs-type">int</span> age;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">talk</span><span class="hljs-params">()</span></span>{
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello&quot;</span>);
-    }
-};
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>    
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">talk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>虚函数是C++里面的一个重要机制，直接关系着面向对象中的多态性的实现。在有虚函数的对象中，会有一个隐含的指针——虚表指针，该指针指向一个虚函数表，表中存储着每个虚函数的地址。</p>
-<p><img src="/images/%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8.png" alt><img src="/images/%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A82.png" alt></p>
+<p><img src="/images/%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8.png"><img src="/images/%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A82.png"></p>
 <p>如果此时在类中再加入一个虚函数，则该对象的大小会变大吗。答案是否定的，因为新加入的虚函数，只会将其函数地址放在虚函数表里，实际并不占用对象的大小。如上面右图所示。</p>
 <p>接下来看一下64位系统上的情况。64位系统中一个指针占8个字节，如下的类定义中，对齐之后的对象占据大小就是16个字节。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{
-    <span class="hljs-type">int</span> age;
-    <span class="hljs-type">char</span>* name;
-};
-</code></pre>
-<p><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%904.png" alt></p>
-<h3 id="自定义内存对齐"><a class="markdownIt-Anchor" href="#自定义内存对齐"></a> 自定义内存对齐</h3>
-<p>在涉及到通信时，我们定义的通信协议里（TCP/IP，BLE）涉及的数据都是精确到bit的，半个字节都不会浪费。此时我们并不想让编译器在内存中填充，就想让成员变量紧挨着存放。C/C++对这种情况也有处理方法，可以使用预编译指令<code>#program pack()</code>来自定义对齐的大小。比如下面的代码，对齐大小是1，此时就不会将变量<code>sex</code>和<code>height</code>之间进行填充，整个对象的大小是7个字节。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta"># program pack(1)</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>{
-    <span class="hljs-type">int</span> age;
-    <span class="hljs-type">char</span> sex;
-    <span class="hljs-type">short</span> height;
-};
-<span class="hljs-meta"># program pack()</span>
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%904.png"></p>
+<h3 id="自定义内存对齐"><a href="#自定义内存对齐" class="headerlink" title="自定义内存对齐"></a>自定义内存对齐</h3><p>在涉及到通信时，我们定义的通信协议里（TCP&#x2F;IP，BLE）涉及的数据都是精确到bit的，半个字节都不会浪费。此时我们并不想让编译器在内存中填充，就想让成员变量紧挨着存放。C&#x2F;C++对这种情况也有处理方法，可以使用预编译指令<code>#program pack()</code>来自定义对齐的大小。比如下面的代码，对齐大小是1，此时就不会将变量<code>sex</code>和<code>height</code>之间进行填充，整个对象的大小是7个字节。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property"># program pack(1)</span>
+<span class="token keyword">class</span> <span class="token class-name">Child</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> sex<span class="token punctuation">;</span>
+    <span class="token keyword">short</span> height<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token macro property"># program pack()</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
