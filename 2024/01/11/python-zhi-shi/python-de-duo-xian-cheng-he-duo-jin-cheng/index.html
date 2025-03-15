@@ -5,10 +5,12 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Python的多线程和多进程, AI, 算法, 深度学习, 机器学习，编程">
-    <meta name="description" content="Python的多线程和多进程进程和线程
+    <meta name="description" content=" Python的多线程和多进程
+ 进程和线程
+
 进程
 
-进程是程序在计算机上的一次执行活动，即正在运行中的应用程序，通常称为进程。当你运行一个程序，你就启动了一个进程。每个进程都有自己独立的地址空间(内存空间)，每当用户启动一个进程时，操作系统就会">
+进程是程序在计算机上的一次执行活动，即正在运行中的应用程序，通常称为进程。当你运行一个程序，你就启动了一个进程。每个进程都有自己独立的地址空间(内存空间)，每当用户启动一个进程时，操作">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -439,7 +441,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Python的多线程和多进程"><a href="#Python的多线程和多进程" class="headerlink" title="Python的多线程和多进程"></a>Python的多线程和多进程</h1><h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><ul>
+                <h1 id="python的多线程和多进程"><a class="markdownIt-Anchor" href="#python的多线程和多进程"></a> Python的多线程和多进程</h1>
+<h2 id="进程和线程"><a class="markdownIt-Anchor" href="#进程和线程"></a> 进程和线程</h2>
+<ul>
 <li>进程</li>
 </ul>
 <p>进程是程序在计算机上的一次执行活动，即正在运行中的应用程序，通常称为进程。当你运行一个程序，你就启动了一个进程。每个进程都有自己独立的地址空间(内存空间)，每当用户启动一个进程时，操作系统就会为该进程分配一个独立的内存空间，让应用程序在这个独立的内存空间中运行。</p>
@@ -453,399 +457,414 @@
 <li>线程和进程的区别</li>
 </ul>
 <blockquote>
-<p> 1）一个进程至少包含一个主线程（main线程），线程需要依赖于进程而存在。<br> 2）多个线程之间共享进程的内存空间。</p>
+<p>1）一个进程至少包含一个主线程（main线程），线程需要依赖于进程而存在。<br>
+2）多个线程之间共享进程的内存空间。</p>
 </blockquote>
 <p>调度：进程是拥有资源的基本单位，是系统资源分配的最小单位；线程是调度和分派的基本单位，是CPU资源调度的最小单位。</p>
-<p>共享地址空间：进程拥有各自独立的地址空间、资源，所以共享复杂，需要用IPC（Inter-Process Communication，进程间通信），但是同步简单；而线程共享所属进程的资源，因此共享简单，但是同步复杂，需要用加锁等措施。<br>占用内存和cpu：进程占用内存多，切换复杂，cpu利用率低；而线程占用内存少，切换简单，cpu利用率高。<br>互相影响：进程之间不会互相影响；而一个线程挂掉会导致整个进程挂掉。</p>
-<p><img src="/images/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B.png"></p>
-<h2 id="多线程threading"><a href="#多线程threading" class="headerlink" title="多线程threading"></a>多线程threading</h2><p>多线程是加速程序计算的有效方式，Python的多线程模块threading上手快速简单，包含了关于线程操作的丰富功能。</p>
-<h3 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h3><p>threading模块的一些基本操作，包括获取线程数，添加线程等。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> threading
-<span class="token keyword">print</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>active_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 获取已激活的线程数</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>enumerate<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 查看所有线程信息---存储在一个列表中</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 查看现在正在运行的线程</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>共享地址空间：进程拥有各自独立的地址空间、资源，所以共享复杂，需要用IPC（Inter-Process Communication，进程间通信），但是同步简单；而线程共享所属进程的资源，因此共享简单，但是同步复杂，需要用加锁等措施。<br>
+占用内存和cpu：进程占用内存多，切换复杂，cpu利用率低；而线程占用内存少，切换简单，cpu利用率高。<br>
+互相影响：进程之间不会互相影响；而一个线程挂掉会导致整个进程挂掉。</p>
+<p><img src="/images/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B.png" alt></p>
+<h2 id="多线程threading"><a class="markdownIt-Anchor" href="#多线程threading"></a> 多线程threading</h2>
+<p>多线程是加速程序计算的有效方式，Python的多线程模块threading上手快速简单，包含了关于线程操作的丰富功能。</p>
+<h3 id="创建线程"><a class="markdownIt-Anchor" href="#创建线程"></a> 创建线程</h3>
+<p>threading模块的一些基本操作，包括获取线程数，添加线程等。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> threading
+<span class="hljs-built_in">print</span>(threading.active_count()) <span class="hljs-comment"># 获取已激活的线程数</span>
+<span class="hljs-built_in">print</span>(threading.<span class="hljs-built_in">enumerate</span>()) <span class="hljs-comment"># 查看所有线程信息---存储在一个列表中</span>
+<span class="hljs-built_in">print</span>(threading.current_thread()) <span class="hljs-comment"># 查看现在正在运行的线程</span>
+</code></pre>
 <p>添加线程，<code>threading.Thread()</code>接收参数<code>target</code>代表这个线程要完成的任务，需自行定义，<code>start()</code>让线程开始工作。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">thread_job</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'This is a thread of %s'</span> <span class="token operator">%</span> threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">thread_job</span>():
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;This is a thread of %s&#x27;</span> % threading.current_thread())
 
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    thread <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>thread_job<span class="token punctuation">,</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true"># 定义线程 </span>
-    thread<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 让线程开始工作</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    thread = threading.Thread(target=thread_job,)   <span class="hljs-comment"># 定义线程 </span>
+    thread.start()  <span class="hljs-comment"># 让线程开始工作</span>
     
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()
+</code></pre>
 <p>在定义线程时，还可以指定线程的名称，如下面的代码：</p>
-<pre class="line-numbers language-python"><code class="language-python">thread <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>thread_job<span class="token punctuation">,</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true"># 定义线程, 默认线程名是Thread-1</span>
-thread <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>thread_job<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"T1"</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true"># 定义线程, 指定名称是T1</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python">thread = threading.Thread(target=thread_job,)   <span class="hljs-comment"># 定义线程, 默认线程名是Thread-1</span>
+thread = threading.Thread(target=thread_job, name=<span class="hljs-string">&quot;T1&quot;</span>)   <span class="hljs-comment"># 定义线程, 指定名称是T1</span>
+</code></pre>
 <p>还可以通过自定义一个 Thread 的子类，然后复写它的 run() 方法，在 run() 方法中编写任务处理代码，实现自定义的多线程程序。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> threading
-<span class="token keyword">import</span> time
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> threading
+<span class="hljs-keyword">import</span> time
 
-<span class="token keyword">class</span> <span class="token class-name">TestThread</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>Thread<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>name<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>self<span class="token punctuation">,</span>name<span class="token operator">=</span>name<span class="token punctuation">)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TestThread</span>(threading.Thread):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,name=<span class="hljs-literal">None</span></span>):
+        <span class="hljs-built_in">super</span>().__init__(self,name=name)
 
-    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">' test '</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
+            <span class="hljs-built_in">print</span>(threading.current_thread().name + <span class="hljs-string">&#x27; test &#x27;</span>, i)
+            time.sleep(<span class="hljs-number">1</span>)
             
-thread <span class="token operator">=</span> TestThread<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'TestThread'</span><span class="token punctuation">)</span>
-thread<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="join功能"><a href="#join功能" class="headerlink" title="join功能"></a>join功能</h3><p>首先来看一个小例子，下面定义了一个任务函数<code>func</code>，执行<code>for</code>循环10次，每次睡眠1秒，执行完成之后打印”all done”。但是我们从结果看到，打印信息”all done”先于”thread finish”被输出。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> time
-<span class="token keyword">import</span> threading
+thread = TestThread(name=<span class="hljs-string">&#x27;TestThread&#x27;</span>)
+thread.start()
+</code></pre>
+<h3 id="join功能"><a class="markdownIt-Anchor" href="#join功能"></a> join功能</h3>
+<p>首先来看一个小例子，下面定义了一个任务函数<code>func</code>，执行<code>for</code>循环10次，每次睡眠1秒，执行完成之后打印&quot;all done&quot;。但是我们从结果看到，打印信息&quot;all done&quot;先于&quot;thread finish&quot;被输出。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> threading
 
-<span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"thread start"</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"thread finish"</span><span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>():
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;thread start&quot;</span>)
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+        time.sleep(<span class="hljs-number">1</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;thread finish&quot;</span>)
 
-t1 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>func<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"t1"</span><span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"all done"</span><span class="token punctuation">)</span>
+t1 = threading.Thread(target=func, name=<span class="hljs-string">&quot;t1&quot;</span>)
+t1.start()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;all done&quot;</span>)
 
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
 thread start
-all done
+<span class="hljs-built_in">all</span> done
 thread finish
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这是因为这里有两个线程，分别是主线程MainThread和定义的线程t1，这两个线程同时运行时，由于t1需要执行函数<code>func</code>，共计需要10s才能完成，而主线程运行不需要这么久，因此主线程会先运行完毕输出”all done”，等t1执行函数<code>func</code>完成时才会输出”thread finish”。</p>
+</code></pre>
+<p>这是因为这里有两个线程，分别是主线程MainThread和定义的线程t1，这两个线程同时运行时，由于t1需要执行函数<code>func</code>，共计需要10s才能完成，而主线程运行不需要这么久，因此主线程会先运行完毕输出&quot;all done&quot;，等t1执行函数<code>func</code>完成时才会输出&quot;thread finish&quot;。</p>
 <p>因此，如果想让所有线程执行完毕后，再一起执行后面的代码（比如上面的输出all done），可以使用<code>join</code>方法。如下面的代码</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s thread start"</span><span class="token operator">%</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s thread finish"</span><span class="token operator">%</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>current_thread<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">num</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;%s thread start&quot;</span>%(threading.current_thread()))
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num):
+        time.sleep(<span class="hljs-number">1</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;%s thread finish&quot;</span>%(threading.current_thread()))
 
-t1 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>func<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"t1"</span><span class="token punctuation">)</span>
-t2 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>func<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"t2"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+t1 = threading.Thread(target=func, args=(<span class="hljs-number">10</span>,), name=<span class="hljs-string">&quot;t1&quot;</span>)
+t2 = threading.Thread(target=func, args=(<span class="hljs-number">1</span>,), name=<span class="hljs-string">&quot;t2&quot;</span>)
+</code></pre>
 <p>上面添加了两个线程t1和t2，均执行函数<code>func</code>，但是两个线程执行任务的耗时不同，t1执行任务10s，而t2执行任务1s。下面分别使用<code>join</code>方法来观察输出。</p>
 <ul>
 <li>不使用join</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"all done"</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">t1.start()
+t2.start()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;all done&quot;</span>)
 
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">140682945677056</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">140682937284352</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-all done
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">140682937284352</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">140682945677056</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+&lt;Thread(t1, started <span class="hljs-number">140682945677056</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">140682937284352</span>)&gt; thread start
+<span class="hljs-built_in">all</span> done
+&lt;Thread(t2, started <span class="hljs-number">140682937284352</span>)&gt; thread finish
+&lt;Thread(t1, started <span class="hljs-number">140682945677056</span>)&gt; thread finish
+</code></pre>
 <ul>
 <li>t1使用join</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"all done"</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">t1.start()
+t2.start()
+t1.join()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;all done&quot;</span>)
 
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">140483331766016</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">140483323373312</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">140483323373312</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">140483331766016</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-all done
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+&lt;Thread(t1, started <span class="hljs-number">140483331766016</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">140483323373312</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">140483323373312</span>)&gt; thread finish
+&lt;Thread(t1, started <span class="hljs-number">140483331766016</span>)&gt; thread finish
+<span class="hljs-built_in">all</span> done
+</code></pre>
 <ul>
 <li>t2使用join</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"all done"</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">t1.start()
+t2.start()
+t2.join()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;all done&quot;</span>)
 
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">139736940828416</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">139736932435712</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">139736932435712</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-all done
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">139736940828416</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+&lt;Thread(t1, started <span class="hljs-number">139736940828416</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">139736932435712</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">139736932435712</span>)&gt; thread finish
+<span class="hljs-built_in">all</span> done
+&lt;Thread(t1, started <span class="hljs-number">139736940828416</span>)&gt; thread finish
+</code></pre>
 <ul>
 <li>都使用join</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python">t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"all done"</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python">t1.start()
+t2.start()
+t1.join()
+t2.join()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;all done&quot;</span>)
 
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">140440337422080</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">140440329029376</span><span class="token punctuation">)</span><span class="token operator">></span> thread start
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t2<span class="token punctuation">,</span> started <span class="token number">140440329029376</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-<span class="token operator">&lt;</span>Thread<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> started <span class="token number">140440337422080</span><span class="token punctuation">)</span><span class="token operator">></span> thread finish
-all done
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+&lt;Thread(t1, started <span class="hljs-number">140440337422080</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">140440329029376</span>)&gt; thread start
+&lt;Thread(t2, started <span class="hljs-number">140440329029376</span>)&gt; thread finish
+&lt;Thread(t1, started <span class="hljs-number">140440337422080</span>)&gt; thread finish
+<span class="hljs-built_in">all</span> done
+</code></pre>
 <p><strong>执行join方法会阻塞调用线程（主线程），直到调用<code>join</code>方法的线程结束。</strong></p>
-<h3 id="Queue功能"><a href="#Queue功能" class="headerlink" title="Queue功能"></a>Queue功能</h3><p>线程间使用队列进行通信，因为队列所有方法都是线程安全的，所以不会出现线程竞争资源的情况。queue 模块即队列，特别适合处理信息在多个线程间的安全交换。</p>
+<h3 id="queue功能"><a class="markdownIt-Anchor" href="#queue功能"></a> Queue功能</h3>
+<p>线程间使用队列进行通信，因为队列所有方法都是线程安全的，所以不会出现线程竞争资源的情况。queue 模块即队列，特别适合处理信息在多个线程间的安全交换。</p>
 <p>多线程调用的函数不能有返回值，所以最直白的应用，就是多个线程处理完毕的结果，放入该队列中，最后进行整合。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> time
-<span class="token keyword">import</span> threading
-<span class="token keyword">from</span> queue <span class="token keyword">import</span> Queue
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> threading
+<span class="hljs-keyword">from</span> queue <span class="hljs-keyword">import</span> Queue
 
-<span class="token keyword">def</span> <span class="token function">square</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        d<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">**</span><span class="token number">2</span>
-    q<span class="token punctuation">.</span>put<span class="token punctuation">(</span>d<span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">square</span>(<span class="hljs-params">d, q</span>):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(d)):
+        d[i] = d[i]**<span class="hljs-number">2</span>
+    q.put(d)
 
-<span class="token keyword">def</span> <span class="token function">multithreading</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    q <span class="token operator">=</span> Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    threads <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>square<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        threads<span class="token punctuation">.</span>append<span class="token punctuation">(</span>t<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> thread <span class="token keyword">in</span> threads<span class="token punctuation">:</span>
-        thread<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    results <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        results<span class="token punctuation">.</span>append<span class="token punctuation">(</span>q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">multithreading</span>(<span class="hljs-params">data</span>):
+    q = Queue()
+    threads = <span class="hljs-built_in">list</span>()
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):
+        t = threading.Thread(target=square, args=(data[i], q))
+        t.start()
+        threads.append(t)
+    <span class="hljs-keyword">for</span> thread <span class="hljs-keyword">in</span> threads:
+        thread.join()
+    results = <span class="hljs-built_in">list</span>()
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):
+        results.append(q.get())
+    <span class="hljs-built_in">print</span>(results)
 
-data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
-multithreading<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+data = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>]]
+multithreading(data)
+</code></pre>
 <p>其中<code>q.put()</code>和<code>q.get()</code>均是阻塞式的。<code>q.put()</code>阻塞方式将数据添加进队列中，如果队列满了则一直等待；<code>q.get()</code>阻塞式获取，队列为空时，则一直等待。</p>
 <p>这里的队列也可以使用multiprocessing提供的Queue。</p>
-<h3 id="Lock锁"><a href="#Lock锁" class="headerlink" title="Lock锁"></a>Lock锁</h3><p>多个线程可以共享所属进程的资源，但是如果不加限制，则线程之间会对共享的资源进行争抢，导致无法预估的问题。比如下面的代码，两个线程共享一个变量A，如果不对共享的内存A进行限制，则最终的结果A是未知的。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> threading
+<h3 id="lock锁"><a class="markdownIt-Anchor" href="#lock锁"></a> Lock锁</h3>
+<p>多个线程可以共享所属进程的资源，但是如果不加限制，则线程之间会对共享的资源进行争抢，导致无法预估的问题。比如下面的代码，两个线程共享一个变量A，如果不对共享的内存A进行限制，则最终的结果A是未知的。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> threading
 
-<span class="token keyword">def</span> <span class="token function">job1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">global</span> A
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        A <span class="token operator">+=</span> <span class="token number">1</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'job1'</span><span class="token punctuation">,</span> A<span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">job2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">global</span> A
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        A <span class="token operator">+=</span> <span class="token number">10</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'job2'</span><span class="token punctuation">,</span> A<span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job1</span>():
+    <span class="hljs-keyword">global</span> A
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+        A += <span class="hljs-number">1</span>
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;job1&#x27;</span>, A)
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job2</span>():
+    <span class="hljs-keyword">global</span> A
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+        A += <span class="hljs-number">10</span>
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;job2&#x27;</span>, A)
 
-A <span class="token operator">=</span> <span class="token number">0</span>
-t1 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>job1<span class="token punctuation">)</span>
-t2 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>job2<span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+A = <span class="hljs-number">0</span>
+t1 = threading.Thread(target=job1)
+t2 = threading.Thread(target=job2)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
     
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-job1 <span class="token number">1</span>
-job2 <span class="token number">11</span>
-job2 <span class="token number">22</span>
-job2 <span class="token number">32</span>
-job1 <span class="token number">12</span>
-job2 <span class="token number">43</span>
-job2 <span class="token number">53</span>
-job2 <span class="token number">63</span>
-job2 <span class="token number">73</span>
-job2 <span class="token number">83</span>
-job2 <span class="token number">93</span>
-job2 <span class="token number">103</span>
-job1 <span class="token number">33</span>
-job1 <span class="token number">104</span>
-job1 <span class="token number">105</span>
-job1 <span class="token number">106</span>
-job1 <span class="token number">107</span>
-job1 <span class="token number">108</span>
-job1 <span class="token number">109</span>
-job1 <span class="token number">110</span>    
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+job1 <span class="hljs-number">1</span>
+job2 <span class="hljs-number">11</span>
+job2 <span class="hljs-number">22</span>
+job2 <span class="hljs-number">32</span>
+job1 <span class="hljs-number">12</span>
+job2 <span class="hljs-number">43</span>
+job2 <span class="hljs-number">53</span>
+job2 <span class="hljs-number">63</span>
+job2 <span class="hljs-number">73</span>
+job2 <span class="hljs-number">83</span>
+job2 <span class="hljs-number">93</span>
+job2 <span class="hljs-number">103</span>
+job1 <span class="hljs-number">33</span>
+job1 <span class="hljs-number">104</span>
+job1 <span class="hljs-number">105</span>
+job1 <span class="hljs-number">106</span>
+job1 <span class="hljs-number">107</span>
+job1 <span class="hljs-number">108</span>
+job1 <span class="hljs-number">109</span>
+job1 <span class="hljs-number">110</span>    
+</code></pre>
 <p>因此，需要使用锁（Lock）来限制多个线程对同一块内存区域的访问。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">job1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">global</span> A<span class="token punctuation">,</span> lock
-    lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 加锁</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        A <span class="token operator">+=</span> <span class="token number">1</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'job1'</span><span class="token punctuation">,</span> A<span class="token punctuation">)</span>
-    lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 释放</span>
-<span class="token keyword">def</span> <span class="token function">job2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">global</span> A<span class="token punctuation">,</span>lock
-    lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        A <span class="token operator">+=</span> <span class="token number">10</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'job2'</span><span class="token punctuation">,</span> A<span class="token punctuation">)</span>
-    lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">job1</span>():
+    <span class="hljs-keyword">global</span> A, lock
+    lock.acquire() <span class="hljs-comment"># 加锁</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+        A += <span class="hljs-number">1</span>
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;job1&#x27;</span>, A)
+    lock.release() <span class="hljs-comment"># 释放</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job2</span>():
+    <span class="hljs-keyword">global</span> A,lock
+    lock.acquire()
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+        A += <span class="hljs-number">10</span>
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;job2&#x27;</span>, A)
+    lock.release()
 
-A <span class="token operator">=</span> <span class="token number">0</span>
-lock <span class="token operator">=</span> threading<span class="token punctuation">.</span>Lock<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t1 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>job1<span class="token punctuation">)</span>
-t2 <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>job2<span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+A = <span class="hljs-number">0</span>
+lock = threading.Lock()
+t1 = threading.Thread(target=job1)
+t2 = threading.Thread(target=job2)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
     
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-job1 <span class="token number">1</span>
-job1 <span class="token number">2</span>
-job1 <span class="token number">3</span>
-job1 <span class="token number">4</span>
-job1 <span class="token number">5</span>
-job1 <span class="token number">6</span>
-job1 <span class="token number">7</span>
-job1 <span class="token number">8</span>
-job1 <span class="token number">9</span>
-job1 <span class="token number">10</span>
-job2 <span class="token number">20</span>
-job2 <span class="token number">30</span>
-job2 <span class="token number">40</span>
-job2 <span class="token number">50</span>
-job2 <span class="token number">60</span>
-job2 <span class="token number">70</span>
-job2 <span class="token number">80</span>
-job2 <span class="token number">90</span>
-job2 <span class="token number">100</span>
-job2 <span class="token number">110</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="多线程不一定有效率"><a href="#多线程不一定有效率" class="headerlink" title="多线程不一定有效率"></a>多线程不一定有效率</h3><p>多线程的工作原理：同一时间只有一个线程在工作，多个线程来回切换，实现多个线程“同时工作”的假象。多线程往往处理并发，即收到多个请求后，多个线程每次处理一点，线程来回切换完成多个请求任务。</p>
-<p><img src="/images/%E5%A4%9A%E7%BA%BF%E7%A8%8B.png"></p>
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+job1 <span class="hljs-number">1</span>
+job1 <span class="hljs-number">2</span>
+job1 <span class="hljs-number">3</span>
+job1 <span class="hljs-number">4</span>
+job1 <span class="hljs-number">5</span>
+job1 <span class="hljs-number">6</span>
+job1 <span class="hljs-number">7</span>
+job1 <span class="hljs-number">8</span>
+job1 <span class="hljs-number">9</span>
+job1 <span class="hljs-number">10</span>
+job2 <span class="hljs-number">20</span>
+job2 <span class="hljs-number">30</span>
+job2 <span class="hljs-number">40</span>
+job2 <span class="hljs-number">50</span>
+job2 <span class="hljs-number">60</span>
+job2 <span class="hljs-number">70</span>
+job2 <span class="hljs-number">80</span>
+job2 <span class="hljs-number">90</span>
+job2 <span class="hljs-number">100</span>
+job2 <span class="hljs-number">110</span>
+</code></pre>
+<h3 id="多线程不一定有效率"><a class="markdownIt-Anchor" href="#多线程不一定有效率"></a> 多线程不一定有效率</h3>
+<p>多线程的工作原理：同一时间只有一个线程在工作，多个线程来回切换，实现多个线程“同时工作”的假象。多线程往往处理并发，即收到多个请求后，多个线程每次处理一点，线程来回切换完成多个请求任务。</p>
+<p><img src="/images/%E5%A4%9A%E7%BA%BF%E7%A8%8B.png" alt></p>
 <p>只有当多个线程处理的任务存在明显的效率差异时，如遇到IO，可以使用多线程提高速度和整体效率；如果是计算密集型任务，把数据拆分给多个线程运算，则不会带来很大的效率收益。</p>
-<h2 id="多进程multiprocess"><a href="#多进程multiprocess" class="headerlink" title="多进程multiprocess"></a>多进程multiprocess</h2><p>多进程是利用多核CPU进行任务处理和运算的一种方式。Python中的multiprocessing模块提供了一种创建和管理进程的方式，使得可以利用多个CPU来加速程序运行。</p>
-<h3 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h3><p>多进程的创建和多线程类似，代码如下：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> multiprocessing <span class="token keyword">as</span> mp
+<h2 id="多进程multiprocess"><a class="markdownIt-Anchor" href="#多进程multiprocess"></a> 多进程multiprocess</h2>
+<p>多进程是利用多核CPU进行任务处理和运算的一种方式。Python中的multiprocessing模块提供了一种创建和管理进程的方式，使得可以利用多个CPU来加速程序运行。</p>
+<h3 id="创建进程"><a class="markdownIt-Anchor" href="#创建进程"></a> 创建进程</h3>
+<p>多进程的创建和多线程类似，代码如下：</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> multiprocessing <span class="hljs-keyword">as</span> mp
 
-<span class="token keyword">def</span> <span class="token function">job</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
-p1 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-p1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-p1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job</span>(<span class="hljs-params">a,b</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello&quot;</span>)
+p1 = mp.Process(target=job, args=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))
+p1.start()
+p1.join()
+</code></pre>
 <p>同样地，也可以自定义一个多进程处理的继承自Process的子类，然后复写它的 run() 方法，在 run() 方法中编写任务处理代码，实现自定义的多进程程序。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> Process
+<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process
 
-<span class="token keyword">class</span> <span class="token class-name">NewProcess</span><span class="token punctuation">(</span>Process<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">NewProcess</span>(<span class="hljs-title class_ inherited__">Process</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name</span>):
+        <span class="hljs-built_in">super</span>().__init__()  
         
-        <span class="token comment" spellcheck="true"># 创建新参数</span>
-        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        <span class="hljs-comment"># 创建新参数</span>
+        self.name = name
     
-    <span class="token comment" spellcheck="true"># 在自定义Process类时，必须实现run()方法</span>
-    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'{self.name}: Hello World'</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Queue功能-1"><a href="#Queue功能-1" class="headerlink" title="Queue功能"></a>Queue功能</h3><p>与多线程类似，多线程调用的函数不能有返回值，因此可以把多个进程的处理或运算结果，放入到队列中，等所有进程均执行完毕后进行整合。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> multiprocessing <span class="token keyword">as</span> mp
+    <span class="hljs-comment"># 在自定义Process类时，必须实现run()方法</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;<span class="hljs-subst">{self.name}</span>: Hello World&#x27;</span>)
+</code></pre>
+<h3 id="queue功能-2"><a class="markdownIt-Anchor" href="#queue功能-2"></a> Queue功能</h3>
+<p>与多线程类似，多线程调用的函数不能有返回值，因此可以把多个进程的处理或运算结果，放入到队列中，等所有进程均执行完毕后进行整合。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> multiprocessing <span class="hljs-keyword">as</span> mp
 
-<span class="token keyword">def</span> <span class="token function">job</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    res <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        res <span class="token operator">+=</span> i<span class="token operator">+</span>i<span class="token operator">**</span><span class="token number">2</span><span class="token operator">+</span>i<span class="token operator">**</span><span class="token number">3</span>
-    q<span class="token punctuation">.</span>put<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-q <span class="token operator">=</span> mp<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
-p1 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-p2 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-p1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-p2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-p1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-p2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-res1 <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-res2 <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>res1<span class="token operator">+</span>res2<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="多线程和多进程的效率对比"><a href="#多线程和多进程的效率对比" class="headerlink" title="多线程和多进程的效率对比"></a>多线程和多进程的效率对比</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> multiprocessing <span class="token keyword">as</span> mp
-<span class="token keyword">import</span> threading <span class="token keyword">as</span> td
-<span class="token keyword">import</span> time
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job</span>(<span class="hljs-params">q</span>):
+    res = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>):
+        res += i+i**<span class="hljs-number">2</span>+i**<span class="hljs-number">3</span>
+    q.put(res)
+q = mp.Queue()
+p1 = mp.Process(target=job, args=(q,))
+p2 = mp.Process(target=job, args=(q,))
+p1.start()
+p2.start()
+p1.join()
+p2.join()
+res1 = q.get()
+res2 = q.get()
+<span class="hljs-built_in">print</span>(res1+res2)
+</code></pre>
+<h3 id="多线程和多进程的效率对比"><a class="markdownIt-Anchor" href="#多线程和多进程的效率对比"></a> 多线程和多进程的效率对比</h3>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> multiprocessing <span class="hljs-keyword">as</span> mp
+<span class="hljs-keyword">import</span> threading <span class="hljs-keyword">as</span> td
+<span class="hljs-keyword">import</span> time
 
-<span class="token keyword">def</span> <span class="token function">job</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    res <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        res <span class="token operator">+=</span> i<span class="token operator">+</span>i<span class="token operator">**</span><span class="token number">2</span><span class="token operator">+</span>i<span class="token operator">**</span><span class="token number">3</span>
-    q<span class="token punctuation">.</span>put<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job</span>(<span class="hljs-params">q</span>):
+    res = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100000</span>):
+        res += i+i**<span class="hljs-number">2</span>+i**<span class="hljs-number">3</span>
+    q.put(res)
 
-<span class="token keyword">def</span> <span class="token function">normal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    res <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 对齐两个进程或线程</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            res <span class="token operator">+=</span> i<span class="token operator">+</span>i<span class="token operator">**</span><span class="token number">2</span><span class="token operator">+</span>i<span class="token operator">**</span><span class="token number">3</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"normal"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">multicore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    q <span class="token operator">=</span> mp<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p1 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    p2 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    p1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    res1 <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    res2 <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"multicore"</span><span class="token punctuation">,</span> res1<span class="token operator">+</span>res2<span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">multithread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    q <span class="token operator">=</span> mp<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    t1 <span class="token operator">=</span> td<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    t2 <span class="token operator">=</span> td<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    t1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    t2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    t1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    t2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    res1 <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    res2 <span class="token operator">=</span> q<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"multithread"</span><span class="token punctuation">,</span> res1<span class="token operator">+</span>res2<span class="token punctuation">)</span> 
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">normal</span>():
+    res = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>): <span class="hljs-comment"># 对齐两个进程或线程</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100000</span>):
+            res += i+i**<span class="hljs-number">2</span>+i**<span class="hljs-number">3</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;normal&quot;</span>, res)
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">multicore</span>():
+    q = mp.Queue()
+    p1 = mp.Process(target=job, args=(q,))
+    p2 = mp.Process(target=job, args=(q,))
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+    res1 = q.get()
+    res2 = q.get()
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;multicore&quot;</span>, res1+res2)
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">multithread</span>():
+    q = mp.Queue()
+    t1 = td.Thread(target=job, args=(q,))
+    t2 = td.Thread(target=job, args=(q,))
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+    res1 = q.get()
+    res2 = q.get()
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;multithread&quot;</span>, res1+res2) 
 
-st <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-normal<span class="token punctuation">(</span><span class="token punctuation">)</span>
-st1 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"normal time "</span><span class="token punctuation">,</span> st1<span class="token operator">-</span>st<span class="token punctuation">)</span>
-multithread<span class="token punctuation">(</span><span class="token punctuation">)</span>
-st2 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"thread time "</span><span class="token punctuation">,</span> st2<span class="token operator">-</span>st1<span class="token punctuation">)</span>
-multicore<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"core time "</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>st2<span class="token punctuation">)</span>
+st = time.time()
+normal()
+st1 = time.time()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;normal time &quot;</span>, st1-st)
+multithread()
+st2 = time.time()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;thread time &quot;</span>, st2-st1)
+multicore()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;core time &quot;</span>, time.time()-st2)
 
-<span class="token operator">>></span><span class="token operator">></span> Output<span class="token punctuation">:</span>
-normal <span class="token number">49999666671666600000</span>
-normal time  <span class="token number">0.06681323051452637</span>
-multithread <span class="token number">49999666671666600000</span>
-thread time  <span class="token number">0.07323598861694336</span>
-multicore <span class="token number">49999666671666600000</span>
-core time  <span class="token number">0.03575706481933594</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="进程池Pool"><a href="#进程池Pool" class="headerlink" title="进程池Pool"></a>进程池Pool</h3><p>与<code>Process</code>创将进程不同，这次使用<code>Pool</code>创建进程池，它会自行解决多进程的问题。<code>Pool</code>和之前的<code>Process</code>的不同点是传入<code>Pool</code>的函数有返回值，而<code>Process</code>传入的函数没有返回值。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> multiprocessing <span class="token keyword">as</span> mp
+<span class="hljs-meta">&gt;&gt;&gt; </span>Output:
+normal <span class="hljs-number">49999666671666600000</span>
+normal time  <span class="hljs-number">0.06681323051452637</span>
+multithread <span class="hljs-number">49999666671666600000</span>
+thread time  <span class="hljs-number">0.07323598861694336</span>
+multicore <span class="hljs-number">49999666671666600000</span>
+core time  <span class="hljs-number">0.03575706481933594</span>
+</code></pre>
+<h3 id="进程池pool"><a class="markdownIt-Anchor" href="#进程池pool"></a> 进程池Pool</h3>
+<p>与<code>Process</code>创将进程不同，这次使用<code>Pool</code>创建进程池，它会自行解决多进程的问题。<code>Pool</code>和之前的<code>Process</code>的不同点是传入<code>Pool</code>的函数有返回值，而<code>Process</code>传入的函数没有返回值。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> multiprocessing <span class="hljs-keyword">as</span> mp
 
-<span class="token keyword">def</span> <span class="token function">job</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">return</span> x<span class="token operator">*</span>x 
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job</span>(<span class="hljs-params">x</span>):
+    <span class="hljs-keyword">return</span> x*x 
     
-<span class="token keyword">def</span> <span class="token function">multicore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    pool <span class="token operator">=</span> mp<span class="token punctuation">.</span>Pool<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    res <span class="token operator">=</span> pool<span class="token punctuation">.</span>map<span class="token punctuation">(</span>job<span class="token punctuation">,</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># [0,1,4,9,16,25,36,49,64,81]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">multicore</span>():
+    pool = mp.Pool()
+    res = pool.<span class="hljs-built_in">map</span>(job, <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>))
+    <span class="hljs-built_in">print</span>(res) <span class="hljs-comment"># [0,1,4,9,16,25,36,49,64,81]</span>
+</code></pre>
 <p><code>map</code>接受数据自动分配给进程池的进程进行运算。<code>Pool</code>默认使用所有的CPU核，如果想只用其中几个核，则由参数<code>process</code>指定。</p>
-<pre class="line-numbers language-python"><code class="language-python">pool <span class="token operator">=</span> mp<span class="token punctuation">.</span>Pool<span class="token punctuation">(</span>processes<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 使用3个核，即3个进程</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="highlight"><code class="python">pool = mp.Pool(processes=<span class="hljs-number">3</span>) <span class="hljs-comment"># 使用3个核，即3个进程</span>
+</code></pre>
 <p><code>Pool</code>除了<code>map()</code>外，还有可以返回结果的方式，那就是<code>apply_async()</code>。<code>apply_async()</code>中只能传递一个值，它一次只会放入一个核进行运算，但是传入值时要注意是可迭代的，同时需要用<code>get()</code>方法获取返回值。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">multicore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    pool <span class="token operator">=</span> mp<span class="token punctuation">.</span>Pool<span class="token punctuation">(</span>processes<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span> 
-    res <span class="token operator">=</span> pool<span class="token punctuation">.</span>apply_async<span class="token punctuation">(</span>job<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true"># 用get获得结果</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 4</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">multicore</span>():
+    pool = mp.Pool(processes=<span class="hljs-number">3</span>) 
+    res = pool.apply_async(job, (<span class="hljs-number">2</span>,))
+    <span class="hljs-comment"># 用get获得结果</span>
+    <span class="hljs-built_in">print</span>(res.get()) <span class="hljs-comment"># 4</span>
+</code></pre>
 <p>如果想要传入多个数值，则需要使用迭代器。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">multicore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    pool <span class="token operator">=</span> mp<span class="token punctuation">.</span>Pool<span class="token punctuation">(</span>processes<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span> 
-    multi_res <span class="token operator">=</span> <span class="token punctuation">[</span>pool<span class="token punctuation">.</span>apply_async<span class="token punctuation">(</span>job<span class="token punctuation">,</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token comment" spellcheck="true"># 用get获得结果</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">[</span>res<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> res <span class="token keyword">in</span> multi_res<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 4</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>进程拥有各自独立的地址空间、资源，因此想要在进程之间共享是没有多线程方便的（global关键字）。共享内存是一种高效的进程间通信方式，它允许多个进程共享同一块内存区域。multiprocessing模块中提供了Value和Array类，可以用来创建共享内存。</p>
-<pre class="line-numbers language-python"><code class="language-python">value1 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Value<span class="token punctuation">(</span><span class="token string">'i'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> 
-value2 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Value<span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">)</span>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">multicore</span>():
+    pool = mp.Pool(processes=<span class="hljs-number">3</span>) 
+    multi_res = [pool.apply_async(job, (i,)) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)]
+    <span class="hljs-comment"># 用get获得结果</span>
+    <span class="hljs-built_in">print</span>([res.get() <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> multi_res]) <span class="hljs-comment"># 4</span>
+</code></pre>
+<h3 id="共享内存"><a class="markdownIt-Anchor" href="#共享内存"></a> 共享内存</h3>
+<p>进程拥有各自独立的地址空间、资源，因此想要在进程之间共享是没有多线程方便的（global关键字）。共享内存是一种高效的进程间通信方式，它允许多个进程共享同一块内存区域。multiprocessing模块中提供了Value和Array类，可以用来创建共享内存。</p>
+<pre class="highlight"><code class="python">value1 = mp.Value(<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-number">0</span>) 
+value2 = mp.Value(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">3.14</span>)
 
-array <span class="token operator">=</span> mp<span class="token punctuation">.</span>Array<span class="token punctuation">(</span><span class="token string">'i'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+array = mp.Array(<span class="hljs-string">&#x27;i&#x27;</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])
+</code></pre>
 <p>这里的<code>Array</code>和numpy中的不同，它只能是一维的，不能是多维的。<code>Value</code>和<code>Array</code> 一样，需要定义数据形式，否则会报错。<code>d</code>表示一个双精浮点类型，<code>i</code>表示一个带符号的整型。具体数据类型见下表。</p>
 <table>
 <thead>
@@ -856,130 +875,133 @@ array <span class="token operator">=</span> mp<span class="token punctuation">.<
 <th>Minimum size in bytes</th>
 </tr>
 </thead>
-<tbody><tr>
-<td><code>&#39;b&#39;</code></td>
+<tbody>
+<tr>
+<td><code>'b'</code></td>
 <td>signed char</td>
 <td>int</td>
 <td>1</td>
 </tr>
 <tr>
-<td><code>&#39;B&#39;</code></td>
+<td><code>'B'</code></td>
 <td>unsigned char</td>
 <td>int</td>
 <td>1</td>
 </tr>
 <tr>
-<td><code>&#39;u&#39;</code></td>
+<td><code>'u'</code></td>
 <td>Py_UNICODE</td>
 <td>Unicode character</td>
 <td>2</td>
 </tr>
 <tr>
-<td><code>&#39;h&#39;</code></td>
+<td><code>'h'</code></td>
 <td>signed short</td>
 <td>int</td>
 <td>2</td>
 </tr>
 <tr>
-<td><code>&#39;H&#39;</code></td>
+<td><code>'H'</code></td>
 <td>unsigned short</td>
 <td>int</td>
 <td>2</td>
 </tr>
 <tr>
-<td><code>&#39;i&#39;</code></td>
+<td><code>'i'</code></td>
 <td>signed int</td>
 <td>int</td>
 <td>2</td>
 </tr>
 <tr>
-<td><code>&#39;I&#39;</code></td>
+<td><code>'I'</code></td>
 <td>unsigned int</td>
 <td>int</td>
 <td>2</td>
 </tr>
 <tr>
-<td><code>&#39;l&#39;</code></td>
+<td><code>'l'</code></td>
 <td>signed long</td>
 <td>int</td>
 <td>4</td>
 </tr>
 <tr>
-<td><code>&#39;L&#39;</code></td>
+<td><code>'L'</code></td>
 <td>unsigned long</td>
 <td>int</td>
 <td>4</td>
 </tr>
 <tr>
-<td><code>&#39;q&#39;</code></td>
+<td><code>'q'</code></td>
 <td>signed long long</td>
 <td>int</td>
 <td>8</td>
 </tr>
 <tr>
-<td><code>&#39;Q&#39;</code></td>
+<td><code>'Q'</code></td>
 <td>unsigned long long</td>
 <td>int</td>
 <td>8</td>
 </tr>
 <tr>
-<td><code>&#39;f&#39;</code></td>
+<td><code>'f'</code></td>
 <td>float</td>
 <td>float</td>
 <td>4</td>
 </tr>
 <tr>
-<td><code>&#39;d&#39;</code></td>
+<td><code>'d'</code></td>
 <td>double</td>
 <td>float</td>
 <td>8</td>
 </tr>
-</tbody></table>
-<h3 id="Lock锁-1"><a href="#Lock锁-1" class="headerlink" title="Lock锁"></a>Lock锁</h3><p>上面介绍了共享内存的概念，如果多进程程序不对共享内存加以限制，则会发生多个进程对共享内存的争夺。因此锁出现了，它是为了防止多个进程对共享内存进行读写，导致无法预估的事情发生。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> multiprocessing <span class="token keyword">as</span> mp
-<span class="token keyword">import</span> time
+</tbody>
+</table>
+<h3 id="lock锁-2"><a class="markdownIt-Anchor" href="#lock锁-2"></a> Lock锁</h3>
+<p>上面介绍了共享内存的概念，如果多进程程序不对共享内存加以限制，则会发生多个进程对共享内存的争夺。因此锁出现了，它是为了防止多个进程对共享内存进行读写，导致无法预估的事情发生。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> multiprocessing <span class="hljs-keyword">as</span> mp
+<span class="hljs-keyword">import</span> time
  
-<span class="token keyword">def</span> <span class="token function">job</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">)</span> 
-        v<span class="token punctuation">.</span>value <span class="token operator">+=</span> num <span class="token comment" spellcheck="true"># v.value获取共享变量值</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span>value<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">" "</span><span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job</span>(<span class="hljs-params">v, num</span>):
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
+        time.sleep(<span class="hljs-number">0.1</span>) 
+        v.value += num <span class="hljs-comment"># v.value获取共享变量值</span>
+        <span class="hljs-built_in">print</span>(v.value, end=<span class="hljs-string">&quot; &quot;</span>)
         
-<span class="token keyword">def</span> <span class="token function">multicore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    v <span class="token operator">=</span> mp<span class="token punctuation">.</span>Value<span class="token punctuation">(</span><span class="token string">'i'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 定义共享变量</span>
-    p1 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    p2 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-    p1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">multicore</span>():
+    v = mp.Value(<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-number">0</span>) <span class="hljs-comment"># 定义共享变量</span>
+    p1 = mp.Process(target=job, args=(v,<span class="hljs-number">1</span>))
+    p2 = mp.Process(target=job, args=(v,<span class="hljs-number">10</span>)) 
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
     
-multicore<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1 12 23 34 45 11 22 33 44 55</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+multicore() <span class="hljs-comment"># 1 12 23 34 45 11 22 33 44 55</span>
+</code></pre>
 <p>与多线程类似，加入Lock限制共享内存。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> multiprocessing <span class="token keyword">as</span> mp
-<span class="token keyword">import</span> time
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> multiprocessing <span class="hljs-keyword">as</span> mp
+<span class="hljs-keyword">import</span> time
  
-<span class="token keyword">def</span> <span class="token function">job</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> num<span class="token punctuation">,</span> lock<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    lock<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">)</span> 
-        v<span class="token punctuation">.</span>value <span class="token operator">+=</span> num <span class="token comment" spellcheck="true"># v.value获取共享变量值</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span>value<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">" "</span><span class="token punctuation">)</span>
-    lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">job</span>(<span class="hljs-params">v, num, lock</span>):
+    lock.acquire()
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
+        time.sleep(<span class="hljs-number">0.1</span>) 
+        v.value += num <span class="hljs-comment"># v.value获取共享变量值</span>
+        <span class="hljs-built_in">print</span>(v.value, end=<span class="hljs-string">&quot; &quot;</span>)
+    lock.release()
         
-<span class="token keyword">def</span> <span class="token function">multicore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    lock <span class="token operator">=</span> mp<span class="token punctuation">.</span>Lock<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    v <span class="token operator">=</span> mp<span class="token punctuation">.</span>Value<span class="token punctuation">(</span><span class="token string">'i'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 定义共享变量</span>
-    p1 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span> lock<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    p2 <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>job<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> lock<span class="token punctuation">)</span><span class="token punctuation">)</span> 
-    p1<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p2<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p1<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    p2<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">multicore</span>():
+    lock = mp.Lock()
+    v = mp.Value(<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-number">0</span>) <span class="hljs-comment"># 定义共享变量</span>
+    p1 = mp.Process(target=job, args=(v,<span class="hljs-number">1</span>, lock))
+    p2 = mp.Process(target=job, args=(v,<span class="hljs-number">10</span>, lock)) 
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
     
-multicore<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1 2 3 4 5 15 25 35 45 55</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+multicore() <span class="hljs-comment"># 1 2 3 4 5 15 25 35 45 55</span>
+</code></pre>
 
                 
             </div>
