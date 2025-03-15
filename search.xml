@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Maskformer系列</title>
+      <link href="/2024/12/12/lun-wen-yue-du/maskformer-xi-lie/"/>
+      <url>/2024/12/12/lun-wen-yue-du/maskformer-xi-lie/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Maskformer系列"><a href="#Maskformer系列" class="headerlink" title="Maskformer系列"></a>Maskformer系列</h1><p>从FCN开始，大部分深度学习方法，图像分割问题被定义为逐像素的分类。Mask R-CNN和DETR为每一个实例生成box和分类预测。那么如果像DETR一样，将分割问题分解为对每一个实例的mask进行分类可以吗？答案确实是可以的，该方法可以替代传统的逐像素分类的方法。</p><h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>深度学习中的图像分割，大部分是基于逐像素分类（per-pixel classification）的方式来完成，即对图像中的每个像素点进行分类；也有部分工作是基于逐掩码分类（per-mask classification）的方式完成，即对每个掩码进行分类，再通过某些方式将多个掩码合并得到最终结果。</p><p>逐掩码分类（per-mask classification）的方式通常用于实例分割，因为该任务需要动态数量的预测输出，而逐像素分类（per-pixel classification）的方式是一个静态的输出数量。如下图所示，左侧是传统的per-pixel classification，右侧是per-mask classification。在后者的范式中，模型会预测N个掩码mask，每一个mask都单独计算mask损失和分类损失</p><p><img src="/images/papers/maskformer/pixel_mask_contrast.png"></p><p>因此，当想要从语义分割迁移到实例分割时，需要改网络结构后重新训练，会很麻烦。</p><p>Maskformer和Mask2former，是属于第二种per-mask classification的方式，可以使用完全相同的模型、损失和训练过程，以统一的方式解决语义级和实例级的图像分割任务。</p><h2 id="Maskformer"><a href="#Maskformer" class="headerlink" title="Maskformer"></a>Maskformer</h2><p><strong>Per-Pixel Classification is Not All You Need for Semantic Segmentation</strong>（NIPS2021）</p><p>本文的思路是：假设图像中含有K个目标类，目的是为了得到$K\times H \times W$的预测。首先得到$N \times H \times W$的二值掩码Mask输出，然后利用辅助的$N \times(K+1)$掩码分类预测（包括空集）完成从N个掩码mask到K个类别的映射。</p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>maskformer模型结构如下图所示，分为三部分：</p><ul><li><strong>pixel-level module</strong>：backbone从原始输入图像中提取低分辨率的特征图<code>F</code>；然后通过pixel decoder把低分辨率的特征图<code>F</code>转成高分辨率的per-pixel embeddings，也即每个pixel都得到一个embedding表征，用来表示每个pixel的特征，所以这里得到的三维矩阵：$C_\epsilon \times H \times W$。</li><li><strong>transformer module</strong>：transformer decoder输入图像的特征<code>F</code>并输出N个object queries。transformer decoder模块中，N个query是用来查询图像中N个的K+1类的概率分布。</li><li><strong>segmentation module</strong>：该模块包含两个支路，<ul><li>上支路：经过transformer decoder后得到Q，再经过MLP进行空间转换，会独立地分别产生<strong>N个类别预测</strong>和<strong>N个对应的mask embeddinngs</strong>。mask embeddinngs维度为$C_\epsilon \times N$，即每个query的embedding表征，用于描述每个query的特征。类别预测维度为$N \times (K+1)$，经过softmax得到了每个query属于哪个类别的概率，所以这里得到的就是$N \times (K+1)$的二维矩阵（假设目标有K类，加上背景类，共K+1类），即掩码分类预测；</li><li>下支路：上支路得到了query的$C_\epsilon \times N$特征，又从pixel decoder得到了每个pixel的特征$C_\epsilon \times H \times W$，因为pixel肯定属于某个query，所以两者相乘得到了$N \times H \times W$。该三维矩阵表示的是pixel属于某个query的概率，即掩码像素预测；</li></ul></li><li>输出：最终，将上支路输出的$N \times (K+1)$掩码分类预测和下支路输出的$N \times H \times W$掩码像素预测相乘后，得到$(K+1) \times H \times W$，去除背景类，则得到最终输出$K \times H \times W$</li></ul><p><img src="/images/papers/maskformer/maskformer.png"></p><p>总结上文，maskformer方法的思路是：把N个query&#x2F;mask作为中间变量latent，巧妙地通过两个矩阵相乘消掉N，得到每个pixel的K类概率分布。</p><p>这里query是借鉴了DETR的工作，query的数量N是动态可调整的，如果图像中的实例增加，可适当增加N来涵盖所有的目标实例；query的数量 N可理解为图像中实例个数的上限，每个query对应一个instance。</p><h3 id="部分实验"><a href="#部分实验" class="headerlink" title="部分实验"></a>部分实验</h3><p>作者得消融实验如下：使用两种如下结构作为baseline模型</p><p><img src="/images/papers/maskformer/maskformer_baseline.png"></p><p>消融实验结果如下图，从图中可以得出两个结果：</p><ol><li>PerPixelBaseline+使用了两个分支，一个分支只管mask，一个分支管分类，这样得结构分割效果更好</li><li>当目标类数量较多时，MaskFormer得改进收益更大</li></ol><p><img src="/images/papers/maskformer/baseline_exp.png"></p><h2 id="Mask2former"><a href="#Mask2former" class="headerlink" title="Mask2former"></a>Mask2former</h2><p><strong>Masked-attention Mask Transformer for Universal Image Segmentation</strong>（CVPR2022）</p><p>Mask2Former的模型架构与MaskFormer基本一致，具体是在MaskFormer的基础上做了如下改进：</p><ol><li>增加了masked attention机制，通过将交叉注意力限制在预测的掩码区域内来提取局部特征，实现更快的收敛并提高性能。</li><li>多尺度高分辨率特征：来帮助模型分割小目标&#x2F;区域。</li><li>其他小的改进：（1）调整了Transformer decoder部分的self-attention和cross-attention的顺序，提升性能；（2）使用importance sampling来降低显存、加快训练速度。</li></ol><p><img src="/images/papers/maskformer/mask2former.png"></p><h3 id="Masked-Attention"><a href="#Masked-Attention" class="headerlink" title="Masked Attention"></a>Masked Attention</h3><p>已经有工作发现，基于transformer的模型的缓慢收敛是由于交叉注意层中的全局上下文，因为交叉注意需要许多次训练才能学会关注局部目标区域。因此作者假设局部特征足以更新查询特征，并且可以通过自关注收集上下文信息。</p><p>其实在一张图像中，较大部分区域都是背景，让背景部分的像素参与cross attetion是不合理的，因此通过transformer decoder输出的预测掩码来屏蔽背景：</p><p><img src="/images/papers/maskformer/mask2former_maskedAttn.png"></p><p>掩码注意力的大致流程是，在transformer decoder的每一层都要加上上一层输出的预测掩码mask，最早的mask0来自查询特征X0（也即query，初始化为0且可学习），然后经过transformer decoder layer逐层生成后续的mask。</p><h3 id="多尺度特征"><a href="#多尺度特征" class="headerlink" title="多尺度特征"></a>多尺度特征</h3><p>这里使用的多尺度特征是通过pixel-decoder获得的，不同上采样层输出的特征图作为不同尺度的特征，组成特征金字塔，如同目标检测中常用的FPN，其目的是帮助模型分割小目标&#x2F;区域。</p><p>从最低分辨率到最高分辨率，分别输入到Transformer解码器层使用不同尺度的特征，如模型架构图所示。重复这个3层Transformer解码器L次，因此最终的Transformer解码器有3L层。</p><h3 id="其他改进"><a href="#其他改进" class="headerlink" title="其他改进"></a>其他改进</h3><p>（1）交换了Transformer decoder部分的self-attention和cross-attention的顺序。因为第一个Transformer解码器层的自注意模块中，输入的查询特征与图像无关，没有来自图像的信号，因此应用自注意不太可能丰富信息。类似于DETR文章中，跳过了第一个Transformer解码器层的自注意模块。</p><p>（2）query是可学习的，这些可学习的查询特征的功能类似于区域建议网络FPN，并且能够生成掩码建议。</p><p>（3）丢弃了dropout。</p><p>（4）由于高分辨率掩码预测导致的大量内存消耗，因此使用K个随机采样点来计算掩码损失而不是整个掩码来训练模型。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul><li><a href="https://arxiv.org/pdf/2107.06278" target="_blank" rel="noopener">https://arxiv.org/pdf/2107.06278</a></li><li><a href="https://arxiv.org/pdf/2112.01527" target="_blank" rel="noopener">https://arxiv.org/pdf/2112.01527</a></li><li><a href="https://www.cnblogs.com/theseventhson/p/18513038" target="_blank" rel="noopener">https://www.cnblogs.com/theseventhson/p/18513038</a></li><li><a href="https://zhuanlan.zhihu.com/p/709808965" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/709808965</a></li><li><a href="https://www.bilibili.com/video/BV1EA22YnEY1" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1EA22YnEY1</a>?</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文阅读 </tag>
+            
+            <tag> 图像分割 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CUDA|GPU的内存结构</title>
       <link href="/2024/11/18/cuda-zhi-shi/gpu-de-nei-cun-jie-gou/"/>
       <url>/2024/11/18/cuda-zhi-shi/gpu-de-nei-cun-jie-gou/</url>
@@ -20,9 +47,9 @@
       
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> CUDA </tag>
+            
+            <tag> 深度学习 </tag>
             
         </tags>
       
@@ -47,9 +74,9 @@
       
         <tags>
             
-            <tag> 算法知识 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 算法知识 </tag>
             
         </tags>
       
@@ -153,9 +180,9 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法知识 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 算法知识 </tag>
             
             <tag> LLM </tag>
             
@@ -182,9 +209,9 @@
       
         <tags>
             
-            <tag> 算法知识 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 算法知识 </tag>
             
         </tags>
       
@@ -236,9 +263,9 @@
       
         <tags>
             
-            <tag> 算法知识 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 算法知识 </tag>
             
         </tags>
       
